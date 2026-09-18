@@ -5,12 +5,33 @@ signal reset_room
 
 const SPEED = 250.0
 const JUMP_VELOCITY = -400.0
-var max_health: int = 5
-var health: int = 5
+const WALL_JUMP_VELOCITY = -380.0
+const WALL_JUMP_PUSH = 350.0
+const WALL_SLIDE_SPEED = 120.0
+
+
 var can_move: bool = true
+var max_health: int
+var has_double_jump: bool
+var has_wall_jump: bool
+var has_sword: bool
+var has_shield: bool
+var has_dash: bool
+
 
 @export var coyote_timer: Timer
 @export var buffer_timer: Timer
+
+var jump_count = 0
+var health: int
+var is_wall_jumping: bool = false
+
+func _ready() -> void:
+	has_double_jump = SaveLoad.get_key_value(SaveLoad.double_jump_key)
+	has_wall_jump = SaveLoad.get_key_value(SaveLoad.wall_jump_key)
+	has_sword = SaveLoad.get_key_value(SaveLoad.sword_key)
+	has_shield = SaveLoad.get_key_value(SaveLoad.shield_key)
+	has_dash = SaveLoad.get_key_value(SaveLoad.dash_key)
 
 func _physics_process(delta: float) -> void:
 	if can_move:
@@ -20,7 +41,9 @@ func _physics_process(delta: float) -> void:
 
 func calculate_velocity(delta: float) -> void:	
 	add_gravity(delta)
+	wall_slide_logic()
 	jump_logic()
+	wall_jump_logic()
 	attack_logic()
 	move_left_right()
 
@@ -28,12 +51,30 @@ func add_gravity(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
+func wall_slide_logic() -> void:
+	if not is_on_floor() and is_on_wall() and velocity.y > 0:
+		velocity.y = min(velocity.y, WALL_SLIDE_SPEED)
+
+func wall_jump_logic() -> void:
+	if Input.is_action_just_pressed("jump") and not is_on_floor() and is_on_wall():
+		var wall_normal = get_wall_normal()
+		velocity.y = WALL_JUMP_VELOCITY
+		velocity.x = wall_normal.x * WALL_JUMP_PUSH
+		is_wall_jumping = true
+		get_tree().create_timer(0.15).timeout.connect(func(): is_wall_jumping = false)
+		jump_count = 1
+		buffer_timer.stop()
+
 func jump_logic():
 	if is_on_floor():
+		jump_count = 0
 		coyote_timer.start()
 	
 	if Input.is_action_just_pressed("jump"):
-		buffer_timer.start()
+		if not is_on_floor() and coyote_timer.is_stopped() and jump_count < 1 + int(has_double_jump):
+			jump()
+		else:
+			buffer_timer.start()
 	
 	if not coyote_timer.is_stopped() and not buffer_timer.is_stopped():
 		jump()
@@ -42,6 +83,7 @@ func jump_logic():
 
 func jump():
 	velocity.y = JUMP_VELOCITY
+	jump_count += 1
 	#$Sound.play_jump()
 
 func attack_logic():
@@ -50,6 +92,8 @@ func attack_logic():
 		pass
 
 func move_left_right():
+	if is_wall_jumping:
+		return
 	var direction := Input.get_axis("left", "right")
 	if direction:
 		velocity.x = direction * SPEED

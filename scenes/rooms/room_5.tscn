@@ -3,6 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://ddtrp88psneyf" path="res://scenes/rooms/room.tscn" id="1_wq1n7"]
 
 [node name="Room 5" unique_id=671016034 instance=ExtResource("1_wq1n7")]
+take_heart = true
+taken_item = "dash"
 
 [node name="Middle Ground" parent="." index="1" unique_id=1312469661]
 tile_map_data = PackedByteArray("AAAKAAYAAAADAAAAAAALAAYAAAADAAAAAAAOAAYAAAADAAAAAAAPAAYAAAADAAAAAAATAAYAAAAEAAEAAAATAAQAAAAEAAEAAAATAAMAAAADAAAAAAATAAUAAAAEAAEAAAA=")

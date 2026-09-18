@@ -2,10 +2,27 @@
 extends Node
 
 @export var max_health_key: Variant = "max health"
+@export var double_jump_key: Variant = "has double jump"
+@export var wall_jump_key: Variant = "has wall jump"
+@export var sword_key: Variant = "has sword"
+@export var shield_key: Variant = "has shield"
+@export var dash_key: Variant = "has dash"
 
 
 const DEFAULT_SAVEDATA: Dictionary = {
-	"max health" : 5 #int
+	"max health" : 5, #int
+	"has double jump": true, #bool
+	"has wall jump": true, #bool
+	"has sword": true, #bool
+	"has shield": true, #bool
+	"has dash": true, #bool
+}
+
+const DEFAULT_PREFERENCES: Dictionary = {
+	"window": DisplayServer.WINDOW_MODE_FULLSCREEN,
+	"Master Volume": linear_to_db(1.0),
+	"Music Volume": linear_to_db(1.0),
+	"SFX Volume": linear_to_db(1.0),
 }
 
 var savedata: Dictionary = {}

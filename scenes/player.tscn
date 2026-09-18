@@ -19,7 +19,9 @@ scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_qhqgy")
 
 [node name="CoyoteTimer" type="Timer" parent="." unique_id=137068760]
+wait_time = 0.2
 one_shot = true
 
 [node name="BufferTimer" type="Timer" parent="." unique_id=453652805]
+wait_time = 0.2
 one_shot = true
