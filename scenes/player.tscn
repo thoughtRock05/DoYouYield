@@ -6,8 +6,10 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3jvd4"]
 size = Vector2(32, 32)
 
-[node name="Player" type="CharacterBody2D" unique_id=933572393]
+[node name="Player" type="CharacterBody2D" unique_id=933572393 node_paths=PackedStringArray("coyote_timer", "buffer_timer")]
 script = ExtResource("1_g2els")
+coyote_timer = NodePath("CoyoteTimer")
+buffer_timer = NodePath("BufferTimer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1180564907]
 shape = SubResource("RectangleShape2D_3jvd4")
@@ -15,3 +17,9 @@ shape = SubResource("RectangleShape2D_3jvd4")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=126547709]
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_qhqgy")
+
+[node name="CoyoteTimer" type="Timer" parent="." unique_id=137068760]
+one_shot = true
+
+[node name="BufferTimer" type="Timer" parent="." unique_id=453652805]
+one_shot = true

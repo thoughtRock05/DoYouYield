@@ -16,7 +16,7 @@ offset_bottom = 40.0
 [node name="Main Menu" parent="SceneContainer" unique_id=1904224642 instance=ExtResource("1_o5qli")]
 
 [node name="DevMusicRemove" type="AudioStreamPlayer" parent="." unique_id=1896486812]
-process_mode = 3
+process_mode = 4
 stream = ExtResource("2_0wfyh")
 autoplay = true
 bus = &"Music"
