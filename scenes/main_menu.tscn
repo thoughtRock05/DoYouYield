@@ -2,12 +2,13 @@
 
 [ext_resource type="Script" uid="uid://sgoomt0nkhnk" path="res://scripts/main_menu.gd" id="1_l6cm7"]
 
-[node name="Main Menu" type="Node2D" unique_id=1904224642 node_paths=PackedStringArray("play_button", "options_button")]
+[node name="Main Menu" type="Node2D" unique_id=1904224642 node_paths=PackedStringArray("play_button", "options_button", "quit_button")]
 script = ExtResource("1_l6cm7")
 initial_scene = &"uid://cgn0wx1wi08dl"
 options_scene = &"uid://e52gy1r6ebo5"
 play_button = NodePath("CanvasLayer/Play")
 options_button = NodePath("CanvasLayer/Options")
+quit_button = NodePath("CanvasLayer/Quit")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1097955562]
 
@@ -39,3 +40,17 @@ offset_bottom = 60.119995
 grow_horizontal = 2
 grow_vertical = 2
 text = "Options"
+
+[node name="Quit" type="Button" parent="CanvasLayer" unique_id=942061550]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = 73.0
+offset_right = 23.0
+offset_bottom = 104.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Quit"
