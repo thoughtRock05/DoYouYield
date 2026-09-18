@@ -1,5 +1,7 @@
 extends Node2D
+class_name Lock
 
+signal trigger_lock(room: String)
 @export var trigger_area: Area2D
 @export var next_room: String
 
@@ -8,4 +10,4 @@ func _ready() -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is Player:
-		SceneTransition.load_scene(next_room)
+		trigger_lock.emit(next_room)

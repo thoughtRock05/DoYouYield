@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://io46bfufwpds"]
+
+[ext_resource type="Script" uid="uid://chdvxw5tyfxw1" path="res://scripts/results_menu.gd" id="1_kqyoe"]
+
+[node name="ResultsMenu" type="Node2D" unique_id=1871666372 node_paths=PackedStringArray("main_menu_button", "quit_button")]
+script = ExtResource("1_kqyoe")
+main_menu = &"uid://5pufmg2xnm6j"
+main_menu_button = NodePath("CanvasLayer/Main Menu")
+quit_button = NodePath("CanvasLayer/Quit")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=274524253]
+
+[node name="Main Menu" type="Button" parent="CanvasLayer" unique_id=1265587901]
+offset_left = 274.0
+offset_top = 131.0
+offset_right = 370.0
+offset_bottom = 162.0
+text = "Main Menu"
+
+[node name="Quit" type="Button" parent="CanvasLayer" unique_id=100435408]
+offset_left = 303.0
+offset_top = 181.0
+offset_right = 345.0
+offset_bottom = 212.0
+text = "Quit"

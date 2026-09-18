@@ -1,11 +1,12 @@
-[gd_scene format=4 uid="uid://dcdm0tk1d6hui"]
+[gd_scene format=3 uid="uid://ddtrp88psneyf"]
 
-[ext_resource type="PackedScene" uid="uid://dop8vfrtc40vm" path="res://scenes/player.tscn" id="1_s5pwh"]
-[ext_resource type="Texture2D" uid="uid://blvrua7u7covv" path="res://assets/DEV TILESET REMOVE.png" id="2_dbehi"]
-[ext_resource type="PackedScene" uid="uid://dt1x5ywbgsh1m" path="res://scenes/lock.tscn" id="3_yfplu"]
+[ext_resource type="Script" uid="uid://c8r4i4r62e5j8" path="res://scripts/room.gd" id="1_1fuux"]
+[ext_resource type="PackedScene" uid="uid://dop8vfrtc40vm" path="res://scenes/player.tscn" id="2_3nht7"]
+[ext_resource type="Texture2D" uid="uid://blvrua7u7covv" path="res://assets/DEV TILESET REMOVE.png" id="3_tmaxl"]
+[ext_resource type="PackedScene" uid="uid://dt1x5ywbgsh1m" path="res://scenes/lock.tscn" id="4_rd4w8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ffxv4"]
-texture = ExtResource("2_dbehi")
+texture = ExtResource("3_tmaxl")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:0/0 = 0
@@ -50,27 +51,64 @@ texture = ExtResource("2_dbehi")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_ffxv4")
 
-[node name="Room 1" type="Node2D" unique_id=671016034]
+[node name="Room" type="Node2D" unique_id=671016034 node_paths=PackedStringArray("yield_prompt", "yes_button", "no_button", "lock")]
+script = ExtResource("1_1fuux")
+yield_prompt = NodePath("CanvasLayer/YieldPrompt")
+yes_button = NodePath("CanvasLayer/YieldPrompt/Yes")
+no_button = NodePath("CanvasLayer/YieldPrompt/No")
+lock = NodePath("Lock")
 
-[node name="Player" parent="." unique_id=933572393 instance=ExtResource("1_s5pwh")]
+[node name="Player" parent="." unique_id=933572393 instance=ExtResource("2_3nht7")]
 position = Vector2(171.925, 70)
 
 [node name="Middle Ground" type="TileMapLayer" parent="." unique_id=1312469661]
-tile_map_data = PackedByteArray("AAACAAUAAAACAAEAAAACAAYAAAACAAEAAAACAAcAAAACAAEAAAADAAYAAAADAAAAAAADAAcAAAADAAEAAAAEAAYAAAADAAAAAAAEAAcAAAADAAEAAAAFAAYAAAADAAAAAAAFAAcAAAADAAEAAAAGAAYAAAADAAAAAAAGAAcAAAADAAEAAAAHAAYAAAADAAAAAAAHAAcAAAADAAEAAAAIAAYAAAADAAAAAAAIAAcAAAADAAEAAAAJAAYAAAADAAAAAAAJAAcAAAADAAEAAAAKAAYAAAADAAAAAAAKAAcAAAADAAEAAAALAAYAAAADAAAAAAALAAcAAAADAAEAAAAMAAYAAAADAAAAAAAMAAcAAAADAAEAAAANAAYAAAADAAAAAAANAAcAAAADAAEAAAAOAAYAAAADAAAAAAAOAAcAAAADAAEAAAACAAEAAAACAAAAAAACAAIAAAACAAEAAAACAAMAAAACAAEAAAACAAQAAAACAAEAAAACAAgAAAACAAIAAAADAAEAAAADAAAAAAADAAgAAAADAAIAAAAEAAEAAAADAAAAAAAEAAgAAAADAAIAAAAFAAEAAAADAAAAAAAFAAgAAAADAAIAAAAGAAEAAAADAAAAAAAGAAgAAAADAAIAAAAHAAEAAAADAAAAAAAHAAgAAAADAAIAAAAIAAEAAAAEAAAAAAAIAAgAAAADAAIAAAAJAAgAAAADAAIAAAAKAAgAAAADAAIAAAALAAgAAAADAAIAAAAMAAgAAAADAAIAAAANAAgAAAADAAIAAAAOAAgAAAADAAIAAAAPAAYAAAADAAAAAAAPAAcAAAADAAEAAAAPAAgAAAADAAIAAAAQAAYAAAAEAAAAAAAQAAcAAAAEAAEAAAAQAAgAAAAEAAIAAAA=")
 tile_set = SubResource("TileSet_85yof")
 
 [node name="Foreground" type="TileMapLayer" parent="." unique_id=308859021]
 z_index = 1
-tile_map_data = PackedByteArray("AAAMAAIAAAADAAAAAAANAAEAAAADAAAAAAANAAIAAAADAAAAAAAOAAEAAAADAAAAAAANAAMAAAADAAAAAAAOAAAAAAADAAAAAAAOAAIAAAADAAAAAAAOAAMAAAADAAEAAAAOAAQAAAADAAEAAAAOAAUAAAADAAEAAAAPAAEAAAADAAAAAAAPAAIAAAADAAAAAAAPAAMAAAADAAAAAAAQAAIAAAADAAAAAAA=")
 tile_set = SubResource("TileSet_85yof")
 collision_enabled = false
 
 [node name="Background" type="TileMapLayer" parent="." unique_id=1723316613]
 z_index = -1
-tile_map_data = PackedByteArray("AAADAAUAAAADAAEAAAAEAAUAAAADAAEAAAAFAAUAAAADAAEAAAAGAAUAAAADAAEAAAAHAAUAAAADAAEAAAAIAAUAAAADAAEAAAADAAIAAAADAAEAAAADAAMAAAADAAEAAAADAAQAAAADAAEAAAAEAAIAAAADAAEAAAAEAAMAAAADAAEAAAAEAAQAAAADAAEAAAAFAAIAAAADAAEAAAAFAAMAAAADAAEAAAAFAAQAAAADAAEAAAAGAAIAAAADAAEAAAAGAAMAAAADAAEAAAAGAAQAAAADAAEAAAAHAAIAAAADAAEAAAAHAAMAAAADAAEAAAAHAAQAAAADAAEAAAAIAAIAAAADAAEAAAAIAAMAAAADAAEAAAAIAAQAAAADAAEAAAA=")
 tile_set = SubResource("TileSet_85yof")
 collision_enabled = false
 
-[node name="Lock" parent="." unique_id=599625686 instance=ExtResource("3_yfplu")]
+[node name="Lock" parent="." unique_id=599625686 instance=ExtResource("4_rd4w8")]
 position = Vector2(289, 110)
-next_room = "uid://b7jnhw8q3083i"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1494660866]
+
+[node name="YieldPrompt" type="Control" parent="CanvasLayer" unique_id=1938132347]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="YieldLabel" type="Label" parent="CanvasLayer/YieldPrompt" unique_id=309691000]
+layout_mode = 0
+offset_left = 265.0
+offset_top = 127.0
+offset_right = 370.0
+offset_bottom = 150.0
+text = "Do You Yield?"
+
+[node name="Yes" type="Button" parent="CanvasLayer/YieldPrompt" unique_id=1638312946]
+process_mode = 2
+layout_mode = 0
+offset_left = 266.0
+offset_top = 165.0
+offset_right = 301.0
+offset_bottom = 196.0
+text = "Yes"
+
+[node name="No" type="Button" parent="CanvasLayer/YieldPrompt" unique_id=1938723962]
+process_mode = 2
+layout_mode = 0
+offset_left = 340.0
+offset_top = 166.0
+offset_right = 371.0
+offset_bottom = 197.0
+text = "No"

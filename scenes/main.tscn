@@ -1,9 +1,11 @@
 [gd_scene format=3 uid="uid://btjeod2oxeori"]
 
 [ext_resource type="PackedScene" uid="uid://5pufmg2xnm6j" path="res://scenes/main_menu.tscn" id="1_o5qli"]
+[ext_resource type="Script" uid="uid://b6kxwh3bt4xd5" path="res://scripts/main.gd" id="1_sugp2"]
 [ext_resource type="AudioStream" uid="uid://cp31d71cj0klo" path="res://assets/audio/DEV MUSIC REMOVE.mp3" id="2_0wfyh"]
 
 [node name="Main" type="Node2D" unique_id=1053634781]
+script = ExtResource("1_sugp2")
 
 [node name="SceneContainer" type="Control" parent="." unique_id=1952630618]
 layout_mode = 3
@@ -14,6 +16,7 @@ offset_bottom = 40.0
 [node name="Main Menu" parent="SceneContainer" unique_id=1904224642 instance=ExtResource("1_o5qli")]
 
 [node name="DevMusicRemove" type="AudioStreamPlayer" parent="." unique_id=1896486812]
+process_mode = 3
 stream = ExtResource("2_0wfyh")
 autoplay = true
 bus = &"Music"

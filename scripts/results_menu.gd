@@ -4,7 +4,6 @@ extends Node2D
 @export var main_menu_button: Button
 @export var quit_button: Button
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	main_menu_button.pressed.connect(_on_main_menu_button_pressed)
 	quit_button.pressed.connect(_on_quit_button_pressed)

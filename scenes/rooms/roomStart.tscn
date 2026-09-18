@@ -1,75 +1,11 @@
-[gd_scene format=4 uid="uid://cgn0wx1wi08dl"]
+[gd_scene format=4 uid="uid://bjwbmwcpnr8vf"]
 
-[ext_resource type="PackedScene" uid="uid://dop8vfrtc40vm" path="res://scenes/player.tscn" id="1_w7smr"]
-[ext_resource type="Texture2D" uid="uid://blvrua7u7covv" path="res://assets/DEV TILESET REMOVE.png" id="2_bgbch"]
-[ext_resource type="PackedScene" uid="uid://dt1x5ywbgsh1m" path="res://scenes/lock.tscn" id="3_djhny"]
+[ext_resource type="PackedScene" uid="uid://ddtrp88psneyf" path="res://scenes/rooms/room.tscn" id="1_xavy7"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ffxv4"]
-texture = ExtResource("2_bgbch")
-0:0/0 = 0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-1:0/0 = 0
-1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-2:0/0 = 0
-2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-3:0/0 = 0
-3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-4:0/0 = 0
-4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-0:1/0 = 0
-0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-1:1/0 = 0
-1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-2:1/0 = 0
-2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-3:1/0 = 0
-3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-4:1/0 = 0
-4:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-0:2/0 = 0
-0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-1:2/0 = 0
-1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-2:2/0 = 0
-2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-3:2/0 = 0
-3:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-4:2/0 = 0
-4:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-0:3/0 = 0
-0:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-1:3/0 = 0
-1:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-2:3/0 = 0
-2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-3:3/0 = 0
-3:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-4:3/0 = 0
+[node name="Room" unique_id=671016034 instance=ExtResource("1_xavy7")]
 
-[sub_resource type="TileSet" id="TileSet_85yof"]
-physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_ffxv4")
+[node name="Middle Ground" parent="." index="1" unique_id=1312469661]
+tile_map_data = PackedByteArray("AAAEAAYAAAADAAAAAAAFAAYAAAADAAAAAAAGAAYAAAADAAAAAAAHAAYAAAADAAAAAAAIAAYAAAADAAAAAAAJAAYAAAADAAAAAAAKAAYAAAADAAAAAAALAAYAAAADAAAAAAAMAAYAAAADAAAAAAANAAYAAAADAAAAAAAOAAYAAAADAAAAAAAPAAYAAAADAAAAAAAQAAYAAAADAAAAAAA=")
 
-[node name="Starting Room" type="Node2D" unique_id=671016034]
-
-[node name="Player" parent="." unique_id=933572393 instance=ExtResource("1_w7smr")]
-position = Vector2(171.925, 70)
-
-[node name="Middle Ground" type="TileMapLayer" parent="." unique_id=1312469661]
-tile_map_data = PackedByteArray("AAACAAUAAAACAAEAAAACAAYAAAACAAEAAAACAAcAAAACAAEAAAADAAYAAAADAAAAAAADAAcAAAADAAEAAAAEAAYAAAADAAAAAAAEAAcAAAADAAEAAAAFAAYAAAADAAAAAAAFAAcAAAADAAEAAAAGAAYAAAADAAAAAAAGAAcAAAADAAEAAAAHAAYAAAADAAAAAAAHAAcAAAADAAEAAAAIAAYAAAADAAAAAAAIAAcAAAADAAEAAAAJAAYAAAADAAAAAAAJAAcAAAADAAEAAAAKAAYAAAADAAAAAAAKAAcAAAADAAEAAAALAAYAAAADAAAAAAALAAcAAAADAAEAAAAMAAYAAAADAAAAAAAMAAcAAAADAAEAAAANAAYAAAADAAAAAAANAAcAAAADAAEAAAAOAAYAAAADAAAAAAAOAAcAAAADAAEAAAACAAEAAAACAAAAAAACAAIAAAACAAEAAAACAAMAAAACAAEAAAACAAQAAAACAAEAAAACAAgAAAACAAIAAAADAAEAAAADAAAAAAADAAgAAAADAAIAAAAEAAEAAAADAAAAAAAEAAgAAAADAAIAAAAFAAEAAAADAAAAAAAFAAgAAAADAAIAAAAGAAEAAAADAAAAAAAGAAgAAAADAAIAAAAHAAEAAAADAAAAAAAHAAgAAAADAAIAAAAIAAEAAAAEAAAAAAAIAAgAAAADAAIAAAAJAAgAAAADAAIAAAAKAAgAAAADAAIAAAALAAgAAAADAAIAAAAMAAgAAAADAAIAAAANAAgAAAADAAIAAAAOAAgAAAADAAIAAAAPAAYAAAADAAAAAAAPAAcAAAADAAEAAAAPAAgAAAADAAIAAAAQAAYAAAAEAAAAAAAQAAcAAAAEAAEAAAAQAAgAAAAEAAIAAAA=")
-tile_set = SubResource("TileSet_85yof")
-
-[node name="Foreground" type="TileMapLayer" parent="." unique_id=308859021]
-z_index = 1
-tile_set = SubResource("TileSet_85yof")
-collision_enabled = false
-
-[node name="Background" type="TileMapLayer" parent="." unique_id=1723316613]
-z_index = -1
-tile_map_data = PackedByteArray("AAADAAUAAAADAAEAAAAEAAUAAAADAAEAAAAFAAUAAAADAAEAAAAGAAUAAAADAAEAAAAHAAUAAAADAAEAAAAIAAUAAAADAAEAAAADAAIAAAADAAEAAAADAAMAAAADAAEAAAADAAQAAAADAAEAAAAEAAIAAAADAAEAAAAEAAMAAAADAAEAAAAEAAQAAAADAAEAAAAFAAIAAAADAAEAAAAFAAMAAAADAAEAAAAFAAQAAAADAAEAAAAGAAIAAAADAAEAAAAGAAMAAAADAAEAAAAGAAQAAAADAAEAAAAHAAIAAAADAAEAAAAHAAMAAAADAAEAAAAHAAQAAAADAAEAAAAIAAIAAAADAAEAAAAIAAMAAAADAAEAAAAIAAQAAAADAAEAAAA=")
-tile_set = SubResource("TileSet_85yof")
-collision_enabled = false
-
-[node name="Lock" parent="." unique_id=599625686 instance=ExtResource("3_djhny")]
-position = Vector2(289, 110)
-next_room = "uid://dcdm0tk1d6hui"
+[node name="Lock" parent="." index="4" unique_id=599625686]
+next_room = "uid://dtlklnlt0xd73"
