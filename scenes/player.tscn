@@ -1,22 +1,27 @@
 [gd_scene format=3 uid="uid://dop8vfrtc40vm"]
 
 [ext_resource type="Script" uid="uid://uamxcy3vvgfm" path="res://scripts/player_controller.gd" id="1_g2els"]
-[ext_resource type="Texture2D" uid="uid://bocrytah3cv27" path="res://icon.svg" id="2_qhqgy"]
+[ext_resource type="Texture2D" uid="uid://bedfq3e5xd1la" path="res://assets/knight_sprite_top.png" id="2_qhqgy"]
+[ext_resource type="Texture2D" uid="uid://csfn6s5chiiib" path="res://assets/knight_sprite_bottom.png" id="3_dqkch"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3jvd4"]
-size = Vector2(32, 32)
+size = Vector2(17, 32)
 
-[node name="Player" type="CharacterBody2D" unique_id=933572393 node_paths=PackedStringArray("coyote_timer", "buffer_timer")]
+[node name="Player" type="CharacterBody2D" unique_id=933572393 node_paths=PackedStringArray("coyote_timer", "buffer_timer", "dash_timer")]
 script = ExtResource("1_g2els")
 coyote_timer = NodePath("CoyoteTimer")
 buffer_timer = NodePath("BufferTimer")
+dash_timer = NodePath("DashTimer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1180564907]
+position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_3jvd4")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=126547709]
-scale = Vector2(0.25, 0.25)
+[node name="TopSprite" type="Sprite2D" parent="." unique_id=188601412]
 texture = ExtResource("2_qhqgy")
+
+[node name="BottomSprite" type="Sprite2D" parent="." unique_id=126547709]
+texture = ExtResource("3_dqkch")
 
 [node name="CoyoteTimer" type="Timer" parent="." unique_id=137068760]
 wait_time = 0.2
@@ -24,4 +29,8 @@ one_shot = true
 
 [node name="BufferTimer" type="Timer" parent="." unique_id=453652805]
 wait_time = 0.2
+one_shot = true
+
+[node name="DashTimer" type="Timer" parent="." unique_id=668212568]
+wait_time = 0.15
 one_shot = true

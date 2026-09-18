@@ -70,19 +70,17 @@ func _on_yes_pressed() -> void:
 	can_interact = false
 	if take_heart:
 		SaveLoad._set_dictionary_value(SaveLoad.max_health_key, SaveLoad.get_key_value(SaveLoad.max_health_key) - 1)
-	match taken_item: #TODO replace w/ actual mechanics
-		"a":
-			pass #SaveLoad._set_dictionary_value(SaveLoad.mechanic_key, false)
-		"b":
-			pass
-		"c":
-			pass
-		"d":
-			pass
-		"e":
-			pass
-		"f":
-			pass
+	match taken_item:
+		"double jump":
+			SaveLoad._set_dictionary_value(SaveLoad.double_jump_key, false)
+		"wall jump":
+			SaveLoad._set_dictionary_value(SaveLoad.wall_jump_key, false)
+		"sword":
+			SaveLoad._set_dictionary_value(SaveLoad.sword_key, false)
+		"shield":
+			SaveLoad._set_dictionary_value(SaveLoad.shield_key, false)
+		"dash":
+			SaveLoad._set_dictionary_value(SaveLoad.dash_key, false)
 		_:
 			pass # default case
 	
