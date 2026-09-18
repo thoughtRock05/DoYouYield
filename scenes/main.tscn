@@ -1,25 +1,61 @@
-[gd_scene format=3 uid="uid://5pufmg2xnm6j"]
+[gd_scene format=3 uid="uid://btjeod2oxeori"]
 
-[ext_resource type="Script" uid="uid://sgoomt0nkhnk" path="res://scripts/main_menu.gd" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://5pufmg2xnm6j" path="res://scenes/main_menu.tscn" id="1_o5qli"]
+[ext_resource type="AudioStream" uid="uid://cp31d71cj0klo" path="res://assets/audio/DEV MUSIC REMOVE.mp3" id="2_0wfyh"]
+[ext_resource type="PackedScene" uid="uid://vbc2v1eva61l" path="res://scenes/volume_slider.tscn" id="3_sugp2"]
 
-[node name="Main" type="Node2D" unique_id=1904224642 node_paths=PackedStringArray("play_button")]
-script = ExtResource("1_o5qli")
-initial_scene = &"uid://cgn0wx1wi08dl"
-play_button = NodePath("CanvasLayer/Button")
+[node name="Main" type="Node2D" unique_id=1053634781]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1097955562]
+[node name="SceneContainer" type="Control" parent="." unique_id=1952630618]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="Button" type="Button" parent="CanvasLayer" unique_id=1276771699]
+[node name="Main Menu" parent="SceneContainer" unique_id=1904224642 instance=ExtResource("1_o5qli")]
+
+[node name="DevMusicRemove" type="AudioStreamPlayer" parent="." unique_id=1896486812]
+stream = ExtResource("2_0wfyh")
+autoplay = true
+bus = &"Music"
+
+[node name="BoxContainer" type="VBoxContainer" parent="." unique_id=1288863642]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -48.0
-offset_top = -15.5
-offset_right = 48.0
-offset_bottom = 15.5
+offset_left = 215.0
+offset_top = 205.0
+offset_right = 422.9996
+offset_bottom = 346.99994
 grow_horizontal = 2
 grow_vertical = 2
-text = "Start Game"
-metadata/_edit_use_anchors_ = true
+alignment = 1
+
+[node name="MasterLabel" type="Label" parent="BoxContainer" unique_id=658050843]
+layout_mode = 2
+text = "Master"
+horizontal_alignment = 1
+
+[node name="Master" parent="BoxContainer" unique_id=1436275487 instance=ExtResource("3_sugp2")]
+layout_mode = 2
+bus_name = "Master"
+
+[node name="MusicLabel" type="Label" parent="BoxContainer" unique_id=547859015]
+layout_mode = 2
+text = "Music"
+horizontal_alignment = 1
+
+[node name="Music" parent="BoxContainer" unique_id=1028778026 instance=ExtResource("3_sugp2")]
+layout_mode = 2
+bus_name = "Music"
+
+[node name="SFXLabel" type="Label" parent="BoxContainer" unique_id=501704184]
+layout_mode = 2
+text = "SFX"
+horizontal_alignment = 1
+
+[node name="SFX" parent="BoxContainer" unique_id=281941511 instance=ExtResource("3_sugp2")]
+layout_mode = 2
+bus_name = "SFX"

@@ -8,6 +8,7 @@ var loaded_resource: PackedScene
 var scene_path: String
 var progress: Array = []
 var use_sub_threads: bool = true
+var container_name: String = "SceneContainer"
 
 func _ready() -> void:
 	set_process(false)
@@ -37,5 +38,16 @@ func _process(_delta: float) -> void:
 			set_process(false)
 		ResourceLoader.THREAD_LOAD_LOADED:
 			loaded_resource = ResourceLoader.load_threaded_get(scene_path)
-			get_tree().change_scene_to_packed(loaded_resource)
+			swap_scene()
 			load_finished.emit()
+
+func swap_scene() -> void:
+	var root = get_tree().current_scene
+	
+	var container = root.find_child(container_name, true, false)
+	
+	for child in container.get_children():
+		child.queue_free()
+	
+	var new_scene = loaded_resource.instantiate()
+	container.add_child(new_scene)
