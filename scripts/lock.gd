@@ -1,7 +1,7 @@
 extends Node2D
 class_name Lock
 
-signal trigger_lock(room: String)
+signal trigger_lock(room: String, take_heart, taken_item)
 @export var trigger_area: Area2D
 @export var next_room: String
 

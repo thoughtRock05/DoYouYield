@@ -4,6 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://dop8vfrtc40vm" path="res://scenes/player.tscn" id="2_3nht7"]
 [ext_resource type="Texture2D" uid="uid://blvrua7u7covv" path="res://assets/DEV TILESET REMOVE.png" id="3_tmaxl"]
 [ext_resource type="PackedScene" uid="uid://dt1x5ywbgsh1m" path="res://scenes/lock.tscn" id="4_rd4w8"]
+[ext_resource type="PackedScene" uid="uid://vbc2v1eva61l" path="res://scenes/volume_slider.tscn" id="5_3nht7"]
+[ext_resource type="PackedScene" uid="uid://df6eqqjn0g74m" path="res://scenes/window_dropdown.tscn" id="6_tmaxl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ffxv4"]
 texture = ExtResource("3_tmaxl")
@@ -51,11 +53,17 @@ texture = ExtResource("3_tmaxl")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_ffxv4")
 
-[node name="Room" type="Node2D" unique_id=671016034 node_paths=PackedStringArray("yield_prompt", "yes_button", "no_button", "lock")]
+[node name="Room" type="Node2D" unique_id=671016034 node_paths=PackedStringArray("player", "yield_prompt", "yes_button", "no_button", "room_options", "back_button", "main_menu_button", "reset_button", "lock")]
 script = ExtResource("1_1fuux")
+player = NodePath("Player")
 yield_prompt = NodePath("CanvasLayer/YieldPrompt")
 yes_button = NodePath("CanvasLayer/YieldPrompt/Yes")
 no_button = NodePath("CanvasLayer/YieldPrompt/No")
+room_options = NodePath("CanvasLayer/RoomOptions")
+back_button = NodePath("CanvasLayer/RoomOptions/Back")
+main_menu = &"uid://5pufmg2xnm6j"
+main_menu_button = NodePath("CanvasLayer/RoomOptions/Main Menu")
+reset_button = NodePath("CanvasLayer/RoomOptions/Reset")
 lock = NodePath("Lock")
 
 [node name="Player" parent="." unique_id=933572393 instance=ExtResource("2_3nht7")]
@@ -79,7 +87,105 @@ position = Vector2(289, 110)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1494660866]
 
+[node name="RoomOptions" type="Control" parent="CanvasLayer" unique_id=650667937]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/RoomOptions" unique_id=5903342]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.34407577, 0.34407574, 0.34407574, 1)
+
+[node name="Back" type="Button" parent="CanvasLayer/RoomOptions" unique_id=709400915]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.3171875
+anchor_top = 0.85833335
+anchor_right = 0.3875
+anchor_bottom = 0.9444444
+grow_horizontal = 2
+grow_vertical = 2
+text = "Back"
+metadata/_edit_use_anchors_ = true
+
+[node name="Main Menu" type="Button" parent="CanvasLayer/RoomOptions" unique_id=2059185360]
+layout_mode = 0
+anchor_left = 0.4109375
+anchor_top = 0.85833335
+anchor_right = 0.5609375
+anchor_bottom = 0.9444444
+text = "Main Menu"
+metadata/_edit_use_anchors_ = true
+
+[node name="Reset" type="Button" parent="CanvasLayer/RoomOptions" unique_id=461254590]
+layout_mode = 0
+anchor_left = 0.575
+anchor_top = 0.85833335
+anchor_right = 0.6546875
+anchor_bottom = 0.9444444
+text = "Reset"
+metadata/_edit_use_anchors_ = true
+
+[node name="VolumeContainer" type="VBoxContainer" parent="CanvasLayer/RoomOptions" unique_id=1405492679]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -117.0
+offset_top = -43.0
+offset_right = 91.00098
+offset_bottom = 98.99994
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="MasterLabel" type="Label" parent="CanvasLayer/RoomOptions/VolumeContainer" unique_id=862970454]
+layout_mode = 2
+text = "Master"
+horizontal_alignment = 1
+
+[node name="Master" parent="CanvasLayer/RoomOptions/VolumeContainer" unique_id=1436275487 instance=ExtResource("5_3nht7")]
+layout_mode = 2
+bus_name = "Master"
+
+[node name="MusicLabel" type="Label" parent="CanvasLayer/RoomOptions/VolumeContainer" unique_id=120308486]
+layout_mode = 2
+text = "Music"
+horizontal_alignment = 1
+
+[node name="Music" parent="CanvasLayer/RoomOptions/VolumeContainer" unique_id=1544534418 instance=ExtResource("5_3nht7")]
+layout_mode = 2
+bus_name = "Music"
+
+[node name="SFXLabel" type="Label" parent="CanvasLayer/RoomOptions/VolumeContainer" unique_id=1865462900]
+layout_mode = 2
+text = "SFX"
+horizontal_alignment = 1
+
+[node name="SFX" parent="CanvasLayer/RoomOptions/VolumeContainer" unique_id=1381304589 instance=ExtResource("5_3nht7")]
+layout_mode = 2
+bus_name = "SFX"
+
+[node name="WindowDropdown" parent="CanvasLayer/RoomOptions" unique_id=1634256139 instance=ExtResource("6_tmaxl")]
+layout_mode = 0
+offset_left = 203.0
+offset_top = 75.0
+offset_right = 411.0
+offset_bottom = 106.0
+
 [node name="YieldPrompt" type="Control" parent="CanvasLayer" unique_id=1938132347]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

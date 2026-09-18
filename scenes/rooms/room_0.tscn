@@ -1,11 +1,15 @@
 [gd_scene format=4 uid="uid://bjwbmwcpnr8vf"]
 
-[ext_resource type="PackedScene" uid="uid://ddtrp88psneyf" path="res://scenes/rooms/room.tscn" id="1_xavy7"]
+[ext_resource type="PackedScene" uid="uid://ddtrp88psneyf" path="res://scenes/rooms/room.tscn" id="1_qm1r8"]
 
-[node name="Room" unique_id=671016034 instance=ExtResource("1_xavy7")]
+[node name="Room 0" unique_id=671016034 instance=ExtResource("1_qm1r8")]
 
 [node name="Middle Ground" parent="." index="1" unique_id=1312469661]
 tile_map_data = PackedByteArray("AAAEAAYAAAADAAAAAAAFAAYAAAADAAAAAAAGAAYAAAADAAAAAAAHAAYAAAADAAAAAAAIAAYAAAADAAAAAAAJAAYAAAADAAAAAAAKAAYAAAADAAAAAAALAAYAAAADAAAAAAAMAAYAAAADAAAAAAANAAYAAAADAAAAAAAOAAYAAAADAAAAAAAPAAYAAAADAAAAAAAQAAYAAAADAAAAAAA=")
 
 [node name="Lock" parent="." index="4" unique_id=599625686]
+position = Vector2(80, 73)
 next_room = "uid://dtlklnlt0xd73"
+
+[node name="RoomOptions" parent="CanvasLayer" parent_id_path=PackedInt32Array(1494660866) index="0" unique_id=650667937]
+process_mode = 2

@@ -12,4 +12,4 @@ tile_map_data = PackedByteArray("AAAPAAUAAAADAAEAAAAPAAQAAAADAAEAAAAPAAMAAAADAAE
 
 [node name="Lock" parent="." index="4" unique_id=599625686]
 position = Vector2(81, 76)
-next_room = "uid://io46bfufwpds"
+next_room = "uid://dppe7s7bpfeof"

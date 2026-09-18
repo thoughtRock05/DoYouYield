@@ -1,0 +1,11 @@
+[gd_scene format=4 uid="uid://brel50h76h54i"]
+
+[ext_resource type="PackedScene" uid="uid://ddtrp88psneyf" path="res://scenes/rooms/room.tscn" id="1_etvqs"]
+
+[node name="Room 3" unique_id=671016034 instance=ExtResource("1_etvqs")]
+
+[node name="Middle Ground" parent="." index="1" unique_id=1312469661]
+tile_map_data = PackedByteArray("AAANAAYAAAADAAAAAAAOAAUAAAADAAAAAAAPAAQAAAADAAAAAAAQAAQAAAADAAAAAAAMAAYAAAADAAAAAAALAAYAAAADAAAAAAAKAAYAAAADAAAAAAAJAAYAAAADAAAAAAAIAAYAAAADAAAAAAAHAAYAAAADAAAAAAAGAAYAAAADAAAAAAAGAAcAAAADAAAAAAAFAAcAAAADAAAAAAAEAAcAAAADAAAAAAA=")
+
+[node name="Lock" parent="." index="4" unique_id=599625686]
+next_room = "uid://dbs0hoyal2od3"

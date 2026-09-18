@@ -1,11 +1,11 @@
 @tool
 extends Node
 
-@export var var_key: Variant = "var name"
+@export var max_health_key: Variant = "max health"
 
 
 const DEFAULT_SAVEDATA: Dictionary = {
-	"var name" : 0 #int
+	"max health" : 5 #int
 }
 
 var savedata: Dictionary = {}

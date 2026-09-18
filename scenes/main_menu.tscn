@@ -4,7 +4,7 @@
 
 [node name="Main Menu" type="Node2D" unique_id=1904224642 node_paths=PackedStringArray("play_button", "options_button", "quit_button")]
 script = ExtResource("1_l6cm7")
-initial_scene = &"uid://cgn0wx1wi08dl"
+initial_scene = &"uid://bjwbmwcpnr8vf"
 options_scene = &"uid://e52gy1r6ebo5"
 play_button = NodePath("CanvasLayer/Control/Play")
 options_button = NodePath("CanvasLayer/Control/Options")
