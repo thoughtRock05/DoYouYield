@@ -6,51 +6,59 @@
 script = ExtResource("1_l6cm7")
 initial_scene = &"uid://cgn0wx1wi08dl"
 options_scene = &"uid://e52gy1r6ebo5"
-play_button = NodePath("CanvasLayer/Play")
-options_button = NodePath("CanvasLayer/Options")
-quit_button = NodePath("CanvasLayer/Quit")
+play_button = NodePath("CanvasLayer/Control/Play")
+options_button = NodePath("CanvasLayer/Control/Options")
+quit_button = NodePath("CanvasLayer/Control/Quit")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1097955562]
 
-[node name="Play" type="Button" parent="CanvasLayer" unique_id=1276771699]
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=1636991819]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Play" type="Button" parent="CanvasLayer/Control" unique_id=1276771699]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -48.0
-offset_top = -15.5
-offset_right = 48.0
-offset_bottom = 15.5
+offset_left = 252.0
+offset_top = 144.5
+offset_right = 348.0
+offset_bottom = 175.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "Start Game"
-metadata/_edit_use_anchors_ = true
 
-[node name="Options" type="Button" parent="CanvasLayer" unique_id=1434579942]
+[node name="Options" type="Button" parent="CanvasLayer/Control" unique_id=1434579942]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -35.0
-offset_top = 29.119995
-offset_right = 35.0
-offset_bottom = 60.119995
+offset_left = 265.0
+offset_top = 189.12
+offset_right = 335.0
+offset_bottom = 220.12
 grow_horizontal = 2
 grow_vertical = 2
 text = "Options"
 
-[node name="Quit" type="Button" parent="CanvasLayer" unique_id=942061550]
+[node name="Quit" type="Button" parent="CanvasLayer/Control" unique_id=942061550]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -19.0
-offset_top = 73.0
-offset_right = 23.0
-offset_bottom = 104.0
+offset_left = 281.0
+offset_top = 233.0
+offset_right = 323.0
+offset_bottom = 264.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Quit"

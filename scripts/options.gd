@@ -8,6 +8,7 @@ func _ready() -> void:
 	back_button.pressed.connect(_on_back_button_pressed)
 	window_dropdown.item_selected.connect(_on_window_dropdown_selected)
 	set_window_type()
+	back_button.grab_focus()
 
 func _on_back_button_pressed() -> void:
 	SceneTransition.load_scene(main_menu)

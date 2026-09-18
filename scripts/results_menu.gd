@@ -7,6 +7,7 @@ extends Node2D
 func _ready() -> void:
 	main_menu_button.pressed.connect(_on_main_menu_button_pressed)
 	quit_button.pressed.connect(_on_quit_button_pressed)
+	main_menu_button.grab_focus()
 
 func _on_main_menu_button_pressed() -> void:
 	SceneTransition.load_scene(main_menu)

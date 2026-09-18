@@ -16,11 +16,12 @@ func _ready() -> void:
 	no_button.pressed.connect(_on_no_pressed)
 	
 	uid = ResourceUID.id_to_text(ResourceLoader.get_resource_uid(scene_file_path))
-	
+
 func _on_lock_triggered(_room: String) -> void:
 	yield_prompt.visible = true
 	room = _room
 	get_tree().paused = true
+	yes_button.grab_focus()
 
 func _on_yes_pressed() -> void:
 	get_tree().paused = false

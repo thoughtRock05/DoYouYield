@@ -6,71 +6,80 @@
 [node name="Options" type="Node2D" unique_id=322749085 node_paths=PackedStringArray("back_button", "window_dropdown")]
 script = ExtResource("1_yjkok")
 main_menu = &"uid://5pufmg2xnm6j"
-back_button = NodePath("CanvasLayer/Back")
-window_dropdown = NodePath("CanvasLayer/Window")
+back_button = NodePath("CanvasLayer/Control/Back")
+window_dropdown = NodePath("CanvasLayer/Control/Window")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=78252589]
 
-[node name="Back" type="Button" parent="CanvasLayer" unique_id=110143976]
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=571604137]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Back" type="Button" parent="CanvasLayer/Control" unique_id=110143976]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -22.5
-offset_top = 75.0
-offset_right = 22.5
-offset_bottom = 106.0
+offset_left = 277.5
+offset_top = 235.0
+offset_right = 322.5
+offset_bottom = 266.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Back"
 
-[node name="VolumeContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=561114777]
+[node name="VolumeContainer" type="VBoxContainer" parent="CanvasLayer/Control" unique_id=561114777]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -105.0
-offset_top = -85.0
-offset_right = 103.00098
-offset_bottom = 56.99994
+offset_left = 195.0
+offset_top = 75.0
+offset_right = 403.00098
+offset_bottom = 216.99994
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="MasterLabel" type="Label" parent="CanvasLayer/VolumeContainer" unique_id=1573940784]
+[node name="MasterLabel" type="Label" parent="CanvasLayer/Control/VolumeContainer" unique_id=1573940784]
 layout_mode = 2
 text = "Master"
 horizontal_alignment = 1
 
-[node name="Master" parent="CanvasLayer/VolumeContainer" unique_id=1436275487 instance=ExtResource("1_c2u1v")]
+[node name="Master" parent="CanvasLayer/Control/VolumeContainer" unique_id=1436275487 instance=ExtResource("1_c2u1v")]
 layout_mode = 2
 bus_name = "Master"
 
-[node name="MusicLabel" type="Label" parent="CanvasLayer/VolumeContainer" unique_id=1524905738]
+[node name="MusicLabel" type="Label" parent="CanvasLayer/Control/VolumeContainer" unique_id=1524905738]
 layout_mode = 2
 text = "Music"
 horizontal_alignment = 1
 
-[node name="Music" parent="CanvasLayer/VolumeContainer" unique_id=819410929 instance=ExtResource("1_c2u1v")]
+[node name="Music" parent="CanvasLayer/Control/VolumeContainer" unique_id=819410929 instance=ExtResource("1_c2u1v")]
 layout_mode = 2
 bus_name = "Music"
 
-[node name="SFXLabel" type="Label" parent="CanvasLayer/VolumeContainer" unique_id=1613176948]
+[node name="SFXLabel" type="Label" parent="CanvasLayer/Control/VolumeContainer" unique_id=1613176948]
 layout_mode = 2
 text = "SFX"
 horizontal_alignment = 1
 
-[node name="SFX" parent="CanvasLayer/VolumeContainer" unique_id=90865649 instance=ExtResource("1_c2u1v")]
+[node name="SFX" parent="CanvasLayer/Control/VolumeContainer" unique_id=90865649 instance=ExtResource("1_c2u1v")]
 layout_mode = 2
 bus_name = "SFX"
 
-[node name="Window" type="OptionButton" parent="CanvasLayer" unique_id=26317640]
+[node name="Window" type="OptionButton" parent="CanvasLayer/Control" unique_id=26317640]
+layout_mode = 0
 offset_left = 24.0
 offset_top = 78.0
 offset_right = 182.0
-offset_bottom = 108.0
+offset_bottom = 109.0
 item_count = 2
 popup/item_0/text = "Windowed"
 popup/item_0/id = 0

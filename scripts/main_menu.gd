@@ -10,6 +10,7 @@ func _ready() -> void:
 	play_button.pressed.connect(_on_play_button_pressed)
 	options_button.pressed.connect(_on_options_menu_button_pressed)
 	quit_button.pressed.connect(_on_quit_button_pressed)
+	play_button.grab_focus()
 
 func _on_play_button_pressed() -> void:
 	SceneTransition.load_scene(initial_scene)
