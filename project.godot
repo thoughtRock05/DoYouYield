@@ -15,8 +15,16 @@ run/main_scene="uid://5pufmg2xnm6j"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+SaveLoad="*uid://b00ukj88bfewh"
+SceneTransition="*uid://dojws7lqo57q7"
+
 [display]
 
+window/size/viewport_width=640
+window/size/viewport_height=360
+window/size/mode=3
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
