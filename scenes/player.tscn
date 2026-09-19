@@ -446,6 +446,7 @@ position = Vector2(9, -2.5)
 shape = SubResource("RectangleShape2D_l2tch")
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="." unique_id=123889765]
+process_mode = 1
 position = Vector2(7, -5)
 sprite_frames = SubResource("SpriteFrames_q2dwa")
 animation = &"attack"

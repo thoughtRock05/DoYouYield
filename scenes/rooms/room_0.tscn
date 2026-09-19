@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://ddtrp88psneyf" path="res://scenes/rooms/room.tscn" id="1_qm1r8"]
 [ext_resource type="PackedScene" uid="uid://4quhxmrnsq0u" path="res://scenes/moving_platform.tscn" id="3_tf3nb"]
 [ext_resource type="PackedScene" uid="uid://c3bfdx54pcoxp" path="res://scenes/enemy_slime.tscn" id="4_iaxgg"]
+[ext_resource type="PackedScene" uid="uid://cqfry822lc17w" path="res://scenes/acid_pit.tscn" id="4_rejh5"]
 
 [node name="Room0" unique_id=671016034 instance=ExtResource("1_qm1r8")]
 room_num = 0
@@ -28,3 +29,8 @@ rel_x = 150.0
 
 [node name="EnemySlime" parent="." index="7" unique_id=1893676253 instance=ExtResource("4_iaxgg")]
 position = Vector2(577, 293)
+
+[node name="AcidPit" parent="." index="8" unique_id=1028025895 instance=ExtResource("4_rejh5")]
+position = Vector2(321, 178)
+
+[editable path="AcidPit"]

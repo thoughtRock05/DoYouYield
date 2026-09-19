@@ -2,9 +2,13 @@
 
 [ext_resource type="PackedScene" uid="uid://ddtrp88psneyf" path="res://scenes/rooms/room.tscn" id="1_6a8el"]
 [ext_resource type="PackedScene" uid="uid://4quhxmrnsq0u" path="res://scenes/moving_platform.tscn" id="2_3e1ps"]
+[ext_resource type="PackedScene" uid="uid://cqfry822lc17w" path="res://scenes/acid_pit.tscn" id="3_ar6ir"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ar6ir"]
 size = Vector2(96, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0g03g"]
+size = Vector2(112, 16)
 
 [node name="Room 2" unique_id=671016034 instance=ExtResource("1_6a8el")]
 room_num = 2
@@ -34,4 +38,18 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAD+/wAAAAAAAAA
 position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_ar6ir")
 
+[node name="AcidPit" parent="." index="7" unique_id=1028025895 instance=ExtResource("3_ar6ir")]
+position = Vector2(640, 368)
+
+[node name="TileMapLayer" parent="AcidPit" index="0" unique_id=1407692899]
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAACAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAABAAEAAAAAAAAAAAACAAEAAAAAAAAAAAADAAEAAAAAAAAAAAAEAAEAAAAAAAAAAAAFAAEAAAAAAAAAAAAGAAEAAAAAAAAAAAA=")
+
+[node name="CollisionShape2D" parent="AcidPit/AcidPit" parent_id_path=PackedInt32Array(1028025895, 2011704841) index="0" unique_id=1619907998]
+position = Vector2(46, 14)
+shape = SubResource("RectangleShape2D_0g03g")
+
+[node name="AcidPit2" parent="." index="8" unique_id=176602615 instance=ExtResource("3_ar6ir")]
+
 [editable path="MovingPlatform"]
+[editable path="AcidPit"]
+[editable path="AcidPit2"]

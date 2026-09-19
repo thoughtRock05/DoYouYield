@@ -90,11 +90,11 @@ func check_shield() -> void:
 		else:
 			if not is_attacking:
 				using_shield = false
-			if not is_dashing or is_attacking or is_stunned:
-				can_move = true
 			if Input.is_action_just_released("shield"):
 				for child in shield_collision.get_overlapping_areas():
 					hit(child)
+				if not is_dashing or is_attacking or is_stunned:
+					can_move = true
 
 func calculate_velocity(delta: float) -> void:	
 	dash_logic()
@@ -263,6 +263,9 @@ func animate():
 		sfx_player_walk.play()
 
 func hit(area: Area2D):
+	if area is AcidPit:
+		die()
+		return
 	if area is not EnemyHitBox:
 		return
 	if is_invincible or using_shield or is_dead:
