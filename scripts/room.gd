@@ -38,6 +38,8 @@ func _ready() -> void:
 	yes_button.pressed.connect(_on_yes_pressed)
 	no_button.pressed.connect(_on_no_pressed)
 	
+	player.set_camera_boundaries(100, 200)
+	
 	back_button.pressed.connect(_on_back_pressed)
 	main_menu_button.pressed.connect(_on_main_menu_pressed)
 	reset_button.pressed.connect(_on_reset_pressed)

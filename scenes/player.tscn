@@ -19,8 +19,9 @@ _data = {
 &"Attack": SubResource("Animation_qhqgy")
 }
 
-[node name="Player" type="CharacterBody2D" unique_id=933572393 node_paths=PackedStringArray("coyote_timer", "buffer_timer", "dash_timer", "sword_hit_box", "animation_player", "top_sprite", "bottom_sprite")]
+[node name="Player" type="CharacterBody2D" unique_id=933572393 node_paths=PackedStringArray("player_camera", "coyote_timer", "buffer_timer", "dash_timer", "sword_hit_box", "animation_player", "top_sprite", "bottom_sprite")]
 script = ExtResource("1_g2els")
+player_camera = NodePath("PlayerCamera")
 coyote_timer = NodePath("CoyoteTimer")
 buffer_timer = NodePath("BufferTimer")
 dash_timer = NodePath("DashTimer")
@@ -28,6 +29,12 @@ sword_hit_box = NodePath("SwordHitBox")
 animation_player = NodePath("AnimationPlayer")
 top_sprite = NodePath("SpriteContainer/TopSprite")
 bottom_sprite = NodePath("SpriteContainer/BottomSprite")
+
+[node name="PlayerCamera" type="Camera2D" parent="." unique_id=750898772]
+process_callback = 0
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 2.27
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1180564907]
 position = Vector2(0.5, 0)

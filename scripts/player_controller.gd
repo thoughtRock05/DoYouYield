@@ -19,7 +19,7 @@ var has_sword: bool
 var has_shield: bool
 var has_dash: bool
 
-
+@export var player_camera: Camera2D
 @export var coyote_timer: Timer
 @export var buffer_timer: Timer
 @export var dash_timer: Timer
@@ -27,7 +27,6 @@ var has_dash: bool
 @export var animation_player: AnimationPlayer
 @export var top_sprite: Sprite2D
 @export var bottom_sprite: Sprite2D
-
 
 var jump_count = 0
 var health: int
@@ -187,3 +186,9 @@ func kill() -> void:
 	
 	await get_tree().create_timer(1.5).timeout
 	reset_room.emit()
+
+func set_camera_boundaries(x: float, y: float) -> void:
+	player_camera.limit_top
+	player_camera.limit_bottom
+	player_camera.limit_left
+	player_camera.limit_right
