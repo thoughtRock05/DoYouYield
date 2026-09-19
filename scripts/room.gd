@@ -56,6 +56,12 @@ func _ready() -> void:
 	
 	heart_bar.set_health(player.health)
 	heart_bar.set_max_health(player.max_health)
+	
+	
+	for child in get_children(true):
+		if child is Slime:
+			child.set_target(player)
+
 func _process(_delta: float) -> void:
 	if not can_interact:
 		return

@@ -10,25 +10,18 @@ z_index = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=852428349]
 z_index = 2
-position = Vector2(6.5, 0.5)
+position = Vector2(10, 0)
+scale = Vector2(1.5, 1.5)
 texture = SubResource("CompressedTexture2D_otjmu")
 
 [node name="Sprite2D2" type="Sprite2D" parent="." unique_id=1111740339]
 z_index = 2
-position = Vector2(20.5, 0.5)
+position = Vector2(30, 0)
+scale = Vector2(1.5, 1.5)
 texture = SubResource("CompressedTexture2D_otjmu")
 
 [node name="Sprite2D3" type="Sprite2D" parent="." unique_id=1343802539]
 z_index = 2
-position = Vector2(34.5, 0.5)
-texture = ExtResource("1_hm6s1")
-
-[node name="Sprite2D4" type="Sprite2D" parent="." unique_id=839944163]
-z_index = 2
-position = Vector2(48.5, 0.5)
-texture = ExtResource("1_hm6s1")
-
-[node name="Sprite2D5" type="Sprite2D" parent="." unique_id=1385581286]
-z_index = 2
-position = Vector2(62.5, 0.5)
+position = Vector2(50, 0)
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("1_hm6s1")

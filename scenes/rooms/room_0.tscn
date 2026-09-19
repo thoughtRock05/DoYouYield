@@ -1,9 +1,8 @@
 [gd_scene format=4 uid="uid://bjwbmwcpnr8vf"]
 
 [ext_resource type="PackedScene" uid="uid://ddtrp88psneyf" path="res://scenes/rooms/room.tscn" id="1_qm1r8"]
-[ext_resource type="Script" uid="uid://dogyksadv0hgl" path="res://scripts/DEV_ASSET_REMOVE.gd" id="2_p0ccy"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3jvd4"]
+[ext_resource type="PackedScene" uid="uid://4quhxmrnsq0u" path="res://scenes/moving_platform.tscn" id="3_tf3nb"]
+[ext_resource type="PackedScene" uid="uid://c3bfdx54pcoxp" path="res://scenes/enemy_slime.tscn" id="4_iaxgg"]
 
 [node name="Room0" unique_id=671016034 instance=ExtResource("1_qm1r8")]
 room_num = 0
@@ -23,10 +22,9 @@ next_room = "uid://dtlklnlt0xd73"
 [node name="RoomOptions" parent="CanvasLayer" parent_id_path=PackedInt32Array(1494660866) index="1" unique_id=650667937]
 process_mode = 2
 
-[node name="DEV ASSET REMOVE" type="Area2D" parent="." index="6" unique_id=652512064]
-position = Vector2(-296, -181)
-script = ExtResource("2_p0ccy")
+[node name="MovingPlatform" parent="." index="6" unique_id=904287372 instance=ExtResource("3_tf3nb")]
+position = Vector2(258, 80)
+rel_x = 150.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DEV ASSET REMOVE" index="0" unique_id=1595375284]
-position = Vector2(615, 360)
-shape = SubResource("RectangleShape2D_3jvd4")
+[node name="EnemySlime" parent="." index="7" unique_id=1893676253 instance=ExtResource("4_iaxgg")]
+position = Vector2(577, 293)

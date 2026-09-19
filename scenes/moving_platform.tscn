@@ -1,0 +1,30 @@
+[gd_scene format=4 uid="uid://4quhxmrnsq0u"]
+
+[ext_resource type="Script" uid="uid://dv56kmattkwlt" path="res://scripts/moving_platform.gd" id="1_ms375"]
+[ext_resource type="Texture2D" uid="uid://ct3jo817gh35" path="res://assets/purple rock tile.png" id="2_1tdcd"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mb26n"]
+texture = ExtResource("2_1tdcd")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_3jvd4"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_mb26n")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l2tch"]
+size = Vector2(64, 32)
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" unique_id=204123403]
+script = ExtResource("1_ms375")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=234184060]
+scale = Vector2(0.5, 0.5)
+tile_map_data = PackedByteArray("AAD/////AAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAD+////AAAAAAAAAAD+/wAAAAAAAAAAAAABAP//AAAAAAAAAAABAAAAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_3jvd4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=183576832]
+shape = SubResource("RectangleShape2D_l2tch")

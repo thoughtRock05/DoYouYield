@@ -14,6 +14,7 @@ const DASH_SPEED = 900.0
 const DASH_DURATION = 0.015
 const DASH_DECEL = 2500.0
 const ATTACK_DECEL = 500.0
+const KNOCKBACK_DECEL = 1200.0
 
 var can_move: bool = true
 
@@ -30,6 +31,8 @@ var has_dash: bool
 @export var sword_hit_box: Area2D
 @export var animated_sprite: AnimatedSprite2D
 @export var i_frame_timer: Timer
+@export var hitbox: Area2D
+@export var shield_sprite: Sprite2D
 
 var jump_count = 0
 var health: int
@@ -42,6 +45,8 @@ var is_attacking: bool = false
 var is_invincible: bool = false
 var is_dead: bool = false
 var using_shield: bool = false
+var is_stunned: bool = false
+var knock_v: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	has_double_jump = SaveLoad.get_key_value(SaveLoad.double_jump_key)
@@ -52,6 +57,11 @@ func _ready() -> void:
 	
 	max_health = SaveLoad.get_key_value(SaveLoad.max_health_key)
 	health = max_health
+	
+	sword_hit_box.monitorable = false
+	sword_hit_box.monitoring = false
+	animated_sprite.frame_changed.connect(_on_frame_changed)
+	hitbox.area_entered.connect(hit)
 
 func _physics_process(delta: float) -> void:
 	if is_dead:
@@ -68,6 +78,7 @@ func calculate_velocity(delta: float) -> void:
 		velocity = dash_dir * DASH_SPEED
 		return
 	add_gravity(delta)
+	knockback_logic(delta)
 	wall_slide_logic()
 	jump_logic()
 	wall_jump_logic()
@@ -99,6 +110,15 @@ func dash_logic():
 func add_gravity(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+
+func knockback_logic(delta: float) -> void:
+	if is_stunned:
+		knock_v.x = move_toward(knock_v.x, 0.0, KNOCKBACK_DECEL * delta)
+		velocity.x = knock_v.x
+		get_tree().create_timer(0.5).timeout.connect(func():
+			is_stunned = false
+			)
+		return
 
 func wall_slide_logic() -> void:
 	if not has_wall_jump or not can_move:
@@ -146,17 +166,32 @@ func attack_logic():
 	if Input.is_action_just_pressed("attack") and not is_attacking:
 		is_attacking = true 
 		can_move = false
-		sword_hit_box.visible = true
-		sword_hit_box.monitorable = true
+		
 		animated_sprite.play("attack")
 		await animated_sprite.animation_finished
-		sword_hit_box.visible = false
-		sword_hit_box.monitorable = false
+		
 		can_move = true
 		is_attacking = false
 
+func _on_frame_changed() -> void:
+	if animated_sprite.animation == "attack":
+		if animated_sprite.frame == 0:
+			if abs(velocity.x) > SPEED and has_shield:
+				using_shield = true
+		if animated_sprite.frame == 1:
+			sword_hit_box.monitoring = true
+			sword_hit_box.monitorable = true
+		if animated_sprite.frame == 2:
+			sword_hit_box.get_overlapping_areas()
+		if animated_sprite.frame == 3:
+			sword_hit_box.monitoring = false
+			sword_hit_box.monitorable = false
+		if animated_sprite.frame == 9:
+			if using_shield:
+				using_shield = false
+
 func move_left_right(delta):
-	if is_wall_jumping:
+	if is_wall_jumping or is_stunned:
 		return
 	var direction: float = 0.0
 	if can_move:
@@ -174,6 +209,7 @@ func move_left_right(delta):
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 
 func animate():
+	shield_sprite.visible = using_shield
 	if is_dead or is_attacking:
 		return
 	if velocity.x < 0:
@@ -194,7 +230,9 @@ func animate():
 	
 	animated_sprite.play("walk")
 
-func hit():
+func hit(area: Area2D):
+	if area is not EnemyHitBox:
+		return
 	#$Sound.play_hit()
 	if is_invincible or using_shield or is_dead:
 		return
@@ -203,6 +241,13 @@ func hit():
 	if health <= 0:
 		die()
 	else:
+		is_stunned = true
+		var knock_dir: float = sign(global_position.x - area.global_position.x)
+		if knock_dir == 0.0:
+			knock_dir = 1
+		knock_v.x = knock_dir * 500.0
+		velocity.y = -250.0
+		
 		is_invincible = true
 		i_frame_timer.start()
 		await i_frame_timer.timeout
@@ -232,4 +277,3 @@ func set_camera_boundaries(x: int, y: int) -> void:
 	player_camera.limit_bottom = y * tile_size
 	player_camera.limit_left = 0
 	player_camera.limit_right = x * tile_size
-	

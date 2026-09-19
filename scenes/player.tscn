@@ -1,13 +1,17 @@
 [gd_scene format=3 uid="uid://dop8vfrtc40vm"]
 
 [ext_resource type="Script" uid="uid://uamxcy3vvgfm" path="res://scripts/player_controller.gd" id="1_g2els"]
+[ext_resource type="Script" uid="uid://bmxixknxbxqtc" path="res://scripts/sword_hit_box.gd" id="2_qhqgy"]
 [ext_resource type="Texture2D" uid="uid://c7npa7nove5l8" path="res://assets/DEV SPRITESHEET REMOVE.png" id="5_qlg0r"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3jvd4"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qhqgy"]
 size = Vector2(15, 29)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3jvd4"]
+size = Vector2(21, 33)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l2tch"]
-size = Vector2(14, 14)
+size = Vector2(32, 37)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d2wvv"]
 atlas = ExtResource("5_qlg0r")
@@ -362,7 +366,11 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="Player" type="CharacterBody2D" unique_id=933572393 node_paths=PackedStringArray("player_camera", "coyote_timer", "buffer_timer", "dash_timer", "sword_hit_box", "animated_sprite", "i_frame_timer")]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qhqgy"]
+load_path = "res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex"
+
+[node name="Player" type="CharacterBody2D" unique_id=933572393 node_paths=PackedStringArray("player_camera", "coyote_timer", "buffer_timer", "dash_timer", "sword_hit_box", "animated_sprite", "i_frame_timer", "hitbox", "shield_sprite")]
+collision_layer = 4
 script = ExtResource("1_g2els")
 player_camera = NodePath("PlayerCamera")
 coyote_timer = NodePath("CoyoteTimer")
@@ -371,6 +379,12 @@ dash_timer = NodePath("DashTimer")
 sword_hit_box = NodePath("SwordHitBox")
 animated_sprite = NodePath("AnimatedSprite2D2")
 i_frame_timer = NodePath("IFrameTimer")
+hitbox = NodePath("Hitbox")
+shield_sprite = NodePath("ShieldSprite")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1984020862]
+position = Vector2(0.5, 1.5)
+shape = SubResource("RectangleShape2D_qhqgy")
 
 [node name="PlayerCamera" type="Camera2D" parent="." unique_id=750898772]
 process_callback = 0
@@ -378,7 +392,11 @@ limit_smoothed = true
 position_smoothing_enabled = true
 position_smoothing_speed = 12.94
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1180564907]
+[node name="Hitbox" type="Area2D" parent="." unique_id=1544907735]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1180564907]
 position = Vector2(0.5, 1.5)
 shape = SubResource("RectangleShape2D_3jvd4")
 
@@ -403,11 +421,21 @@ one_shot = true
 
 [node name="SwordHitBox" type="Area2D" parent="." unique_id=999956691]
 position = Vector2(17, 0)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("2_qhqgy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwordHitBox" unique_id=1910927984]
+position = Vector2(9, -2.5)
 shape = SubResource("RectangleShape2D_l2tch")
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="." unique_id=123889765]
 position = Vector2(7, -5)
 sprite_frames = SubResource("SpriteFrames_q2dwa")
-animation = &"wall_cling"
+animation = &"attack"
+frame = 3
+
+[node name="ShieldSprite" type="Sprite2D" parent="." unique_id=770510889]
+visible = false
+scale = Vector2(0.28124997, 0.28124997)
+texture = SubResource("CompressedTexture2D_qhqgy")
