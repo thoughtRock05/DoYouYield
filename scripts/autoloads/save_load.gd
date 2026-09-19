@@ -10,7 +10,7 @@ extends Node
 
 
 const DEFAULT_SAVEDATA: Dictionary = {
-	"max health" : 5, #int
+	"max health" : 3, #int
 	"has double jump": true, #bool
 	"has wall jump": true, #bool
 	"has sword": true, #bool

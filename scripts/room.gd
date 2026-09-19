@@ -4,6 +4,8 @@ extends Node
 
 @export var room_num: int = -1
 
+@export var heart_bar: Node2D
+
 @export var yield_prompt: Control
 @export var yes_button: Button
 @export var no_button: Button
@@ -48,7 +50,12 @@ func _ready() -> void:
 	reset_button.pressed.connect(_on_reset_pressed)
 	player.reset_room.connect(_on_reset_pressed)
 	uid = ResourceUID.id_to_text(ResourceLoader.get_resource_uid(scene_file_path))
-
+	
+	player.set_health.connect(heart_bar.set_health)
+	player.set_max_health.connect(heart_bar.set_max_health)
+	
+	heart_bar.set_health(player.health)
+	heart_bar.set_max_health(player.max_health)
 func _process(_delta: float) -> void:
 	if not can_interact:
 		return
@@ -62,6 +69,7 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("escape"):
 		if can_interact == false:
 			return
+		heart_bar.visible = in_options_menu
 		in_options_menu = not in_options_menu
 		player.can_move = not in_options_menu
 		get_tree().paused = in_options_menu

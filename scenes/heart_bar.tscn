@@ -6,14 +6,29 @@
 load_path = "res://.godot/imported/full_heart.png-2560fe522e4500ef7e87a446f2008836.ctex"
 
 [node name="HeartBar" type="Node2D" unique_id=932334193]
+z_index = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=852428349]
-position = Vector2(-14, 0)
+z_index = 2
+position = Vector2(6.5, 0.5)
 texture = SubResource("CompressedTexture2D_otjmu")
 
 [node name="Sprite2D2" type="Sprite2D" parent="." unique_id=1111740339]
+z_index = 2
+position = Vector2(20.5, 0.5)
 texture = SubResource("CompressedTexture2D_otjmu")
 
 [node name="Sprite2D3" type="Sprite2D" parent="." unique_id=1343802539]
-position = Vector2(14, 0)
+z_index = 2
+position = Vector2(34.5, 0.5)
+texture = ExtResource("1_hm6s1")
+
+[node name="Sprite2D4" type="Sprite2D" parent="." unique_id=839944163]
+z_index = 2
+position = Vector2(48.5, 0.5)
+texture = ExtResource("1_hm6s1")
+
+[node name="Sprite2D5" type="Sprite2D" parent="." unique_id=1385581286]
+z_index = 2
+position = Vector2(62.5, 0.5)
 texture = ExtResource("1_hm6s1")

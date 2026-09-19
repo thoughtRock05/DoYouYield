@@ -10,7 +10,7 @@ class_name MusicController
 @export var player_6: AudioStreamPlayer
 @export var menu_music: AudioStreamPlayer
 
-@export var fade_time: float = 0.75
+@export var fade_time: float = 1.25
 
 var players: Array[AudioStreamPlayer] = []
 
@@ -29,21 +29,20 @@ func _ready() -> void:
 	for i in range(players.size()):
 		if i == current_player:
 			players[i].volume_db = 0.0
-			players[i].play()
 		else:
 			players[i].volume_db = -80.0
+		players[i].play()
 
 func switch_player(p: int) -> void:
 	if p < 0 or p > 7:
 		return
 	var next_player = p
-	var position = players[current_player].get_playback_position()
 	
 	players[next_player].volume_db = -80.0
-	players[next_player].play(position)
 	
 	var tween = create_tween().set_parallel(true)
-	tween.tween_property(players[current_player], "volume_db", -80.0, fade_time / 2.0)
+	tween.set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+	tween.tween_property(players[current_player], "volume_db", -80.0, fade_time)
 	tween.tween_property(players[next_player], "volume_db", 0.0, fade_time)
 	
 	current_player = next_player

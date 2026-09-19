@@ -2,6 +2,8 @@ extends CharacterBody2D
 class_name Player
 
 signal reset_room
+signal set_health(health: int)
+@warning_ignore("unused_signal") signal set_max_health(max_health: int)
 
 const SPEED = 250.0
 const JUMP_VELOCITY = -400.0
@@ -9,10 +11,12 @@ const WALL_JUMP_VELOCITY = -380.0
 const WALL_JUMP_PUSH = 350.0
 const WALL_SLIDE_SPEED = 120.0
 const DASH_SPEED = 900.0
-const DASH_DURATION = 0.15
+const DASH_DURATION = 0.015
+const DASH_DECEL = 2500.0
+const ATTACK_DECEL = 500.0
 
 var can_move: bool = true
-var max_health: int
+
 var has_double_jump: bool
 var has_wall_jump: bool
 var has_sword: bool
@@ -24,17 +28,20 @@ var has_dash: bool
 @export var buffer_timer: Timer
 @export var dash_timer: Timer
 @export var sword_hit_box: Area2D
-@export var animation_player: AnimationPlayer
-@export var top_sprite: Sprite2D
-@export var bottom_sprite: Sprite2D
+@export var animated_sprite: AnimatedSprite2D
+@export var i_frame_timer: Timer
 
 var jump_count = 0
 var health: int
+var max_health: int
 var is_wall_jumping: bool = false
 var can_dash: bool = true
 var is_dashing: bool = false
 var dash_dir: Vector2 = Vector2.RIGHT
 var is_attacking: bool = false
+var is_invincible: bool = false
+var is_dead: bool = false
+var using_shield: bool = false
 
 func _ready() -> void:
 	has_double_jump = SaveLoad.get_key_value(SaveLoad.double_jump_key)
@@ -42,12 +49,18 @@ func _ready() -> void:
 	has_sword = SaveLoad.get_key_value(SaveLoad.sword_key)
 	has_shield = SaveLoad.get_key_value(SaveLoad.shield_key)
 	has_dash = SaveLoad.get_key_value(SaveLoad.dash_key)
+	
+	max_health = SaveLoad.get_key_value(SaveLoad.max_health_key)
+	health = max_health
 
 func _physics_process(delta: float) -> void:
-	if can_move:
-		calculate_velocity(delta)
-		animate()
+	if is_dead:
+		add_gravity(delta)
 		move_and_slide()
+		return
+	calculate_velocity(delta)
+	animate()
+	move_and_slide()
 
 func calculate_velocity(delta: float) -> void:	
 	dash_logic()
@@ -59,22 +72,24 @@ func calculate_velocity(delta: float) -> void:
 	jump_logic()
 	wall_jump_logic()
 	attack_logic()
-	move_left_right()
+	move_left_right(delta)
 
 func dash_logic():
-	if not has_dash:
+	if not has_dash or not can_move:
 		return
 	var input_x: float = Input.get_axis("left", "right")
-	if input_x != 0:
+	if input_x != 0 and not is_dashing:
 		dash_dir = Vector2(input_x, 0).normalized()
 	
 	if Input.is_action_just_pressed("dash") and can_dash and not is_dashing:
 		is_dashing = true
 		can_dash = false
 		velocity.y = 0
+		
+		velocity = dash_dir * DASH_SPEED
+		
 		get_tree().create_timer(DASH_DURATION).timeout.connect(func():
 			is_dashing = false
-			velocity.x = SPEED
 		)
 		
 		get_tree().create_timer(DASH_DURATION + 0.5).timeout.connect(func():
@@ -86,13 +101,13 @@ func add_gravity(delta: float) -> void:
 		velocity += get_gravity() * delta
 
 func wall_slide_logic() -> void:
-	if not has_wall_jump:
+	if not has_wall_jump or not can_move:
 		return
 	if not is_on_floor() and is_on_wall() and velocity.y > 0:
 		velocity.y = min(velocity.y, WALL_SLIDE_SPEED)
 
 func wall_jump_logic() -> void:
-	if not has_wall_jump:
+	if not has_wall_jump or not can_move:
 		return
 	if Input.is_action_just_pressed("jump") and not is_on_floor() and is_on_wall():
 		var wall_normal = get_wall_normal()
@@ -107,7 +122,6 @@ func jump_logic():
 	if is_on_floor():
 		jump_count = 0
 		coyote_timer.start()
-		#can_dash = true
 	
 	if Input.is_action_just_pressed("jump"):
 		if not is_on_floor() and coyote_timer.is_stopped() and jump_count < 1 + int(has_double_jump):
@@ -115,7 +129,7 @@ func jump_logic():
 		else:
 			buffer_timer.start()
 	
-	if not coyote_timer.is_stopped() and not buffer_timer.is_stopped():
+	if not coyote_timer.is_stopped() and not buffer_timer.is_stopped() and can_move:
 		jump()
 		coyote_timer.stop()
 		buffer_timer.stop()
@@ -123,68 +137,93 @@ func jump_logic():
 func jump():
 	velocity.y = JUMP_VELOCITY
 	jump_count += 1
+	animated_sprite.play("jump")
 	#$Sound.play_jump()
 
 func attack_logic():
-	if not has_sword:
+	if not has_sword or not can_move:
 		return
 	if Input.is_action_just_pressed("attack") and not is_attacking:
 		is_attacking = true 
+		can_move = false
 		sword_hit_box.visible = true
 		sword_hit_box.monitorable = true
-		animation_player.play("Attack")
-		await animation_player.animation_finished
+		animated_sprite.play("attack")
+		await animated_sprite.animation_finished
 		sword_hit_box.visible = false
 		sword_hit_box.monitorable = false
+		can_move = true
 		is_attacking = false
 
-func move_left_right():
+func move_left_right(delta):
 	if is_wall_jumping:
 		return
-	var direction := Input.get_axis("left", "right")
-	if direction:
-		velocity.x = direction * SPEED
+	var direction: float = 0.0
+	if can_move:
+		direction = Input.get_axis("left", "right")
+	if is_dashing:
+		return
+	if is_attacking:
+		velocity.x = move_toward(velocity.x, direction * SPEED, ATTACK_DECEL * delta)
+	elif abs(velocity.x) > SPEED:
+		velocity.x = move_toward(velocity.x, direction * SPEED, DASH_DECEL * delta)
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		if direction:
+			velocity.x = direction * SPEED
+		else:
+			velocity.x = move_toward(velocity.x, 0, SPEED)
 
 func animate():
+	if is_dead or is_attacking:
+		return
 	if velocity.x < 0:
-		top_sprite.flip_h = true
-		bottom_sprite.flip_h = true
+		animated_sprite.flip_h = true
 	elif velocity.x > 0:
-		top_sprite.flip_h = false
-		bottom_sprite.flip_h = false
-
+		animated_sprite.flip_h = false
+	
 	if not is_on_floor():
 		if velocity.y < 0:
-			pass
-		else:
-			pass
+			animated_sprite.play("jump")
+		elif velocity.y > 0:
+			animated_sprite.play("fall")
 		return
 	
-	if velocity.x == 0:
-		pass
+	if velocity.x == 0 and not is_attacking:
+		animated_sprite.play("idle")
 		return
 	
-	#$AnimationPlayer.play_animation("Running")
+	animated_sprite.play("walk")
 
 func hit():
 	#$Sound.play_hit()
-	health =- 1
+	if is_invincible or using_shield or is_dead:
+		return
+	health -= 1
+	set_health.emit(health)
 	if health <= 0:
-		kill()
+		die()
+	else:
+		is_invincible = true
+		i_frame_timer.start()
+		await i_frame_timer.timeout
+		is_invincible = false
 
 func health_pickup():
 	#$Sound.play_health_pickup()
 	health += 1
 	if health > max_health:
 		health = max_health
+	set_health.emit(health)
 
-func kill() -> void:
+func die() -> void:
+	set_health.emit(0)
+	is_dead = true
+	can_move = false
+	velocity = Vector2.ZERO
 	#$Sound.play_die()
-	#$AnimationPlayer.play_animation("Die")
+	animated_sprite.play("die")
 	
-	await get_tree().create_timer(1.5).timeout
+	await animated_sprite.animation_finished
 	reset_room.emit()
 
 func set_camera_boundaries(x: int, y: int) -> void:
@@ -193,3 +232,4 @@ func set_camera_boundaries(x: int, y: int) -> void:
 	player_camera.limit_bottom = y * tile_size
 	player_camera.limit_left = 0
 	player_camera.limit_right = x * tile_size
+	

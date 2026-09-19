@@ -2,7 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://5pufmg2xnm6j" path="res://scenes/main_menu.tscn" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://b6kxwh3bt4xd5" path="res://scripts/main.gd" id="1_sugp2"]
-[ext_resource type="PackedScene" uid="uid://dtsnjb3etfst4" path="res://scenes/heart_bar.tscn" id="2_eb6dy"]
 [ext_resource type="Script" uid="uid://4hg1uru4w5en" path="res://scripts/music_controller.gd" id="4_jyhfs"]
 [ext_resource type="AudioStream" uid="uid://bvbeh5sadqb6t" path="res://assets/audio/GJ26_Room_0.mp3" id="4_ya4ey"]
 [ext_resource type="AudioStream" uid="uid://lawk253mq1sw" path="res://assets/audio/GJ26_Room_1.mp3" id="5_eb6dy"]
@@ -16,10 +15,6 @@
 [node name="Main" type="Node2D" unique_id=1053634781 node_paths=PackedStringArray("music_controller")]
 script = ExtResource("1_sugp2")
 music_controller = NodePath("MusicController")
-
-[node name="HeartBar" parent="." unique_id=932334193 instance=ExtResource("2_eb6dy")]
-position = Vector2(45, 25.000002)
-scale = Vector2(1.5, 1.5)
 
 [node name="SceneContainer" type="Control" parent="." unique_id=1952630618]
 layout_mode = 3
@@ -43,24 +38,32 @@ menu_music = NodePath("MenuMusic")
 
 [node name="Player0" type="AudioStreamPlayer" parent="MusicController" unique_id=2064085531]
 stream = ExtResource("4_ya4ey")
+bus = &"Music"
 
 [node name="Player1" type="AudioStreamPlayer" parent="MusicController" unique_id=901429361]
 stream = ExtResource("5_eb6dy")
+bus = &"Music"
 
 [node name="Player2" type="AudioStreamPlayer" parent="MusicController" unique_id=815647722]
 stream = ExtResource("6_trceg")
+bus = &"Music"
 
 [node name="Player3" type="AudioStreamPlayer" parent="MusicController" unique_id=1547385616]
 stream = ExtResource("7_a8y0u")
+bus = &"Music"
 
 [node name="Player4" type="AudioStreamPlayer" parent="MusicController" unique_id=419863624]
 stream = ExtResource("8_jkv2x")
+bus = &"Music"
 
 [node name="Player5" type="AudioStreamPlayer" parent="MusicController" unique_id=1699476332]
 stream = ExtResource("9_jbj1t")
+bus = &"Music"
 
 [node name="Player6" type="AudioStreamPlayer" parent="MusicController" unique_id=824629418]
 stream = ExtResource("10_muem4")
+bus = &"Music"
 
 [node name="MenuMusic" type="AudioStreamPlayer" parent="MusicController" unique_id=511267185]
 stream = ExtResource("11_dp3eg")
+bus = &"Music"
