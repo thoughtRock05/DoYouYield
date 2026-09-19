@@ -1,6 +1,24 @@
 [gd_scene format=4 uid="uid://brel50h76h54i"]
 
 [ext_resource type="PackedScene" uid="uid://ddtrp88psneyf" path="res://scenes/rooms/room.tscn" id="1_etvqs"]
+[ext_resource type="Texture2D" uid="uid://ct3jo817gh35" path="res://assets/purple rock tile.png" id="2_josgj"]
+[ext_resource type="PackedScene" uid="uid://4quhxmrnsq0u" path="res://scenes/moving_platform.tscn" id="3_g5ssp"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_g5ssp"]
+texture = ExtResource("2_josgj")
+texture_region_size = Vector2i(32, 32)
+use_texture_padding = false
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_3jvd4"]
+tile_size = Vector2i(32, 32)
+sources/2 = SubResource("TileSetAtlasSource_g5ssp")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ahsqd"]
+size = Vector2(48, 16)
 
 [node name="Room 3" unique_id=671016034 instance=ExtResource("1_etvqs")]
 room_num = 3
@@ -21,3 +39,38 @@ tile_map_data = PackedByteArray("AAAAAAsAAQAAAAAAAAABAAsAAQAAAAAAAAACAAsAAQAAAAA
 [node name="Lock" parent="." index="4" unique_id=599625686]
 position = Vector2(331, 831)
 next_room = "uid://dbs0hoyal2od3"
+
+[node name="Bridge" type="Node2D" parent="." index="6" unique_id=917707392]
+position = Vector2(128, 352)
+
+[node name="TileMap" type="TileMapLayer" parent="Bridge" index="0" unique_id=387164327]
+scale = Vector2(0.5, 0.5)
+tile_map_data = PackedByteArray("AAAAAAAAAgAAAAAAAAABAAAAAgAAAAAAAAACAAAAAgAAAAAAAAADAAAAAgAAAAAAAAAEAAAAAgAAAAAAAAAFAAAAAgAAAAAAAAAGAAAAAgAAAAAAAAAHAAAAAgAAAAAAAAAIAAAAAgAAAAAAAAAJAAAAAgAAAAAAAAAKAAAAAgAAAAAAAAALAAAAAgAAAAAAAAAMAAAAAgAAAAAAAAANAAAAAgAAAAAAAAAOAAAAAgAAAAAAAAAPAAAAAgAAAAAAAAAQAAAAAgAAAAAAAAARAAAAAgAAAAAAAAASAAAAAgAAAAAAAAATAAAAAgAAAAAAAAAUAAAAAgAAAAAAAAAVAAAAAgAAAAAAAAAWAAAAAgAAAAAAAAAXAAAAAgAAAAAAAAAYAAAAAgAAAAAAAAA=")
+tile_set = SubResource("TileSet_3jvd4")
+
+[node name="MovingPlatform" parent="." index="7" unique_id=204123403 instance=ExtResource("3_g5ssp")]
+position = Vector2(480, 768)
+rel_y = -75.0
+duration = 2.0
+
+[node name="TileMapLayer" parent="MovingPlatform" index="0" unique_id=234184060]
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAD+/wAAAAAAAAAAAAA=")
+
+[node name="CollisionShape2D" parent="MovingPlatform" index="1" unique_id=183576832]
+position = Vector2(-8, 8)
+shape = SubResource("RectangleShape2D_ahsqd")
+
+[node name="MovingPlatform2" parent="." index="8" unique_id=1383625235 instance=ExtResource("3_g5ssp")]
+position = Vector2(192, 768)
+rel_y = -75.0
+duration = 2.0
+
+[node name="TileMapLayer" parent="MovingPlatform2" index="0" unique_id=234184060]
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAD+/wAAAAAAAAAAAAA=")
+
+[node name="CollisionShape2D" parent="MovingPlatform2" index="1" unique_id=183576832]
+position = Vector2(-8, 8)
+shape = SubResource("RectangleShape2D_ahsqd")
+
+[editable path="MovingPlatform"]
+[editable path="MovingPlatform2"]

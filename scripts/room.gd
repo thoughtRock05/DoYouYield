@@ -86,10 +86,6 @@ func _process(_delta: float) -> void:
 			Music.switch_player(7)
 		else:
 			Music.switch_player(room_num)
-	
-	if Input.is_action_just_pressed("back"):
-		if in_options_menu:
-			_on_back_pressed()
 
 func _on_lock_triggered(_room: String) -> void:
 	can_interact = false

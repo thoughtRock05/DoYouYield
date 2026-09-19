@@ -62,7 +62,9 @@ animations = [{
 size = Vector2(20, 18)
 
 [node name="EnemySlime" type="CharacterBody2D" unique_id=1893676253 node_paths=PackedStringArray("sprite", "alert", "hitbox")]
+process_mode = 1
 collision_layer = 2
+collision_mask = 3
 script = ExtResource("1_khk2i")
 sprite = NodePath("AnimatedSprite2D")
 alert = NodePath("Alert")

@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://dtlklnlt0xd73"]
 
 [ext_resource type="PackedScene" uid="uid://ddtrp88psneyf" path="res://scenes/rooms/room.tscn" id="1_scgta"]
+[ext_resource type="PackedScene" uid="uid://c3bfdx54pcoxp" path="res://scenes/enemy_slime.tscn" id="2_hnbyo"]
 
 [node name="Room1" unique_id=671016034 instance=ExtResource("1_scgta")]
 room_num = 1
@@ -20,3 +21,15 @@ tile_map_data = PackedByteArray("AAAAAAsAAQAAAAAAAAABAAsAAQAAAAAAAAACAAsAAQAAAAA
 [node name="Lock" parent="." index="4" unique_id=599625686]
 position = Vector2(1585, 433)
 next_room = "uid://dppe7s7bpfeof"
+
+[node name="EnemySlime" parent="." index="6" unique_id=1893676253 instance=ExtResource("2_hnbyo")]
+position = Vector2(274, 738)
+
+[node name="EnemySlime2" parent="." index="7" unique_id=1836032555 instance=ExtResource("2_hnbyo")]
+position = Vector2(298, 739)
+
+[node name="EnemySlime3" parent="." index="8" unique_id=1224836683 instance=ExtResource("2_hnbyo")]
+position = Vector2(320, 738)
+
+[node name="EnemySlime4" parent="." index="9" unique_id=332784255 instance=ExtResource("2_hnbyo")]
+position = Vector2(342, 738)

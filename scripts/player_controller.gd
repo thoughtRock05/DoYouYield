@@ -33,6 +33,15 @@ var has_dash: bool
 @export var i_frame_timer: Timer
 @export var hitbox: Area2D
 @export var shield_sprite: Sprite2D
+@export var shield_collision: Area2D
+
+@export var sfx_player_dash: AudioStreamPlayer
+@export var sfx_player_death: AudioStreamPlayer
+@export var sfx_player_hurt: AudioStreamPlayer
+@export var sfx_player_jump: AudioStreamPlayer
+@export var sfx_player_walk: AudioStreamPlayer
+@export var sfx_player_walk_lower_pitch: AudioStreamPlayer
+@export var sfx_player_wall_slide: AudioStreamPlayer
 
 var jump_count = 0
 var health: int
@@ -68,9 +77,24 @@ func _physics_process(delta: float) -> void:
 		add_gravity(delta)
 		move_and_slide()
 		return
+	check_shield()
 	calculate_velocity(delta)
 	animate()
 	move_and_slide()
+
+func check_shield() -> void:
+		if Input.is_action_pressed("shield"):
+			if has_shield:
+				using_shield = true
+				can_move = false
+		else:
+			if not is_attacking:
+				using_shield = false
+			if not is_dashing or is_attacking or is_stunned:
+				can_move = true
+			if Input.is_action_just_released("shield"):
+				for child in shield_collision.get_overlapping_areas():
+					hit(child)
 
 func calculate_velocity(delta: float) -> void:	
 	dash_logic()
@@ -96,7 +120,8 @@ func dash_logic():
 		is_dashing = true
 		can_dash = false
 		velocity.y = 0
-		
+		if not sfx_player_dash.is_playing():
+			sfx_player_dash.play()
 		velocity = dash_dir * DASH_SPEED
 		
 		get_tree().create_timer(DASH_DURATION).timeout.connect(func():
@@ -125,11 +150,15 @@ func wall_slide_logic() -> void:
 		return
 	if not is_on_floor() and is_on_wall() and velocity.y > 0:
 		velocity.y = min(velocity.y, WALL_SLIDE_SPEED)
+		if not sfx_player_wall_slide.is_playing():
+			sfx_player_wall_slide.play()
 
 func wall_jump_logic() -> void:
 	if not has_wall_jump or not can_move:
 		return
 	if Input.is_action_just_pressed("jump") and not is_on_floor() and is_on_wall():
+		if sfx_player_wall_slide.is_playing():
+			sfx_player_wall_slide.stop()
 		var wall_normal = get_wall_normal()
 		velocity.y = WALL_JUMP_VELOCITY
 		velocity.x = wall_normal.x * WALL_JUMP_PUSH
@@ -158,7 +187,8 @@ func jump():
 	velocity.y = JUMP_VELOCITY
 	jump_count += 1
 	animated_sprite.play("jump")
-	#$Sound.play_jump()
+	if not sfx_player_jump.is_playing():
+		sfx_player_jump.play()
 
 func attack_logic():
 	if not has_sword or not can_move:
@@ -229,13 +259,16 @@ func animate():
 		return
 	
 	animated_sprite.play("walk")
+	if not sfx_player_walk.is_playing():
+		sfx_player_walk.play()
 
 func hit(area: Area2D):
 	if area is not EnemyHitBox:
 		return
-	#$Sound.play_hit()
 	if is_invincible or using_shield or is_dead:
 		return
+	if not sfx_player_hurt.is_playing():
+		sfx_player_hurt.play()
 	health -= 1
 	set_health.emit(health)
 	if health <= 0:
@@ -265,7 +298,7 @@ func die() -> void:
 	is_dead = true
 	can_move = false
 	velocity = Vector2.ZERO
-	#$Sound.play_die()
+	sfx_player_death.play()
 	animated_sprite.play("die")
 	
 	await animated_sprite.animation_finished

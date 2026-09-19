@@ -2,7 +2,15 @@
 
 [ext_resource type="Script" uid="uid://uamxcy3vvgfm" path="res://scripts/player_controller.gd" id="1_g2els"]
 [ext_resource type="Script" uid="uid://bmxixknxbxqtc" path="res://scripts/sword_hit_box.gd" id="2_qhqgy"]
+[ext_resource type="Texture2D" uid="uid://bthi4x6vsltkd" path="res://assets/crystal-actually transparent.png" id="4_d2wvv"]
+[ext_resource type="AudioStream" uid="uid://cscd8ks7k0rk4" path="res://assets/audio/sfx_player_dash.wav" id="4_y4r1p"]
+[ext_resource type="AudioStream" uid="uid://dxu2a42g2fuiu" path="res://assets/audio/sfx_player_death.wav" id="5_d2wvv"]
 [ext_resource type="Texture2D" uid="uid://c7npa7nove5l8" path="res://assets/DEV SPRITESHEET REMOVE.png" id="5_qlg0r"]
+[ext_resource type="AudioStream" uid="uid://c7lxmrf1b6j27" path="res://assets/audio/sfx_player_hurt.wav" id="6_3v2ag"]
+[ext_resource type="AudioStream" uid="uid://cei016nhkh0o6" path="res://assets/audio/sfx_player_jump.wav" id="7_jej6c"]
+[ext_resource type="AudioStream" uid="uid://dvrlg3w5j1sdi" path="res://assets/audio/sfx_player_walk.wav" id="8_f1ej7"]
+[ext_resource type="AudioStream" uid="uid://t04iirilhtep" path="res://assets/audio/sfx_player_walk_lower_pitch.wav" id="9_oprun"]
+[ext_resource type="AudioStream" uid="uid://sv3dpuw6wiw1" path="res://assets/audio/sfx_player_wall_slide.wav" id="10_a8ls1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qhqgy"]
 size = Vector2(15, 29)
@@ -366,10 +374,10 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qhqgy"]
-load_path = "res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex"
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q2dwa"]
+size = Vector2(32, 36)
 
-[node name="Player" type="CharacterBody2D" unique_id=933572393 node_paths=PackedStringArray("player_camera", "coyote_timer", "buffer_timer", "dash_timer", "sword_hit_box", "animated_sprite", "i_frame_timer", "hitbox", "shield_sprite")]
+[node name="Player" type="CharacterBody2D" unique_id=933572393 node_paths=PackedStringArray("player_camera", "coyote_timer", "buffer_timer", "dash_timer", "sword_hit_box", "animated_sprite", "i_frame_timer", "hitbox", "shield_sprite", "shield_collision", "sfx_player_dash", "sfx_player_death", "sfx_player_hurt", "sfx_player_jump", "sfx_player_walk", "sfx_player_walk_lower_pitch", "sfx_player_wall_slide")]
 collision_layer = 4
 script = ExtResource("1_g2els")
 player_camera = NodePath("PlayerCamera")
@@ -381,6 +389,14 @@ animated_sprite = NodePath("AnimatedSprite2D2")
 i_frame_timer = NodePath("IFrameTimer")
 hitbox = NodePath("Hitbox")
 shield_sprite = NodePath("ShieldSprite")
+shield_collision = NodePath("ShieldCollision")
+sfx_player_dash = NodePath("SfxPlayerDash")
+sfx_player_death = NodePath("SfxPlayerDeath")
+sfx_player_hurt = NodePath("SfxPlayerHurt")
+sfx_player_jump = NodePath("SfxPlayerJump")
+sfx_player_walk = NodePath("SfxPlayerWalk")
+sfx_player_walk_lower_pitch = NodePath("SfxPlayerWalkLowerPitch")
+sfx_player_wall_slide = NodePath("SfxPlayerWallSlide")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1984020862]
 position = Vector2(0.5, 1.5)
@@ -435,7 +451,46 @@ sprite_frames = SubResource("SpriteFrames_q2dwa")
 animation = &"attack"
 frame = 3
 
+[node name="SfxPlayerDash" type="AudioStreamPlayer" parent="." unique_id=747909556]
+stream = ExtResource("4_y4r1p")
+volume_db = 1.0
+bus = &"SFX"
+
+[node name="SfxPlayerDeath" type="AudioStreamPlayer" parent="." unique_id=2063277065]
+stream = ExtResource("5_d2wvv")
+volume_db = 1.0
+bus = &"SFX"
+
+[node name="SfxPlayerHurt" type="AudioStreamPlayer" parent="." unique_id=1737898659]
+stream = ExtResource("6_3v2ag")
+volume_db = 1.0
+bus = &"SFX"
+
+[node name="SfxPlayerJump" type="AudioStreamPlayer" parent="." unique_id=1588001212]
+stream = ExtResource("7_jej6c")
+bus = &"SFX"
+
+[node name="SfxPlayerWalk" type="AudioStreamPlayer" parent="." unique_id=595235907]
+stream = ExtResource("8_f1ej7")
+volume_db = 1.0
+bus = &"SFX"
+
+[node name="SfxPlayerWalkLowerPitch" type="AudioStreamPlayer" parent="." unique_id=589273537]
+stream = ExtResource("9_oprun")
+
+[node name="SfxPlayerWallSlide" type="AudioStreamPlayer" parent="." unique_id=213915711]
+stream = ExtResource("10_a8ls1")
+volume_db = 1.0
+bus = &"SFX"
+
 [node name="ShieldSprite" type="Sprite2D" parent="." unique_id=770510889]
-visible = false
-scale = Vector2(0.28124997, 0.28124997)
-texture = SubResource("CompressedTexture2D_qhqgy")
+position = Vector2(1, -4)
+texture = ExtResource("4_d2wvv")
+
+[node name="ShieldCollision" type="Area2D" parent="." unique_id=345555207]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShieldCollision" unique_id=11410703]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_q2dwa")
