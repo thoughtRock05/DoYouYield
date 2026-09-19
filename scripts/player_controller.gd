@@ -263,6 +263,10 @@ func animate():
 		sfx_player_walk.play()
 
 func hit(area: Area2D):
+	if area is HeartBox:
+		area.get_parent().queue_free()
+		health_pickup()
+		return
 	if area is AcidPit:
 		die()
 		return

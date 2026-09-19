@@ -1,5 +1,7 @@
 extends Node
 
+const HEART_DROP = preload("uid://cvvxfxr3biyta")
+
 @export var player: Player
 
 @export var room_num: int = -1
@@ -57,7 +59,10 @@ func _ready() -> void:
 	heart_bar.set_health(player.health)
 	heart_bar.set_max_health(player.max_health)
 	
-	
+	for child in get_children():
+		if child is Slime:
+			child.spawn_heart.connect(_on_spawn_heart)
+
 	for child in get_children(true):
 		if child is Slime:
 			child.set_target(player)
@@ -140,3 +145,14 @@ func _on_reset_pressed() -> void:
 	room_options.visible = false
 	get_tree().paused = false
 	SceneTransition.load_scene(uid)
+
+func _on_spawn_heart(pos: Vector2) -> void:
+	call_deferred("spawn_heart", pos)
+
+func spawn_heart(pos: Vector2) -> void:
+	if randi_range(0,100) < 65:
+		var heart = HEART_DROP.instantiate() as RigidBody2D
+		add_child(heart)
+		heart.position = pos
+		var force = Vector2(randf_range(150,250), randf_range(150,250))
+		heart.apply_force(force)

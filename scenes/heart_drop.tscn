@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://cvvxfxr3biyta"]
 
 [ext_resource type="Texture2D" uid="uid://cskxj6ve5i1b2" path="res://assets/heart animation.png" id="1_a4x2y"]
+[ext_resource type="Script" uid="uid://crwgse7o22kr7" path="res://scripts/heart_drop.gd" id="1_vpq05"]
+[ext_resource type="Script" uid="uid://b6qka5kmnr4t4" path="res://scripts/heart_box.gd" id="2_napxk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_napxk"]
 atlas = ExtResource("1_a4x2y")
@@ -73,8 +75,28 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="HeartDrop" type="Node2D" unique_id=871199804]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3jvd4"]
+size = Vector2(14, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a4x2y"]
+size = Vector2(14, 12)
+
+[node name="HeartDrop" type="RigidBody2D" unique_id=1066314477 node_paths=PackedStringArray("animated_sprite_2d")]
+collision_layer = 2
+script = ExtResource("1_vpq05")
+animated_sprite_2d = NodePath("AnimatedSprite2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2081478857]
 sprite_frames = SubResource("SpriteFrames_3jvd4")
 frame_progress = 0.5726208
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=179656495]
+shape = SubResource("RectangleShape2D_3jvd4")
+
+[node name="HeartBox" type="Area2D" parent="." unique_id=247574137]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("2_napxk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HeartBox" unique_id=1432038654]
+shape = SubResource("RectangleShape2D_a4x2y")

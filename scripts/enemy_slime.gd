@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name Slime
 
+signal spawn_heart(pos: Vector2)
+
 @export var sprite: AnimatedSprite2D
 @export var alert: Sprite2D
 @export var hitbox: Area2D
@@ -69,6 +71,7 @@ func hit(area: Area2D) -> void:
 	
 	health -= 1
 	if health <= 0:
+		spawn_heart.emit(position)
 		queue_free()
 		return
 	is_stunned = true
