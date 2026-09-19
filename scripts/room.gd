@@ -80,21 +80,39 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("escape"):
 		if can_interact == false:
 			return
-		heart_bar.visible = in_options_menu
-		in_options_menu = not in_options_menu
-		player.can_move = not in_options_menu
-		get_tree().paused = in_options_menu
-		room_options.visible = in_options_menu
+		open_menu()
 		
-		if in_options_menu:
-			back_button.grab_focus()
-			Music.switch_player(7)
-		else:
-			Music.switch_player(room_num)
+	if Input.is_action_just_pressed("back"):
+		if in_options_menu == false:
+			return
+		if can_interact == false:
+			return
+		open_menu()
+
+func open_menu() -> void:
+	in_options_menu = not in_options_menu
+	heart_bar.visible = not in_options_menu
+	
+	
+	
+	get_tree().paused = in_options_menu
+	room_options.visible = in_options_menu
+	
+	if in_options_menu:
+		back_button.grab_focus()
+		Music.switch_player(7)
+	else:
+		Music.switch_player(room_num)
+	
+	await get_tree().create_timer(0.25).timeout
+	player.can_move = not in_options_menu
+	player.in_menu = in_options_menu
 
 func _on_lock_triggered(_room: String) -> void:
+	Music.switch_player(room_num + 8)
 	can_interact = false
 	player.can_move = false
+	player.in_menu = true
 	yield_prompt.visible = true
 	room = _room
 	get_tree().paused = true
@@ -123,15 +141,14 @@ func _on_yes_pressed() -> void:
 	SceneTransition.load_scene(room)
 
 func _on_no_pressed() -> void:
+	Music.switch_player(room_num)
 	yield_prompt.visible = false
 	get_tree().paused = false
 	player.can_move = true
 	can_interact = true
 
 func _on_back_pressed() -> void:
-	room_options.visible = false
-	get_tree().paused = false
-	player.can_move = true
+	open_menu()
 
 func _on_main_menu_pressed() -> void:
 	can_interact = false

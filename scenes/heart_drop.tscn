@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cskxj6ve5i1b2" path="res://assets/heart animation.png" id="1_a4x2y"]
 [ext_resource type="Script" uid="uid://crwgse7o22kr7" path="res://scripts/heart_drop.gd" id="1_vpq05"]
 [ext_resource type="Script" uid="uid://b6qka5kmnr4t4" path="res://scripts/heart_box.gd" id="2_napxk"]
+[ext_resource type="AudioStream" uid="uid://cly1iwg0f4nyk" path="res://assets/audio/sfx_heart_shimmer.wav" id="4_n1cnx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_napxk"]
 atlas = ExtResource("1_a4x2y")
@@ -81,10 +82,11 @@ size = Vector2(14, 12)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a4x2y"]
 size = Vector2(14, 12)
 
-[node name="HeartDrop" type="RigidBody2D" unique_id=1066314477 node_paths=PackedStringArray("animated_sprite_2d")]
+[node name="HeartDrop" type="RigidBody2D" unique_id=1066314477 node_paths=PackedStringArray("animated_sprite_2d", "audio_stream_player")]
 collision_layer = 2
 script = ExtResource("1_vpq05")
 animated_sprite_2d = NodePath("AnimatedSprite2D")
+audio_stream_player = NodePath("SfxHeartShimmer")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2081478857]
 sprite_frames = SubResource("SpriteFrames_3jvd4")
@@ -100,3 +102,9 @@ script = ExtResource("2_napxk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HeartBox" unique_id=1432038654]
 shape = SubResource("RectangleShape2D_a4x2y")
+
+[node name="SfxHeartShimmer" type="AudioStreamPlayer" parent="." unique_id=1639400176]
+process_mode = 1
+stream = ExtResource("4_n1cnx")
+volume_db = -12.0
+bus = &"SFX"

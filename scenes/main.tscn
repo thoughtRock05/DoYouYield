@@ -11,6 +11,12 @@
 [ext_resource type="AudioStream" uid="uid://csm77c5pefj32" path="res://assets/audio/GJ26_Room_5.mp3" id="9_jbj1t"]
 [ext_resource type="AudioStream" uid="uid://cxh153aufeixx" path="res://assets/audio/GJ26_Room_6.mp3" id="10_muem4"]
 [ext_resource type="AudioStream" uid="uid://c8if55s6yawnw" path="res://assets/audio/GJ26_Pause_Menu.mp3" id="11_dp3eg"]
+[ext_resource type="AudioStream" uid="uid://cthf0v3s2c6sy" path="res://assets/audio/ost_room_0_isolated.wav" id="12_muem4"]
+[ext_resource type="AudioStream" uid="uid://cr2yrjua1xjsa" path="res://assets/audio/ost_room_1_isolated.wav" id="13_dp3eg"]
+[ext_resource type="AudioStream" uid="uid://c34tylesrlbf6" path="res://assets/audio/ost_room_2_isolated.wav" id="14_0ld40"]
+[ext_resource type="AudioStream" uid="uid://binbnppw6q2r3" path="res://assets/audio/ost_room_3_isolated.wav" id="15_gqmmt"]
+[ext_resource type="AudioStream" uid="uid://dsx0u1pdx64kh" path="res://assets/audio/ost_room_4_isolated.wav" id="16_yc10j"]
+[ext_resource type="AudioStream" uid="uid://c1tsjfkxqi4c2" path="res://assets/audio/ost_room_5_isolated.wav" id="17_jscy8"]
 
 [node name="Main" type="Node2D" unique_id=1053634781 node_paths=PackedStringArray("music_controller")]
 script = ExtResource("1_sugp2")
@@ -24,7 +30,7 @@ offset_bottom = 40.0
 
 [node name="Main Menu" parent="SceneContainer" unique_id=1904224642 instance=ExtResource("1_o5qli")]
 
-[node name="MusicController" type="Node" parent="." unique_id=1919563507 node_paths=PackedStringArray("player_0", "player_1", "player_2", "player_3", "player_4", "player_5", "player_6", "menu_music")]
+[node name="MusicController" type="Node" parent="." unique_id=1919563507 node_paths=PackedStringArray("player_0", "player_1", "player_2", "player_3", "player_4", "player_5", "player_6", "menu_music", "ost_room_0_isolated", "ost_room_1_isolated", "ost_room_2_isolated", "ost_room_3_isolated", "ost_room_4_isolated", "ost_room_5_isolated", "ost_room_6_isolated")]
 process_mode = 3
 script = ExtResource("4_jyhfs")
 player_0 = NodePath("Player0")
@@ -35,6 +41,13 @@ player_4 = NodePath("Player4")
 player_5 = NodePath("Player5")
 player_6 = NodePath("Player6")
 menu_music = NodePath("MenuMusic")
+ost_room_0_isolated = NodePath("OstRoom0Isolated")
+ost_room_1_isolated = NodePath("OstRoom1Isolated")
+ost_room_2_isolated = NodePath("OstRoom2Isolated")
+ost_room_3_isolated = NodePath("OstRoom3Isolated")
+ost_room_4_isolated = NodePath("OstRoom4Isolated")
+ost_room_5_isolated = NodePath("OstRoom5Isolated")
+ost_room_6_isolated = NodePath("")
 
 [node name="Player0" type="AudioStreamPlayer" parent="MusicController" unique_id=2064085531]
 stream = ExtResource("4_ya4ey")
@@ -66,4 +79,28 @@ bus = &"Music"
 
 [node name="MenuMusic" type="AudioStreamPlayer" parent="MusicController" unique_id=511267185]
 stream = ExtResource("11_dp3eg")
+bus = &"Music"
+
+[node name="OstRoom0Isolated" type="AudioStreamPlayer" parent="MusicController" unique_id=936860826]
+stream = ExtResource("12_muem4")
+bus = &"Music"
+
+[node name="OstRoom1Isolated" type="AudioStreamPlayer" parent="MusicController" unique_id=1398109776]
+stream = ExtResource("13_dp3eg")
+bus = &"Music"
+
+[node name="OstRoom2Isolated" type="AudioStreamPlayer" parent="MusicController" unique_id=419505783]
+stream = ExtResource("14_0ld40")
+bus = &"Music"
+
+[node name="OstRoom3Isolated" type="AudioStreamPlayer" parent="MusicController" unique_id=436854065]
+stream = ExtResource("15_gqmmt")
+bus = &"Music"
+
+[node name="OstRoom4Isolated" type="AudioStreamPlayer" parent="MusicController" unique_id=1244997488]
+stream = ExtResource("16_yc10j")
+bus = &"Music"
+
+[node name="OstRoom5Isolated" type="AudioStreamPlayer" parent="MusicController" unique_id=843434199]
+stream = ExtResource("17_jscy8")
 bus = &"Music"

@@ -75,7 +75,6 @@ collision_enabled = false
 [node name="Lock" parent="." unique_id=599625686 instance=ExtResource("4_rd4w8")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1494660866]
-visible = false
 script = ExtResource("5_rd4w8")
 
 [node name="HeartBar" parent="CanvasLayer" unique_id=932334193 instance=ExtResource("2_w2a3g")]
@@ -83,6 +82,7 @@ position = Vector2(19, 24)
 script = ExtResource("3_i8kcg")
 
 [node name="RoomOptions" type="Control" parent="CanvasLayer" unique_id=650667937]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -190,11 +190,13 @@ grow_vertical = 2
 
 [node name="YieldLabel" type="Label" parent="CanvasLayer/YieldPrompt" unique_id=309691000]
 layout_mode = 0
-offset_left = 265.0
-offset_top = 127.0
-offset_right = 370.0
-offset_bottom = 150.0
+offset_left = 245.0
+offset_top = 112.0
+offset_right = 390.0
+offset_bottom = 165.0
 text = "Do You Yield?"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Yes" type="Button" parent="CanvasLayer/YieldPrompt" unique_id=1638312946]
 process_mode = 2

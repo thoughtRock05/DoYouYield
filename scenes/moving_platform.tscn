@@ -19,6 +19,7 @@ sources/0 = SubResource("TileSetAtlasSource_mb26n")
 size = Vector2(64, 32)
 
 [node name="MovingPlatform" type="AnimatableBody2D" unique_id=204123403]
+process_mode = 1
 script = ExtResource("1_ms375")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=234184060]

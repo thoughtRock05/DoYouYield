@@ -6,16 +6,17 @@ signal set_health(health: int)
 @warning_ignore("unused_signal") signal set_max_health(max_health: int)
 
 const SPEED = 250.0
-const JUMP_VELOCITY = -400.0
+const JUMP_VELOCITY = -315.0
 const WALL_JUMP_VELOCITY = -380.0
-const WALL_JUMP_PUSH = 350.0
-const WALL_SLIDE_SPEED = 120.0
-const DASH_SPEED = 900.0
+const WALL_JUMP_PUSH = 150.0
+const WALL_SLIDE_SPEED = 90.0
+const DASH_SPEED = 600.0
 const DASH_DURATION = 0.015
 const DASH_DECEL = 2500.0
 const ATTACK_DECEL = 500.0
 const KNOCKBACK_DECEL = 1200.0
 
+var in_menu: bool = false
 var can_move: bool = true
 
 var has_double_jump: bool
@@ -42,6 +43,8 @@ var has_dash: bool
 @export var sfx_player_walk: AudioStreamPlayer
 @export var sfx_player_walk_lower_pitch: AudioStreamPlayer
 @export var sfx_player_wall_slide: AudioStreamPlayer
+@export var sfx_heart_pickup: AudioStreamPlayer
+@export var sfx_sword_swing: AudioStreamPlayer
 
 var jump_count = 0
 var health: int
@@ -71,6 +74,8 @@ func _ready() -> void:
 	sword_hit_box.monitoring = false
 	animated_sprite.frame_changed.connect(_on_frame_changed)
 	hitbox.area_entered.connect(hit)
+	animated_sprite.position.x = 11.0
+	sword_hit_box.position.x = 17.0
 
 func _physics_process(delta: float) -> void:
 	if is_dead:
@@ -84,7 +89,7 @@ func _physics_process(delta: float) -> void:
 
 func check_shield() -> void:
 		if Input.is_action_pressed("shield"):
-			if has_shield:
+			if has_shield and not in_menu:
 				using_shield = true
 				can_move = false
 		else:
@@ -93,8 +98,9 @@ func check_shield() -> void:
 			if Input.is_action_just_released("shield"):
 				for child in shield_collision.get_overlapping_areas():
 					hit(child)
-				if not is_dashing or is_attacking or is_stunned:
-					can_move = true
+				if is_dashing or is_attacking or is_stunned or in_menu:
+					return
+				can_move = true
 
 func calculate_velocity(delta: float) -> void:	
 	dash_logic()
@@ -117,6 +123,7 @@ func dash_logic():
 		dash_dir = Vector2(input_x, 0).normalized()
 	
 	if Input.is_action_just_pressed("dash") and can_dash and not is_dashing:
+		animated_sprite.play("dash")
 		is_dashing = true
 		can_dash = false
 		velocity.y = 0
@@ -173,7 +180,7 @@ func jump_logic():
 		coyote_timer.start()
 	
 	if Input.is_action_just_pressed("jump"):
-		if not is_on_floor() and coyote_timer.is_stopped() and jump_count < 1 + int(has_double_jump):
+		if not is_on_floor() and coyote_timer.is_stopped() and jump_count < 1 + int(has_double_jump) and can_move:
 			jump()
 		else:
 			buffer_timer.start()
@@ -196,7 +203,7 @@ func attack_logic():
 	if Input.is_action_just_pressed("attack") and not is_attacking:
 		is_attacking = true 
 		can_move = false
-		
+		sfx_sword_swing.play()
 		animated_sprite.play("attack")
 		await animated_sprite.animation_finished
 		
@@ -216,7 +223,7 @@ func _on_frame_changed() -> void:
 		if animated_sprite.frame == 3:
 			sword_hit_box.monitoring = false
 			sword_hit_box.monitorable = false
-		if animated_sprite.frame == 9:
+		if animated_sprite.frame == 4:
 			if using_shield:
 				using_shield = false
 
@@ -243,15 +250,22 @@ func animate():
 	if is_dead or is_attacking:
 		return
 	if velocity.x < 0:
+		animated_sprite.position.x = -8.0
 		animated_sprite.flip_h = true
+		sword_hit_box.position.x = -17.0
 	elif velocity.x > 0:
+		animated_sprite.position.x = 11.0
 		animated_sprite.flip_h = false
+		sword_hit_box.position.x = 17.0
 	
 	if not is_on_floor():
 		if velocity.y < 0:
 			animated_sprite.play("jump")
 		elif velocity.y > 0:
-			animated_sprite.play("fall")
+			if is_on_wall():
+				animated_sprite.play("wall_cling")
+			else:
+				animated_sprite.play("fall")
 		return
 	
 	if velocity.x == 0 and not is_attacking:
@@ -281,6 +295,7 @@ func hit(area: Area2D):
 	if health <= 0:
 		die()
 	else:
+		animated_sprite.play("hurt")
 		is_stunned = true
 		var knock_dir: float = sign(global_position.x - area.global_position.x)
 		if knock_dir == 0.0:
@@ -294,7 +309,7 @@ func hit(area: Area2D):
 		is_invincible = false
 
 func health_pickup():
-	#$Sound.play_health_pickup()
+	sfx_heart_pickup.play()
 	health += 1
 	if health > max_health:
 		health = max_health

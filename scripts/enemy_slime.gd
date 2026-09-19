@@ -6,11 +6,14 @@ signal spawn_heart(pos: Vector2)
 @export var sprite: AnimatedSprite2D
 @export var alert: Sprite2D
 @export var hitbox: Area2D
+@export var sfx_slime_damage: AudioStreamPlayer
 
 const SPEED = 30.0
+var speed = SPEED / self.scale.x
 const KNOCKBACK: float = 300.0
 var target: Player = null
-var threshold: float = 150.0
+var max_threshold: float = 900.0
+var target_threshold: float = 150.0
 var dir: float = -1.0
 var is_alerting: bool = false
 var is_alerted: bool = false
@@ -34,7 +37,9 @@ func _physics_process(delta: float) -> void:
 		knock = move_toward(knock, 0.0, 1500.0 * delta)
 		velocity.x = knock
 	else:
-		if (target.position - position).length() < threshold:
+		if (target.position - position).length() > max_threshold:
+			return
+		if (target.position - position).length() < target_threshold:
 			if not is_alerted:
 				is_alerting = true
 				is_alerted = true
@@ -43,14 +48,14 @@ func _physics_process(delta: float) -> void:
 				)
 			if abs(global_position.x - target.position.x) > 0.2:
 				dir = sign(target.position.x - position.x)
-				velocity.x = dir * SPEED
+				velocity.x = dir * speed
 			else:
 				velocity.x = 0
 		else:
 			is_alerted = false
 			if is_on_wall():
 				dir = get_wall_normal().x
-			velocity.x = dir * SPEED
+			velocity.x = dir * speed
 		
 	if abs(global_position.x - target.position.x) > 0.2:
 		if velocity.x >= 0:
@@ -68,7 +73,7 @@ func hit(area: Area2D) -> void:
 		return
 	if is_stunned:
 		return
-	
+	sfx_slime_damage.play()
 	health -= 1
 	if health <= 0:
 		spawn_heart.emit(position)
