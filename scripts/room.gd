@@ -2,6 +2,8 @@ extends Node
 
 @export var player: Player
 
+@export var room_num: int = -1
+
 @export var yield_prompt: Control
 @export var yes_button: Button
 @export var no_button: Button
@@ -26,6 +28,8 @@ var can_interact: bool = true
 var in_options_menu: bool = false
 
 func _ready() -> void:
+	Music.switch_player(room_num)
+	
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	player.can_move = true
 	yield_prompt.visible = false
@@ -51,6 +55,8 @@ func _process(_delta: float) -> void:
 			can_interact = true
 	
 	if Input.is_action_just_pressed("escape"):
+		if can_interact == false:
+			return
 		in_options_menu = not in_options_menu
 		player.can_move = not in_options_menu
 		get_tree().paused = in_options_menu
@@ -58,8 +64,12 @@ func _process(_delta: float) -> void:
 		
 		if in_options_menu:
 			back_button.grab_focus()
+			Music.switch_player(7)
+		else:
+			Music.switch_player(room_num)
 
 func _on_lock_triggered(_room: String) -> void:
+	can_interact = false
 	player.can_move = false
 	yield_prompt.visible = true
 	room = _room
@@ -92,6 +102,7 @@ func _on_no_pressed() -> void:
 	yield_prompt.visible = false
 	get_tree().paused = false
 	player.can_move = true
+	can_interact = true
 
 func _on_back_pressed() -> void:
 	room_options.visible = false

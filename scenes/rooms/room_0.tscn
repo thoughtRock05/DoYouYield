@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://ddtrp88psneyf" path="res://scenes/rooms/room.tscn" id="1_qm1r8"]
 
 [node name="Room 0" unique_id=671016034 instance=ExtResource("1_qm1r8")]
+room_num = 0
 
 [node name="Player" parent="." index="0" unique_id=933572393]
 position = Vector2(76, 130)
@@ -14,8 +15,5 @@ tile_map_data = PackedByteArray("AAAAAAsAAQAAAAAAAAABAAsAAQAAAAAAAAACAAsAAQAAAAA
 position = Vector2(291, 160)
 next_room = "uid://dtlklnlt0xd73"
 
-[node name="CanvasLayer" parent="." index="5" unique_id=1494660866]
-visible = true
-
-[node name="RoomOptions" parent="CanvasLayer" index="0" unique_id=650667937]
+[node name="RoomOptions" parent="CanvasLayer" parent_id_path=PackedInt32Array(1494660866) index="0" unique_id=650667937]
 process_mode = 2

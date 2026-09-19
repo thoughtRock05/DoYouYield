@@ -7,21 +7,31 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3jvd4"]
 size = Vector2(17, 32)
 
-[node name="Player" type="CharacterBody2D" unique_id=933572393 node_paths=PackedStringArray("coyote_timer", "buffer_timer", "dash_timer")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l2tch"]
+size = Vector2(14, 14)
+
+[sub_resource type="Animation" id="Animation_qhqgy"]
+resource_name = "Attack"
+length = 0.35
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dqkch"]
+_data = {
+&"Attack": SubResource("Animation_qhqgy")
+}
+
+[node name="Player" type="CharacterBody2D" unique_id=933572393 node_paths=PackedStringArray("coyote_timer", "buffer_timer", "dash_timer", "sword_hit_box", "animation_player", "top_sprite", "bottom_sprite")]
 script = ExtResource("1_g2els")
 coyote_timer = NodePath("CoyoteTimer")
 buffer_timer = NodePath("BufferTimer")
 dash_timer = NodePath("DashTimer")
+sword_hit_box = NodePath("SwordHitBox")
+animation_player = NodePath("AnimationPlayer")
+top_sprite = NodePath("SpriteContainer/TopSprite")
+bottom_sprite = NodePath("SpriteContainer/BottomSprite")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1180564907]
 position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_3jvd4")
-
-[node name="TopSprite" type="Sprite2D" parent="." unique_id=188601412]
-texture = ExtResource("2_qhqgy")
-
-[node name="BottomSprite" type="Sprite2D" parent="." unique_id=126547709]
-texture = ExtResource("3_dqkch")
 
 [node name="CoyoteTimer" type="Timer" parent="." unique_id=137068760]
 wait_time = 0.2
@@ -34,3 +44,23 @@ one_shot = true
 [node name="DashTimer" type="Timer" parent="." unique_id=668212568]
 wait_time = 0.15
 one_shot = true
+
+[node name="AttackTimer" type="Timer" parent="." unique_id=1978799325]
+wait_time = 0.35
+
+[node name="SwordHitBox" type="Area2D" parent="." unique_id=999956691]
+position = Vector2(17, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwordHitBox" unique_id=1910927984]
+shape = SubResource("RectangleShape2D_l2tch")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=197746376]
+libraries/ = SubResource("AnimationLibrary_dqkch")
+
+[node name="SpriteContainer" type="Node2D" parent="." unique_id=741602411]
+
+[node name="TopSprite" type="Sprite2D" parent="SpriteContainer" unique_id=188601412]
+texture = ExtResource("2_qhqgy")
+
+[node name="BottomSprite" type="Sprite2D" parent="SpriteContainer" unique_id=126547709]
+texture = ExtResource("3_dqkch")

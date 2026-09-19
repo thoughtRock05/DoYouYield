@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://ddtrp88psneyf" path="res://scenes/rooms/room.tscn" id="1_etvqs"]
 
 [node name="Room 3" unique_id=671016034 instance=ExtResource("1_etvqs")]
+room_num = 3
 take_heart = true
 taken_item = "sword"
 
@@ -15,6 +16,3 @@ tile_map_data = PackedByteArray("AAAAAAsAAQAAAAAAAAABAAsAAQAAAAAAAAACAAsAAQAAAAA
 [node name="Lock" parent="." index="4" unique_id=599625686]
 position = Vector2(299, 159)
 next_room = "uid://dbs0hoyal2od3"
-
-[node name="CanvasLayer" parent="." index="5" unique_id=1494660866]
-visible = true

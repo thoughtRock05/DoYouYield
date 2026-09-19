@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://ddtrp88psneyf" path="res://scenes/rooms/room.tscn" id="1_2f6pe"]
 
 [node name="Room 4" unique_id=671016034 instance=ExtResource("1_2f6pe")]
+room_num = 4
 taken_item = "shield"
 
 [node name="Middle Ground" parent="." index="1" unique_id=1312469661]
@@ -13,6 +14,3 @@ tile_map_data = PackedByteArray("AAAAAAsAAQAAAAAAAAABAAsAAQAAAAAAAAACAAsAAQAAAAA
 
 [node name="Lock" parent="." index="4" unique_id=599625686]
 next_room = "uid://dpad4ln8ypfpd"
-
-[node name="CanvasLayer" parent="." index="5" unique_id=1494660866]
-visible = true

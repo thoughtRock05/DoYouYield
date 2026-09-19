@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dt1x5ywbgsh1m" path="res://scenes/lock.tscn" id="4_rd4w8"]
 [ext_resource type="Texture2D" uid="uid://ct3jo817gh35" path="res://assets/purple rock tile.png" id="4_w2a3g"]
 [ext_resource type="PackedScene" uid="uid://vbc2v1eva61l" path="res://scenes/volume_slider.tscn" id="5_3nht7"]
+[ext_resource type="Script" uid="uid://bae7rxj2csaji" path="res://scripts/canvas_layer.gd" id="5_rd4w8"]
 [ext_resource type="PackedScene" uid="uid://df6eqqjn0g74m" path="res://scenes/window_dropdown.tscn" id="6_tmaxl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tmaxl"]
@@ -51,6 +52,7 @@ position = Vector2(311, 153)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1494660866]
 visible = false
+script = ExtResource("5_rd4w8")
 
 [node name="RoomOptions" type="Control" parent="CanvasLayer" unique_id=650667937]
 layout_mode = 3

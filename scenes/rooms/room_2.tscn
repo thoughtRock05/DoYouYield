@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://ddtrp88psneyf" path="res://scenes/rooms/room.tscn" id="1_6a8el"]
 
 [node name="Room 2" unique_id=671016034 instance=ExtResource("1_6a8el")]
+room_num = 2
 taken_item = "wall jump"
 
 [node name="Middle Ground" parent="." index="1" unique_id=1312469661]
@@ -11,6 +12,3 @@ tile_map_data = PackedByteArray("AAAAAAsAAQAAAAAAAAABAAsAAQAAAAAAAAACAAsAAQAAAAA
 [node name="Lock" parent="." index="4" unique_id=599625686]
 position = Vector2(296, 150)
 next_room = "uid://brel50h76h54i"
-
-[node name="CanvasLayer" parent="." index="5" unique_id=1494660866]
-visible = true

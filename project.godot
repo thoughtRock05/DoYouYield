@@ -23,6 +23,7 @@ buses/default_bus_layout="uid://csvsabiii7nw4"
 
 SaveLoad="*uid://b00ukj88bfewh"
 SceneTransition="*uid://dojws7lqo57q7"
+Music="*uid://d1bthb8t336pb"
 
 [display]
 
