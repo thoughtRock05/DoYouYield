@@ -12,8 +12,8 @@ dest_files=["res://.godot/imported/GJ26_Room_2.mp3-55f5d534cd0aa4e48f15b274363d0
 
 [params]
 
-loop=false
-loop_offset=0
-bpm=0
+loop=true
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4

@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bitr4ge5s6v13" path="res://assets/knight walkthrough_transparent.png" id="4_dqkch"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3jvd4"]
-size = Vector2(15, 31)
+size = Vector2(15, 29)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l2tch"]
 size = Vector2(14, 14)
@@ -95,7 +95,7 @@ position_smoothing_enabled = true
 position_smoothing_speed = 12.94
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1180564907]
-position = Vector2(1, 1)
+position = Vector2(0.5, 1.5)
 shape = SubResource("RectangleShape2D_3jvd4")
 
 [node name="CoyoteTimer" type="Timer" parent="." unique_id=137068760]

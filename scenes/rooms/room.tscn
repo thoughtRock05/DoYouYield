@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c8r4i4r62e5j8" path="res://scripts/room.gd" id="1_1fuux"]
 [ext_resource type="PackedScene" uid="uid://dop8vfrtc40vm" path="res://scenes/player.tscn" id="2_3nht7"]
+[ext_resource type="PackedScene" uid="uid://dtsnjb3etfst4" path="res://scenes/heart_bar.tscn" id="2_w2a3g"]
 [ext_resource type="PackedScene" uid="uid://dt1x5ywbgsh1m" path="res://scenes/lock.tscn" id="4_rd4w8"]
 [ext_resource type="Texture2D" uid="uid://ct3jo817gh35" path="res://assets/purple rock tile.png" id="4_w2a3g"]
 [ext_resource type="PackedScene" uid="uid://vbc2v1eva61l" path="res://scenes/volume_slider.tscn" id="5_3nht7"]
@@ -32,8 +33,10 @@ main_menu_button = NodePath("CanvasLayer/RoomOptions/Main Menu")
 reset_button = NodePath("CanvasLayer/RoomOptions/Reset")
 lock = NodePath("Lock")
 
+[node name="HeartBar" parent="." unique_id=932334193 instance=ExtResource("2_w2a3g")]
+position = Vector2(54, 34)
+
 [node name="Player" parent="." unique_id=933572393 instance=ExtResource("2_3nht7")]
-position = Vector2(62, 50)
 
 [node name="Middle Ground" type="TileMapLayer" parent="." unique_id=1312469661]
 scale = Vector2(0.5, 0.5)
@@ -48,7 +51,6 @@ z_index = -1
 collision_enabled = false
 
 [node name="Lock" parent="." unique_id=599625686 instance=ExtResource("4_rd4w8")]
-position = Vector2(311, 153)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1494660866]
 visible = false
