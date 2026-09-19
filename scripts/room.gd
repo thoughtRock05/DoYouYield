@@ -24,6 +24,9 @@ var uid: String
 @export var take_heart: bool = false
 @export var taken_item: String
 
+@export var tiles_x: int = 0
+@export var tiles_y: int = 0
+
 var can_interact: bool = true
 var in_options_menu: bool = false
 
@@ -38,7 +41,7 @@ func _ready() -> void:
 	yes_button.pressed.connect(_on_yes_pressed)
 	no_button.pressed.connect(_on_no_pressed)
 	
-	player.set_camera_boundaries(100, 200)
+	player.set_camera_boundaries(tiles_x, tiles_y)
 	
 	back_button.pressed.connect(_on_back_pressed)
 	main_menu_button.pressed.connect(_on_main_menu_pressed)
@@ -69,6 +72,10 @@ func _process(_delta: float) -> void:
 			Music.switch_player(7)
 		else:
 			Music.switch_player(room_num)
+	
+	if Input.is_action_just_pressed("back"):
+		if in_options_menu:
+			_on_back_pressed()
 
 func _on_lock_triggered(_room: String) -> void:
 	can_interact = false

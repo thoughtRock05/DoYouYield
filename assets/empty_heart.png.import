@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://blvrua7u7covv"
-path="res://.godot/imported/DEV TILESET REMOVE.png-6206b7eb0b5cdb45d1e0c01f61147327.ctex"
+uid="uid://c3mawi0nlqfkt"
+path="res://.godot/imported/empty_heart.png-d5162c5e8e7a097759d4ac469ed443a5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/DEV TILESET REMOVE.png"
-dest_files=["res://.godot/imported/DEV TILESET REMOVE.png-6206b7eb0b5cdb45d1e0c01f61147327.ctex"]
+source_file="res://assets/empty_heart.png"
+dest_files=["res://.godot/imported/empty_heart.png-d5162c5e8e7a097759d4ac469ed443a5.ctex"]
 
 [params]
 

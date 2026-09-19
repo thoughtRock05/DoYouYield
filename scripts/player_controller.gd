@@ -187,8 +187,9 @@ func kill() -> void:
 	await get_tree().create_timer(1.5).timeout
 	reset_room.emit()
 
-func set_camera_boundaries(x: float, y: float) -> void:
-	player_camera.limit_top
-	player_camera.limit_bottom
-	player_camera.limit_left
-	player_camera.limit_right
+func set_camera_boundaries(x: int, y: int) -> void:
+	var tile_size: int = 16
+	player_camera.limit_top = 0
+	player_camera.limit_bottom = y * tile_size
+	player_camera.limit_left = 0
+	player_camera.limit_right = x * tile_size

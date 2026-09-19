@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://cvvxfxr3biyta"]
+
+[ext_resource type="Texture2D" uid="uid://cskxj6ve5i1b2" path="res://assets/heart animation.png" id="1_a4x2y"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_napxk"]
+atlas = ExtResource("1_a4x2y")
+region = Rect2(0, 0, 13, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vpq05"]
+atlas = ExtResource("1_a4x2y")
+region = Rect2(13, 0, 13, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n1cnx"]
+atlas = ExtResource("1_a4x2y")
+region = Rect2(26, 0, 13, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pthqn"]
+atlas = ExtResource("1_a4x2y")
+region = Rect2(39, 0, 13, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ydvc"]
+atlas = ExtResource("1_a4x2y")
+region = Rect2(52, 0, 13, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w410m"]
+atlas = ExtResource("1_a4x2y")
+region = Rect2(65, 0, 13, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bu5eg"]
+atlas = ExtResource("1_a4x2y")
+region = Rect2(78, 0, 13, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_868y2"]
+atlas = ExtResource("1_a4x2y")
+region = Rect2(91, 0, 13, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nct8a"]
+atlas = ExtResource("1_a4x2y")
+region = Rect2(104, 0, 13, 11)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3jvd4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_napxk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vpq05")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n1cnx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pthqn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ydvc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w410m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bu5eg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_868y2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nct8a")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="HeartDrop" type="Node2D" unique_id=871199804]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2081478857]
+sprite_frames = SubResource("SpriteFrames_3jvd4")
+frame_progress = 0.5726208
