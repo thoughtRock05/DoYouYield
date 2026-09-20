@@ -9,59 +9,9 @@ gradient = SubResource("Gradient_3jvd4")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
-[sub_resource type="GDScript" id="GDScript_1pkm2"]
-script/source = "extends PointLight2D
-
-@export var animation_player: AnimationPlayer
-
-func _ready() -> void:
-	animation_player.play(\"glow\")
-"
-
-[sub_resource type="Animation" id="Animation_1pkm2"]
-length = 0.001
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:texture_scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0.4, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-
-[sub_resource type="Animation" id="Animation_2nl85"]
-resource_name = "glow"
-length = 10.0
-loop_mode = 1
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:texture_scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(2, 0, 0),
-"points": PackedFloat32Array(0.4, 0, 0, 0, 0, 0.7, 0, 0, 0, 0, 0.4, 0, 0, 0, 0),
-"times": PackedFloat32Array(0, 5, 10)
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_1pkm2"]
-_data = {
-&"RESET": SubResource("Animation_1pkm2"),
-&"glow": SubResource("Animation_2nl85")
-}
-
-[node name="TorchLight" type="PointLight2D" unique_id=1898532190 node_paths=PackedStringArray("animation_player")]
+[node name="TorchLight" type="PointLight2D" unique_id=1898532190]
 z_index = 2
 scale = Vector2(14.765624, 12.96875)
 energy = 4.0
 texture = SubResource("GradientTexture2D_3jvd4")
 texture_scale = 0.4
-script = SubResource("GDScript_1pkm2")
-animation_player = NodePath("AnimationPlayer")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=353858731]
-libraries/ = SubResource("AnimationLibrary_1pkm2")
