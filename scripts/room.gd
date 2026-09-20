@@ -152,8 +152,11 @@ func _on_no_pressed() -> void:
 	Music.switch_player(room_num)
 	yield_prompt.visible = false
 	get_tree().paused = false
-	player.can_move = true
+	
 	can_interact = true
+	
+	await get_tree().create_timer(0.5).timeout
+	player.can_move = true
 
 func _on_back_pressed() -> void:
 	open_menu()

@@ -712,6 +712,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/YieldPrompt" unique_id=175837966]
+layout_mode = 0
+offset_left = 152.0
+offset_top = 74.0
+offset_right = 489.0
+offset_bottom = 135.0
+color = Color(0.03, 0.03, 0.03, 0.42352942)
+
 [node name="YieldLabel" type="Label" parent="CanvasLayer/YieldPrompt" unique_id=309691000]
 layout_mode = 1
 anchors_preset = 5

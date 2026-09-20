@@ -6,10 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://bf0clp6oh6dh4" path="res://assets/dragon3.png" id="4_b00dr"]
 [ext_resource type="Texture2D" uid="uid://bysmgw21841ql" path="res://assets/dragon4.png" id="5_kf5e4"]
 [ext_resource type="Texture2D" uid="uid://cwyfwoww8n4s" path="res://assets/dragon5.png" id="6_yg2jv"]
-[ext_resource type="Texture2D" uid="uid://om4mvkc6omls" path="res://assets/dragon6.png" id="7_plyvp"]
+[ext_resource type="Texture2D" uid="uid://cyosr3m66pkqq" path="res://assets/dragonfinal.png" id="7_xdi0x"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dimrd"]
-load_path = "res://.godot/imported/room0_dragon.png-75ed5ea957c462a49d57cc365f1f6bb4.ctex"
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_epks6"]
+load_path = "res://.godot/imported/dragon6.png-800e9934d9ce8fdcf7b7f4360616cc44.ctex"
 
 [node name="Room0" unique_id=671016034 instance=ExtResource("1_qm1r8")]
 room_num = 0
@@ -36,13 +36,13 @@ texture = ExtResource("5_kf5e4")
 texture = ExtResource("6_yg2jv")
 
 [node name="Sprite2D" parent="Node2D/ParallaxLayer6" parent_id_path=PackedInt32Array(2014147915) index="0" unique_id=280523691]
-texture = ExtResource("7_plyvp")
+texture = SubResource("CompressedTexture2D_epks6")
 
 [node name="ParallaxLayer7" type="Parallax2D" parent="Node2D" index="6" unique_id=1540800122]
 scroll_scale = Vector2(0.8, 0.8)
 
 [node name="Sprite2D" type="Sprite2D" parent="Node2D/ParallaxLayer7" index="0" unique_id=1933731912]
-texture = SubResource("CompressedTexture2D_dimrd")
+texture = ExtResource("7_xdi0x")
 centered = false
 
 [node name="Player" parent="." index="1" unique_id=933572393]
@@ -55,9 +55,17 @@ tile_map_data = PackedByteArray("AAAAAAAAAQAAAAAAAAAAAAEAAQAEAAAAAAAAAAIAAQAEAAA
 position = Vector2(750, 351)
 next_room = "uid://dtlklnlt0xd73"
 
-[node name="RoomOptions" parent="CanvasLayer" parent_id_path=PackedInt32Array(1494660866) index="1" unique_id=650667937]
-process_mode = 2
+[node name="CanvasLayer" parent="." index="6" unique_id=1494660866]
+visible = true
 
-[node name="YieldLabel" parent="CanvasLayer/YieldPrompt" parent_id_path=PackedInt32Array(1938132347) index="0" unique_id=309691000]
+[node name="RoomOptions" parent="CanvasLayer" index="1" unique_id=650667937]
+process_mode = 2
+visible = false
+
+[node name="YieldPrompt" parent="CanvasLayer" index="2" unique_id=1938132347]
+visible = true
+
+[node name="YieldLabel" parent="CanvasLayer/YieldPrompt" index="1" unique_id=309691000]
+z_index = 1
 text = "In order to leave, you must give what you need most.
 Are you ready?"
