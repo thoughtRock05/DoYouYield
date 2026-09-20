@@ -37,7 +37,7 @@ position = Vector2(1297, 192)
 next_room = "uid://d2itu2g3hg4ki"
 
 [node name="YieldLabel" parent="CanvasLayer/YieldPrompt" parent_id_path=PackedInt32Array(1938132347) index="0" unique_id=309691000]
-text = "Do You Yield?
+text = "Yield what you need most:
 Dash & Heart"
 
 [node name="MovingPlatform" parent="." index="6" unique_id=204123403 instance=ExtResource("2_585it")]

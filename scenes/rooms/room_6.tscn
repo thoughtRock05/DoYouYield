@@ -25,6 +25,10 @@ tile_map_data = PackedByteArray("AAAAAAAAAQAAAAAAAAAAAAEAAQAAAAAAAAAAAAIAAQAAAAA
 position = Vector2(1586, 430)
 next_room = "uid://io46bfufwpds"
 
+[node name="YieldLabel" parent="CanvasLayer/YieldPrompt" parent_id_path=PackedInt32Array(1938132347) index="0" unique_id=309691000]
+text = "You have given all you have.
+You may now leave the Undonegeon."
+
 [node name="EnemySlime" parent="." index="6" unique_id=1893676253 instance=ExtResource("2_wf3jn")]
 position = Vector2(689, 643)
 

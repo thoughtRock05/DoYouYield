@@ -2,21 +2,19 @@
 
 [ext_resource type="PackedScene" uid="uid://5pufmg2xnm6j" path="res://scenes/main_menu.tscn" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://b6kxwh3bt4xd5" path="res://scripts/main.gd" id="1_sugp2"]
+[ext_resource type="AudioStream" uid="uid://d0t4uaeywxm2f" path="res://assets/audio/ost_room_0_1_loopable.mp3" id="4_jkv2x"]
 [ext_resource type="Script" uid="uid://4hg1uru4w5en" path="res://scripts/music_controller.gd" id="4_jyhfs"]
-[ext_resource type="AudioStream" uid="uid://bvbeh5sadqb6t" path="res://assets/audio/GJ26_Room_0.mp3" id="4_ya4ey"]
-[ext_resource type="AudioStream" uid="uid://lawk253mq1sw" path="res://assets/audio/GJ26_Room_1.mp3" id="5_eb6dy"]
-[ext_resource type="AudioStream" uid="uid://61ycdkat7e1d" path="res://assets/audio/GJ26_Room_2.mp3" id="6_trceg"]
-[ext_resource type="AudioStream" uid="uid://hm75i37a2jqb" path="res://assets/audio/GJ26_Room_3.mp3" id="7_a8y0u"]
-[ext_resource type="AudioStream" uid="uid://dabwdv6jfcglx" path="res://assets/audio/GJ26_Room_4.mp3" id="8_jkv2x"]
-[ext_resource type="AudioStream" uid="uid://csm77c5pefj32" path="res://assets/audio/GJ26_Room_5.mp3" id="9_jbj1t"]
-[ext_resource type="AudioStream" uid="uid://cxh153aufeixx" path="res://assets/audio/GJ26_Room_6.mp3" id="10_muem4"]
-[ext_resource type="AudioStream" uid="uid://c8if55s6yawnw" path="res://assets/audio/GJ26_Pause_Menu.mp3" id="11_dp3eg"]
-[ext_resource type="AudioStream" uid="uid://cthf0v3s2c6sy" path="res://assets/audio/ost_room_0_isolated.wav" id="12_muem4"]
-[ext_resource type="AudioStream" uid="uid://cr2yrjua1xjsa" path="res://assets/audio/ost_room_1_isolated.wav" id="13_dp3eg"]
-[ext_resource type="AudioStream" uid="uid://c34tylesrlbf6" path="res://assets/audio/ost_room_2_isolated.wav" id="14_0ld40"]
-[ext_resource type="AudioStream" uid="uid://binbnppw6q2r3" path="res://assets/audio/ost_room_3_isolated.wav" id="15_gqmmt"]
-[ext_resource type="AudioStream" uid="uid://dsx0u1pdx64kh" path="res://assets/audio/ost_room_4_isolated.wav" id="16_yc10j"]
-[ext_resource type="AudioStream" uid="uid://c1tsjfkxqi4c2" path="res://assets/audio/ost_room_5_isolated.wav" id="17_jscy8"]
+[ext_resource type="AudioStream" uid="uid://b328muyii27sv" path="res://assets/audio/ost_room_2_loopable.mp3" id="5_jbj1t"]
+[ext_resource type="AudioStream" uid="uid://7wp1imdyxk3u" path="res://assets/audio/ost_room_3_loopable.mp3" id="6_muem4"]
+[ext_resource type="AudioStream" uid="uid://dla1o7ty54bdo" path="res://assets/audio/ost_room_4_loopable.mp3" id="7_dp3eg"]
+[ext_resource type="AudioStream" uid="uid://dswm8qfki1546" path="res://assets/audio/ost_room_5_loopable.mp3" id="8_0ld40"]
+[ext_resource type="AudioStream" uid="uid://bdanugkj3ju2w" path="res://assets/audio/ost_room_6_loopable.mp3" id="9_gqmmt"]
+[ext_resource type="AudioStream" uid="uid://b23ua15cfk52c" path="res://assets/audio/ost_menu_loopable.mp3" id="10_yc10j"]
+[ext_resource type="AudioStream" uid="uid://d2pmlew6ud8s" path="res://assets/audio/ost_room_0_1_isolate_loopable.mp3" id="11_jscy8"]
+[ext_resource type="AudioStream" uid="uid://b1x8egd8iuhye" path="res://assets/audio/ost_room_2_isolate_loopable.mp3" id="12_pm3ni"]
+[ext_resource type="AudioStream" uid="uid://7xraeam7rdef" path="res://assets/audio/ost_room_3_isolate_loopable.mp3" id="13_y6deb"]
+[ext_resource type="AudioStream" uid="uid://bua8inql6cjsh" path="res://assets/audio/ost_room_4_isolate_loopable.mp3" id="14_og1vs"]
+[ext_resource type="AudioStream" uid="uid://bu6evrr3peoht" path="res://assets/audio/ost_room_5_isolate_loopable.mp3" id="15_2wyq8"]
 
 [node name="Main" type="Node2D" unique_id=1053634781 node_paths=PackedStringArray("music_controller")]
 script = ExtResource("1_sugp2")
@@ -30,7 +28,7 @@ offset_bottom = 40.0
 
 [node name="Main Menu" parent="SceneContainer" unique_id=1904224642 instance=ExtResource("1_o5qli")]
 
-[node name="MusicController" type="Node" parent="." unique_id=1919563507 node_paths=PackedStringArray("player_0", "player_1", "player_2", "player_3", "player_4", "player_5", "player_6", "menu_music", "ost_room_0_isolated", "ost_room_1_isolated", "ost_room_2_isolated", "ost_room_3_isolated", "ost_room_4_isolated", "ost_room_5_isolated", "ost_room_6_isolated")]
+[node name="MusicController" type="Node" parent="." unique_id=1919563507 node_paths=PackedStringArray("player_0", "player_1", "player_2", "player_3", "player_4", "player_5", "player_6", "menu_music", "ost_room_0_isolated", "ost_room_1_isolated", "ost_room_2_isolated", "ost_room_3_isolated", "ost_room_4_isolated", "ost_room_5_isolated")]
 process_mode = 3
 script = ExtResource("4_jyhfs")
 player_0 = NodePath("Player0")
@@ -47,60 +45,59 @@ ost_room_2_isolated = NodePath("OstRoom2Isolated")
 ost_room_3_isolated = NodePath("OstRoom3Isolated")
 ost_room_4_isolated = NodePath("OstRoom4Isolated")
 ost_room_5_isolated = NodePath("OstRoom5Isolated")
-ost_room_6_isolated = NodePath("")
 
 [node name="Player0" type="AudioStreamPlayer" parent="MusicController" unique_id=2064085531]
-stream = ExtResource("4_ya4ey")
+stream = ExtResource("4_jkv2x")
 bus = &"Music"
 
 [node name="Player1" type="AudioStreamPlayer" parent="MusicController" unique_id=901429361]
-stream = ExtResource("5_eb6dy")
+stream = ExtResource("4_jkv2x")
 bus = &"Music"
 
 [node name="Player2" type="AudioStreamPlayer" parent="MusicController" unique_id=815647722]
-stream = ExtResource("6_trceg")
+stream = ExtResource("5_jbj1t")
 bus = &"Music"
 
 [node name="Player3" type="AudioStreamPlayer" parent="MusicController" unique_id=1547385616]
-stream = ExtResource("7_a8y0u")
+stream = ExtResource("6_muem4")
 bus = &"Music"
 
 [node name="Player4" type="AudioStreamPlayer" parent="MusicController" unique_id=419863624]
-stream = ExtResource("8_jkv2x")
+stream = ExtResource("7_dp3eg")
 bus = &"Music"
 
 [node name="Player5" type="AudioStreamPlayer" parent="MusicController" unique_id=1699476332]
-stream = ExtResource("9_jbj1t")
+stream = ExtResource("8_0ld40")
 bus = &"Music"
 
 [node name="Player6" type="AudioStreamPlayer" parent="MusicController" unique_id=824629418]
-stream = ExtResource("10_muem4")
+stream = ExtResource("9_gqmmt")
 bus = &"Music"
 
 [node name="MenuMusic" type="AudioStreamPlayer" parent="MusicController" unique_id=511267185]
-stream = ExtResource("11_dp3eg")
+stream = ExtResource("10_yc10j")
 bus = &"Music"
 
 [node name="OstRoom0Isolated" type="AudioStreamPlayer" parent="MusicController" unique_id=936860826]
-stream = ExtResource("12_muem4")
+stream = ExtResource("11_jscy8")
 bus = &"Music"
 
 [node name="OstRoom1Isolated" type="AudioStreamPlayer" parent="MusicController" unique_id=1398109776]
-stream = ExtResource("13_dp3eg")
+stream = ExtResource("11_jscy8")
 bus = &"Music"
 
 [node name="OstRoom2Isolated" type="AudioStreamPlayer" parent="MusicController" unique_id=419505783]
-stream = ExtResource("14_0ld40")
+stream = ExtResource("12_pm3ni")
 bus = &"Music"
 
 [node name="OstRoom3Isolated" type="AudioStreamPlayer" parent="MusicController" unique_id=436854065]
-stream = ExtResource("15_gqmmt")
+stream = ExtResource("13_y6deb")
 bus = &"Music"
 
 [node name="OstRoom4Isolated" type="AudioStreamPlayer" parent="MusicController" unique_id=1244997488]
-stream = ExtResource("16_yc10j")
+stream = ExtResource("14_og1vs")
 bus = &"Music"
 
 [node name="OstRoom5Isolated" type="AudioStreamPlayer" parent="MusicController" unique_id=843434199]
-stream = ExtResource("17_jscy8")
+stream = ExtResource("15_2wyq8")
 bus = &"Music"

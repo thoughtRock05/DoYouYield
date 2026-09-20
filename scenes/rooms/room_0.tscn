@@ -26,6 +26,9 @@ next_room = "uid://dtlklnlt0xd73"
 [node name="RoomOptions" parent="CanvasLayer" parent_id_path=PackedInt32Array(1494660866) index="1" unique_id=650667937]
 process_mode = 2
 
+[node name="YieldLabel" parent="CanvasLayer/YieldPrompt" parent_id_path=PackedInt32Array(1938132347) index="0" unique_id=309691000]
+text = "Yield what you need most:"
+
 [node name="MovingPlatform" parent="." index="6" unique_id=904287372 instance=ExtResource("3_tf3nb")]
 position = Vector2(258, 80)
 rel_x = 150.0

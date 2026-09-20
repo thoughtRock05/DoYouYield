@@ -224,21 +224,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ujl30")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ujl30")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ujl30")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ujl30")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ujl30")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ujl30")
 }],
 "loop": 0,
 "name": &"hurt",
@@ -319,7 +304,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q2dwa"]
 size = Vector2(32, 36)
 
-[node name="Player" type="CharacterBody2D" unique_id=933572393 node_paths=PackedStringArray("player_camera", "coyote_timer", "buffer_timer", "dash_timer", "sword_hit_box", "animated_sprite", "i_frame_timer", "hitbox", "shield_sprite", "shield_collision", "sfx_player_dash", "sfx_player_death", "sfx_player_hurt", "sfx_player_jump", "sfx_player_walk", "sfx_player_walk_lower_pitch", "sfx_player_wall_slide", "sfx_heart_pickup", "sfx_sword_swing")]
+[node name="Player" type="CharacterBody2D" unique_id=933572393 node_paths=PackedStringArray("player_camera", "coyote_timer", "buffer_timer", "dash_timer", "sword_hit_box", "animated_sprite", "i_frame_timer", "hitbox", "shield_sprite", "shield_collision", "sfx_player_dash", "sfx_player_death", "sfx_player_hurt", "sfx_player_jump", "sfx_player_walk", "sfx_player_wall_slide", "sfx_heart_pickup", "sfx_sword_swing")]
 collision_layer = 4
 script = ExtResource("1_g2els")
 player_camera = NodePath("PlayerCamera")
@@ -337,7 +322,6 @@ sfx_player_death = NodePath("SfxPlayerDeath")
 sfx_player_hurt = NodePath("SfxPlayerHurt")
 sfx_player_jump = NodePath("SfxPlayerJump")
 sfx_player_walk = NodePath("SfxPlayerWalk")
-sfx_player_walk_lower_pitch = NodePath("")
 sfx_player_wall_slide = NodePath("SfxPlayerWallSlide")
 sfx_heart_pickup = NodePath("SfxHeartPickup")
 sfx_sword_swing = NodePath("SfxSwordSwing")
