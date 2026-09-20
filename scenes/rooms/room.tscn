@@ -2,13 +2,19 @@
 
 [ext_resource type="Script" uid="uid://c8r4i4r62e5j8" path="res://scripts/room.gd" id="1_1fuux"]
 [ext_resource type="PackedScene" uid="uid://dop8vfrtc40vm" path="res://scenes/player.tscn" id="2_3nht7"]
+[ext_resource type="Texture2D" uid="uid://b4pek6hbu51i6" path="res://assets/cave1.png" id="2_jycyc"]
 [ext_resource type="PackedScene" uid="uid://dtsnjb3etfst4" path="res://scenes/heart_bar.tscn" id="2_w2a3g"]
 [ext_resource type="Texture2D" uid="uid://bp8uegy6ox6u8" path="res://assets/TILESET.png" id="3_a1uh7"]
 [ext_resource type="Script" uid="uid://g1y0lojvnoq6" path="res://scripts/heart_bar.gd" id="3_i8kcg"]
+[ext_resource type="Texture2D" uid="uid://by1uc7qji45sp" path="res://assets/cave2.png" id="3_p5707"]
 [ext_resource type="PackedScene" uid="uid://dt1x5ywbgsh1m" path="res://scenes/lock.tscn" id="4_rd4w8"]
 [ext_resource type="PackedScene" uid="uid://vbc2v1eva61l" path="res://scenes/volume_slider.tscn" id="5_3nht7"]
 [ext_resource type="Script" uid="uid://bae7rxj2csaji" path="res://scripts/canvas_layer.gd" id="5_rd4w8"]
 [ext_resource type="PackedScene" uid="uid://df6eqqjn0g74m" path="res://scenes/window_dropdown.tscn" id="6_tmaxl"]
+[ext_resource type="Texture2D" uid="uid://c1mq4eh4l6r5j" path="res://assets/cave3.png" id="10_gbkeq"]
+[ext_resource type="Texture2D" uid="uid://dcnx8r8o84403" path="res://assets/cave4.png" id="11_ju88f"]
+[ext_resource type="Texture2D" uid="uid://0xsvuqhht0l3" path="res://assets/cave5.png" id="12_jycyc"]
+[ext_resource type="Texture2D" uid="uid://g4ki6os2asut" path="res://assets/cave6.png" id="13_p5707"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tmaxl"]
 texture = ExtResource("3_a1uh7")
@@ -53,13 +59,6 @@ texture_region_size = Vector2i(32, 32)
 6:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 7:1/0 = 0
 7:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
-0:2/0 = 0
-1:2/0 = 0
-2:2/0 = 0
-3:2/0 = 0
-4:2/0 = 0
-5:2/0 = 0
-6:2/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_qliwx"]
 tile_size = Vector2i(32, 32)
@@ -91,12 +90,12 @@ texture_region_size = Vector2i(32, 32)
 6:1/0 = 0
 7:1/0 = 0
 0:2/0 = 0
-1:2/0 = 0
-2:2/0 = 0
-3:2/0 = 0
-4:2/0 = 0
-5:2/0 = 0
-6:2/0 = 0
+6:3/0 = 0
+7:3/0 = 0
+8:3/0 = 0
+9:3/0 = 0
+10:3/0 = 0
+11:3/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_a1uh7"]
 tile_size = Vector2i(32, 32)
@@ -125,13 +124,6 @@ texture_region_size = Vector2i(32, 32)
 5:1/0 = 0
 6:1/0 = 0
 7:1/0 = 0
-0:2/0 = 0
-1:2/0 = 0
-2:2/0 = 0
-3:2/0 = 0
-4:2/0 = 0
-5:2/0 = 0
-6:2/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_hm6s1"]
 tile_size = Vector2i(32, 32)
@@ -150,6 +142,52 @@ main_menu = &"uid://5pufmg2xnm6j"
 main_menu_button = NodePath("CanvasLayer/RoomOptions/Main Menu")
 reset_button = NodePath("CanvasLayer/RoomOptions/Reset")
 lock = NodePath("Lock")
+
+[node name="Node2D" type="Node2D" parent="." unique_id=1696102987]
+z_index = -3
+scale = Vector2(0.85, 0.85)
+
+[node name="ParallaxLayer1" type="Parallax2D" parent="Node2D" unique_id=852846276]
+scroll_scale = Vector2(0, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D/ParallaxLayer1" unique_id=1943610877]
+texture = ExtResource("2_jycyc")
+centered = false
+
+[node name="ParallaxLayer2" type="Parallax2D" parent="Node2D" unique_id=298795171]
+scroll_scale = Vector2(0.1, 0.1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D/ParallaxLayer2" unique_id=1085061654]
+texture = ExtResource("3_p5707")
+centered = false
+
+[node name="ParallaxLayer3" type="Parallax2D" parent="Node2D" unique_id=885096743]
+scroll_scale = Vector2(0.2, 0.2)
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D/ParallaxLayer3" unique_id=1339255661]
+texture = ExtResource("10_gbkeq")
+centered = false
+
+[node name="ParallaxLayer4" type="Parallax2D" parent="Node2D" unique_id=262871249]
+scroll_scale = Vector2(0.3, 0.3)
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D/ParallaxLayer4" unique_id=2087034164]
+texture = ExtResource("11_ju88f")
+centered = false
+
+[node name="ParallaxLayer5" type="Parallax2D" parent="Node2D" unique_id=105208814]
+scroll_scale = Vector2(0.5, 0.5)
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D/ParallaxLayer5" unique_id=112949159]
+texture = ExtResource("12_jycyc")
+centered = false
+
+[node name="ParallaxLayer6" type="Parallax2D" parent="Node2D" unique_id=2014147915]
+scroll_scale = Vector2(0.7, 0.7)
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D/ParallaxLayer6" unique_id=280523691]
+texture = ExtResource("13_p5707")
+centered = false
 
 [node name="Player" parent="." unique_id=933572393 instance=ExtResource("2_3nht7")]
 

@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://ca6latd2wo6sd"]
 
-[sub_resource type="Gradient" id="Gradient_2nl85"]
-offsets = PackedFloat32Array(0, 0.40803382, 1)
-colors = PackedColorArray(1, 1, 1, 1, 0.16565639, 0.16565642, 0.16565636, 1, 0, 0, 0, 1)
+[sub_resource type="Gradient" id="Gradient_3jvd4"]
+offsets = PackedFloat32Array(0.0021141649, 1)
+colors = PackedColorArray(0.899979, 0.37967363, 0, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_3jvd4"]
-gradient = SubResource("Gradient_2nl85")
+gradient = SubResource("Gradient_3jvd4")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
@@ -18,51 +18,50 @@ func _ready() -> void:
 	animation_player.play(\"glow\")
 "
 
-[sub_resource type="Animation" id="Animation_2nl85"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:texture:gradient")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [SubResource("Gradient_2nl85")]
-}
-
 [sub_resource type="Animation" id="Animation_1pkm2"]
-resource_name = "glow"
-length = 2.0
-tracks/0/type = "value"
+length = 0.001
+tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:texture:gradient")
+tracks/0/path = NodePath(".:texture_scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1, 1.98),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [SubResource("Gradient_2nl85"), SubResource("Gradient_2nl85"), SubResource("Gradient_2nl85")]
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0.4, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_5riym"]
+[sub_resource type="Animation" id="Animation_2nl85"]
+resource_name = "glow"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(2, 0, 0),
+"points": PackedFloat32Array(0.4, 0, 0, 0, 0, 0.7, 0, 0, 0, 0, 0.4, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 5, 10)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1pkm2"]
 _data = {
-&"RESET": SubResource("Animation_2nl85"),
-&"glow": SubResource("Animation_1pkm2")
+&"RESET": SubResource("Animation_1pkm2"),
+&"glow": SubResource("Animation_2nl85")
 }
 
 [node name="TorchLight" type="PointLight2D" unique_id=1898532190 node_paths=PackedStringArray("animation_player")]
 z_index = 2
-color = Color(0.93911475, 0.48588657, 5.7756904e-07, 1)
+scale = Vector2(14.765624, 12.96875)
 energy = 4.0
 texture = SubResource("GradientTexture2D_3jvd4")
-texture_scale = 4.0
+texture_scale = 0.4
 script = SubResource("GDScript_1pkm2")
 animation_player = NodePath("AnimationPlayer")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=198777194]
-libraries/ = SubResource("AnimationLibrary_5riym")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=353858731]
+libraries/ = SubResource("AnimationLibrary_1pkm2")
