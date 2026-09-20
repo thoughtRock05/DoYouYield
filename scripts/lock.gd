@@ -8,6 +8,7 @@ const DOOR_OPEN = preload("uid://bk66uajxkaxfj")
 signal trigger_lock(room: String, take_heart, taken_item)
 @export var trigger_area: Area2D
 @export var next_room: String
+@export var sfx_door: AudioStreamPlayer
 
 var is_open: bool = false:
 	set(value):
@@ -22,4 +23,5 @@ func _ready() -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is Player:
+		sfx_door.play()
 		trigger_lock.emit(next_room)

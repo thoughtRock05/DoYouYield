@@ -8,6 +8,7 @@ signal spawn_heart(pos: Vector2)
 @export var hitbox: Area2D
 @export var sfx_slime_damage: AudioStreamPlayer
 @export var sfx_slime_aggro: AudioStreamPlayer
+@export var sfx_slime_death: AudioStreamPlayer
 
 const SPEED = 30.0
 var speed = SPEED / self.scale.x
@@ -77,11 +78,12 @@ func hit(area: Area2D) -> void:
 		sfx_slime_damage.play()
 		health -= 1
 		if health <= 0:
+			sfx_slime_death.play()
 			spawn_heart.emit(position)
 			self.visible = false
 			self.collision_layer = 0
 			self.collision_mask = 0
-			await sfx_slime_damage.finished
+			await sfx_slime_death.finished
 			queue_free()
 			return
 	is_stunned = true

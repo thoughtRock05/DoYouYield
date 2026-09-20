@@ -20,6 +20,7 @@ const HEART_DROP = preload("uid://cvvxfxr3biyta")
 @export var main_menu_button: Button
 
 @export var reset_button: Button
+@export var sfx_player_walk_echo: AudioStreamPlayer
 
 @export var lock: Lock
 
@@ -124,6 +125,7 @@ func _on_lock_triggered(_room: String) -> void:
 	yes_button.grab_focus()
 
 func _on_yes_pressed() -> void:
+	sfx_player_walk_echo.play()
 	can_interact = false
 	if take_heart:
 		SaveLoad._set_dictionary_value(SaveLoad.max_health_key, SaveLoad.get_key_value(SaveLoad.max_health_key) - 1)

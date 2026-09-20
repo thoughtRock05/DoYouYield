@@ -4,8 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://4ydo5nnur84p" path="res://assets/slimes_finished.png" id="2_khk2i"]
 [ext_resource type="Texture2D" uid="uid://cshmmuisxhngo" path="res://assets/exclamation point.png" id="3_1trss"]
 [ext_resource type="Script" uid="uid://db48diif8wxj6" path="res://scripts/enemy_hit_box.gd" id="4_y5ckx"]
-[ext_resource type="AudioStream" uid="uid://ebmou1twe237" path="res://assets/audio/sfx_slime_damage.wav" id="5_ecc73"]
+[ext_resource type="AudioStream" uid="uid://c48s5xbilwj41" path="res://assets/audio/sfx_slime_bonk.wav" id="5_mo75l"]
 [ext_resource type="AudioStream" uid="uid://vvhyjebcv41n" path="res://assets/audio/sfx_slime_aggro.wav" id="6_afdiv"]
+[ext_resource type="AudioStream" uid="uid://k4jmx74oullw" path="res://assets/audio/sfx_slime_death.wav" id="7_21qb3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3jvd4"]
 size = Vector2(20, 18)
@@ -63,7 +64,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l2tch"]
 size = Vector2(20, 18)
 
-[node name="EnemySlime" type="CharacterBody2D" unique_id=1893676253 node_paths=PackedStringArray("sprite", "alert", "hitbox", "sfx_slime_damage", "sfx_slime_aggro")]
+[node name="EnemySlime" type="CharacterBody2D" unique_id=1893676253 node_paths=PackedStringArray("sprite", "alert", "hitbox", "sfx_slime_damage", "sfx_slime_aggro", "sfx_slime_death")]
 process_mode = 1
 collision_layer = 2
 collision_mask = 3
@@ -73,6 +74,7 @@ alert = NodePath("Alert")
 hitbox = NodePath("EnemyHitBox")
 sfx_slime_damage = NodePath("SfxSlimeDamage")
 sfx_slime_aggro = NodePath("SfxSlimeAggro")
+sfx_slime_death = NodePath("SfxSlimeDeath")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2091795132]
 position = Vector2(0, 1)
@@ -98,10 +100,14 @@ position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_l2tch")
 
 [node name="SfxSlimeDamage" type="AudioStreamPlayer" parent="." unique_id=1798419569]
-stream = ExtResource("5_ecc73")
+stream = ExtResource("5_mo75l")
 bus = &"SFX"
 
 [node name="SfxSlimeAggro" type="AudioStreamPlayer" parent="." unique_id=1975817597]
 stream = ExtResource("6_afdiv")
 pitch_scale = 0.5
+bus = &"SFX"
+
+[node name="SfxSlimeDeath" type="AudioStreamPlayer" parent="." unique_id=1296416060]
+stream = ExtResource("7_21qb3")
 bus = &"SFX"

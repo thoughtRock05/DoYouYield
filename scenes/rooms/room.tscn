@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://g4ki6os2asut" path="res://assets/cave6.png" id="13_p5707"]
 [ext_resource type="FontFile" uid="uid://di30hy6qprkyp" path="res://assets/OldEnglishGothicPixelRegular.ttf" id="14_p5707"]
 [ext_resource type="Script" uid="uid://d0vxf0intxep4" path="res://scripts/speed_run_timer.gd" id="17_u8r6a"]
+[ext_resource type="AudioStream" uid="uid://dp0sopctvc0fx" path="res://assets/audio/sfx_player_walk_echo.wav" id="18_1m0bn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tmaxl"]
 texture = ExtResource("3_a1uh7")
@@ -92,16 +93,54 @@ texture_region_size = Vector2i(32, 32)
 6:1/0 = 0
 7:1/0 = 0
 0:2/0 = 0
-6:3/0 = 0
-7:3/0 = 0
-8:3/0 = 0
-9:3/0 = 0
-10:3/0 = 0
-11:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+6:4/0 = 0
+7:4/0 = 0
+8:4/0 = 0
+9:4/0 = 0
+10:4/0 = 0
+11:4/0 = 0
+11:5/0 = 0
+10:5/0 = 0
+9:5/0 = 0
+7:5/0 = 0
+6:5/0 = 0
+8:5/0 = 0
+1:6/0 = 0
+0:6/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u8r6a"]
+texture = ExtResource("3_a1uh7")
+texture_region_size = Vector2i(32, 32)
+0:5/animation_columns = 3
+0:5/animation_mode = 1
+0:5/animation_frame_0/duration = 1.0
+0:5/animation_frame_1/duration = 1.0
+0:5/animation_frame_2/duration = 1.0
+0:5/0 = 0
+3:5/animation_columns = 3
+3:5/animation_frame_0/duration = 1.0
+3:5/animation_frame_1/duration = 1.0
+3:5/animation_frame_2/duration = 1.0
+3:5/0 = 0
+1:2/animation_mode = 1
+1:2/animation_frame_0/duration = 1.0
+1:2/animation_frame_1/duration = 1.0
+1:2/animation_frame_2/duration = 1.0
+1:2/animation_frame_3/duration = 1.0
+1:2/animation_frame_4/duration = 1.0
+1:2/animation_frame_5/duration = 1.0
+1:2/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_a1uh7"]
 tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_a1uh7")
+sources/1 = SubResource("TileSetAtlasSource_u8r6a")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i8kcg"]
 texture = ExtResource("3_a1uh7")
@@ -126,10 +165,38 @@ texture_region_size = Vector2i(32, 32)
 5:1/0 = 0
 6:1/0 = 0
 7:1/0 = 0
+6:5/0 = 0
+7:5/0 = 0
+8:5/0 = 0
+9:5/0 = 0
+10:5/0 = 0
+11:5/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1m0bn"]
+texture = ExtResource("3_a1uh7")
+texture_region_size = Vector2i(32, 32)
+0:3/animation_columns = 8
+0:3/animation_mode = 1
+0:3/animation_frame_0/duration = 1.0
+0:3/animation_frame_1/duration = 1.0
+0:3/animation_frame_2/duration = 1.0
+0:3/animation_frame_3/duration = 1.0
+0:3/animation_frame_4/duration = 1.0
+0:3/animation_frame_5/duration = 1.0
+0:3/animation_frame_6/duration = 1.0
+0:3/animation_frame_7/duration = 1.0
+0:3/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_hm6s1"]
 tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_i8kcg")
+sources/2 = SubResource("TileSetAtlasSource_1m0bn")
 
 [sub_resource type="Image" id="Image_u8r6a"]
 data = {
@@ -425,7 +492,7 @@ cache/0/50/0/glyphs/56/size = Vector2(30, 40)
 cache/0/50/0/glyphs/56/uv_rect = Rect2(96, 1, 30, 40)
 cache/0/50/0/glyphs/56/texture_idx = 0
 
-[node name="Room" type="Node2D" unique_id=671016034 node_paths=PackedStringArray("player", "heart_bar", "yield_prompt", "yes_button", "no_button", "room_options", "back_button", "speed_run_timer", "main_menu_button", "reset_button", "lock")]
+[node name="Room" type="Node2D" unique_id=671016034 node_paths=PackedStringArray("player", "heart_bar", "yield_prompt", "yes_button", "no_button", "room_options", "back_button", "speed_run_timer", "main_menu_button", "reset_button", "sfx_player_walk_echo", "lock")]
 script = ExtResource("1_1fuux")
 player = NodePath("Player")
 heart_bar = NodePath("CanvasLayer/HeartBar")
@@ -438,6 +505,7 @@ speed_run_timer = NodePath("CanvasLayer/SpeedRunTimer")
 main_menu = &"uid://5pufmg2xnm6j"
 main_menu_button = NodePath("CanvasLayer/RoomOptions/Main Menu")
 reset_button = NodePath("CanvasLayer/RoomOptions/Reset")
+sfx_player_walk_echo = NodePath("SfxPlayerWalkEcho")
 lock = NodePath("Lock")
 
 [node name="Node2D" type="Node2D" parent="." unique_id=1696102987]
@@ -507,6 +575,7 @@ collision_enabled = false
 [node name="Lock" parent="." unique_id=599625686 instance=ExtResource("4_rd4w8")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1494660866]
+visible = false
 script = ExtResource("5_rd4w8")
 
 [node name="HeartBar" parent="CanvasLayer" unique_id=932334193 instance=ExtResource("2_w2a3g")]
@@ -718,3 +787,8 @@ theme_override_fonts/font = ExtResource("14_p5707")
 text = "100.00"
 horizontal_alignment = 2
 vertical_alignment = 1
+
+[node name="SfxPlayerWalkEcho" type="AudioStreamPlayer" parent="." unique_id=1220384792]
+stream = ExtResource("18_1m0bn")
+volume_db = 1.5
+bus = &"SFX"

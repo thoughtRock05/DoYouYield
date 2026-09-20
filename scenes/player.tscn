@@ -8,7 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://dxu2a42g2fuiu" path="res://assets/audio/sfx_player_death.wav" id="5_d2wvv"]
 [ext_resource type="AudioStream" uid="uid://c7lxmrf1b6j27" path="res://assets/audio/sfx_player_hurt.wav" id="6_3v2ag"]
 [ext_resource type="AudioStream" uid="uid://cei016nhkh0o6" path="res://assets/audio/sfx_player_jump.wav" id="7_jej6c"]
-[ext_resource type="AudioStream" uid="uid://dvrlg3w5j1sdi" path="res://assets/audio/sfx_player_walk.wav" id="8_f1ej7"]
+[ext_resource type="AudioStream" uid="uid://duqcr6fcxfp1j" path="res://assets/audio/sfx_player_walk_new.wav" id="9_jej6c"]
 [ext_resource type="AudioStream" uid="uid://sv3dpuw6wiw1" path="res://assets/audio/sfx_player_wall_slide.wav" id="10_a8ls1"]
 [ext_resource type="Texture2D" uid="uid://dhm7dpnrmm7a6" path="res://assets/crystal v3.png" id="12_3v2ag"]
 [ext_resource type="AudioStream" uid="uid://cv4kvrlay6000" path="res://assets/audio/sfx_heart_pickup.wav" id="13_jej6c"]
@@ -410,7 +410,7 @@ stream = ExtResource("7_jej6c")
 bus = &"SFX"
 
 [node name="SfxPlayerWalk" type="AudioStreamPlayer" parent="." unique_id=595235907]
-stream = ExtResource("8_f1ej7")
+stream = ExtResource("9_jej6c")
 volume_db = 1.0
 bus = &"SFX"
 
