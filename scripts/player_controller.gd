@@ -263,7 +263,8 @@ func animate():
 			animated_sprite.play("jump")
 		elif velocity.y > 0:
 			if is_on_wall():
-				animated_sprite.play("wall_cling")
+				if has_wall_jump:
+					animated_sprite.play("wall_cling")
 			else:
 				animated_sprite.play("fall")
 		return

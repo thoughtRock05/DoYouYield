@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://ca6latd2wo6sd"]
+
+[sub_resource type="Gradient" id="Gradient_2nl85"]
+offsets = PackedFloat32Array(0, 0.6511628, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.16565639, 0.16565642, 0.16565636, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3jvd4"]
+gradient = SubResource("Gradient_2nl85")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="GDScript" id="GDScript_1pkm2"]
+script/source = "extends PointLight2D
+
+@export var animated_sprite_2d: AnimatedSprite2D
+
+func _ready() -> void:
+	animated_sprite_2d.play(\"default\")
+"
+
+[node name="TorchLight" type="PointLight2D" unique_id=1898532190 node_paths=PackedStringArray("animated_sprite_2d")]
+z_index = 2
+color = Color(0.93911475, 0.48588657, 5.7756904e-07, 1)
+energy = 4.0
+texture = SubResource("GradientTexture2D_3jvd4")
+texture_scale = 4.0
+script = SubResource("GDScript_1pkm2")
+animated_sprite_2d = NodePath("")

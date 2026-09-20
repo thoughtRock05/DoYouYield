@@ -1,15 +1,23 @@
 [gd_scene format=3 uid="uid://dt1x5ywbgsh1m"]
 
 [ext_resource type="Script" uid="uid://b8g2ppciu8j0m" path="res://scripts/lock.gd" id="1_60jus"]
+[ext_resource type="Texture2D" uid="uid://kyv1nm3ioy0" path="res://assets/door_closed.png" id="2_s433i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3jvd4"]
+size = Vector2(16, 29)
 
-[node name="Lock" type="Node2D" unique_id=599625686 node_paths=PackedStringArray("trigger_area")]
+[node name="Lock" type="Node2D" unique_id=599625686 node_paths=PackedStringArray("sprite_2d", "trigger_area")]
+z_index = -1
 script = ExtResource("1_60jus")
+sprite_2d = NodePath("Sprite2D")
 trigger_area = NodePath("Area2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1515198630]
+texture = ExtResource("2_s433i")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=802225447]
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=771235972]
+position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_3jvd4")

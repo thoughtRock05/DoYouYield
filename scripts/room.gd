@@ -58,7 +58,8 @@ func _ready() -> void:
 	
 	heart_bar.set_health(player.health)
 	heart_bar.set_max_health(player.max_health)
-	
+	lock.is_open = false
+
 	for child in get_children():
 		if child is Slime:
 			child.spawn_heart.connect(_on_spawn_heart)
@@ -109,6 +110,7 @@ func open_menu() -> void:
 	player.in_menu = in_options_menu
 
 func _on_lock_triggered(_room: String) -> void:
+	lock.is_open = true
 	Music.switch_player(room_num + 8)
 	can_interact = false
 	player.can_move = false
@@ -141,6 +143,7 @@ func _on_yes_pressed() -> void:
 	SceneTransition.load_scene(room)
 
 func _on_no_pressed() -> void:
+	lock.is_open = false
 	Music.switch_player(room_num)
 	yield_prompt.visible = false
 	get_tree().paused = false

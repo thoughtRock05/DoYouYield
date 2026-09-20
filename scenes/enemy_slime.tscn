@@ -82,6 +82,7 @@ sprite_frames = SubResource("SpriteFrames_3jvd4")
 frame_progress = 0.98137534
 
 [node name="Alert" type="Sprite2D" parent="." unique_id=1732907874]
+z_index = 3
 position = Vector2(0, -17)
 texture = ExtResource("3_1trss")
 
