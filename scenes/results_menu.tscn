@@ -54,6 +54,17 @@ scale = Vector2(6.715, 6.715)
 texture = ExtResource("3_mpbci")
 
 [node name="Label" type="Label" parent="CanvasLayer/Control" unique_id=1951554807]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -15.0
+offset_top = 103.0
+offset_right = 25.0
+offset_bottom = 126.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
