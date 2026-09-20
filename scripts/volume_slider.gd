@@ -4,6 +4,13 @@ extends HSlider
 var bus_index: int
 
 func _ready() -> void:
+	if bus_name == "Music":
+		max_value = 0.45
+		step = 0.009
+	else:
+		max_value = 1.0
+		step = 0.1
+	
 	bus_index = AudioServer.get_bus_index(bus_name)
 	value_changed.connect(_on_value_changed)
 	

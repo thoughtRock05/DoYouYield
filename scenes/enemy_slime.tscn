@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cshmmuisxhngo" path="res://assets/exclamation point.png" id="3_1trss"]
 [ext_resource type="Script" uid="uid://db48diif8wxj6" path="res://scripts/enemy_hit_box.gd" id="4_y5ckx"]
 [ext_resource type="AudioStream" uid="uid://ebmou1twe237" path="res://assets/audio/sfx_slime_damage.wav" id="5_ecc73"]
+[ext_resource type="AudioStream" uid="uid://vvhyjebcv41n" path="res://assets/audio/sfx_slime_aggro.wav" id="6_afdiv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3jvd4"]
 size = Vector2(20, 18)
@@ -62,7 +63,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l2tch"]
 size = Vector2(20, 18)
 
-[node name="EnemySlime" type="CharacterBody2D" unique_id=1893676253 node_paths=PackedStringArray("sprite", "alert", "hitbox", "sfx_slime_damage")]
+[node name="EnemySlime" type="CharacterBody2D" unique_id=1893676253 node_paths=PackedStringArray("sprite", "alert", "hitbox", "sfx_slime_damage", "sfx_slime_aggro")]
 process_mode = 1
 collision_layer = 2
 collision_mask = 3
@@ -71,6 +72,7 @@ sprite = NodePath("AnimatedSprite2D")
 alert = NodePath("Alert")
 hitbox = NodePath("EnemyHitBox")
 sfx_slime_damage = NodePath("SfxSlimeDamage")
+sfx_slime_aggro = NodePath("SfxSlimeAggro")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2091795132]
 position = Vector2(0, 1)
@@ -97,4 +99,9 @@ shape = SubResource("RectangleShape2D_l2tch")
 
 [node name="SfxSlimeDamage" type="AudioStreamPlayer" parent="." unique_id=1798419569]
 stream = ExtResource("5_ecc73")
+bus = &"SFX"
+
+[node name="SfxSlimeAggro" type="AudioStreamPlayer" parent="." unique_id=1975817597]
+stream = ExtResource("6_afdiv")
+pitch_scale = 0.5
 bus = &"SFX"

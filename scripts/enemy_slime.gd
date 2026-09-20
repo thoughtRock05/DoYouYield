@@ -7,6 +7,7 @@ signal spawn_heart(pos: Vector2)
 @export var alert: Sprite2D
 @export var hitbox: Area2D
 @export var sfx_slime_damage: AudioStreamPlayer
+@export var sfx_slime_aggro: AudioStreamPlayer
 
 const SPEED = 30.0
 var speed = SPEED / self.scale.x
@@ -41,6 +42,7 @@ func _physics_process(delta: float) -> void:
 			return
 		if (target.position - position).length() < target_threshold:
 			if not is_alerted:
+				sfx_slime_aggro.play()
 				is_alerting = true
 				is_alerted = true
 				get_tree().create_timer(0.5).timeout.connect(func():

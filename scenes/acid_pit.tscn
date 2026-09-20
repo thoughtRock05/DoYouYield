@@ -1,14 +1,20 @@
 [gd_scene format=3 uid="uid://cqfry822lc17w"]
 
 [ext_resource type="Script" uid="uid://ofrsd7vgtfiv" path="res://scripts/acid_pit.gd" id="1_h22xs"]
+[ext_resource type="AudioStream" uid="uid://pkpqehga4ov6" path="res://assets/audio/sfx_acid_bubble_pop.wav" id="2_x3ghq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3jvd4"]
 size = Vector2(16, 16)
 
-[node name="AcidPit" type="Area2D" unique_id=2011704841]
+[node name="AcidPit" type="Area2D" unique_id=2011704841 node_paths=PackedStringArray("sfx_acid_bubble_pop")]
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("1_h22xs")
+sfx_acid_bubble_pop = NodePath("SfxAcidBubblePop")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1619907998]
 shape = SubResource("RectangleShape2D_3jvd4")
+
+[node name="SfxAcidBubblePop" type="AudioStreamPlayer2D" parent="." unique_id=932803935]
+stream = ExtResource("2_x3ghq")
+max_distance = 225.0

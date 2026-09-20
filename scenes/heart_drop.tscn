@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cskxj6ve5i1b2" path="res://assets/heart animation.png" id="1_a4x2y"]
 [ext_resource type="Script" uid="uid://crwgse7o22kr7" path="res://scripts/heart_drop.gd" id="1_vpq05"]
 [ext_resource type="Script" uid="uid://b6qka5kmnr4t4" path="res://scripts/heart_box.gd" id="2_napxk"]
-[ext_resource type="AudioStream" uid="uid://cly1iwg0f4nyk" path="res://assets/audio/sfx_heart_shimmer.wav" id="4_n1cnx"]
+[ext_resource type="AudioStream" uid="uid://sqvu2eyxwcta" path="res://assets/audio/sfx_heart_shimmer_bitcrush_loopable.mp3" id="4_n1cnx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_napxk"]
 atlas = ExtResource("1_a4x2y")
