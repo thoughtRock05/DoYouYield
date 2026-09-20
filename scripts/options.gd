@@ -5,6 +5,7 @@ extends Node2D
 @export var window_dropdown: OptionButton
 
 func _ready() -> void:
+	SpeedRunTimerGlobal.is_paused = true
 	back_button.pressed.connect(_on_back_button_pressed)
 	back_button.grab_focus()
 

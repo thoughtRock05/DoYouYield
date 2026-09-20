@@ -37,7 +37,7 @@ var in_options_menu: bool = false
 
 func _ready() -> void:
 	Music.switch_player(room_num)
-	
+	SpeedRunTimerGlobal.is_paused = false
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	player.can_move = true
 	yield_prompt.visible = false
@@ -95,7 +95,7 @@ func _process(_delta: float) -> void:
 func open_menu() -> void:
 	in_options_menu = not in_options_menu
 	heart_bar.visible = not in_options_menu
-	
+	SpeedRunTimerGlobal.is_paused = in_options_menu
 	
 	
 	get_tree().paused = in_options_menu

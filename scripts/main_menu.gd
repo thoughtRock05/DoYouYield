@@ -11,7 +11,7 @@ func _ready() -> void:
 	options_button.pressed.connect(_on_options_menu_button_pressed)
 	quit_button.pressed.connect(_on_quit_button_pressed)
 	play_button.grab_focus()
-	SpeedRunTimerGlobal.is_speedrunning = false
+	SpeedRunTimerGlobal.is_paused = true
 
 func _on_play_button_pressed() -> void:
 	SceneTransition.load_scene(initial_scene)

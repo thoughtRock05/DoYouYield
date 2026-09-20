@@ -16,7 +16,6 @@
 [ext_resource type="Texture2D" uid="uid://0xsvuqhht0l3" path="res://assets/cave5.png" id="12_jycyc"]
 [ext_resource type="Texture2D" uid="uid://g4ki6os2asut" path="res://assets/cave6.png" id="13_p5707"]
 [ext_resource type="FontFile" uid="uid://di30hy6qprkyp" path="res://assets/OldEnglishGothicPixelRegular.ttf" id="14_p5707"]
-[ext_resource type="PackedScene" uid="uid://cttg2bby718yy" path="res://scenes/speed_running_toggle.tscn" id="17_1m0bn"]
 [ext_resource type="Script" uid="uid://d0vxf0intxep4" path="res://scripts/speed_run_timer.gd" id="17_u8r6a"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tmaxl"]
@@ -634,28 +633,6 @@ offset_top = 77.0
 offset_right = 423.0
 offset_bottom = 108.0
 theme_override_fonts/font = SubResource("FontFile_dfhby")
-
-[node name="Label2" type="Label" parent="CanvasLayer/RoomOptions" unique_id=574631556]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -154.0
-offset_top = 55.0
-offset_right = -48.0
-offset_bottom = 78.0
-grow_horizontal = 0
-theme_override_fonts/font = ExtResource("14_p5707")
-text = "Speedrun Timer"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="SpeedRunningToggle" parent="CanvasLayer/RoomOptions" unique_id=1071498158 instance=ExtResource("17_1m0bn")]
-layout_mode = 0
-offset_left = 522.0
-offset_top = 80.0
-offset_right = 566.0
-offset_bottom = 104.0
 
 [node name="YieldPrompt" type="Control" parent="CanvasLayer" unique_id=1938132347]
 visible = false
