@@ -157,6 +157,7 @@ func _on_main_menu_pressed() -> void:
 	can_interact = false
 	player.can_move = false
 	get_tree().paused = false
+	SaveLoad.reset_save()
 	SceneTransition.load_scene(main_menu)
 
 func _on_reset_pressed() -> void:

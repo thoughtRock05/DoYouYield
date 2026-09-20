@@ -21,13 +21,16 @@ const DEFAULT_SAVEDATA: Dictionary = {
 const DEFAULT_PREFERENCES: Dictionary = {
 	"window": DisplayServer.WINDOW_MODE_FULLSCREEN,
 	"Master Volume": linear_to_db(1.0),
-	"Music Volume": linear_to_db(1.0),
+	"Music Volume": linear_to_db(0.75),
 	"SFX Volume": linear_to_db(1.0),
 }
 
 var savedata: Dictionary = {}
 
 func _ready() -> void:
+	savedata = DEFAULT_SAVEDATA.duplicate(true)
+
+func reset_save() -> void:
 	savedata = DEFAULT_SAVEDATA.duplicate(true)
 
 @export var file_num: int = 1
