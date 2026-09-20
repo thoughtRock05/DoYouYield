@@ -14,6 +14,7 @@ const HEART_DROP = preload("uid://cvvxfxr3biyta")
 
 @export var room_options: Control
 @export var back_button: Button
+@export var speed_run_timer: Control
 
 @export var main_menu: StringName = &""
 @export var main_menu_button: Button
@@ -41,6 +42,7 @@ func _ready() -> void:
 	player.can_move = true
 	yield_prompt.visible = false
 	room_options.visible = false
+	speed_run_timer.visible = true
 	lock.trigger_lock.connect(_on_lock_triggered)
 	yes_button.pressed.connect(_on_yes_pressed)
 	no_button.pressed.connect(_on_no_pressed)
@@ -98,6 +100,7 @@ func open_menu() -> void:
 	
 	get_tree().paused = in_options_menu
 	room_options.visible = in_options_menu
+	speed_run_timer.visible = not in_options_menu
 	
 	if in_options_menu:
 		back_button.grab_focus()
@@ -158,12 +161,14 @@ func _on_main_menu_pressed() -> void:
 	player.can_move = false
 	get_tree().paused = false
 	SaveLoad.reset_save()
+	SpeedRunTimerGlobal._reset()
 	SceneTransition.load_scene(main_menu)
 
 func _on_reset_pressed() -> void:
 	can_interact = false
 	player.can_move = false
 	room_options.visible = false
+	speed_run_timer.visible = true
 	get_tree().paused = false
 	SceneTransition.load_scene(uid)
 

@@ -15,7 +15,9 @@
 [ext_resource type="Texture2D" uid="uid://dcnx8r8o84403" path="res://assets/cave4.png" id="11_ju88f"]
 [ext_resource type="Texture2D" uid="uid://0xsvuqhht0l3" path="res://assets/cave5.png" id="12_jycyc"]
 [ext_resource type="Texture2D" uid="uid://g4ki6os2asut" path="res://assets/cave6.png" id="13_p5707"]
-[ext_resource type="FontFile" uid="uid://cwhamt02n2uew" path="res://assets/OldLondon.ttf" id="14_p5707"]
+[ext_resource type="FontFile" uid="uid://di30hy6qprkyp" path="res://assets/OldEnglishGothicPixelRegular.ttf" id="14_p5707"]
+[ext_resource type="PackedScene" uid="uid://cttg2bby718yy" path="res://scenes/speed_running_toggle.tscn" id="17_1m0bn"]
+[ext_resource type="Script" uid="uid://d0vxf0intxep4" path="res://scripts/speed_run_timer.gd" id="17_u8r6a"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tmaxl"]
 texture = ExtResource("3_a1uh7")
@@ -424,7 +426,7 @@ cache/0/50/0/glyphs/56/size = Vector2(30, 40)
 cache/0/50/0/glyphs/56/uv_rect = Rect2(96, 1, 30, 40)
 cache/0/50/0/glyphs/56/texture_idx = 0
 
-[node name="Room" type="Node2D" unique_id=671016034 node_paths=PackedStringArray("player", "heart_bar", "yield_prompt", "yes_button", "no_button", "room_options", "back_button", "main_menu_button", "reset_button", "lock")]
+[node name="Room" type="Node2D" unique_id=671016034 node_paths=PackedStringArray("player", "heart_bar", "yield_prompt", "yes_button", "no_button", "room_options", "back_button", "speed_run_timer", "main_menu_button", "reset_button", "lock")]
 script = ExtResource("1_1fuux")
 player = NodePath("Player")
 heart_bar = NodePath("CanvasLayer/HeartBar")
@@ -433,6 +435,7 @@ yes_button = NodePath("CanvasLayer/YieldPrompt/Yes")
 no_button = NodePath("CanvasLayer/YieldPrompt/No")
 room_options = NodePath("CanvasLayer/RoomOptions")
 back_button = NodePath("CanvasLayer/RoomOptions/Back")
+speed_run_timer = NodePath("CanvasLayer/SpeedRunTimer")
 main_menu = &"uid://5pufmg2xnm6j"
 main_menu_button = NodePath("CanvasLayer/RoomOptions/Main Menu")
 reset_button = NodePath("CanvasLayer/RoomOptions/Reset")
@@ -505,7 +508,6 @@ collision_enabled = false
 [node name="Lock" parent="." unique_id=599625686 instance=ExtResource("4_rd4w8")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1494660866]
-visible = false
 script = ExtResource("5_rd4w8")
 
 [node name="HeartBar" parent="CanvasLayer" unique_id=932334193 instance=ExtResource("2_w2a3g")]
@@ -610,6 +612,21 @@ horizontal_alignment = 1
 layout_mode = 2
 bus_name = "SFX"
 
+[node name="Label" type="Label" parent="CanvasLayer/RoomOptions" unique_id=552472570]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -376.0
+offset_top = 52.0
+offset_right = -270.0
+offset_bottom = 75.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("14_p5707")
+text = "Window Mode"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="WindowDropdown" parent="CanvasLayer/RoomOptions" unique_id=1634256139 instance=ExtResource("6_tmaxl")]
 layout_mode = 0
 offset_left = 215.0
@@ -617,6 +634,28 @@ offset_top = 77.0
 offset_right = 423.0
 offset_bottom = 108.0
 theme_override_fonts/font = SubResource("FontFile_dfhby")
+
+[node name="Label2" type="Label" parent="CanvasLayer/RoomOptions" unique_id=574631556]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -154.0
+offset_top = 55.0
+offset_right = -48.0
+offset_bottom = 78.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("14_p5707")
+text = "Speedrun Timer"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpeedRunningToggle" parent="CanvasLayer/RoomOptions" unique_id=1071498158 instance=ExtResource("17_1m0bn")]
+layout_mode = 0
+offset_left = 522.0
+offset_top = 80.0
+offset_right = 566.0
+offset_bottom = 104.0
 
 [node name="YieldPrompt" type="Control" parent="CanvasLayer" unique_id=1938132347]
 visible = false
@@ -675,3 +714,30 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("14_p5707")
 text = "No"
+
+[node name="SpeedRunTimer" type="Control" parent="CanvasLayer" unique_id=1544486867 node_paths=PackedStringArray("label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("17_u8r6a")
+label = NodePath("Label")
+
+[node name="Label" type="Label" parent="CanvasLayer/SpeedRunTimer" unique_id=202616394]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -63.0
+offset_top = -23.0
+offset_right = -3.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("14_p5707")
+text = "100.00"
+horizontal_alignment = 2
+vertical_alignment = 1

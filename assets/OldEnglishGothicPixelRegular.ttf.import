@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://cwhamt02n2uew"
-path="res://.godot/imported/OldLondon.ttf-8c605ff5c42e1b0239e6263772ce0b41.fontdata"
+uid="uid://di30hy6qprkyp"
+path="res://.godot/imported/OldEnglishGothicPixelRegular.ttf-65fa518e20ff565b89c3aa3b9df15f1c.fontdata"
 
 [deps]
 
-source_file="res://assets/OldLondon.ttf"
-dest_files=["res://.godot/imported/OldLondon.ttf-8c605ff5c42e1b0239e6263772ce0b41.fontdata"]
+source_file="res://assets/OldEnglishGothicPixelRegular.ttf"
+dest_files=["res://.godot/imported/OldEnglishGothicPixelRegular.ttf-65fa518e20ff565b89c3aa3b9df15f1c.fontdata"]
 
 [params]
 

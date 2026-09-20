@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://e52gy1r6ebo5"]
 
 [ext_resource type="Script" uid="uid://cjuab11xanhe7" path="res://scripts/options.gd" id="1_hm4m4"]
-[ext_resource type="FontFile" uid="uid://cwhamt02n2uew" path="res://assets/OldLondon.ttf" id="2_3xsyx"]
+[ext_resource type="FontFile" uid="uid://di30hy6qprkyp" path="res://assets/OldEnglishGothicPixelRegular.ttf" id="2_3xsyx"]
 [ext_resource type="PackedScene" uid="uid://vbc2v1eva61l" path="res://scenes/volume_slider.tscn" id="2_lfjc7"]
 [ext_resource type="PackedScene" uid="uid://df6eqqjn0g74m" path="res://scenes/window_dropdown.tscn" id="3_3xsyx"]
+[ext_resource type="PackedScene" uid="uid://cttg2bby718yy" path="res://scenes/speed_running_toggle.tscn" id="5_3xsyx"]
 
 [node name="OptionsMenu" type="Node2D" unique_id=322749085 node_paths=PackedStringArray("back_button")]
 script = ExtResource("1_hm4m4")
@@ -90,6 +91,21 @@ horizontal_alignment = 1
 layout_mode = 2
 bus_name = "SFX"
 
+[node name="Label" type="Label" parent="CanvasLayer/Control" unique_id=627227415]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -54.0
+offset_top = 32.0
+offset_right = 52.0
+offset_bottom = 55.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_3xsyx")
+text = "Window Mode"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="WindowDropdown" parent="CanvasLayer/Control" unique_id=1634256139 instance=ExtResource("3_3xsyx")]
 layout_mode = 1
 anchors_preset = 8
@@ -104,3 +120,25 @@ offset_bottom = -84.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("2_3xsyx")
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control" unique_id=667736314]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -152.0
+offset_top = 53.0
+offset_right = -46.0
+offset_bottom = 76.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("2_3xsyx")
+text = "Speedrun Timer"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpeedRunningToggle" parent="CanvasLayer/Control" unique_id=1071498158 instance=ExtResource("5_3xsyx")]
+layout_mode = 0
+offset_left = 522.0
+offset_top = 80.0
+offset_right = 566.0
+offset_bottom = 104.0

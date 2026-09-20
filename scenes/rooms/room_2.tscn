@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cqfry822lc17w" path="res://scenes/acid_pit.tscn" id="3_ar6ir"]
 [ext_resource type="PackedScene" uid="uid://cvvxfxr3biyta" path="res://scenes/heart_drop.tscn" id="4_0g03g"]
 [ext_resource type="PackedScene" uid="uid://c3bfdx54pcoxp" path="res://scenes/enemy_slime.tscn" id="5_km8ef"]
-[ext_resource type="FontFile" uid="uid://cwhamt02n2uew" path="res://assets/OldLondon.ttf" id="6_0hwry"]
+[ext_resource type="FontFile" uid="uid://di30hy6qprkyp" path="res://assets/OldEnglishGothicPixelRegular.ttf" id="6_0hwry"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ar6ir"]
 size = Vector2(96, 16)

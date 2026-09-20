@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://sgoomt0nkhnk" path="res://scripts/main_menu.gd" id="1_l6cm7"]
 [ext_resource type="Texture2D" uid="uid://dntsuqbnn468a" path="res://assets/undonegeon_logo_narrow.png" id="2_ekxnf"]
-[ext_resource type="FontFile" uid="uid://cwhamt02n2uew" path="res://assets/OldLondon.ttf" id="3_bqqt6"]
+[ext_resource type="FontFile" uid="uid://di30hy6qprkyp" path="res://assets/OldEnglishGothicPixelRegular.ttf" id="3_bqqt6"]
 
 [node name="Main Menu" type="Node2D" unique_id=1904224642 node_paths=PackedStringArray("play_button", "options_button", "quit_button")]
 script = ExtResource("1_l6cm7")

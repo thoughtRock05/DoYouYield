@@ -11,7 +11,7 @@ size = Vector2(112, 67)
 size = Vector2(112, 66)
 
 [node name="Room1" unique_id=671016034 instance=ExtResource("1_qliwx")]
-room_num = 1
+room_num = 6
 tiles_x = 101
 tiles_y = 48
 
