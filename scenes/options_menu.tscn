@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://e52gy1r6ebo5"]
 
 [ext_resource type="Script" uid="uid://cjuab11xanhe7" path="res://scripts/options.gd" id="1_hm4m4"]
-[ext_resource type="FontFile" uid="uid://di30hy6qprkyp" path="res://assets/OldEnglishGothicPixelRegular.ttf" id="2_3xsyx"]
+[ext_resource type="FontFile" uid="uid://cwhamt02n2uew" path="res://assets/OldLondon.ttf" id="2_3xsyx"]
 [ext_resource type="PackedScene" uid="uid://vbc2v1eva61l" path="res://scenes/volume_slider.tscn" id="2_lfjc7"]
 [ext_resource type="PackedScene" uid="uid://df6eqqjn0g74m" path="res://scenes/window_dropdown.tscn" id="3_3xsyx"]
 

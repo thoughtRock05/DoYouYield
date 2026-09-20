@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://io46bfufwpds"]
 
 [ext_resource type="Script" uid="uid://chdvxw5tyfxw1" path="res://scripts/results_menu.gd" id="1_kqyoe"]
-[ext_resource type="FontFile" uid="uid://di30hy6qprkyp" path="res://assets/OldEnglishGothicPixelRegular.ttf" id="2_uxv0o"]
+[ext_resource type="FontFile" uid="uid://cwhamt02n2uew" path="res://assets/OldLondon.ttf" id="2_uxv0o"]
 [ext_resource type="Texture2D" uid="uid://bo30ovjpi0k8h" path="res://assets/full_heart.png" id="3_mpbci"]
 
 [node name="ResultsMenu" type="Node2D" unique_id=1871666372 node_paths=PackedStringArray("main_menu_button", "quit_button")]

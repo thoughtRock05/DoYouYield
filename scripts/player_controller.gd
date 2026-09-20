@@ -95,9 +95,9 @@ func check_camera(delta) -> void:
 	var look_y: float = 0
 	
 	if Input.is_action_pressed("up"):
-		look_y -= 200
+		look_y -= 50
 	elif Input.is_action_pressed("down"):
-		look_y += 200
+		look_y += 50
 	
 	player_camera.position.y = lerp(player_camera.position.y, look_y, 10 * delta)
 
