@@ -41,7 +41,7 @@ texture = SubResource("CompressedTexture2D_epks6")
 [node name="ParallaxLayer7" type="Parallax2D" parent="Node2D" index="6" unique_id=1540800122]
 scroll_scale = Vector2(0.8, 0.8)
 
-[node name="Sprite2D" type="Sprite2D" parent="Node2D/ParallaxLayer7" index="0" unique_id=1933731912]
+[node name="Sprite2D" type="Sprite2D" parent="Node2D/ParallaxLayer7" index="0" unique_id=280265247]
 texture = ExtResource("7_xdi0x")
 centered = false
 
