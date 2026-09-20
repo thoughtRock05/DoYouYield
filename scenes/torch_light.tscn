@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ca6latd2wo6sd"]
 
 [sub_resource type="Gradient" id="Gradient_2nl85"]
-offsets = PackedFloat32Array(0, 0.6511628, 1)
+offsets = PackedFloat32Array(0, 0.40803382, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0.16565639, 0.16565642, 0.16565636, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_3jvd4"]
@@ -12,17 +12,57 @@ fill_from = Vector2(0.5, 0.5)
 [sub_resource type="GDScript" id="GDScript_1pkm2"]
 script/source = "extends PointLight2D
 
-@export var animated_sprite_2d: AnimatedSprite2D
+@export var animation_player: AnimationPlayer
 
 func _ready() -> void:
-	animated_sprite_2d.play(\"default\")
+	animation_player.play(\"glow\")
 "
 
-[node name="TorchLight" type="PointLight2D" unique_id=1898532190 node_paths=PackedStringArray("animated_sprite_2d")]
+[sub_resource type="Animation" id="Animation_2nl85"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture:gradient")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("Gradient_2nl85")]
+}
+
+[sub_resource type="Animation" id="Animation_1pkm2"]
+resource_name = "glow"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture:gradient")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 1.98),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [SubResource("Gradient_2nl85"), SubResource("Gradient_2nl85"), SubResource("Gradient_2nl85")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5riym"]
+_data = {
+&"RESET": SubResource("Animation_2nl85"),
+&"glow": SubResource("Animation_1pkm2")
+}
+
+[node name="TorchLight" type="PointLight2D" unique_id=1898532190 node_paths=PackedStringArray("animation_player")]
 z_index = 2
 color = Color(0.93911475, 0.48588657, 5.7756904e-07, 1)
 energy = 4.0
 texture = SubResource("GradientTexture2D_3jvd4")
 texture_scale = 4.0
 script = SubResource("GDScript_1pkm2")
-animated_sprite_2d = NodePath("")
+animation_player = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=198777194]
+libraries/ = SubResource("AnimationLibrary_5riym")

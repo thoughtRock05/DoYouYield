@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/ost_menu_loopable.mp3-3f1e91a226b845bb7943b0f
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0

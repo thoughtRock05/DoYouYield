@@ -75,7 +75,7 @@ func _ready() -> void:
 	animated_sprite.frame_changed.connect(_on_frame_changed)
 	hitbox.area_entered.connect(hit)
 	animated_sprite.position.x = 11.0
-	sword_hit_box.position.x = 17.0
+	sword_hit_box.position.x = 30.0
 
 func _physics_process(delta: float) -> void:
 	if is_dead:
@@ -252,11 +252,11 @@ func animate():
 	if velocity.x < 0:
 		animated_sprite.position.x = -8.0
 		animated_sprite.flip_h = true
-		sword_hit_box.position.x = -17.0
+		sword_hit_box.position.x = -30.0
 	elif velocity.x > 0:
 		animated_sprite.position.x = 11.0
 		animated_sprite.flip_h = false
-		sword_hit_box.position.x = 17.0
+		sword_hit_box.position.x = 30.0
 	
 	if not is_on_floor():
 		if velocity.y < 0:
@@ -298,6 +298,7 @@ func hit(area: Area2D):
 	else:
 		animated_sprite.play("hurt")
 		is_stunned = true
+		is_attacking = false
 		var knock_dir: float = sign(global_position.x - area.global_position.x)
 		if knock_dir == 0.0:
 			knock_dir = 1
@@ -308,6 +309,7 @@ func hit(area: Area2D):
 		i_frame_timer.start()
 		await i_frame_timer.timeout
 		is_invincible = false
+		is_stunned = true
 
 func health_pickup():
 	sfx_heart_pickup.play()
@@ -317,12 +319,13 @@ func health_pickup():
 	set_health.emit(health)
 
 func die() -> void:
-	set_health.emit(0)
-	is_dead = true
-	can_move = false
-	velocity = Vector2.ZERO
-	sfx_player_death.play()
-	animated_sprite.play("die")
+	if not is_dead:
+		set_health.emit(0)
+		is_dead = true
+		can_move = false
+		velocity = Vector2(0.0, -200.0)
+		sfx_player_death.play()
+		animated_sprite.play("die")
 	
 	await animated_sprite.animation_finished
 	reset_room.emit()

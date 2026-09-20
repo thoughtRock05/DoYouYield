@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/ost_room_0_1_isolate_loopable.mp3-c1a9ab926ce
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0
