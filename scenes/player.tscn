@@ -182,6 +182,21 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4r5pv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4r5pv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4r5pv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4r5pv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4r5pv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4r5pv")
 }],
 "loop": 0,
 "name": &"dash",
@@ -216,12 +231,6 @@ animations = [{
 "speed": 7.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ujl30")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ujl30")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ujl30")
 }],
@@ -301,10 +310,13 @@ animations = [{
 "speed": 7.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_q2dwa"]
-size = Vector2(32, 36)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jej6c"]
+size = Vector2(36, 45)
 
-[node name="Player" type="CharacterBody2D" unique_id=933572393 node_paths=PackedStringArray("player_camera", "coyote_timer", "buffer_timer", "dash_timer", "sword_hit_box", "animated_sprite", "i_frame_timer", "hitbox", "shield_sprite", "shield_collision", "sfx_player_dash", "sfx_player_death", "sfx_player_hurt", "sfx_player_jump", "sfx_player_walk", "sfx_player_wall_slide", "sfx_heart_pickup", "sfx_sword_swing")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q2dwa"]
+size = Vector2(38, 47)
+
+[node name="Player" type="CharacterBody2D" unique_id=933572393 node_paths=PackedStringArray("player_camera", "coyote_timer", "buffer_timer", "dash_timer", "sword_hit_box", "animated_sprite", "i_frame_timer", "hitbox", "shield_sprite", "shield_hitbox", "shield_collision", "sfx_player_dash", "sfx_player_death", "sfx_player_hurt", "sfx_player_jump", "sfx_player_walk", "sfx_player_wall_slide", "sfx_heart_pickup", "sfx_sword_swing")]
 collision_layer = 4
 script = ExtResource("1_g2els")
 player_camera = NodePath("PlayerCamera")
@@ -315,8 +327,9 @@ sword_hit_box = NodePath("SwordHitBox")
 animated_sprite = NodePath("AnimatedSprite2D2")
 i_frame_timer = NodePath("IFrameTimer")
 hitbox = NodePath("Hitbox")
-shield_sprite = NodePath("ShieldSprite")
-shield_collision = NodePath("ShieldCollision")
+shield_sprite = NodePath("Shield/ShieldSprite")
+shield_hitbox = NodePath("Shield/ShieldHitbox")
+shield_collision = NodePath("Shield/ShieldCollision")
 sfx_player_dash = NodePath("SfxPlayerDash")
 sfx_player_death = NodePath("SfxPlayerDeath")
 sfx_player_hurt = NodePath("SfxPlayerHurt")
@@ -354,14 +367,12 @@ wait_time = 0.2
 one_shot = true
 
 [node name="DashTimer" type="Timer" parent="." unique_id=668212568]
-wait_time = 0.15
 one_shot = true
 
 [node name="AttackTimer" type="Timer" parent="." unique_id=1978799325]
 wait_time = 0.35
 
 [node name="IFrameTimer" type="Timer" parent="." unique_id=1978740903]
-wait_time = 2.0
 one_shot = true
 
 [node name="SwordHitBox" type="Area2D" parent="." unique_id=999956691]
@@ -377,8 +388,7 @@ shape = SubResource("RectangleShape2D_l2tch")
 process_mode = 1
 position = Vector2(11, -5)
 sprite_frames = SubResource("SpriteFrames_q2dwa")
-animation = &"attack"
-frame = 2
+animation = &"dash"
 
 [node name="SfxPlayerDash" type="AudioStreamPlayer" parent="." unique_id=747909556]
 stream = ExtResource("4_y4r1p")
@@ -418,14 +428,22 @@ bus = &"SFX"
 stream = ExtResource("14_f1ej7")
 bus = &"SFX"
 
-[node name="ShieldSprite" type="Sprite2D" parent="." unique_id=770510889]
+[node name="Shield" type="StaticBody2D" parent="." unique_id=1293064894]
+collision_layer = 2
+collision_mask = 0
+
+[node name="ShieldSprite" type="Sprite2D" parent="Shield" unique_id=770510889]
 position = Vector2(1, -4)
 texture = ExtResource("12_3v2ag")
 
-[node name="ShieldCollision" type="Area2D" parent="." unique_id=345555207]
-collision_layer = 0
-collision_mask = 2
+[node name="ShieldCollision" type="CollisionShape2D" parent="Shield" unique_id=1961876393]
+position = Vector2(1, -4.5)
+shape = SubResource("RectangleShape2D_jej6c")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ShieldCollision" unique_id=11410703]
-position = Vector2(1, 0)
+[node name="ShieldHitbox" type="Area2D" parent="Shield" unique_id=345555207]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shield/ShieldHitbox" unique_id=11410703]
+position = Vector2(1, -4.5)
 shape = SubResource("RectangleShape2D_q2dwa")

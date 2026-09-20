@@ -71,22 +71,27 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func hit(area: Area2D) -> void:
-	if area is not SwordHitBox:
-		return
 	if is_stunned:
 		return
-	sfx_slime_damage.play()
-	health -= 1
-	if health <= 0:
-		spawn_heart.emit(position)
-		queue_free()
-		return
+	if area is SwordHitBox:
+		sfx_slime_damage.play()
+		health -= 1
+		if health <= 0:
+			spawn_heart.emit(position)
+			self.visible = false
+			self.collision_layer = 0
+			self.collision_mask = 0
+			await sfx_slime_damage.finished
+			queue_free()
+			return
 	is_stunned = true
+	get_tree().create_timer(0.5).timeout.connect(func():
+		is_stunned = false
+		)
 	var knockback_dir: float = sign(global_position.x - area.global_position.x)
 	if knockback_dir == 0.0:
 		knockback_dir = 1.0
 	knock = knockback_dir * KNOCKBACK
 	velocity.y -= 100.0
-	get_tree().create_timer(0.5).timeout.connect(func():
-		is_stunned = false
-		)
+	velocity.x = knock
+	

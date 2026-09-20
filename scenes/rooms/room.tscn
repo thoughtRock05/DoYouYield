@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://dcnx8r8o84403" path="res://assets/cave4.png" id="11_ju88f"]
 [ext_resource type="Texture2D" uid="uid://0xsvuqhht0l3" path="res://assets/cave5.png" id="12_jycyc"]
 [ext_resource type="Texture2D" uid="uid://g4ki6os2asut" path="res://assets/cave6.png" id="13_p5707"]
+[ext_resource type="FontFile" uid="uid://di30hy6qprkyp" path="res://assets/OldEnglishGothicPixelRegular.ttf" id="14_p5707"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tmaxl"]
 texture = ExtResource("3_a1uh7")
@@ -218,7 +219,6 @@ position = Vector2(19, 24)
 script = ExtResource("3_i8kcg")
 
 [node name="RoomOptions" type="Control" parent="CanvasLayer" unique_id=650667937]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -234,35 +234,40 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.34407577, 0.34407574, 0.34407574, 1)
+color = Color(0.23137255, 0.08627451, 0.15294118, 1)
 
 [node name="Back" type="Button" parent="CanvasLayer/RoomOptions" unique_id=709400915]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.3171875
-anchor_top = 0.85833335
-anchor_right = 0.3875
-anchor_bottom = 0.9444444
+anchor_left = 0.3375
+anchor_top = 0.81666666
+anchor_right = 0.4078125
+anchor_bottom = 0.9027778
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("14_p5707")
 text = "Back"
 metadata/_edit_use_anchors_ = true
 
 [node name="Main Menu" type="Button" parent="CanvasLayer/RoomOptions" unique_id=2059185360]
-layout_mode = 0
-anchor_left = 0.4109375
-anchor_top = 0.85833335
-anchor_right = 0.5609375
-anchor_bottom = 0.9444444
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.43125
+anchor_top = 0.81666666
+anchor_right = 0.58125
+anchor_bottom = 0.9027778
+theme_override_fonts/font = ExtResource("14_p5707")
 text = "Main Menu"
 metadata/_edit_use_anchors_ = true
 
 [node name="Reset" type="Button" parent="CanvasLayer/RoomOptions" unique_id=461254590]
-layout_mode = 0
-anchor_left = 0.575
-anchor_top = 0.85833335
-anchor_right = 0.6546875
-anchor_bottom = 0.9444444
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5953125
+anchor_top = 0.81666666
+anchor_right = 0.675
+anchor_bottom = 0.9027778
+theme_override_fonts/font = ExtResource("14_p5707")
 text = "Reset"
 metadata/_edit_use_anchors_ = true
 
@@ -273,16 +278,17 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -117.0
-offset_top = -43.0
-offset_right = 91.00098
-offset_bottom = 98.99994
+offset_left = -104.0
+offset_top = -47.0
+offset_right = 104.00098
+offset_bottom = 94.99994
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
 [node name="MasterLabel" type="Label" parent="CanvasLayer/RoomOptions/VolumeContainer" unique_id=862970454]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("14_p5707")
 text = "Master"
 horizontal_alignment = 1
 
@@ -292,6 +298,7 @@ bus_name = "Master"
 
 [node name="MusicLabel" type="Label" parent="CanvasLayer/RoomOptions/VolumeContainer" unique_id=120308486]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("14_p5707")
 text = "Music"
 horizontal_alignment = 1
 
@@ -301,6 +308,7 @@ bus_name = "Music"
 
 [node name="SFXLabel" type="Label" parent="CanvasLayer/RoomOptions/VolumeContainer" unique_id=1865462900]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("14_p5707")
 text = "SFX"
 horizontal_alignment = 1
 
@@ -310,10 +318,11 @@ bus_name = "SFX"
 
 [node name="WindowDropdown" parent="CanvasLayer/RoomOptions" unique_id=1634256139 instance=ExtResource("6_tmaxl")]
 layout_mode = 0
-offset_left = 203.0
-offset_top = 75.0
-offset_right = 411.0
-offset_bottom = 106.0
+offset_left = 215.0
+offset_top = 77.0
+offset_right = 423.0
+offset_bottom = 108.0
+theme_override_fonts/font = ExtResource("14_p5707")
 
 [node name="YieldPrompt" type="Control" parent="CanvasLayer" unique_id=1938132347]
 visible = false
@@ -334,6 +343,7 @@ offset_top = 46.0
 offset_right = 110.0
 offset_bottom = 163.0
 grow_horizontal = 2
+theme_override_fonts/font = ExtResource("14_p5707")
 text = "Do You Yield?"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -352,6 +362,7 @@ offset_right = -16.0
 offset_bottom = 16.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("14_p5707")
 text = "Yes"
 
 [node name="No" type="Button" parent="CanvasLayer/YieldPrompt" unique_id=1938723962]
@@ -368,4 +379,5 @@ offset_right = 47.0
 offset_bottom = 16.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("14_p5707")
 text = "No"

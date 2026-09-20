@@ -12,7 +12,6 @@ size = Vector2(112, 66)
 
 [node name="Room1" unique_id=671016034 instance=ExtResource("1_qliwx")]
 room_num = 1
-taken_item = "double jump"
 tiles_x = 101
 tiles_y = 48
 
@@ -61,8 +60,15 @@ position = Vector2(3.695488e-06, 1.0000076)
 scale = Vector2(1.7500004, 1.4687502)
 
 [node name="YieldLabel" parent="CanvasLayer/YieldPrompt" parent_id_path=PackedInt32Array(1938132347) index="0" unique_id=309691000]
-text = "Yield what you need most:
-Double Jump"
+text = "You have given away what aided you.
+You have been redeemed.
+You may now exit the Undonegeon."
+
+[node name="Yes" parent="CanvasLayer/YieldPrompt" parent_id_path=PackedInt32Array(1938132347) index="1" unique_id=1638312946]
+text = "Ok"
+
+[node name="No" parent="CanvasLayer/YieldPrompt" parent_id_path=PackedInt32Array(1938132347) index="2" unique_id=1938723962]
+text = "Not Yet"
 
 [editable path="AcidPit"]
 [editable path="AcidPit2"]

@@ -8,9 +8,10 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ahsqd"]
 size = Vector2(48, 16)
 
-[node name="Room 3" unique_id=671016034 node_paths=PackedStringArray("area_2d") instance=ExtResource("1_etvqs")]
+[node name="Room 3" unique_id=671016034 node_paths=PackedStringArray("area_2d", "moving_platform_3") instance=ExtResource("1_etvqs")]
 script = ExtResource("2_g5ssp")
 area_2d = NodePath("Lock/Area2D")
+moving_platform_3 = NodePath("MovingPlatform3")
 room_num = 3
 take_heart = true
 taken_item = "sword"
@@ -27,11 +28,11 @@ tile_map_data = PackedByteArray("AAAAAAAAAQAAAAAAAAAAAAEAAQAAAAAAAAAAAAIAAQAAAAA
 tile_map_data = PackedByteArray("AAAAAAsAAQAAAAAAAAABAAsAAQAAAAAAAAACAAsAAQAAAAAAAAADAAsAAQAAAAAAAAAEAAsAAQAAAAAAAAAFAAsAAQAAAAAAAAAGAAsAAQAAAAAAAAAHAAsAAQAAAAAAAAAIAAsAAQAAAAAAAAAJAAsAAQAAAAAAAAAOAAsAAQAAAAAAAAAPAAsAAQAAAAAAAAASAAsAAQAAAAAAAAATAAsAAQAAAAAAAAARAAsAAQAAAAAAAAAQAAsAAQAAAAAAAAANAAsAAQAAAAAAAAAMAAsAAQAAAAAAAAALAAsAAQAAAAAAAAAKAAsAAQAAAAAAAAA=")
 
 [node name="Lock" parent="." index="5" unique_id=599625686]
-position = Vector2(326, 663)
+position = Vector2(605, 336)
 next_room = "uid://dbs0hoyal2od3"
 
 [node name="MovingPlatform" parent="." index="6" unique_id=204123403 instance=ExtResource("3_g5ssp")]
-position = Vector2(477, 602)
+position = Vector2(451, 612)
 rel_y = -75.0
 duration = 2.0
 
@@ -43,7 +44,7 @@ position = Vector2(-8, 8)
 shape = SubResource("RectangleShape2D_ahsqd")
 
 [node name="MovingPlatform2" parent="." index="7" unique_id=1383625235 instance=ExtResource("3_g5ssp")]
-position = Vector2(173, 601)
+position = Vector2(202, 611)
 rel_y = -75.0
 duration = 2.0
 
@@ -54,7 +55,19 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAD+/wAAAAAAAAA
 position = Vector2(-8, 8)
 shape = SubResource("RectangleShape2D_ahsqd")
 
-[node name="EnemySlime" parent="." index="8" unique_id=1893676253 instance=ExtResource("4_ahsqd")]
+[node name="MovingPlatform3" parent="." index="8" unique_id=743616043 instance=ExtResource("3_g5ssp")]
+position = Vector2(512, 352)
+rel_y = 278.0
+duration = 5.0
+
+[node name="TileMapLayer" parent="MovingPlatform3" index="0" unique_id=234184060]
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAD+/wAAAAAAAAAAAAA=")
+
+[node name="CollisionShape2D" parent="MovingPlatform3" index="1" unique_id=183576832]
+position = Vector2(-8, 8)
+shape = SubResource("RectangleShape2D_ahsqd")
+
+[node name="EnemySlime" parent="." index="9" unique_id=1893676253 instance=ExtResource("4_ahsqd")]
 position = Vector2(322, 647)
 scale = Vector2(2.25, 2.25)
 
@@ -65,3 +78,4 @@ Sword & Heart"
 [editable path="Lock"]
 [editable path="MovingPlatform"]
 [editable path="MovingPlatform2"]
+[editable path="MovingPlatform3"]

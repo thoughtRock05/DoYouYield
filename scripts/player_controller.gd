@@ -11,11 +11,12 @@ const WALL_JUMP_VELOCITY = -380.0
 const WALL_JUMP_PUSH = 150.0
 const WALL_SLIDE_SPEED = 90.0
 const DASH_SPEED = 600.0
-const DASH_DURATION = 0.015
+const DASH_DURATION = 0.15
 const DASH_DECEL = 2500.0
 const ATTACK_DECEL = 500.0
 const KNOCKBACK_DECEL = 1200.0
-
+const I_FRAMES_DURATION = 0.5
+ 
 var in_menu: bool = false
 var can_move: bool = true
 
@@ -34,14 +35,14 @@ var has_dash: bool
 @export var i_frame_timer: Timer
 @export var hitbox: Area2D
 @export var shield_sprite: Sprite2D
-@export var shield_collision: Area2D
+@export var shield_hitbox: Area2D
+@export var shield_collision: CollisionShape2D
 
 @export var sfx_player_dash: AudioStreamPlayer
 @export var sfx_player_death: AudioStreamPlayer
 @export var sfx_player_hurt: AudioStreamPlayer
 @export var sfx_player_jump: AudioStreamPlayer
 @export var sfx_player_walk: AudioStreamPlayer
-@export var sfx_player_walk_lower_pitch: AudioStreamPlayer
 @export var sfx_player_wall_slide: AudioStreamPlayer
 @export var sfx_heart_pickup: AudioStreamPlayer
 @export var sfx_sword_swing: AudioStreamPlayer
@@ -74,6 +75,8 @@ func _ready() -> void:
 	sword_hit_box.monitoring = false
 	animated_sprite.frame_changed.connect(_on_frame_changed)
 	hitbox.area_entered.connect(hit)
+	dash_timer.timeout.connect(_on_dash_timer_timeout)
+	i_frame_timer.timeout.connect(_on_i_frame_timer_timeout)
 	animated_sprite.position.x = 11.0
 	sword_hit_box.position.x = 30.0
 
@@ -82,21 +85,34 @@ func _physics_process(delta: float) -> void:
 		add_gravity(delta)
 		move_and_slide()
 		return
+	check_camera(delta)
 	check_shield()
 	calculate_velocity(delta)
 	animate()
 	move_and_slide()
 
+func check_camera(delta) -> void:
+	var look_y: float = 0
+	
+	if Input.is_action_pressed("up"):
+		look_y -= 200
+	elif Input.is_action_pressed("down"):
+		look_y += 200
+	
+	player_camera.position.y = lerp(player_camera.position.y, look_y, 10 * delta)
+
 func check_shield() -> void:
 		if Input.is_action_pressed("shield"):
 			if has_shield and not in_menu:
+				if not using_shield:
+					velocity.x = 0
 				using_shield = true
 				can_move = false
 		else:
 			if not is_attacking:
 				using_shield = false
 			if Input.is_action_just_released("shield"):
-				for child in shield_collision.get_overlapping_areas():
+				for child in shield_hitbox.get_overlapping_areas():
 					hit(child)
 				if is_dashing or is_attacking or is_stunned or in_menu:
 					return
@@ -130,14 +146,7 @@ func dash_logic():
 		if not sfx_player_dash.is_playing():
 			sfx_player_dash.play()
 		velocity = dash_dir * DASH_SPEED
-		
-		get_tree().create_timer(DASH_DURATION).timeout.connect(func():
-			is_dashing = false
-		)
-		
-		get_tree().create_timer(DASH_DURATION + 0.5).timeout.connect(func():
-			can_dash = true
-		)
+		dash_timer.start(DASH_DURATION)
 
 func add_gravity(delta: float) -> void:
 	if not is_on_floor():
@@ -147,10 +156,6 @@ func knockback_logic(delta: float) -> void:
 	if is_stunned:
 		knock_v.x = move_toward(knock_v.x, 0.0, KNOCKBACK_DECEL * delta)
 		velocity.x = knock_v.x
-		get_tree().create_timer(0.5).timeout.connect(func():
-			is_stunned = false
-			)
-		return
 
 func wall_slide_logic() -> void:
 	if not has_wall_jump or not can_move:
@@ -194,8 +199,7 @@ func jump():
 	velocity.y = JUMP_VELOCITY
 	jump_count += 1
 	animated_sprite.play("jump")
-	if not sfx_player_jump.is_playing():
-		sfx_player_jump.play()
+	sfx_player_jump.play()
 
 func attack_logic():
 	if not has_sword or not can_move:
@@ -243,11 +247,21 @@ func move_left_right(delta):
 		if direction:
 			velocity.x = direction * SPEED
 		else:
-			velocity.x = move_toward(velocity.x, 0, SPEED)
+			velocity.x = move_toward(velocity.x, 0, ATTACK_DECEL * delta)
 
 func animate():
 	shield_sprite.visible = using_shield
+	shield_collision.disabled = not using_shield
+	shield_hitbox.monitorable = using_shield
+	shield_hitbox.monitoring = using_shield
 	if is_dead or is_attacking:
+		return
+	if is_stunned:
+		animated_sprite.play("hurt")
+		return
+	if is_dashing:
+		if animated_sprite.animation != "dash":
+			animated_sprite.play("dash")
 		return
 	if velocity.x < 0:
 		animated_sprite.position.x = -8.0
@@ -272,8 +286,8 @@ func animate():
 	if velocity.x == 0 and not is_attacking:
 		animated_sprite.play("idle")
 		return
-	
-	animated_sprite.play("walk")
+	elif velocity.x <= SPEED:
+		animated_sprite.play("walk")
 	if not sfx_player_walk.is_playing():
 		sfx_player_walk.play()
 
@@ -296,9 +310,15 @@ func hit(area: Area2D):
 	if health <= 0:
 		die()
 	else:
-		animated_sprite.play("hurt")
+		if is_dashing:
+			is_dashing = false
+			dash_timer.stop()
+			can_dash = true
 		is_stunned = true
 		is_attacking = false
+		can_move = false
+		using_shield = false
+		animated_sprite.play("hurt")
 		var knock_dir: float = sign(global_position.x - area.global_position.x)
 		if knock_dir == 0.0:
 			knock_dir = 1
@@ -307,9 +327,11 @@ func hit(area: Area2D):
 		
 		is_invincible = true
 		i_frame_timer.start()
-		await i_frame_timer.timeout
-		is_invincible = false
-		is_stunned = true
+		
+		await get_tree().create_timer(I_FRAMES_DURATION).timeout
+		if not is_dead:
+			is_stunned = false
+			can_move = true
 
 func health_pickup():
 	sfx_heart_pickup.play()
@@ -326,7 +348,6 @@ func die() -> void:
 		velocity = Vector2(0.0, -200.0)
 		sfx_player_death.play()
 		animated_sprite.play("die")
-	
 	await animated_sprite.animation_finished
 	reset_room.emit()
 
@@ -336,3 +357,11 @@ func set_camera_boundaries(x: int, y: int) -> void:
 	player_camera.limit_bottom = y * tile_size
 	player_camera.limit_left = 0
 	player_camera.limit_right = x * tile_size
+
+func _on_dash_timer_timeout() -> void:
+	is_dashing = false
+	await get_tree().create_timer(0.5).timeout
+	can_dash = true
+
+func _on_i_frame_timer_timeout() -> void:
+	is_invincible = false

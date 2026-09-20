@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://e52gy1r6ebo5"]
 
 [ext_resource type="Script" uid="uid://cjuab11xanhe7" path="res://scripts/options.gd" id="1_hm4m4"]
+[ext_resource type="FontFile" uid="uid://di30hy6qprkyp" path="res://assets/OldEnglishGothicPixelRegular.ttf" id="2_3xsyx"]
 [ext_resource type="PackedScene" uid="uid://vbc2v1eva61l" path="res://scenes/volume_slider.tscn" id="2_lfjc7"]
 [ext_resource type="PackedScene" uid="uid://df6eqqjn0g74m" path="res://scenes/window_dropdown.tscn" id="3_3xsyx"]
 
@@ -13,9 +14,20 @@ back_button = NodePath("CanvasLayer/Control/Back")
 
 [node name="Control" type="Control" parent="CanvasLayer" unique_id=571604137]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control" unique_id=183934306]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.2317115, 0.08757391, 0.15188468, 1)
 
 [node name="Back" type="Button" parent="CanvasLayer/Control" unique_id=110143976]
 layout_mode = 1
@@ -24,12 +36,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 277.5
-offset_top = 235.0
-offset_right = 322.5
-offset_bottom = 266.0
+offset_left = -22.0
+offset_top = 82.0
+offset_right = 23.0
+offset_bottom = 113.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_3xsyx")
 text = "Back"
 
 [node name="VolumeContainer" type="VBoxContainer" parent="CanvasLayer/Control" unique_id=561114777]
@@ -39,16 +52,17 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 195.0
-offset_top = 75.0
-offset_right = 403.00098
-offset_bottom = 216.99994
+offset_left = -104.00049
+offset_top = -70.99997
+offset_right = 104.00049
+offset_bottom = 70.99997
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
 [node name="MasterLabel" type="Label" parent="CanvasLayer/Control/VolumeContainer" unique_id=1573940784]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_3xsyx")
 text = "Master"
 horizontal_alignment = 1
 
@@ -58,6 +72,7 @@ bus_name = "Master"
 
 [node name="MusicLabel" type="Label" parent="CanvasLayer/Control/VolumeContainer" unique_id=1524905738]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_3xsyx")
 text = "Music"
 horizontal_alignment = 1
 
@@ -67,6 +82,7 @@ bus_name = "Music"
 
 [node name="SFXLabel" type="Label" parent="CanvasLayer/Control/VolumeContainer" unique_id=1613176948]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_3xsyx")
 text = "SFX"
 horizontal_alignment = 1
 
@@ -75,8 +91,16 @@ layout_mode = 2
 bus_name = "SFX"
 
 [node name="WindowDropdown" parent="CanvasLayer/Control" unique_id=1634256139 instance=ExtResource("3_3xsyx")]
-layout_mode = 0
-offset_left = 244.0
-offset_top = 50.0
-offset_right = 402.0
-offset_bottom = 81.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -79.0
+offset_top = -115.0
+offset_right = 79.0
+offset_bottom = -84.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_3xsyx")
