@@ -66,5 +66,6 @@ offset_right = 25.0
 offset_bottom = 126.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_uxv0o")
 horizontal_alignment = 1
 vertical_alignment = 1
