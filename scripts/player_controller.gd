@@ -18,6 +18,7 @@ const ATTACK_DECEL = 700.0
 const KNOCKBACK_DECEL = 1200.0
 const I_FRAMES_DURATION = 0.5
 const DASH_ATTACK_SPEED = 100.0
+const WALL_DETATCH = 100.0
 
 enum State {
 	IDLE,
@@ -89,6 +90,7 @@ func _ready() -> void:
 	player_sprite.frame_changed.connect(_on_frame_changed)
 	player_hitbox.area_entered.connect(hit)
 	sword_hit_box.area_entered.connect(_on_sword_hit_box_area_entered)
+	shield_hitbox.area_entered.connect(_on_shield_hitbox_area_entered)
 	dash_timer.timeout.connect(_on_dash_timer_timeout)
 	i_frame_timer.timeout.connect(_on_i_frame_timer_timeout)
 	player_sprite.position.x = 11.0
@@ -99,6 +101,7 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	check_camera(delta)
+	var dir = Input.get_axis("left","right")
 	
 	if active_state == State.DEAD:
 		add_gravity(delta)
@@ -114,12 +117,9 @@ func _physics_process(delta: float) -> void:
 			jump_count = 0
 			coyote_timer.start()
 		
-		if Input.is_action_pressed("shield") and has_shield and not in_menu:
-			change_state(State.SHIELD)
-		elif Input.is_action_just_pressed("dash") and has_dash and can_dash:
-			change_state(State.DASH)
-		elif Input.is_action_just_pressed("attack") and has_sword:
-			change_state(State.ATTACK)
+		if check_inputs():
+			return
+		
 		elif Input.is_action_just_pressed("jump") or (not coyote_timer.is_stopped() and not buffer_timer.is_stopped()):
 			jump()
 		elif Input.get_axis("left", "right") != 0.0:
@@ -129,7 +129,6 @@ func _physics_process(delta: float) -> void:
 	
 	elif active_state == State.WALK:
 		player_sprite.play("walk")
-		var dir = Input.get_axis("left", "right")
 		if dir != 0:
 			velocity.x = dir * SPEED
 		add_gravity(delta)
@@ -141,12 +140,9 @@ func _physics_process(delta: float) -> void:
 			jump_count = 0
 			coyote_timer.start()
 		
-		if Input.is_action_pressed("shield") and has_shield and not in_menu:
-			change_state(State.SHIELD)
-		elif Input.is_action_just_pressed("dash") and has_dash and can_dash:
-			change_state(State.DASH)
-		elif Input.is_action_just_pressed("attack") and has_sword:
-			change_state(State.ATTACK)
+		if check_inputs():
+			return
+		
 		elif Input.is_action_just_pressed("jump") or (not coyote_timer.is_stopped() and not buffer_timer.is_stopped()):
 			jump()
 		elif dir == 0.0:
@@ -156,7 +152,6 @@ func _physics_process(delta: float) -> void:
 	
 	elif active_state == State.JUMP:
 		player_sprite.play("jump")
-		var dir = Input.get_axis("left", "right")
 		if wall_jump_timer.is_stopped():
 			velocity.x = dir * SPEED
 		add_gravity(delta)
@@ -179,7 +174,6 @@ func _physics_process(delta: float) -> void:
 	
 	elif active_state == State.FALL:
 		player_sprite.play("fall")
-		var dir = Input.get_axis("left", "right")
 		velocity.x = dir * SPEED
 		add_gravity(delta)
 		
@@ -206,6 +200,7 @@ func _physics_process(delta: float) -> void:
 		velocity.y = min(velocity.y, WALL_SLIDE_SPEED)
 		add_gravity(delta)
 		
+		
 		if Input.is_action_just_pressed("jump"):
 			if sfx_player_wall_slide.is_playing():
 				sfx_player_wall_slide.stop()
@@ -215,6 +210,11 @@ func _physics_process(delta: float) -> void:
 			jump_count = 1
 			wall_jump_timer.start()
 			change_state(State.JUMP)
+		elif dir == 0 or sign(dir) == sign(get_wall_normal().x):
+			if sfx_player_wall_slide.is_playing():
+				sfx_player_wall_slide.stop()
+			velocity.x = get_wall_normal().x * WALL_DETATCH
+			change_state(State.FALL)
 		elif is_on_floor():
 			if sfx_player_wall_slide.is_playing():
 				sfx_player_wall_slide.stop()
@@ -237,7 +237,6 @@ func _physics_process(delta: float) -> void:
 			velocity.y = 0
 		else:
 			add_gravity(delta)
-			var dir = Input.get_axis("left", "right")
 			var target = dir * SPEED
 			velocity.x = move_toward(velocity.x, target, DASH_DECEL * delta)
 			
@@ -260,8 +259,6 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, ATTACK_DECEL * delta)
 		add_gravity(delta)
 		if not Input.is_action_pressed("shield") or not has_shield or in_menu:
-			for child in shield_hitbox.get_overlapping_areas():
-				hit(child)
 			change_state(State.IDLE)
 
 	elif active_state == State.ATTACK:
@@ -269,7 +266,6 @@ func _physics_process(delta: float) -> void:
 		if abs(velocity.x) > SPEED:
 			velocity.x = move_toward(velocity.x, 0, ATTACK_DECEL * delta) 
 		else:
-			var dir = Input.get_axis("left","right")
 			velocity.x = move_toward(velocity.x, dir * SPEED, ATTACK_DECEL * delta)
 		
 		if not player_sprite.is_playing() or player_sprite.animation != "attack":
@@ -281,7 +277,7 @@ func _physics_process(delta: float) -> void:
 		velocity.x = knock_v.x
 		add_gravity(delta)
 
-	update_facing()
+	update_facing(dir)
 	update_shield_visuals()
 	move_and_slide()
 
@@ -362,17 +358,28 @@ func _on_frame_changed() -> void:
 			sword_hit_box.monitoring = false
 			sword_hit_box.monitorable = false
 
-func update_facing():
+func update_facing(dir: float):
 	if active_state == State.DASH or active_state == State.ATTACK or active_state == State.DEAD:
 		return
-	if velocity.x < 0:
-		player_sprite.position.x = -8.0
-		player_sprite.flip_h = true
-		sword_hit_box.position.x = -30.0
-	elif velocity.x > 0:
-		player_sprite.position.x = 11.0
-		player_sprite.flip_h = false
-		sword_hit_box.position.x = 30.0
+	if dir != 0:
+		if active_state == State.JUMP and velocity.x != 0:
+			if velocity.x < 0:
+				player_sprite.position.x = -8.0
+				player_sprite.flip_h = true
+				sword_hit_box.position.x = -30.0
+			elif velocity.x > 0:
+				player_sprite.position.x = 11.0
+				player_sprite.flip_h = false
+				sword_hit_box.position.x = 30.0
+		elif dir < 0:
+			player_sprite.position.x = -8.0
+			player_sprite.flip_h = true
+			sword_hit_box.position.x = -30.0
+		elif dir > 0:
+			player_sprite.position.x = 11.0
+			player_sprite.flip_h = false
+			sword_hit_box.position.x = 30.0
+
 
 func update_shield_visuals():
 	var shielding = (active_state == State.SHIELD) or (active_state == State.ATTACK and abs(velocity.x) > DASH_ATTACK_SPEED)
@@ -453,3 +460,19 @@ func _on_i_frame_timer_timeout() -> void:
 func _on_sword_hit_box_area_entered(area: Area2D) -> void:
 	if area is EnemyHitBox:
 		area.get_parent().hit(sword_hit_box)
+
+func check_inputs() -> bool:
+	if Input.is_action_just_pressed("shield") and has_shield and not in_menu:
+		change_state(State.SHIELD)
+		return true
+	elif Input.is_action_just_pressed("dash") and has_dash and can_dash:
+		change_state(State.DASH)
+		return true
+	elif Input.is_action_just_pressed("attack") and has_sword:
+		change_state(State.ATTACK)
+		return true
+	return false
+
+func _on_shield_hitbox_area_entered(area: Area2D) -> void:
+	if active_state == State.SHIELD and area is EnemyHitBox:
+		area.get_parent().hit(shield_hitbox)

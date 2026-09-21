@@ -9,10 +9,11 @@ signal spawn_heart(pos: Vector2)
 @export var sfx_slime_damage: AudioStreamPlayer
 @export var sfx_slime_aggro: AudioStreamPlayer
 @export var sfx_slime_death: AudioStreamPlayer
+@export var sfx_slime_bonk: AudioStreamPlayer
 
 const SPEED = 30.0
 var speed = SPEED / self.scale.x
-const KNOCKBACK: float = 300.0
+const KNOCKBACK: Vector2 = Vector2(300,100)
 var target: Player = null
 var max_threshold: float = 900.0
 var target_threshold: float = 150.0
@@ -78,6 +79,7 @@ func _physics_process(delta: float) -> void:
 func hit(area: Area2D) -> void:
 	if is_stunned:
 		return
+	sfx_slime_bonk.play()
 	if area is SwordHitBox:
 		sfx_slime_damage.play()
 		health -= 1
@@ -102,7 +104,7 @@ func hit(area: Area2D) -> void:
 		
 	if knockback_dir == 0.0:
 		knockback_dir = 1.0
-	knock = knockback_dir * KNOCKBACK
-	velocity.y -= 100.0
+	knock = knockback_dir * KNOCKBACK.x
+	velocity.y -= KNOCKBACK.y
 	velocity.x = knock
 	
