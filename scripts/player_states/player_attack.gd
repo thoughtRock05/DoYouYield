@@ -4,10 +4,13 @@ class_name PlayerAttack
 func enter_state(_msg := {}) -> void:
 	player.sfx_sword_swing.play()
 	player.player_sprite.play("attack")
+	if abs(player.velocity.x) > player.DASH_ATTACK_SPEED or not player.is_on_floor():
+		player.is_dash_attack = true
 
 func exit_state() -> void:
 	player.sword_hit_box.set_deferred("monitorable", false)
 	player.sword_hit_box.set_deferred("monitoring", false)
+	player.is_dash_attack = false
 
 func physics_update(delta: float) -> void:
 	var dir = Input.get_axis("left", "right")

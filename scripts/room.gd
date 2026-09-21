@@ -157,6 +157,7 @@ func _on_no_pressed() -> void:
 	
 	await get_tree().create_timer(0.5).timeout
 	player.can_move = true
+	player.in_menu = false
 
 func _on_back_pressed() -> void:
 	open_menu()

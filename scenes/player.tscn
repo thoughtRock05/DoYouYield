@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://dwydjsijwnoq7" path="res://scripts/shield_container.gd" id="5_f1ej7"]
 [ext_resource type="AudioStream" uid="uid://c7lxmrf1b6j27" path="res://assets/audio/sfx_player_hurt.wav" id="6_3v2ag"]
 [ext_resource type="AudioStream" uid="uid://cei016nhkh0o6" path="res://assets/audio/sfx_player_jump.wav" id="7_jej6c"]
+[ext_resource type="Script" uid="uid://djij2pl6swius" path="res://scripts/shield_hitbox.gd" id="7_ujl30"]
 [ext_resource type="AudioStream" uid="uid://duqcr6fcxfp1j" path="res://assets/audio/sfx_player_walk_new.wav" id="9_jej6c"]
 [ext_resource type="AudioStream" uid="uid://sv3dpuw6wiw1" path="res://assets/audio/sfx_player_wall_slide.wav" id="10_a8ls1"]
 [ext_resource type="Texture2D" uid="uid://dhm7dpnrmm7a6" path="res://assets/crystal v3.png" id="12_3v2ag"]
@@ -341,9 +342,7 @@ shape = SubResource("RectangleShape2D_qhqgy")
 process_mode = 1
 position = Vector2(11, -5)
 sprite_frames = SubResource("SpriteFrames_q2dwa")
-animation = &"walk"
-frame = 4
-frame_progress = 0.1262443
+animation = &"attack"
 
 [node name="PlayerCamera" type="Camera2D" parent="." unique_id=750898772]
 process_callback = 0
@@ -387,6 +386,7 @@ shape = SubResource("RectangleShape2D_f1ej7")
 [node name="ShieldHitbox" type="Area2D" parent="Shield" unique_id=345555207]
 collision_layer = 4
 collision_mask = 2
+script = ExtResource("7_ujl30")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shield/ShieldHitbox" unique_id=11410703]
 position = Vector2(1, -4.5)

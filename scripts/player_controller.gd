@@ -64,6 +64,7 @@ var dash_dir: Vector2 = Vector2.RIGHT
 var is_invincible: bool = false
 var knock_v: Vector2 = Vector2.ZERO
 var current_dash: DashType = DashType.NONE
+var is_dash_attack: bool = false
 
 func _ready() -> void:
 	has_double_jump = SaveLoad.get_key_value(SaveLoad.double_jump_key)
@@ -160,10 +161,9 @@ func update_facing(dir: float):
 
 func update_shield_visuals():
 	var shielding = (state_machine.current_state.name == "PlayerShield")
-	var dash_attack = (state_machine.current_state.name == "PlayerAttack" and abs(velocity.x) > DASH_ATTACK_SPEED)
 	
-	shield_sprite.visible = shielding or dash_attack
-	shield_collision.disabled = not (shielding or dash_attack)
+	shield_sprite.visible = shielding or is_dash_attack
+	shield_collision.disabled = not (shielding or is_dash_attack)
 	shield_hitbox.monitorable = shielding
 	shield_hitbox.monitoring = shielding
 

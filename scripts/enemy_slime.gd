@@ -84,11 +84,13 @@ func hit(area: Area2D) -> void:
 		sfx_slime_damage.play()
 		health -= 1
 		if health <= 0:
-			sfx_slime_death.play()
-			spawn_heart.emit(position)
+			hitbox.set_deferred("monitorable", false)
+			hitbox.set_deferred("monitoring", false)
 			self.visible = false
 			self.collision_layer = 0
 			self.collision_mask = 0
+			sfx_slime_death.play()
+			spawn_heart.emit(position)
 			await sfx_slime_death.finished
 			queue_free()
 			return
@@ -104,7 +106,7 @@ func hit(area: Area2D) -> void:
 		
 	if knockback_dir == 0.0:
 		knockback_dir = 1.0
-	knock = knockback_dir * KNOCKBACK.x
+	knock = knockback_dir * KNOCKBACK.x * (1 + int(area is ShieldHitBox))
 	velocity.y -= KNOCKBACK.y
 	velocity.x = knock
 	

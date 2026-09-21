@@ -26,16 +26,11 @@ func enter_state(_msg := {}) -> void:
 func physics_update(delta: float) -> void:
 	var dir = Input.get_axis("left", "right")
 	
-	if Input.is_action_just_pressed("jump"):
-		var max_jumps = 1 + int(player.has_double_jump)
-		if not player.coyote_timer.is_stopped() or player.jump_count < max_jumps:
-			player.dash_timer.stop()
-			
-			if player.current_dash == player.DashType.GROUND:
-				player.current_dash = player.DashType.AIR
-				player.can_dash = false
-			player.jump()
-			return
+	if Input.is_action_just_pressed("shield") and player.has_shield:
+		player.dash_timer.stop()
+		if player.current_dash == player.DashType.GROUND:
+			player.can_dash = true
+			player.current_dash = player.DashType.AIR
 	
 	if Input.is_action_just_pressed("attack") and player.has_sword:
 		player.dash_timer.stop()
