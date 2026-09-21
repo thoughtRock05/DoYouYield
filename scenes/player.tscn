@@ -14,6 +14,17 @@
 [ext_resource type="Texture2D" uid="uid://dhm7dpnrmm7a6" path="res://assets/crystal v3.png" id="12_3v2ag"]
 [ext_resource type="AudioStream" uid="uid://cv4kvrlay6000" path="res://assets/audio/sfx_heart_pickup.wav" id="13_jej6c"]
 [ext_resource type="AudioStream" uid="uid://df4whcj1qguxc" path="res://assets/audio/sfx_sword_swing.wav" id="14_f1ej7"]
+[ext_resource type="Script" uid="uid://bumqkv3wqlaum" path="res://scripts/state_machine.gd" id="15_a8ls1"]
+[ext_resource type="Script" uid="uid://c6x4hxsaxlfb3" path="res://scripts/player_states/player_idle.gd" id="16_fulsm"]
+[ext_resource type="Script" uid="uid://ctu3h0xx5ms5d" path="res://scripts/player_states/player_walk.gd" id="17_fulsm"]
+[ext_resource type="Script" uid="uid://54wiaxbymhd4" path="res://scripts/player_states/player_jump.gd" id="18_4r5pv"]
+[ext_resource type="Script" uid="uid://ciy2h5i3irjt4" path="res://scripts/player_states/player_fall.gd" id="19_60mlk"]
+[ext_resource type="Script" uid="uid://crcwi575rrpj6" path="res://scripts/player_states/player_wall_slide.gd" id="20_i4ail"]
+[ext_resource type="Script" uid="uid://3hcu6cy43dyd" path="res://scripts/player_states/player_dash.gd" id="21_a38lo"]
+[ext_resource type="Script" uid="uid://e60qrkh8h14w" path="res://scripts/player_states/player_shield.gd" id="22_4ni07"]
+[ext_resource type="Script" uid="uid://btmr7s2w6pocp" path="res://scripts/player_states/player_attack.gd" id="23_l71n6"]
+[ext_resource type="Script" uid="uid://d2mtittgq60h8" path="res://scripts/player_states/player_stun.gd" id="24_ke2ow"]
+[ext_resource type="Script" uid="uid://c0ufqsb8sro3n" path="res://scripts/player_states/player_dead.gd" id="25_ke2ow"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qhqgy"]
 size = Vector2(15, 29)
@@ -295,7 +306,7 @@ size = Vector2(42, 47)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q2dwa"]
 size = Vector2(44, 49)
 
-[node name="Player" type="CharacterBody2D" unique_id=933572393 node_paths=PackedStringArray("player_sprite", "player_camera", "player_hitbox", "sword_hit_box", "shield_sprite", "shield_collision", "shield_hitbox", "coyote_timer", "buffer_timer", "dash_timer", "wall_jump_timer", "attack_timer", "i_frame_timer", "sfx_player_dash", "sfx_player_death", "sfx_player_hurt", "sfx_player_jump", "sfx_player_walk", "sfx_player_wall_slide", "sfx_heart_pickup", "sfx_sword_swing")]
+[node name="Player" type="CharacterBody2D" unique_id=933572393 node_paths=PackedStringArray("player_sprite", "player_camera", "player_hitbox", "sword_hit_box", "shield_sprite", "shield_collision", "shield_hitbox", "coyote_timer", "buffer_timer", "dash_timer", "wall_jump_timer", "attack_timer", "i_frame_timer", "sfx_player_dash", "sfx_player_death", "sfx_player_hurt", "sfx_player_jump", "sfx_player_walk", "sfx_player_wall_slide", "sfx_heart_pickup", "sfx_sword_swing", "state_machine")]
 collision_layer = 4
 script = ExtResource("1_g2els")
 player_sprite = NodePath("PlayerSprite")
@@ -319,6 +330,7 @@ sfx_player_walk = NodePath("SfxPlayerWalk")
 sfx_player_wall_slide = NodePath("SfxPlayerWallSlide")
 sfx_heart_pickup = NodePath("SfxHeartPickup")
 sfx_sword_swing = NodePath("SfxSwordSwing")
+state_machine = NodePath("StateMachine")
 
 [node name="PlayerCollider" type="CollisionShape2D" parent="." unique_id=1984020862]
 visible = false
@@ -438,3 +450,48 @@ bus = &"SFX"
 [node name="SfxSwordSwing" type="AudioStreamPlayer" parent="." unique_id=601247149]
 stream = ExtResource("14_f1ej7")
 bus = &"SFX"
+
+[node name="StateMachine" type="Node" parent="." unique_id=1146266221 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("15_a8ls1")
+initial_state = NodePath("PlayerIdle")
+metadata/_custom_type_script = "uid://bumqkv3wqlaum"
+
+[node name="PlayerIdle" type="Node" parent="StateMachine" unique_id=1045576513]
+script = ExtResource("16_fulsm")
+metadata/_custom_type_script = "uid://bwg1nh5hx6dde"
+
+[node name="PlayerWalk" type="Node" parent="StateMachine" unique_id=19344112]
+script = ExtResource("17_fulsm")
+metadata/_custom_type_script = "uid://bwg1nh5hx6dde"
+
+[node name="PlayerJump" type="Node" parent="StateMachine" unique_id=1927591974]
+script = ExtResource("18_4r5pv")
+metadata/_custom_type_script = "uid://bwg1nh5hx6dde"
+
+[node name="PlayerFall" type="Node" parent="StateMachine" unique_id=1541733494]
+script = ExtResource("19_60mlk")
+metadata/_custom_type_script = "uid://bwg1nh5hx6dde"
+
+[node name="PlayerWallSlide" type="Node" parent="StateMachine" unique_id=2072970612]
+script = ExtResource("20_i4ail")
+metadata/_custom_type_script = "uid://bwg1nh5hx6dde"
+
+[node name="PlayerDash" type="Node" parent="StateMachine" unique_id=751758474]
+script = ExtResource("21_a38lo")
+metadata/_custom_type_script = "uid://bwg1nh5hx6dde"
+
+[node name="PlayerShield" type="Node" parent="StateMachine" unique_id=538406219]
+script = ExtResource("22_4ni07")
+metadata/_custom_type_script = "uid://bwg1nh5hx6dde"
+
+[node name="PlayerAttack" type="Node" parent="StateMachine" unique_id=1348958886]
+script = ExtResource("23_l71n6")
+metadata/_custom_type_script = "uid://bwg1nh5hx6dde"
+
+[node name="PlayerStun" type="Node" parent="StateMachine" unique_id=1140397763]
+script = ExtResource("24_ke2ow")
+metadata/_custom_type_script = "uid://bwg1nh5hx6dde"
+
+[node name="PlayerDead" type="Node" parent="StateMachine" unique_id=187639277]
+script = ExtResource("25_ke2ow")
+metadata/_custom_type_script = "uid://bwg1nh5hx6dde"
