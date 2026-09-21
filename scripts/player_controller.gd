@@ -17,9 +17,9 @@ const DASH_DECEL = 2500.0
 const ATTACK_DECEL = 700.0
 const KNOCKBACK_DECEL = 1200.0
 const I_FRAMES_DURATION = 0.5
-const DASH_ATTACK_SPEED = 100.0
+const DASH_ATTACK_SPEED = 275.0
 const WALL_DETATCH = 100.0
-
+enum DashType {NONE, GROUND, AIR}
 var in_menu: bool = false
 
 var has_double_jump: bool
@@ -63,6 +63,7 @@ var can_dash: bool = true
 var dash_dir: Vector2 = Vector2.RIGHT
 var is_invincible: bool = false
 var knock_v: Vector2 = Vector2.ZERO
+var current_dash: DashType = DashType.NONE
 
 func _ready() -> void:
 	has_double_jump = SaveLoad.get_key_value(SaveLoad.double_jump_key)
@@ -90,7 +91,9 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if not can_move:
 		return
-	
+	if is_on_floor() and dash_timer.is_stopped() and current_dash != DashType.GROUND:
+		can_dash = true
+		current_dash = DashType.NONE
 	var dir = Input.get_axis("left","right")
 	check_camera(delta)
 	update_facing(dir)
@@ -115,8 +118,8 @@ func jump():
 	jump_count += 1
 	player_sprite.play("jump")
 	sfx_player_jump.play()
-	state_machine.change_state("PlayerJump")
 	buffer_timer.stop()
+	state_machine.change_state("PlayerJump")
 
 func _on_frame_changed() -> void:
 	if player_sprite.animation == "dash":
@@ -134,7 +137,7 @@ func _on_frame_changed() -> void:
 
 func update_facing(dir: float):
 	var current_state_name = state_machine.current_state.name
-	if current_state_name in ["dash", "attack", "dead"]:
+	if current_state_name in ["PlayerDash", "PlayerAttack", "PlayerDead"]:
 		return
 	if dir != 0:
 		if current_state_name == "jump" and velocity.x != 0:
@@ -156,12 +159,14 @@ func update_facing(dir: float):
 			sword_hit_box.position.x = 30.0
 
 func update_shield_visuals():
-	var current_state_name = state_machine.current_state.name
-	var shielding = (current_state_name == "shield") or (current_state_name == "attack" and abs(velocity.x) > DASH_ATTACK_SPEED)
-	shield_sprite.visible = shielding
-	shield_collision.disabled = not shielding
+	var shielding = (state_machine.current_state.name == "PlayerShield")
+	var dash_attack = (state_machine.current_state.name == "PlayerAttack" and abs(velocity.x) > DASH_ATTACK_SPEED)
+	
+	shield_sprite.visible = shielding or dash_attack
+	shield_collision.disabled = not (shielding or dash_attack)
 	shield_hitbox.monitorable = shielding
 	shield_hitbox.monitoring = shielding
+
 
 func hit(area: Area2D):
 	if area is HeartBox:
@@ -175,7 +180,7 @@ func hit(area: Area2D):
 		return
 	
 	var current_state_name = state_machine.current_state.name
-	if is_invincible or current_state_name == "shield" or current_state_name == "dead" or (current_state_name == "attack" and abs(velocity.x) > DASH_ATTACK_SPEED):
+	if is_invincible or current_state_name == "PlayerShield" or current_state_name == "PlayerDead" or (current_state_name == "PlayerAttack" and abs(velocity.x) > DASH_ATTACK_SPEED):
 		return
 	if not sfx_player_hurt.is_playing():
 		sfx_player_hurt.play()
@@ -186,9 +191,11 @@ func hit(area: Area2D):
 	if health <= 0:
 		die()
 	else:
-		if current_state_name == "dash":
+		if current_state_name == "PlayerDash":
 			dash_timer.stop()
-			can_dash = true
+			if current_dash == DashType.GROUND:
+				can_dash = true
+				current_dash = DashType.NONE
 		
 		state_machine.change_state("PlayerStun")
 		var knock_dir: float = sign(global_position.x - area.global_position.x)
@@ -212,7 +219,7 @@ func health_pickup():
 	set_health.emit(health)
 
 func die() -> void:
-	if state_machine.current_state.name != "dead":
+	if state_machine.current_state.name != "PlayerDead":
 		set_health.emit(0)
 		state_machine.change_state("PlayerDead")
 		velocity = Vector2(0.0, -200.0)
@@ -229,7 +236,9 @@ func set_camera_boundaries(x: int, y: int) -> void:
 	player_camera.reset_smoothing()
 
 func _on_dash_timer_timeout() -> void:
-	can_dash = true
+	if current_dash == DashType.GROUND:
+		can_dash = true
+		current_dash = DashType.NONE
 
 func _on_i_frame_timer_timeout() -> void:
 	is_invincible = false
@@ -239,7 +248,9 @@ func _on_sword_hit_box_area_entered(area: Area2D) -> void:
 		area.get_parent().hit(sword_hit_box)
 
 func check_inputs() -> bool:
-	if Input.is_action_just_pressed("shield") and has_shield and not in_menu:
+	if in_menu:
+		return false
+	if Input.is_action_just_pressed("shield") and has_shield:
 		state_machine.change_state("PlayerShield")
 		return true
 	elif Input.is_action_just_pressed("dash") and has_dash and can_dash:
@@ -251,5 +262,7 @@ func check_inputs() -> bool:
 	return false
 
 func _on_shield_hitbox_area_entered(area: Area2D) -> void:
-	if state_machine.current_state.name == "PlayerShield" and area is EnemyHitBox:
-		area.get_parent().hit(shield_hitbox)
+	var current_state_name = state_machine.current_state.name
+	if current_state_name == "PlayerShield":
+		if area is EnemyHitBox:
+			area.get_parent().hit(shield_hitbox)

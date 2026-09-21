@@ -1,26 +1,23 @@
 extends Node2D
 
-var full_heart: CompressedTexture2D = preload("uid://bo30ovjpi0k8h")
-var empty_heart: CompressedTexture2D = preload("uid://c3mawi0nlqfkt")
+var heart_icon: PackedScene = preload("uid://b6gho8g43hlot")
 
-func _ready() -> void:
+func set_max_health(max_health: int) -> void:
 	for child in get_children():
-		if child is Sprite2D:
-			child.show()
-			child.texture = full_heart
+		if child is HeartIcon:
+			child.queue_free()
+	
+	for idx in range(max_health):
+		var heart: HeartIcon = heart_icon.instantiate() as HeartIcon
+		add_child(heart)
+		heart.position = Vector2(10 + (15 * idx * heart.scale.x), 8 * heart.scale.y)
 
-func set_max_health(i: int) -> void:
+func set_health(health: int) -> void:
+	var idx: int = 0
 	for child in get_children():
-		if child is Sprite2D:
-			if child.get_index() >= i:
-				child.hide()
+		if child is HeartIcon:
+			if idx < health:
+				child.full()
 			else:
-				child.show()
-
-func set_health(i: int) -> void:
-	for child in get_children():
-		if child is Sprite2D:
-			if child.get_index() < i:
-				child.texture = full_heart
-			else:
-				child.texture = empty_heart
+				child.empty()
+			idx += 1

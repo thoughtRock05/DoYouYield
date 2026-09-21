@@ -13,10 +13,10 @@ func physics_update(delta: float) -> void:
 	var dir = Input.get_axis("left", "right")
 	player.add_gravity(delta)
 	
-	if abs(player.velocity.x) > player.SPEED:
-		player.velocity.x = move_toward(player.velocity.x, 0, player.ATTACK_DECEL * delta)
-	else:
+	if abs(player.velocity.x) > player.DASH_ATTACK_SPEED or not player.is_on_floor():
 		player.velocity.x = move_toward(player.velocity.x, dir * player.SPEED, player.ATTACK_DECEL * delta)
+	else:
+		player.velocity.x = move_toward(player.velocity.x, 0, player.WALK_DECEL * delta)
 	
 	if not player.player_sprite.is_playing() or player.player_sprite.animation != "attack":
 		state_machine.change_state("PlayerIdle")

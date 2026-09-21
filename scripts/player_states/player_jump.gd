@@ -6,9 +6,18 @@ func enter_state(_msg := {}) -> void:
 
 func physics_update(delta: float) -> void:
 	var dir = Input.get_axis("left", "right")
-	if player.wall_jump_timer.is_stopped():
-		player.velocity.x = dir * player.SPEED
 	player.add_gravity(delta)
+	
+	if abs(player.velocity.x) > player.SPEED:
+		if dir == 0:
+			player.velocity.x = move_toward(player.velocity.x, 0, player.DASH_DECEL * delta)
+		else:
+			player.velocity.x = move_toward(player.velocity.x, dir * player.SPEED, player.DASH_DECEL * delta)
+	else:
+		if dir != 0:
+			player.velocity.x = move_toward(player.velocity.x, dir * player.SPEED, player.SPEED * 8.0 * delta)
+		else:
+			player.velocity.x = move_toward(player.velocity.x, 0, player.WALK_DECEL * delta)
 	
 	if Input.is_action_just_pressed("dash") and player.has_dash and player.can_dash:
 		state_machine.change_state("PlayerDash")

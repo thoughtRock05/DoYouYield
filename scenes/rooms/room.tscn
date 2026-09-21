@@ -5,7 +5,6 @@
 [ext_resource type="Texture2D" uid="uid://b4pek6hbu51i6" path="res://assets/cave1.png" id="2_jycyc"]
 [ext_resource type="PackedScene" uid="uid://dtsnjb3etfst4" path="res://scenes/heart_bar.tscn" id="2_w2a3g"]
 [ext_resource type="Texture2D" uid="uid://bp8uegy6ox6u8" path="res://assets/TILESET.png" id="3_a1uh7"]
-[ext_resource type="Script" uid="uid://g1y0lojvnoq6" path="res://scripts/heart_bar.gd" id="3_i8kcg"]
 [ext_resource type="Texture2D" uid="uid://by1uc7qji45sp" path="res://assets/cave2.png" id="3_p5707"]
 [ext_resource type="PackedScene" uid="uid://dt1x5ywbgsh1m" path="res://scenes/lock.tscn" id="4_rd4w8"]
 [ext_resource type="PackedScene" uid="uid://vbc2v1eva61l" path="res://scenes/volume_slider.tscn" id="5_3nht7"]
@@ -576,14 +575,12 @@ collision_enabled = false
 [node name="Lock" parent="." unique_id=599625686 instance=ExtResource("4_rd4w8")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1494660866]
-visible = false
 script = ExtResource("5_rd4w8")
 
 [node name="HeartBar" parent="CanvasLayer" unique_id=932334193 instance=ExtResource("2_w2a3g")]
-position = Vector2(19, 24)
-script = ExtResource("3_i8kcg")
 
 [node name="RoomOptions" type="Control" parent="CanvasLayer" unique_id=650667937]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

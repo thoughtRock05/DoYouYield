@@ -1,27 +1,7 @@
 [gd_scene format=3 uid="uid://dtsnjb3etfst4"]
 
-[ext_resource type="Texture2D" uid="uid://c3mawi0nlqfkt" path="res://assets/empty_heart.png" id="1_hm6s1"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_otjmu"]
-load_path = "res://.godot/imported/full_heart.png-2560fe522e4500ef7e87a446f2008836.ctex"
+[ext_resource type="Script" uid="uid://g1y0lojvnoq6" path="res://scripts/heart_bar.gd" id="1_otjmu"]
 
 [node name="HeartBar" type="Node2D" unique_id=932334193]
 z_index = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=852428349]
-z_index = 2
-position = Vector2(10, 0)
-scale = Vector2(1.5, 1.5)
-texture = SubResource("CompressedTexture2D_otjmu")
-
-[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=1111740339]
-z_index = 2
-position = Vector2(30, 0)
-scale = Vector2(1.5, 1.5)
-texture = SubResource("CompressedTexture2D_otjmu")
-
-[node name="Sprite2D3" type="Sprite2D" parent="." unique_id=1343802539]
-z_index = 2
-position = Vector2(50, 0)
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("1_hm6s1")
+script = ExtResource("1_otjmu")
