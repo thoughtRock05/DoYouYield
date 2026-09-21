@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bxqj6o2pt2nn7" path="res://assets/knight+sprites--actual FINAL2!.png" id="4_d2wvv"]
 [ext_resource type="AudioStream" uid="uid://cscd8ks7k0rk4" path="res://assets/audio/sfx_player_dash.wav" id="4_y4r1p"]
 [ext_resource type="AudioStream" uid="uid://dxu2a42g2fuiu" path="res://assets/audio/sfx_player_death.wav" id="5_d2wvv"]
+[ext_resource type="Script" uid="uid://dwydjsijwnoq7" path="res://scripts/shield_container.gd" id="5_f1ej7"]
 [ext_resource type="AudioStream" uid="uid://c7lxmrf1b6j27" path="res://assets/audio/sfx_player_hurt.wav" id="6_3v2ag"]
 [ext_resource type="AudioStream" uid="uid://cei016nhkh0o6" path="res://assets/audio/sfx_player_jump.wav" id="7_jej6c"]
 [ext_resource type="AudioStream" uid="uid://duqcr6fcxfp1j" path="res://assets/audio/sfx_player_walk_new.wav" id="9_jej6c"]
@@ -288,13 +289,13 @@ size = Vector2(21, 33)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l2tch"]
 size = Vector2(36, 31)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jej6c"]
-size = Vector2(36, 45)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f1ej7"]
+size = Vector2(42, 47)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q2dwa"]
-size = Vector2(38, 47)
+size = Vector2(44, 49)
 
-[node name="Player" type="CharacterBody2D" unique_id=933572393 node_paths=PackedStringArray("player_sprite", "player_camera", "player_hitbox", "sword_hit_box", "shield_sprite", "shield_collision", "shield_hitbox", "coyote_timer", "buffer_timer", "dash_timer", "attack_timer", "i_frame_timer", "sfx_player_dash", "sfx_player_death", "sfx_player_hurt", "sfx_player_jump", "sfx_player_walk", "sfx_player_wall_slide", "sfx_heart_pickup", "sfx_sword_swing")]
+[node name="Player" type="CharacterBody2D" unique_id=933572393 node_paths=PackedStringArray("player_sprite", "player_camera", "player_hitbox", "sword_hit_box", "shield_sprite", "shield_collision", "shield_hitbox", "coyote_timer", "buffer_timer", "dash_timer", "wall_jump_timer", "attack_timer", "i_frame_timer", "sfx_player_dash", "sfx_player_death", "sfx_player_hurt", "sfx_player_jump", "sfx_player_walk", "sfx_player_wall_slide", "sfx_heart_pickup", "sfx_sword_swing")]
 collision_layer = 4
 script = ExtResource("1_g2els")
 player_sprite = NodePath("PlayerSprite")
@@ -307,6 +308,7 @@ shield_hitbox = NodePath("Shield/ShieldHitbox")
 coyote_timer = NodePath("CoyoteTimer")
 buffer_timer = NodePath("BufferTimer")
 dash_timer = NodePath("DashTimer")
+wall_jump_timer = NodePath("WallJumpTimer")
 attack_timer = NodePath("AttackTimer")
 i_frame_timer = NodePath("IFrameTimer")
 sfx_player_dash = NodePath("SfxPlayerDash")
@@ -332,7 +334,6 @@ frame = 4
 frame_progress = 0.1262443
 
 [node name="PlayerCamera" type="Camera2D" parent="." unique_id=750898772]
-visible = false
 process_callback = 0
 limit_smoothed = true
 position_smoothing_enabled = true
@@ -359,9 +360,9 @@ script = ExtResource("2_qhqgy")
 shape = SubResource("RectangleShape2D_l2tch")
 
 [node name="Shield" type="StaticBody2D" parent="." unique_id=1293064894]
-visible = false
 collision_layer = 2
 collision_mask = 0
+script = ExtResource("5_f1ej7")
 
 [node name="ShieldSprite" type="Sprite2D" parent="Shield" unique_id=770510889]
 position = Vector2(1, -4)
@@ -369,7 +370,7 @@ texture = ExtResource("12_3v2ag")
 
 [node name="ShieldCollision" type="CollisionShape2D" parent="Shield" unique_id=1961876393]
 position = Vector2(1, -4.5)
-shape = SubResource("RectangleShape2D_jej6c")
+shape = SubResource("RectangleShape2D_f1ej7")
 
 [node name="ShieldHitbox" type="Area2D" parent="Shield" unique_id=345555207]
 collision_layer = 4
@@ -388,6 +389,10 @@ wait_time = 0.2
 one_shot = true
 
 [node name="DashTimer" type="Timer" parent="." unique_id=668212568]
+one_shot = true
+
+[node name="WallJumpTimer" type="Timer" parent="." unique_id=506511039]
+wait_time = 0.25
 one_shot = true
 
 [node name="AttackTimer" type="Timer" parent="." unique_id=1978799325]

@@ -6,6 +6,7 @@ signal set_health(health: int)
 @warning_ignore("unused_signal") signal set_max_health(max_health: int)
 
 const SPEED = 250.0
+const WALK_DECEL = 1200.0
 const JUMP_VELOCITY = -315.0
 const WALL_JUMP_VELOCITY = -380.0
 const WALL_JUMP_PUSH = 150.0
@@ -13,9 +14,10 @@ const WALL_SLIDE_SPEED = 90.0
 const DASH_SPEED = 500.0
 const DASH_DURATION = 0.25
 const DASH_DECEL = 2500.0
-const ATTACK_DECEL = 500.0
+const ATTACK_DECEL = 700.0
 const KNOCKBACK_DECEL = 1200.0
 const I_FRAMES_DURATION = 0.5
+const DASH_ATTACK_SPEED = 100.0
 
 enum State {
 	IDLE,
@@ -50,6 +52,7 @@ var has_dash: bool
 @export var coyote_timer: Timer
 @export var buffer_timer: Timer
 @export var dash_timer: Timer
+@export var wall_jump_timer: Timer
 @export var attack_timer: Timer
 @export var i_frame_timer: Timer
 
@@ -104,7 +107,7 @@ func _physics_process(delta: float) -> void:
 	
 	if active_state == State.IDLE:
 		player_sprite.play("idle")
-		velocity.x = move_toward(velocity.x, 0, ATTACK_DECEL * delta)
+		velocity.x = move_toward(velocity.x, 0, WALK_DECEL * delta)
 		add_gravity(delta)
 		
 		if is_on_floor():
@@ -127,7 +130,8 @@ func _physics_process(delta: float) -> void:
 	elif active_state == State.WALK:
 		player_sprite.play("walk")
 		var dir = Input.get_axis("left", "right")
-		velocity.x = dir * SPEED
+		if dir != 0:
+			velocity.x = dir * SPEED
 		add_gravity(delta)
 		
 		if not sfx_player_walk.is_playing() and is_on_floor():
@@ -153,7 +157,8 @@ func _physics_process(delta: float) -> void:
 	elif active_state == State.JUMP:
 		player_sprite.play("jump")
 		var dir = Input.get_axis("left", "right")
-		velocity.x = dir * SPEED
+		if wall_jump_timer.is_stopped():
+			velocity.x = dir * SPEED
 		add_gravity(delta)
 		
 		if Input.is_action_just_pressed("dash") and has_dash and can_dash:
@@ -208,6 +213,7 @@ func _physics_process(delta: float) -> void:
 			velocity.y = WALL_JUMP_VELOCITY
 			velocity.x = wall_normal.x * WALL_JUMP_PUSH
 			jump_count = 1
+			wall_jump_timer.start()
 			change_state(State.JUMP)
 		elif is_on_floor():
 			if sfx_player_wall_slide.is_playing():
@@ -369,7 +375,7 @@ func update_facing():
 		sword_hit_box.position.x = 30.0
 
 func update_shield_visuals():
-	var shielding = (active_state == State.SHIELD)
+	var shielding = (active_state == State.SHIELD) or (active_state == State.ATTACK and abs(velocity.x) > DASH_ATTACK_SPEED)
 	shield_sprite.visible = shielding
 	shield_collision.disabled = not shielding
 	shield_hitbox.monitorable = shielding
@@ -385,7 +391,7 @@ func hit(area: Area2D):
 		return
 	if area is not EnemyHitBox:
 		return
-	if is_invincible or active_state == State.SHIELD or active_state == State.DEAD:
+	if is_invincible or active_state == State.SHIELD or active_state == State.DEAD or (active_state == State.ATTACK and abs(velocity.x) > DASH_ATTACK_SPEED):
 		return
 	if not sfx_player_hurt.is_playing():
 		sfx_player_hurt.play()
