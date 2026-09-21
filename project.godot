@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Do You Yield"
+config/name="Undonegeon"
 run/main_scene="uid://btjeod2oxeori"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
