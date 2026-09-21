@@ -24,7 +24,7 @@ var is_stunned: bool = false
 var knock: float = 0.0
 
 func _ready() -> void:
-	hitbox.area_entered.connect(hit)
+	pass
 
 func set_target(t: Player) -> void:
 	target = t
@@ -34,6 +34,10 @@ func _physics_process(delta: float) -> void:
 	
 	if not is_on_floor():
 		velocity.y += 980.0 * delta
+	
+	if not target:
+		move_and_slide()
+		return
 	
 	if is_stunned:
 		knock = move_toward(knock, 0.0, 1500.0 * delta)
@@ -90,7 +94,12 @@ func hit(area: Area2D) -> void:
 	get_tree().create_timer(0.5).timeout.connect(func():
 		is_stunned = false
 		)
-	var knockback_dir: float = sign(global_position.x - area.global_position.x)
+	var knockback_dir: float = 1.0
+	if area and area.owner:
+		knockback_dir = sign(global_position.x - area.global_position.x)
+	elif target:
+		knockback_dir = sign(global_position.x - target.global_position.x)
+		
 	if knockback_dir == 0.0:
 		knockback_dir = 1.0
 	knock = knockback_dir * KNOCKBACK

@@ -10,15 +10,28 @@ const JUMP_VELOCITY = -315.0
 const WALL_JUMP_VELOCITY = -380.0
 const WALL_JUMP_PUSH = 150.0
 const WALL_SLIDE_SPEED = 90.0
-const DASH_SPEED = 600.0
-const DASH_DURATION = 0.15
+const DASH_SPEED = 500.0
+const DASH_DURATION = 0.25
 const DASH_DECEL = 2500.0
 const ATTACK_DECEL = 500.0
 const KNOCKBACK_DECEL = 1200.0
 const I_FRAMES_DURATION = 0.5
- 
+
+enum State {
+	IDLE,
+	WALK,
+	JUMP,
+	FALL,
+	WALL_SLIDE,
+	DASH,
+	SHIELD,
+	ATTACK,
+	STUN,
+	DEAD
+}
+
+var active_state: State = State.IDLE
 var in_menu: bool = false
-var can_move: bool = true
 
 var has_double_jump: bool
 var has_wall_jump: bool
@@ -26,17 +39,19 @@ var has_sword: bool
 var has_shield: bool
 var has_dash: bool
 
+@export var player_sprite: AnimatedSprite2D
 @export var player_camera: Camera2D
+@export var player_hitbox: PlayerHitBox
+@export var sword_hit_box: SwordHitBox
+@export var shield_sprite: Sprite2D
+@export var shield_collision: CollisionShape2D
+@export var shield_hitbox: Area2D
+
 @export var coyote_timer: Timer
 @export var buffer_timer: Timer
 @export var dash_timer: Timer
-@export var sword_hit_box: Area2D
-@export var animated_sprite: AnimatedSprite2D
+@export var attack_timer: Timer
 @export var i_frame_timer: Timer
-@export var hitbox: Area2D
-@export var shield_sprite: Sprite2D
-@export var shield_hitbox: Area2D
-@export var shield_collision: CollisionShape2D
 
 @export var sfx_player_dash: AudioStreamPlayer
 @export var sfx_player_death: AudioStreamPlayer
@@ -47,18 +62,13 @@ var has_dash: bool
 @export var sfx_heart_pickup: AudioStreamPlayer
 @export var sfx_sword_swing: AudioStreamPlayer
 
+var can_move = true
 var jump_count = 0
 var health: int
 var max_health: int
-var is_wall_jumping: bool = false
 var can_dash: bool = true
-var is_dashing: bool = false
 var dash_dir: Vector2 = Vector2.RIGHT
-var is_attacking: bool = false
 var is_invincible: bool = false
-var is_dead: bool = false
-var using_shield: bool = false
-var is_stunned: bool = false
 var knock_v: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
@@ -73,223 +83,297 @@ func _ready() -> void:
 	
 	sword_hit_box.monitorable = false
 	sword_hit_box.monitoring = false
-	animated_sprite.frame_changed.connect(_on_frame_changed)
-	hitbox.area_entered.connect(hit)
+	player_sprite.frame_changed.connect(_on_frame_changed)
+	player_hitbox.area_entered.connect(hit)
+	sword_hit_box.area_entered.connect(_on_sword_hit_box_area_entered)
 	dash_timer.timeout.connect(_on_dash_timer_timeout)
 	i_frame_timer.timeout.connect(_on_i_frame_timer_timeout)
-	animated_sprite.position.x = 11.0
+	player_sprite.position.x = 11.0
 	sword_hit_box.position.x = 30.0
 
 func _physics_process(delta: float) -> void:
-	if is_dead:
+	if not can_move:
+		return
+	
+	check_camera(delta)
+	
+	if active_state == State.DEAD:
 		add_gravity(delta)
 		move_and_slide()
 		return
-	check_camera(delta)
-	check_shield()
-	calculate_velocity(delta)
-	animate()
+	
+	if active_state == State.IDLE:
+		player_sprite.play("idle")
+		velocity.x = move_toward(velocity.x, 0, ATTACK_DECEL * delta)
+		add_gravity(delta)
+		
+		if is_on_floor():
+			jump_count = 0
+			coyote_timer.start()
+		
+		if Input.is_action_pressed("shield") and has_shield and not in_menu:
+			change_state(State.SHIELD)
+		elif Input.is_action_just_pressed("dash") and has_dash and can_dash:
+			change_state(State.DASH)
+		elif Input.is_action_just_pressed("attack") and has_sword:
+			change_state(State.ATTACK)
+		elif Input.is_action_just_pressed("jump") or (not coyote_timer.is_stopped() and not buffer_timer.is_stopped()):
+			jump()
+		elif Input.get_axis("left", "right") != 0.0:
+			change_state(State.WALK)
+		elif not is_on_floor():
+			change_state(State.FALL)
+	
+	elif active_state == State.WALK:
+		player_sprite.play("walk")
+		var dir = Input.get_axis("left", "right")
+		velocity.x = dir * SPEED
+		add_gravity(delta)
+		
+		if not sfx_player_walk.is_playing() and is_on_floor():
+			sfx_player_walk.play()
+		
+		if is_on_floor():
+			jump_count = 0
+			coyote_timer.start()
+		
+		if Input.is_action_pressed("shield") and has_shield and not in_menu:
+			change_state(State.SHIELD)
+		elif Input.is_action_just_pressed("dash") and has_dash and can_dash:
+			change_state(State.DASH)
+		elif Input.is_action_just_pressed("attack") and has_sword:
+			change_state(State.ATTACK)
+		elif Input.is_action_just_pressed("jump") or (not coyote_timer.is_stopped() and not buffer_timer.is_stopped()):
+			jump()
+		elif dir == 0.0:
+			change_state(State.IDLE)
+		elif not is_on_floor():
+			change_state(State.FALL)
+	
+	elif active_state == State.JUMP:
+		player_sprite.play("jump")
+		var dir = Input.get_axis("left", "right")
+		velocity.x = dir * SPEED
+		add_gravity(delta)
+		
+		if Input.is_action_just_pressed("dash") and has_dash and can_dash:
+			change_state(State.DASH)
+		elif Input.is_action_just_pressed("attack") and has_sword:
+			change_state(State.ATTACK)
+		elif Input.is_action_just_pressed("jump") and jump_count < 1 + int(has_double_jump):
+			jump()
+		elif has_wall_jump and not is_on_floor() and is_on_wall() and velocity.y > 0:
+			change_state(State.WALL_SLIDE)
+		elif velocity.y >= 0:
+			change_state(State.FALL)
+		elif is_on_floor():
+			if dir == 0.0:
+				change_state(State.IDLE)
+			else:
+				change_state(State.WALK)
+	
+	elif active_state == State.FALL:
+		player_sprite.play("fall")
+		var dir = Input.get_axis("left", "right")
+		velocity.x = dir * SPEED
+		add_gravity(delta)
+		
+		if Input.is_action_just_pressed("dash") and has_dash and can_dash:
+			change_state(State.DASH)
+		elif Input.is_action_just_pressed("attack") and has_sword:
+			change_state(State.ATTACK)
+		elif Input.is_action_just_pressed("jump") and (coyote_timer.is_stopped() == false or jump_count < 1 + int(has_double_jump)):
+			jump()
+			coyote_timer.stop()
+		elif has_wall_jump and not is_on_floor() and is_on_wall() and velocity.y > 0:
+			change_state(State.WALL_SLIDE)
+		elif is_on_floor():
+			jump_count = 0
+			if dir == 0.0:
+				change_state(State.IDLE)
+			else:
+				change_state(State.WALK)
+		
+	elif active_state == State.WALL_SLIDE:
+		player_sprite.play("wall_cling")
+		if not sfx_player_wall_slide.is_playing():
+			sfx_player_wall_slide.play()
+		velocity.y = min(velocity.y, WALL_SLIDE_SPEED)
+		add_gravity(delta)
+		
+		if Input.is_action_just_pressed("jump"):
+			if sfx_player_wall_slide.is_playing():
+				sfx_player_wall_slide.stop()
+			var wall_normal = get_wall_normal()
+			velocity.y = WALL_JUMP_VELOCITY
+			velocity.x = wall_normal.x * WALL_JUMP_PUSH
+			jump_count = 1
+			change_state(State.JUMP)
+		elif is_on_floor():
+			if sfx_player_wall_slide.is_playing():
+				sfx_player_wall_slide.stop()
+			change_state(State.IDLE)
+		elif not is_on_wall():
+			if sfx_player_wall_slide.is_playing():
+				sfx_player_wall_slide.stop()
+			change_state(State.FALL)
+
+	elif active_state == State.DASH:
+		if Input.is_action_just_pressed("attack") and has_sword:
+			dash_timer.stop()
+			can_dash = true
+			velocity = dash_dir * DASH_SPEED * 0.85
+			change_state(State.ATTACK)
+			return
+		
+		if not dash_timer.is_stopped():
+			velocity = dash_dir * DASH_SPEED
+			velocity.y = 0
+		else:
+			add_gravity(delta)
+			var dir = Input.get_axis("left", "right")
+			var target = dir * SPEED
+			velocity.x = move_toward(velocity.x, target, DASH_DECEL * delta)
+			
+			if abs(velocity.x) > SPEED:
+				if dir != 0:
+					velocity.x = move_toward(velocity.x, dir * SPEED, DASH_DECEL * delta)
+				else:
+					velocity.x = move_toward(velocity.x, 0, DASH_DECEL * delta)
+			
+			if is_on_floor():
+				if dir == 0.0:
+					change_state(State.IDLE)
+				else:
+					change_state(State.WALK)
+			elif is_on_wall():
+				change_state(State.FALL)
+
+	elif active_state == State.SHIELD:
+		player_sprite.play("idle")
+		velocity.x = move_toward(velocity.x, 0, ATTACK_DECEL * delta)
+		add_gravity(delta)
+		if not Input.is_action_pressed("shield") or not has_shield or in_menu:
+			for child in shield_hitbox.get_overlapping_areas():
+				hit(child)
+			change_state(State.IDLE)
+
+	elif active_state == State.ATTACK:
+		add_gravity(delta)
+		if abs(velocity.x) > SPEED:
+			velocity.x = move_toward(velocity.x, 0, ATTACK_DECEL * delta) 
+		else:
+			var dir = Input.get_axis("left","right")
+			velocity.x = move_toward(velocity.x, dir * SPEED, ATTACK_DECEL * delta)
+		
+		if not player_sprite.is_playing() or player_sprite.animation != "attack":
+			change_state(State.IDLE)
+
+	elif active_state == State.STUN:
+		player_sprite.play("hurt")
+		knock_v.x = move_toward(knock_v.x, 0.0, KNOCKBACK_DECEL * delta)
+		velocity.x = knock_v.x
+		add_gravity(delta)
+
+	update_facing()
+	update_shield_visuals()
 	move_and_slide()
 
 func check_camera(delta) -> void:
 	var look_y: float = 0
-	
 	if Input.is_action_pressed("up"):
 		look_y -= 50
 	elif Input.is_action_pressed("down"):
 		look_y += 50
-	
 	player_camera.position.y = lerp(player_camera.position.y, look_y, 10 * delta)
-
-func check_shield() -> void:
-		if Input.is_action_pressed("shield"):
-			if has_shield and not in_menu:
-				if not using_shield:
-					velocity.x = 0
-				using_shield = true
-				can_move = false
-		else:
-			if not is_attacking:
-				using_shield = false
-			if Input.is_action_just_released("shield"):
-				for child in shield_hitbox.get_overlapping_areas():
-					hit(child)
-				if is_dashing or is_attacking or is_stunned or in_menu:
-					return
-				can_move = true
-
-func calculate_velocity(delta: float) -> void:	
-	dash_logic()
-	if is_dashing:
-		velocity = dash_dir * DASH_SPEED
-		return
-	add_gravity(delta)
-	knockback_logic(delta)
-	wall_slide_logic()
-	jump_logic()
-	wall_jump_logic()
-	attack_logic()
-	move_left_right(delta)
-
-func dash_logic():
-	if not has_dash or not can_move:
-		return
-	var input_x: float = Input.get_axis("left", "right")
-	if input_x != 0 and not is_dashing:
-		dash_dir = Vector2(input_x, 0).normalized()
-	
-	if Input.is_action_just_pressed("dash") and can_dash and not is_dashing:
-		animated_sprite.play("dash")
-		is_dashing = true
-		can_dash = false
-		velocity.y = 0
-		if not sfx_player_dash.is_playing():
-			sfx_player_dash.play()
-		velocity = dash_dir * DASH_SPEED
-		dash_timer.start(DASH_DURATION)
 
 func add_gravity(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-func knockback_logic(delta: float) -> void:
-	if is_stunned:
-		knock_v.x = move_toward(knock_v.x, 0.0, KNOCKBACK_DECEL * delta)
-		velocity.x = knock_v.x
-
-func wall_slide_logic() -> void:
-	if not has_wall_jump or not can_move:
-		return
-	if not is_on_floor() and is_on_wall() and velocity.y > 0:
-		velocity.y = min(velocity.y, WALL_SLIDE_SPEED)
-		if not sfx_player_wall_slide.is_playing():
-			sfx_player_wall_slide.play()
-
-func wall_jump_logic() -> void:
-	if not has_wall_jump or not can_move:
-		return
-	if Input.is_action_just_pressed("jump") and not is_on_floor() and is_on_wall():
-		if sfx_player_wall_slide.is_playing():
-			sfx_player_wall_slide.stop()
-		var wall_normal = get_wall_normal()
-		velocity.y = WALL_JUMP_VELOCITY
-		velocity.x = wall_normal.x * WALL_JUMP_PUSH
-		is_wall_jumping = true
-		get_tree().create_timer(0.15).timeout.connect(func(): is_wall_jumping = false)
-		jump_count = 1
-		buffer_timer.stop()
-
-func jump_logic():
-	if is_on_floor():
-		jump_count = 0
-		coyote_timer.start()
-	
-	if Input.is_action_just_pressed("jump"):
-		if not is_on_floor() and coyote_timer.is_stopped() and jump_count < 1 + int(has_double_jump) and can_move:
-			jump()
-		else:
-			buffer_timer.start()
-	
-	if not coyote_timer.is_stopped() and not buffer_timer.is_stopped() and can_move:
-		jump()
-		coyote_timer.stop()
-		buffer_timer.stop()
-
 func jump():
 	velocity.y = JUMP_VELOCITY
 	jump_count += 1
-	animated_sprite.play("jump")
+	player_sprite.play("jump")
 	sfx_player_jump.play()
+	change_state(State.JUMP)
+	buffer_timer.stop()
 
-func attack_logic():
-	if not has_sword or not can_move:
-		return
-	if Input.is_action_just_pressed("attack") and not is_attacking:
-		is_attacking = true 
-		can_move = false
-		sfx_sword_swing.play()
-		animated_sprite.play("attack")
-		await animated_sprite.animation_finished
-		
-		can_move = true
-		is_attacking = false
+func change_state(new_state: State) -> void:
+	if active_state == State.ATTACK:
+		sword_hit_box.set_deferred("monitorable", false)
+		sword_hit_box.set_deferred("monitoring", false)
+
+	active_state = new_state
+
+	match active_state:
+		State.IDLE:
+			player_sprite.play("idle")
+		State.WALK:
+			player_sprite.play("walk")
+		State.JUMP:
+			player_sprite.play("jump")
+		State.FALL:
+			player_sprite.play("fall")
+		State.WALL_SLIDE:
+			player_sprite.play("wall_cling")
+		State.DASH:
+			var input_x: float = Input.get_axis("left", "right")
+			if input_x != 0:
+				dash_dir = Vector2(input_x, 0).normalized()
+			else:
+				var dash_x = -1 if player_sprite.flip_h else 1
+				dash_dir = Vector2(dash_x, 0)
+			
+			player_sprite.play("dash")
+			can_dash = false
+			velocity = dash_dir * DASH_SPEED
+			velocity.y = 0
+			if not sfx_player_dash.is_playing():
+				sfx_player_dash.play()
+			dash_timer.start(DASH_DURATION)
+		State.ATTACK:
+			sfx_sword_swing.play()
+			player_sprite.play("attack")
+		State.SHIELD:
+			player_sprite.play("idle")
+		State.STUN:
+			player_sprite.play("hurt")
+		State.DEAD:
+			player_sprite.play("die")
 
 func _on_frame_changed() -> void:
-	if animated_sprite.animation == "attack":
-		if animated_sprite.frame == 0:
-			if abs(velocity.x) > SPEED and has_shield:
-				using_shield = true
-		if animated_sprite.frame == 1:
+	if player_sprite.animation == "dash":
+		var last_frame: int = player_sprite.sprite_frames.get_frame_count("dash") - 1
+		if player_sprite.frame == last_frame:
+			player_sprite.pause()
+	
+	if player_sprite.animation == "attack":
+		if player_sprite.frame == 2:
 			sword_hit_box.monitoring = true
 			sword_hit_box.monitorable = true
-		if animated_sprite.frame == 2:
-			sword_hit_box.get_overlapping_areas()
-		if animated_sprite.frame == 3:
+		if player_sprite.frame == 4:
 			sword_hit_box.monitoring = false
 			sword_hit_box.monitorable = false
-		if animated_sprite.frame == 4:
-			if using_shield:
-				using_shield = false
 
-func move_left_right(delta):
-	if is_wall_jumping or is_stunned:
-		return
-	var direction: float = 0.0
-	if can_move:
-		direction = Input.get_axis("left", "right")
-	if is_dashing:
-		return
-	if is_attacking:
-		velocity.x = move_toward(velocity.x, direction * SPEED, ATTACK_DECEL * delta)
-	elif abs(velocity.x) > SPEED:
-		velocity.x = move_toward(velocity.x, direction * SPEED, DASH_DECEL * delta)
-	else:
-		if direction:
-			velocity.x = direction * SPEED
-		else:
-			velocity.x = move_toward(velocity.x, 0, ATTACK_DECEL * delta)
-
-func animate():
-	shield_sprite.visible = using_shield
-	shield_collision.disabled = not using_shield
-	shield_hitbox.monitorable = using_shield
-	shield_hitbox.monitoring = using_shield
-	if is_dead or is_attacking:
-		return
-	if is_stunned:
-		animated_sprite.play("hurt")
-		return
-	if is_dashing:
-		if animated_sprite.animation != "dash":
-			animated_sprite.play("dash")
+func update_facing():
+	if active_state == State.DASH or active_state == State.ATTACK or active_state == State.DEAD:
 		return
 	if velocity.x < 0:
-		animated_sprite.position.x = -8.0
-		animated_sprite.flip_h = true
+		player_sprite.position.x = -8.0
+		player_sprite.flip_h = true
 		sword_hit_box.position.x = -30.0
 	elif velocity.x > 0:
-		animated_sprite.position.x = 11.0
-		animated_sprite.flip_h = false
+		player_sprite.position.x = 11.0
+		player_sprite.flip_h = false
 		sword_hit_box.position.x = 30.0
-	
-	if not is_on_floor():
-		if velocity.y < 0:
-			animated_sprite.play("jump")
-		elif velocity.y > 0:
-			if is_on_wall():
-				if has_wall_jump:
-					animated_sprite.play("wall_cling")
-			else:
-				animated_sprite.play("fall")
-		return
-	
-	if velocity.x == 0 and not is_attacking:
-		animated_sprite.play("idle")
-		return
-	elif velocity.x <= SPEED:
-		animated_sprite.play("walk")
-	if not sfx_player_walk.is_playing():
-		sfx_player_walk.play()
+
+func update_shield_visuals():
+	var shielding = (active_state == State.SHIELD)
+	shield_sprite.visible = shielding
+	shield_collision.disabled = not shielding
+	shield_hitbox.monitorable = shielding
+	shield_hitbox.monitoring = shielding
 
 func hit(area: Area2D):
 	if area is HeartBox:
@@ -301,24 +385,22 @@ func hit(area: Area2D):
 		return
 	if area is not EnemyHitBox:
 		return
-	if is_invincible or using_shield or is_dead:
+	if is_invincible or active_state == State.SHIELD or active_state == State.DEAD:
 		return
 	if not sfx_player_hurt.is_playing():
 		sfx_player_hurt.play()
+	
 	health -= 1
 	set_health.emit(health)
+	
 	if health <= 0:
 		die()
 	else:
-		if is_dashing:
-			is_dashing = false
+		if active_state == State.DASH:
 			dash_timer.stop()
 			can_dash = true
-		is_stunned = true
-		is_attacking = false
-		can_move = false
-		using_shield = false
-		animated_sprite.play("hurt")
+		
+		change_state(State.STUN)
 		var knock_dir: float = sign(global_position.x - area.global_position.x)
 		if knock_dir == 0.0:
 			knock_dir = 1
@@ -329,9 +411,8 @@ func hit(area: Area2D):
 		i_frame_timer.start()
 		
 		await get_tree().create_timer(I_FRAMES_DURATION).timeout
-		if not is_dead:
-			is_stunned = false
-			can_move = true
+		if active_state == State.STUN:
+			change_state(State.IDLE)
 
 func health_pickup():
 	sfx_heart_pickup.play()
@@ -341,27 +422,28 @@ func health_pickup():
 	set_health.emit(health)
 
 func die() -> void:
-	if not is_dead:
+	if active_state != State.DEAD:
 		set_health.emit(0)
-		is_dead = true
-		can_move = false
+		change_state(State.DEAD)
 		velocity = Vector2(0.0, -200.0)
 		sfx_player_death.play()
-		animated_sprite.play("die")
-	await animated_sprite.animation_finished
-	reset_room.emit()
+		await player_sprite.animation_finished
+		reset_room.emit()
 
 func set_camera_boundaries(x: int, y: int) -> void:
 	var tile_size: int = 16
-	player_camera.limit_top = 0
-	player_camera.limit_bottom = y * tile_size
-	player_camera.limit_left = 0
-	player_camera.limit_right = x * tile_size
+	player_camera.limit_top = tile_size * -1
+	player_camera.limit_bottom = (y + 1) * tile_size
+	player_camera.limit_left = tile_size * -1
+	player_camera.limit_right = (x + 1) * tile_size
+	player_camera.reset_smoothing()
 
 func _on_dash_timer_timeout() -> void:
-	is_dashing = false
-	await get_tree().create_timer(0.5).timeout
 	can_dash = true
 
 func _on_i_frame_timer_timeout() -> void:
 	is_invincible = false
+
+func _on_sword_hit_box_area_entered(area: Area2D) -> void:
+	if area is EnemyHitBox:
+		area.get_parent().hit(sword_hit_box)

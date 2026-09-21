@@ -12,6 +12,7 @@ func _ready() -> void:
 	label.text = "%.2f" % SpeedRunTimerGlobal.time
 
 func _on_main_menu_button_pressed() -> void:
+	SaveLoad.reset_save()
 	SceneTransition.load_scene(main_menu)
 
 func _on_quit_button_pressed() -> void:
