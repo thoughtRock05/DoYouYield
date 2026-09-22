@@ -352,8 +352,6 @@ position_smoothing_speed = 12.94
 
 [node name="PlayerHitbox" type="Area2D" parent="." unique_id=1544907735]
 visible = false
-collision_layer = 4
-collision_mask = 2
 script = ExtResource("2_3v2ag")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHitbox" unique_id=1180564907]
@@ -363,8 +361,6 @@ shape = SubResource("RectangleShape2D_3jvd4")
 [node name="SwordHitBox" type="Area2D" parent="." unique_id=999956691]
 visible = false
 position = Vector2(30, -3)
-collision_layer = 4
-collision_mask = 2
 script = ExtResource("2_qhqgy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwordHitBox" unique_id=1910927984]
@@ -384,8 +380,6 @@ position = Vector2(1, -4.5)
 shape = SubResource("RectangleShape2D_f1ej7")
 
 [node name="ShieldHitbox" type="Area2D" parent="Shield" unique_id=345555207]
-collision_layer = 4
-collision_mask = 2
 script = ExtResource("7_ujl30")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shield/ShieldHitbox" unique_id=11410703]
