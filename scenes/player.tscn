@@ -317,20 +317,20 @@ sword_hit_box = NodePath("SwordHitBox")
 shield_sprite = NodePath("Shield/ShieldSprite")
 shield_collision = NodePath("Shield/ShieldCollision")
 shield_hitbox = NodePath("Shield/ShieldHitbox")
-coyote_timer = NodePath("CoyoteTimer")
-buffer_timer = NodePath("BufferTimer")
-dash_timer = NodePath("DashTimer")
-wall_jump_timer = NodePath("WallJumpTimer")
-attack_timer = NodePath("AttackTimer")
-i_frame_timer = NodePath("IFrameTimer")
-sfx_player_dash = NodePath("SfxPlayerDash")
-sfx_player_death = NodePath("SfxPlayerDeath")
-sfx_player_hurt = NodePath("SfxPlayerHurt")
-sfx_player_jump = NodePath("SfxPlayerJump")
-sfx_player_walk = NodePath("SfxPlayerWalk")
-sfx_player_wall_slide = NodePath("SfxPlayerWallSlide")
-sfx_heart_pickup = NodePath("SfxHeartPickup")
-sfx_sword_swing = NodePath("SfxSwordSwing")
+coyote_timer = NodePath("Timers/CoyoteTimer")
+buffer_timer = NodePath("Timers/BufferTimer")
+dash_timer = NodePath("Timers/DashTimer")
+wall_jump_timer = NodePath("Timers/WallJumpTimer")
+attack_timer = NodePath("Timers/AttackTimer")
+i_frame_timer = NodePath("Timers/IFrameTimer")
+sfx_player_dash = NodePath("SFX/SfxPlayerDash")
+sfx_player_death = NodePath("SFX/SfxPlayerDeath")
+sfx_player_hurt = NodePath("SFX/SfxPlayerHurt")
+sfx_player_jump = NodePath("SFX/SfxPlayerJump")
+sfx_player_walk = NodePath("SFX/SfxPlayerWalk")
+sfx_player_wall_slide = NodePath("SFX/SfxPlayerWallSlide")
+sfx_heart_pickup = NodePath("SFX/SfxHeartPickup")
+sfx_sword_swing = NodePath("SFX/SfxSwordSwing")
 state_machine = NodePath("StateMachine")
 
 [node name="PlayerCollider" type="CollisionShape2D" parent="." unique_id=1984020862]
@@ -392,62 +392,66 @@ script = ExtResource("7_ujl30")
 position = Vector2(1, -4.5)
 shape = SubResource("RectangleShape2D_q2dwa")
 
-[node name="CoyoteTimer" type="Timer" parent="." unique_id=137068760]
+[node name="Timers" type="Node" parent="." unique_id=1795574115]
+
+[node name="CoyoteTimer" type="Timer" parent="Timers" unique_id=137068760]
 wait_time = 0.2
 one_shot = true
 
-[node name="BufferTimer" type="Timer" parent="." unique_id=453652805]
+[node name="BufferTimer" type="Timer" parent="Timers" unique_id=453652805]
 wait_time = 0.2
 one_shot = true
 
-[node name="DashTimer" type="Timer" parent="." unique_id=668212568]
+[node name="DashTimer" type="Timer" parent="Timers" unique_id=668212568]
 one_shot = true
 
-[node name="WallJumpTimer" type="Timer" parent="." unique_id=506511039]
+[node name="WallJumpTimer" type="Timer" parent="Timers" unique_id=506511039]
 wait_time = 0.25
 one_shot = true
 
-[node name="AttackTimer" type="Timer" parent="." unique_id=1978799325]
+[node name="AttackTimer" type="Timer" parent="Timers" unique_id=1978799325]
 wait_time = 0.35
 
-[node name="IFrameTimer" type="Timer" parent="." unique_id=1978740903]
+[node name="IFrameTimer" type="Timer" parent="Timers" unique_id=1978740903]
 one_shot = true
 
-[node name="SfxPlayerDash" type="AudioStreamPlayer" parent="." unique_id=747909556]
+[node name="SFX" type="Node" parent="." unique_id=2031687970]
+
+[node name="SfxPlayerDash" type="AudioStreamPlayer" parent="SFX" unique_id=747909556]
 stream = ExtResource("4_y4r1p")
 volume_db = 1.0
 bus = &"SFX"
 
-[node name="SfxPlayerDeath" type="AudioStreamPlayer" parent="." unique_id=2063277065]
+[node name="SfxPlayerDeath" type="AudioStreamPlayer" parent="SFX" unique_id=2063277065]
 stream = ExtResource("5_d2wvv")
 volume_db = 1.0
 bus = &"SFX"
 
-[node name="SfxPlayerHurt" type="AudioStreamPlayer" parent="." unique_id=1737898659]
+[node name="SfxPlayerHurt" type="AudioStreamPlayer" parent="SFX" unique_id=1737898659]
 stream = ExtResource("6_3v2ag")
 volume_db = 1.0
 bus = &"SFX"
 
-[node name="SfxPlayerJump" type="AudioStreamPlayer" parent="." unique_id=1588001212]
+[node name="SfxPlayerJump" type="AudioStreamPlayer" parent="SFX" unique_id=1588001212]
 stream = ExtResource("7_jej6c")
 bus = &"SFX"
 
-[node name="SfxPlayerWalk" type="AudioStreamPlayer" parent="." unique_id=595235907]
+[node name="SfxPlayerWalk" type="AudioStreamPlayer" parent="SFX" unique_id=595235907]
 stream = ExtResource("9_jej6c")
 volume_db = 1.0
 bus = &"SFX"
 
-[node name="SfxPlayerWallSlide" type="AudioStreamPlayer" parent="." unique_id=213915711]
+[node name="SfxPlayerWallSlide" type="AudioStreamPlayer" parent="SFX" unique_id=213915711]
 stream = ExtResource("10_a8ls1")
 volume_db = 1.0
 bus = &"SFX"
 
-[node name="SfxHeartPickup" type="AudioStreamPlayer" parent="." unique_id=457798029]
+[node name="SfxHeartPickup" type="AudioStreamPlayer" parent="SFX" unique_id=457798029]
 stream = ExtResource("13_jej6c")
 volume_db = -12.0
 bus = &"SFX"
 
-[node name="SfxSwordSwing" type="AudioStreamPlayer" parent="." unique_id=601247149]
+[node name="SfxSwordSwing" type="AudioStreamPlayer" parent="SFX" unique_id=601247149]
 stream = ExtResource("14_f1ej7")
 bus = &"SFX"
 

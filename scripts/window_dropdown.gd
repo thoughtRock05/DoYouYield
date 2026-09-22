@@ -1,8 +1,11 @@
 extends OptionButton
+const FONT = preload("uid://di30hy6qprkyp")
 
 func _ready() -> void:
 	self.item_selected.connect(_on_window_dropdown_selected)
 	set_window_type()
+	theme = Theme.new()
+	theme.default_font = FONT
 
 func _on_window_dropdown_selected(i: int) -> void:
 	match i:
