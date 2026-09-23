@@ -82,10 +82,11 @@ size = Vector2(14, 12)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a4x2y"]
 size = Vector2(14, 12)
 
-[node name="HeartDrop" type="RigidBody2D" unique_id=1066314477 node_paths=PackedStringArray("animated_sprite_2d", "audio_stream_player")]
+[node name="HeartDrop" type="RigidBody2D" unique_id=1066314477 node_paths=PackedStringArray("animated_sprite_2d", "audio_stream_player", "heart_box")]
 script = ExtResource("1_vpq05")
 animated_sprite_2d = NodePath("AnimatedSprite2D")
 audio_stream_player = NodePath("SfxHeartShimmer")
+heart_box = NodePath("HeartBox")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2081478857]
 sprite_frames = SubResource("SpriteFrames_3jvd4")
@@ -95,6 +96,8 @@ frame_progress = 0.5726208
 shape = SubResource("RectangleShape2D_3jvd4")
 
 [node name="HeartBox" type="Area2D" parent="." unique_id=247574137]
+collision_layer = 16
+collision_mask = 2
 script = ExtResource("2_napxk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HeartBox" unique_id=1432038654]

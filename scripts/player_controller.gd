@@ -170,7 +170,6 @@ func update_shield_visuals():
 
 func hit(area: Area2D):
 	if area is HeartBox:
-		area.get_parent().queue_free()
 		health_pickup()
 		return
 	if area is AcidPit:

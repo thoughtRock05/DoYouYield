@@ -56,7 +56,6 @@ next_room = "uid://dtlklnlt0xd73"
 
 [node name="RoomOptions" parent="CanvasLayer" parent_id_path=PackedInt32Array(1494660866) index="1" unique_id=650667937]
 process_mode = 2
-visible = false
 
 [node name="YieldPrompt" parent="CanvasLayer" parent_id_path=PackedInt32Array(1494660866) index="2" unique_id=1938132347]
 visible = true
