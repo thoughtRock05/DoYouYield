@@ -1,4 +1,5 @@
 extends Node
+class_name Room
 
 const HEART_DROP = preload("uid://cvvxfxr3biyta")
 

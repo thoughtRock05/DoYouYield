@@ -1,4 +1,4 @@
-extends "res://scripts/room.gd"
+extends Room
 
 @export var area_2d: Area2D
 @export var moving_platform_3: AnimatableBody2D

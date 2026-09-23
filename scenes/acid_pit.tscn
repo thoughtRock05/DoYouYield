@@ -15,8 +15,8 @@ gradient = SubResource("Gradient_x3ghq")
 fill_from = Vector2(1, 1)
 
 [node name="AcidPit" type="Area2D" unique_id=2011704841 node_paths=PackedStringArray("sfx_acid_bubble_pop")]
-collision_layer = 2
-collision_mask = 4
+collision_layer = 4
+collision_mask = 2
 script = ExtResource("1_h22xs")
 sfx_acid_bubble_pop = NodePath("SfxAcidBubblePop")
 
