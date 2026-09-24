@@ -97,8 +97,10 @@ script = ExtResource("3_xydat")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HeartBox" unique_id=1432038654]
 shape = SubResource("RectangleShape2D_a4x2y")
 
-[node name="SfxHeartShimmer" type="AudioStreamPlayer" parent="." unique_id=1639400176]
+[node name="SfxHeartShimmer" type="AudioStreamPlayer2D" parent="." unique_id=437807980]
 process_mode = 1
 stream = ExtResource("4_nhja5")
 volume_db = -12.0
+max_distance = 1500.0
+attenuation = 3.3635943
 bus = &"SFX"

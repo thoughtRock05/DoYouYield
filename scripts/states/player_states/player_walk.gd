@@ -1,9 +1,12 @@
 extends State
 class_name PlayerWalk
 
+var step_distance_accumulator: float = 0.0
+const STEP_DISTANCE: float = 65.0
 
 func enter_state(_msg := {}) -> void:
 	actor.player_sprite.play("walk")
+	step_distance_accumulator = 0.0 # Reset on enter
 
 func physics_update(delta: float) -> void:
 	var dir = Input.get_axis("left", "right")
@@ -11,8 +14,12 @@ func physics_update(delta: float) -> void:
 		actor.velocity.x = dir * actor.SPEED
 	actor.add_gravity(delta)
 	
-	if not actor.sfx_player_walk.is_playing() and actor.is_on_floor():
-		actor.sfx_player_walk.play()
+	if actor.is_on_floor() and dir != 0:
+		step_distance_accumulator += abs(actor.velocity.x) * delta
+		if step_distance_accumulator >= STEP_DISTANCE:
+			step_distance_accumulator = 0.0
+			actor.sfx_player_walk.pitch_scale = randf_range(0.95, 1.05)
+			actor.sfx_player_walk.play()
 	
 	if actor.is_on_floor():
 		actor.jump_count = 0

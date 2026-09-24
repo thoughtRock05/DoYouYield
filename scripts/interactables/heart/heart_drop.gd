@@ -2,7 +2,7 @@ extends RigidBody2D
 class_name HeartPickup
 
 @export var animated_sprite_2d: AnimatedSprite2D
-@export var audio_stream_player: AudioStreamPlayer
+@export var audio_stream_player: AudioStreamPlayer2D
 @export var heart_box: HeartBox
 
 func _ready() -> void:

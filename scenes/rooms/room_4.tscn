@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://ddtrp88psneyf" path="res://scenes/rooms/room.tscn" id="1_2f6pe"]
 [ext_resource type="PackedScene" uid="uid://4quhxmrnsq0u" path="res://scenes/environment/moving_platform.tscn" id="2_8h73v"]
 [ext_resource type="PackedScene" uid="uid://cqfry822lc17w" path="res://scenes/environment/hazards/acid_pit/acid_pit.tscn" id="3_u8vhm"]
-[ext_resource type="PackedScene" uid="uid://c3bfdx54pcoxp" path="res://scenes/enemies/slime/enemy_slime.tscn" id="4_u8vhm"]
+[ext_resource type="PackedScene" uid="uid://dnncw2ivdbxfd" path="res://scenes/enemies/slime/slime_enemy.tscn" id="4_u8vhm"]
 
 [node name="Room 4" unique_id=671016034 instance=ExtResource("1_2f6pe")]
 room_num = 4
@@ -39,12 +39,15 @@ position = Vector2(1728, 864)
 x_size = 27
 y_size = 7
 
-[node name="EnemySlime" parent="." index="8" unique_id=1893676253 instance=ExtResource("4_u8vhm")]
-position = Vector2(1168, 1063)
-
-[node name="EnemySlime2" parent="." index="9" unique_id=1030835330 instance=ExtResource("4_u8vhm")]
-position = Vector2(2439, 523)
-
 [node name="YieldLabel" parent="CanvasLayer/YieldPrompt" parent_id_path=PackedInt32Array(1938132347) index="1" unique_id=309691000]
 text = "Yield what you need most:
 Shield"
+
+[node name="SlimeEnemy" parent="." index="10" unique_id=1893676253 instance=ExtResource("4_u8vhm")]
+position = Vector2(1165, 1049)
+
+[node name="SlimeEnemy2" parent="." index="11" unique_id=1291795288 instance=ExtResource("4_u8vhm")]
+position = Vector2(678, 1047)
+
+[node name="SlimeEnemy3" parent="." index="12" unique_id=1008907309 instance=ExtResource("4_u8vhm")]
+position = Vector2(2430, 515)

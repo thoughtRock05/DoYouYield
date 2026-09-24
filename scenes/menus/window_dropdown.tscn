@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://df6eqqjn0g74m"]
 
 [ext_resource type="Script" uid="uid://46crdju24l35" path="res://scripts/menus/window_dropdown.gd" id="1_npbyx"]
-[ext_resource type="FontFile" uid="uid://di30hy6qprkyp" path="res://assets/OldEnglishGothicPixelRegular.ttf" id="1_o1nvf"]
+[ext_resource type="FontFile" uid="uid://di30hy6qprkyp" path="res://assets/fonts/OldEnglishGothicPixelRegular.ttf" id="1_o1nvf"]
 
 [node name="WindowDropdown" type="OptionButton" unique_id=1634256139]
 offset_right = 158.0

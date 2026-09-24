@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://io46bfufwpds"]
 
 [ext_resource type="Script" uid="uid://chdvxw5tyfxw1" path="res://scripts/menus/results_menu.gd" id="1_kqyoe"]
-[ext_resource type="FontFile" uid="uid://di30hy6qprkyp" path="res://assets/OldEnglishGothicPixelRegular.ttf" id="2_uxv0o"]
+[ext_resource type="FontFile" uid="uid://di30hy6qprkyp" path="res://assets/fonts/OldEnglishGothicPixelRegular.ttf" id="2_uxv0o"]
 [ext_resource type="Texture2D" uid="uid://bo30ovjpi0k8h" path="res://assets/images/interactables/heart/full_heart.png" id="3_mpbci"]
 
 [node name="ResultsMenu" type="Node2D" unique_id=1871666372 node_paths=PackedStringArray("main_menu_button", "quit_button", "label")]
@@ -50,7 +50,7 @@ text = "Quit"
 
 [node name="FullHeart" type="Sprite2D" parent="CanvasLayer/Control" unique_id=1076773160]
 position = Vector2(321, 133.9325)
-scale = Vector2(6.715, 6.715)
+scale = Vector2(3.41, 3.41)
 texture = ExtResource("3_mpbci")
 
 [node name="Label" type="Label" parent="CanvasLayer/Control" unique_id=1951554807]
@@ -69,3 +69,21 @@ grow_vertical = 2
 theme_override_fonts/font = ExtResource("2_uxv0o")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Credits" type="Label" parent="CanvasLayer/Control" unique_id=1459781900]
+layout_mode = 0
+offset_left = 467.0
+offset_top = 69.0
+offset_right = 579.0
+offset_bottom = 300.0
+theme_override_fonts/font = ExtResource("2_uxv0o")
+text = "Programming:
+Riordan Cassidy
+Level Design:
+Christopher Gore
+Riordan Cassidy
+Art:
+Ella DeGrow
+Mo Bhende
+Music:
+Mo Bhende"

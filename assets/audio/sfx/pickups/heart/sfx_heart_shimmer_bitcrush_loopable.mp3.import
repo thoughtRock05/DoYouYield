@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/sfx_heart_shimmer_bitcrush_loopable.mp3-1bdde
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0

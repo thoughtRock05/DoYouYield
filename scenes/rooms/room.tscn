@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://vbc2v1eva61l" path="res://scenes/menus/volume_slider.tscn" id="5_3nht7"]
 [ext_resource type="Script" uid="uid://bae7rxj2csaji" path="res://scripts/menus/menu_canvas.gd" id="5_rd4w8"]
 [ext_resource type="PackedScene" uid="uid://df6eqqjn0g74m" path="res://scenes/menus/window_dropdown.tscn" id="6_tmaxl"]
-[ext_resource type="FontFile" uid="uid://di30hy6qprkyp" path="res://assets/OldEnglishGothicPixelRegular.ttf" id="14_p5707"]
+[ext_resource type="FontFile" uid="uid://di30hy6qprkyp" path="res://assets/fonts/OldEnglishGothicPixelRegular.ttf" id="14_p5707"]
 [ext_resource type="Script" uid="uid://d0vxf0intxep4" path="res://scripts/menus/speed_run_timer.gd" id="17_u8r6a"]
 [ext_resource type="AudioStream" uid="uid://dp0sopctvc0fx" path="res://assets/audio/sfx/player/sfx_player_walk_echo.wav" id="18_1m0bn"]
 

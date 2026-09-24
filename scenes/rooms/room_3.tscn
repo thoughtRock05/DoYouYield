@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://ddtrp88psneyf" path="res://scenes/rooms/room.tscn" id="1_etvqs"]
 [ext_resource type="Script" uid="uid://dpeyrqelmayp2" path="res://scripts/rooms/room_3.gd" id="2_g5ssp"]
 [ext_resource type="PackedScene" uid="uid://4quhxmrnsq0u" path="res://scenes/environment/moving_platform.tscn" id="3_g5ssp"]
-[ext_resource type="PackedScene" uid="uid://c3bfdx54pcoxp" path="res://scenes/enemies/slime/enemy_slime.tscn" id="4_ahsqd"]
+[ext_resource type="PackedScene" uid="uid://dnncw2ivdbxfd" path="res://scenes/enemies/slime/slime_enemy.tscn" id="4_ahsqd"]
 
 [node name="Room 3" unique_id=671016034 node_paths=PackedStringArray("moving_platform_3") instance=ExtResource("1_etvqs")]
 script = ExtResource("2_g5ssp")
@@ -47,10 +47,10 @@ x_size = 3
 rel_y = 15.0
 duration = 3.5
 
-[node name="EnemySlime" parent="." index="9" unique_id=1893676253 instance=ExtResource("4_ahsqd")]
-position = Vector2(649, 1296)
-scale = Vector2(2.25, 2.25)
-
 [node name="YieldLabel" parent="CanvasLayer/YieldPrompt" parent_id_path=PackedInt32Array(1938132347) index="1" unique_id=309691000]
 text = "Yield what you need most:
 Sword & Heart"
+
+[node name="SlimeEnemy" parent="." index="11" unique_id=1893676253 instance=ExtResource("4_ahsqd")]
+position = Vector2(608.00006, 1247)
+scale = Vector2(5, 5)
