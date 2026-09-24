@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://b6gho8g43hlot"]
+
+[ext_resource type="Script" uid="uid://cln62my4swsko" path="res://scripts/interactables/heart/heart_icon.gd" id="1_m24wm"]
+[ext_resource type="Texture2D" uid="uid://bo30ovjpi0k8h" path="res://assets/images/interactables/heart/full_heart.png" id="1_ovopu"]
+
+[node name="HeartIcon" type="Sprite2D" unique_id=989057009]
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("1_ovopu")
+script = ExtResource("1_m24wm")

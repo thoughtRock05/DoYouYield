@@ -132,7 +132,7 @@ down={
 2d_physics/layer_2="Player"
 2d_physics/layer_3="Enemy"
 2d_physics/layer_4="Env Hazard"
-2d_physics/layer_5="Pickups"
+2d_physics/layer_5="Interactables"
 
 [physics]
 
@@ -144,3 +144,5 @@ textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+2d/snap/snap_2d_transforms_to_pixel=true
+2d/snap/snap_2d_vertices_to_pixel=true

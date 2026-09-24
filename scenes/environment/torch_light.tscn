@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://ca6latd2wo6sd"]
+
+[ext_resource type="Script" uid="uid://bcdvqlxdb0r4q" path="res://scripts/environment/torch_light.gd" id="1_5riym"]
+
+[sub_resource type="Gradient" id="Gradient_3jvd4"]
+offsets = PackedFloat32Array(0.0021141649, 0.53276956, 1)
+colors = PackedColorArray(0.899979, 0.37967363, 0, 1, 0.9249843, 0.53475523, 0.25000003, 0.75, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3jvd4"]
+gradient = SubResource("Gradient_3jvd4")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="TorchLight" type="PointLight2D" unique_id=1898532190]
+z_index = 2
+scale = Vector2(3.15625, 3.15625)
+energy = 1.2
+texture = SubResource("GradientTexture2D_3jvd4")
+script = ExtResource("1_5riym")

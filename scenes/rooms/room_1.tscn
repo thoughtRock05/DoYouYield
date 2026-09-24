@@ -1,8 +1,8 @@
 [gd_scene format=4 uid="uid://dtlklnlt0xd73"]
 
 [ext_resource type="PackedScene" uid="uid://ddtrp88psneyf" path="res://scenes/rooms/room.tscn" id="1_scgta"]
-[ext_resource type="PackedScene" uid="uid://c3bfdx54pcoxp" path="res://scenes/enemy_slime.tscn" id="2_hnbyo"]
-[ext_resource type="PackedScene" uid="uid://cqfry822lc17w" path="res://scenes/acid_pit.tscn" id="3_fbq1s"]
+[ext_resource type="PackedScene" uid="uid://c3bfdx54pcoxp" path="res://scenes/enemies/slime/enemy_slime.tscn" id="2_hnbyo"]
+[ext_resource type="PackedScene" uid="uid://cqfry822lc17w" path="res://scenes/environment/hazards/acid_pit/acid_pit.tscn" id="3_fbq1s"]
 
 [node name="Room1" unique_id=671016034 instance=ExtResource("1_scgta")]
 room_num = 1

@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cttg2bby718yy"]
+
+[ext_resource type="Script" uid="uid://bjukgf50k2jyc" path="res://scripts/menus/speed_running_toggle.gd" id="1_br6a0"]
+
+[node name="SpeedRunningToggle" type="CheckButton" unique_id=1071498158]
+offset_right = 44.0
+offset_bottom = 24.0
+script = ExtResource("1_br6a0")

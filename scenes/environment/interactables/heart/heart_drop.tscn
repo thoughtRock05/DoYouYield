@@ -1,0 +1,103 @@
+[gd_scene format=3 uid="uid://cvvxfxr3biyta"]
+
+[ext_resource type="Script" uid="uid://crwgse7o22kr7" path="res://scripts/interactables/heart/heart_drop.gd" id="1_b8qtl"]
+[ext_resource type="Texture2D" uid="uid://cskxj6ve5i1b2" path="res://assets/images/interactables/heart/heart animation.png" id="2_dubu6"]
+[ext_resource type="Script" uid="uid://b6qka5kmnr4t4" path="res://scripts/interactables/heart/heart_box.gd" id="3_xydat"]
+[ext_resource type="AudioStream" uid="uid://sqvu2eyxwcta" path="res://assets/audio/sfx/pickups/heart/sfx_heart_shimmer_bitcrush_loopable.mp3" id="4_nhja5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n1cnx"]
+atlas = ExtResource("2_dubu6")
+region = Rect2(0, 0, 26, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pthqn"]
+atlas = ExtResource("2_dubu6")
+region = Rect2(26, 0, 26, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ydvc"]
+atlas = ExtResource("2_dubu6")
+region = Rect2(52, 0, 26, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w410m"]
+atlas = ExtResource("2_dubu6")
+region = Rect2(78, 0, 26, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bu5eg"]
+atlas = ExtResource("2_dubu6")
+region = Rect2(104, 0, 26, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_868y2"]
+atlas = ExtResource("2_dubu6")
+region = Rect2(130, 0, 26, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nct8a"]
+atlas = ExtResource("2_dubu6")
+region = Rect2(182, 0, 26, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_egiii"]
+atlas = ExtResource("2_dubu6")
+region = Rect2(156, 0, 26, 22)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3jvd4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n1cnx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pthqn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ydvc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w410m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bu5eg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_868y2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nct8a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_egiii")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3jvd4"]
+size = Vector2(28, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a4x2y"]
+size = Vector2(28, 24)
+
+[node name="HeartDrop" type="RigidBody2D" unique_id=1066314477 node_paths=PackedStringArray("animated_sprite_2d", "audio_stream_player", "heart_box")]
+script = ExtResource("1_b8qtl")
+animated_sprite_2d = NodePath("AnimatedSprite2D")
+audio_stream_player = NodePath("SfxHeartShimmer")
+heart_box = NodePath("HeartBox")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2081478857]
+sprite_frames = SubResource("SpriteFrames_3jvd4")
+frame_progress = 0.5726208
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=179656495]
+shape = SubResource("RectangleShape2D_3jvd4")
+
+[node name="HeartBox" type="Area2D" parent="." unique_id=247574137]
+collision_layer = 16
+collision_mask = 2
+script = ExtResource("3_xydat")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HeartBox" unique_id=1432038654]
+shape = SubResource("RectangleShape2D_a4x2y")
+
+[node name="SfxHeartShimmer" type="AudioStreamPlayer" parent="." unique_id=1639400176]
+process_mode = 1
+stream = ExtResource("4_nhja5")
+volume_db = -12.0
+bus = &"SFX"

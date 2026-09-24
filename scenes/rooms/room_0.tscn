@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://bjwbmwcpnr8vf"]
 
 [ext_resource type="PackedScene" uid="uid://ddtrp88psneyf" path="res://scenes/rooms/room.tscn" id="1_qm1r8"]
-[ext_resource type="PackedScene" uid="uid://c3bfdx54pcoxp" path="res://scenes/enemy_slime.tscn" id="8_epks6"]
+[ext_resource type="PackedScene" uid="uid://c3bfdx54pcoxp" path="res://scenes/enemies/slime/enemy_slime.tscn" id="8_epks6"]
 
 [node name="Room0" unique_id=671016034 instance=ExtResource("1_qm1r8")]
 room_num = 0
@@ -20,7 +20,7 @@ tile_map_data = PackedByteArray("AAD/////AQAAAAAAAAD//wAAAQAEAAAAAAD//wEAAQAEAAA
 [node name="Background" parent="." index="4" unique_id=1723316613]
 tile_map_data = PackedByteArray("AAADABoAAAAAAAAAAAADABgAAAAAAAAAAAADABYAAAAAAAAAAAA=")
 
-[node name="Lock" parent="." index="5" unique_id=599625686]
+[node name="Door" parent="." index="5" unique_id=599625686]
 position = Vector2(1499, 834)
 next_room = "uid://dtlklnlt0xd73"
 

@@ -1,17 +1,17 @@
 [gd_scene format=4 uid="uid://ddtrp88psneyf"]
 
-[ext_resource type="Script" uid="uid://c8r4i4r62e5j8" path="res://scripts/room.gd" id="1_1fuux"]
-[ext_resource type="PackedScene" uid="uid://dop8vfrtc40vm" path="res://scenes/player.tscn" id="2_3nht7"]
-[ext_resource type="PackedScene" uid="uid://csnx16rhwb5kr" path="res://scenes/Parallax.tscn" id="2_c7djm"]
-[ext_resource type="PackedScene" uid="uid://dtsnjb3etfst4" path="res://scenes/heart_bar.tscn" id="2_w2a3g"]
-[ext_resource type="Texture2D" uid="uid://bp8uegy6ox6u8" path="res://assets/TILESET.png" id="3_a1uh7"]
-[ext_resource type="PackedScene" uid="uid://dt1x5ywbgsh1m" path="res://scenes/lock.tscn" id="4_rd4w8"]
-[ext_resource type="PackedScene" uid="uid://vbc2v1eva61l" path="res://scenes/volume_slider.tscn" id="5_3nht7"]
-[ext_resource type="Script" uid="uid://bae7rxj2csaji" path="res://scripts/canvas_layer.gd" id="5_rd4w8"]
-[ext_resource type="PackedScene" uid="uid://df6eqqjn0g74m" path="res://scenes/window_dropdown.tscn" id="6_tmaxl"]
+[ext_resource type="Script" uid="uid://c8r4i4r62e5j8" path="res://scripts/rooms/room.gd" id="1_1fuux"]
+[ext_resource type="PackedScene" uid="uid://dop8vfrtc40vm" path="res://scenes/player/player.tscn" id="2_3nht7"]
+[ext_resource type="PackedScene" uid="uid://csnx16rhwb5kr" path="res://scenes/environment/Parallax.tscn" id="2_c7djm"]
+[ext_resource type="PackedScene" uid="uid://dtsnjb3etfst4" path="res://scenes/environment/interactables/heart/heart_bar.tscn" id="2_w2a3g"]
+[ext_resource type="Texture2D" uid="uid://bp8uegy6ox6u8" path="res://assets/images/environment/tilesets/TILESET.png" id="3_a1uh7"]
+[ext_resource type="PackedScene" uid="uid://dt1x5ywbgsh1m" path="res://scenes/environment/interactables/door/door.tscn" id="4_rd4w8"]
+[ext_resource type="PackedScene" uid="uid://vbc2v1eva61l" path="res://scenes/menus/volume_slider.tscn" id="5_3nht7"]
+[ext_resource type="Script" uid="uid://bae7rxj2csaji" path="res://scripts/menus/menu_canvas.gd" id="5_rd4w8"]
+[ext_resource type="PackedScene" uid="uid://df6eqqjn0g74m" path="res://scenes/menus/window_dropdown.tscn" id="6_tmaxl"]
 [ext_resource type="FontFile" uid="uid://di30hy6qprkyp" path="res://assets/OldEnglishGothicPixelRegular.ttf" id="14_p5707"]
-[ext_resource type="Script" uid="uid://d0vxf0intxep4" path="res://scripts/speed_run_timer.gd" id="17_u8r6a"]
-[ext_resource type="AudioStream" uid="uid://dp0sopctvc0fx" path="res://assets/audio/sfx_player_walk_echo.wav" id="18_1m0bn"]
+[ext_resource type="Script" uid="uid://d0vxf0intxep4" path="res://scripts/menus/speed_run_timer.gd" id="17_u8r6a"]
+[ext_resource type="AudioStream" uid="uid://dp0sopctvc0fx" path="res://assets/audio/sfx/player/sfx_player_walk_echo.wav" id="18_1m0bn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u8r6a"]
 texture = ExtResource("3_a1uh7")
@@ -459,7 +459,7 @@ main_menu = &"uid://5pufmg2xnm6j"
 main_menu_button = NodePath("CanvasLayer/RoomOptions/Main Menu")
 reset_button = NodePath("CanvasLayer/RoomOptions/Reset")
 sfx_player_walk_echo = NodePath("SfxPlayerWalkEcho")
-lock = NodePath("Lock")
+lock = NodePath("Door")
 
 [node name="Parallax" parent="." unique_id=991567529 instance=ExtResource("2_c7djm")]
 
@@ -478,7 +478,7 @@ z_index = -1
 tile_set = SubResource("TileSet_hm6s1")
 collision_enabled = false
 
-[node name="Lock" parent="." unique_id=599625686 instance=ExtResource("4_rd4w8")]
+[node name="Door" parent="." unique_id=599625686 instance=ExtResource("4_rd4w8")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1494660866]
 script = ExtResource("5_rd4w8")

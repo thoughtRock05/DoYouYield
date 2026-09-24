@@ -1,14 +1,14 @@
 [gd_scene format=4 uid="uid://d2itu2g3hg4ki"]
 
 [ext_resource type="PackedScene" uid="uid://ddtrp88psneyf" path="res://scenes/rooms/room.tscn" id="1_qliwx"]
-[ext_resource type="PackedScene" uid="uid://c3bfdx54pcoxp" path="res://scenes/enemy_slime.tscn" id="2_wf3jn"]
-[ext_resource type="PackedScene" uid="uid://cqfry822lc17w" path="res://scenes/acid_pit.tscn" id="3_7u5fy"]
+[ext_resource type="PackedScene" uid="uid://c3bfdx54pcoxp" path="res://scenes/enemies/slime/enemy_slime.tscn" id="2_wf3jn"]
+[ext_resource type="PackedScene" uid="uid://cqfry822lc17w" path="res://scenes/environment/hazards/acid_pit/acid_pit.tscn" id="3_7u5fy"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wodat"]
-size = Vector2(112, 67)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wf3jn"]
+size = Vector2(32, 36)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_p8nu4"]
-size = Vector2(112, 66)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7u5fy"]
+size = Vector2(32, 36)
 
 [node name="Room6" unique_id=671016034 instance=ExtResource("1_qliwx")]
 room_num = 6
@@ -28,7 +28,7 @@ tile_map_data = PackedByteArray("AAAAAAsAAQAAAAAAAAABAAsAAQAAAAAAAAACAAsAAQAAAAA
 [node name="Background" parent="." index="4" unique_id=1723316613]
 tile_map_data = PackedByteArray("AABPACEAAAAHAAUAAAA=")
 
-[node name="Lock" parent="." index="5" unique_id=599625686]
+[node name="Door" parent="." index="5" unique_id=599625686]
 position = Vector2(1584, 431)
 next_room = "uid://io46bfufwpds"
 
@@ -42,36 +42,36 @@ position = Vector2(814, 643)
 position = Vector2(1229, 532)
 
 [node name="AcidPit" parent="." index="9" unique_id=2011704841 instance=ExtResource("3_7u5fy")]
-position = Vector2(312, 704)
+position = Vector2(320, 704)
 
 [node name="CollisionShape2D" parent="AcidPit" index="0" unique_id=1619907998]
-position = Vector2(0, 14.5)
-shape = SubResource("RectangleShape2D_wodat")
+position = Vector2(16, 8)
+shape = SubResource("RectangleShape2D_wf3jn")
 
-[node name="PointLight2D" parent="AcidPit" index="2" unique_id=1072386159]
-position = Vector2(0, 0.5)
-scale = Vector2(1.71875, 1.484375)
+[node name="PointLight2D" parent="AcidPit" index="1" unique_id=1072386159]
+position = Vector2(16, 8)
+scale = Vector2(0.5, 0.75)
 
 [node name="AcidPit2" parent="." index="10" unique_id=1114062185 instance=ExtResource("3_7u5fy")]
-position = Vector2(472, 704)
+position = Vector2(480, 704)
 
 [node name="CollisionShape2D" parent="AcidPit2" index="0" unique_id=1619907998]
-position = Vector2(0, 15)
-shape = SubResource("RectangleShape2D_p8nu4")
+position = Vector2(16, 8)
+shape = SubResource("RectangleShape2D_7u5fy")
 
-[node name="PointLight2D" parent="AcidPit2" index="2" unique_id=1072386159]
-position = Vector2(3.695488e-06, 1.0000076)
-scale = Vector2(1.7500004, 1.4687502)
+[node name="PointLight2D" parent="AcidPit2" index="1" unique_id=1072386159]
+position = Vector2(16, 8)
+scale = Vector2(0.5, 0.75)
 
-[node name="YieldLabel" parent="CanvasLayer/YieldPrompt" parent_id_path=PackedInt32Array(1938132347) index="0" unique_id=309691000]
+[node name="YieldLabel" parent="CanvasLayer/YieldPrompt" parent_id_path=PackedInt32Array(1938132347) index="1" unique_id=309691000]
 text = "You have given away what aided you.
 You have been redeemed.
 You may now exit the Undonegeon."
 
-[node name="Yes" parent="CanvasLayer/YieldPrompt" parent_id_path=PackedInt32Array(1938132347) index="1" unique_id=1638312946]
+[node name="Yes" parent="CanvasLayer/YieldPrompt" parent_id_path=PackedInt32Array(1938132347) index="2" unique_id=1638312946]
 text = "OK"
 
-[node name="No" parent="CanvasLayer/YieldPrompt" parent_id_path=PackedInt32Array(1938132347) index="2" unique_id=1938723962]
+[node name="No" parent="CanvasLayer/YieldPrompt" parent_id_path=PackedInt32Array(1938132347) index="3" unique_id=1938723962]
 text = "Not Yet"
 
 [editable path="AcidPit"]

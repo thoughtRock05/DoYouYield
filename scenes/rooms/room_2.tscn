@@ -1,10 +1,10 @@
 [gd_scene format=4 uid="uid://dppe7s7bpfeof"]
 
 [ext_resource type="PackedScene" uid="uid://ddtrp88psneyf" path="res://scenes/rooms/room.tscn" id="1_6a8el"]
-[ext_resource type="PackedScene" uid="uid://4quhxmrnsq0u" path="res://scenes/moving_platform.tscn" id="2_3e1ps"]
-[ext_resource type="PackedScene" uid="uid://cqfry822lc17w" path="res://scenes/acid_pit.tscn" id="3_ar6ir"]
-[ext_resource type="PackedScene" uid="uid://cvvxfxr3biyta" path="res://scenes/heart_drop.tscn" id="4_0g03g"]
-[ext_resource type="PackedScene" uid="uid://c3bfdx54pcoxp" path="res://scenes/enemy_slime.tscn" id="5_km8ef"]
+[ext_resource type="PackedScene" uid="uid://4quhxmrnsq0u" path="res://scenes/environment/moving_platform.tscn" id="2_3e1ps"]
+[ext_resource type="PackedScene" uid="uid://cqfry822lc17w" path="res://scenes/environment/hazards/acid_pit/acid_pit.tscn" id="3_ar6ir"]
+[ext_resource type="PackedScene" uid="uid://cvvxfxr3biyta" path="res://scenes/environment/interactables/heart/heart_drop.tscn" id="4_0g03g"]
+[ext_resource type="PackedScene" uid="uid://c3bfdx54pcoxp" path="res://scenes/enemies/slime/enemy_slime.tscn" id="5_km8ef"]
 [ext_resource type="FontFile" uid="uid://di30hy6qprkyp" path="res://assets/OldEnglishGothicPixelRegular.ttf" id="6_0hwry"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ar6ir"]
@@ -44,7 +44,7 @@ rel_y = -161.0
 duration = 3.0
 
 [node name="TileMapLayer" parent="MovingPlatform" index="0" unique_id=234184060]
-tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAD+/wAAAAAAAAAAAAABAAAAAAAAAAAAAAD9/wAAAAAAAAAAAAACAAAAAAAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAD///////////////8AAP////////////8AAAAAAAAAAAAAAAD//wAAAAAAAAAAAAD+///////////////+/wAAAAAAAAAAAAABAP////////////8BAAAAAAAAAAAAAAD9/wAAAAAAAAAAAAACAAAAAAAAAAAAAAA=")
 
 [node name="CollisionShape2D" parent="MovingPlatform" index="1" unique_id=183576832]
 position = Vector2(0, 8)
@@ -57,7 +57,7 @@ position = Vector2(696, 568)
 position = Vector2(0, 4.5)
 shape = SubResource("RectangleShape2D_0g03g")
 
-[node name="PointLight2D" parent="AcidPit" index="2" unique_id=1072386159]
+[node name="PointLight2D" parent="AcidPit" index="1" unique_id=1072386159]
 position = Vector2(0, -7.9999924)
 scale = Vector2(1.75, 6)
 
@@ -68,7 +68,7 @@ position = Vector2(856, 568)
 position = Vector2(0, 44.5)
 shape = SubResource("RectangleShape2D_km8ef")
 
-[node name="PointLight2D" parent="AcidPit2" index="2" unique_id=1072386159]
+[node name="PointLight2D" parent="AcidPit2" index="1" unique_id=1072386159]
 position = Vector2(0, 35.00001)
 scale = Vector2(1.75, 4.6562495)
 
@@ -97,7 +97,7 @@ text = "Fwed"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="YieldLabel" parent="CanvasLayer/YieldPrompt" parent_id_path=PackedInt32Array(1938132347) index="0" unique_id=309691000]
+[node name="YieldLabel" parent="CanvasLayer/YieldPrompt" parent_id_path=PackedInt32Array(1938132347) index="1" unique_id=309691000]
 text = "Yield what you need most:
 Wall Jump"
 

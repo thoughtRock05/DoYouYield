@@ -1,9 +1,9 @@
 [gd_scene format=4 uid="uid://brel50h76h54i"]
 
 [ext_resource type="PackedScene" uid="uid://ddtrp88psneyf" path="res://scenes/rooms/room.tscn" id="1_etvqs"]
-[ext_resource type="Script" uid="uid://dpeyrqelmayp2" path="res://scripts/room_3.gd" id="2_g5ssp"]
-[ext_resource type="PackedScene" uid="uid://4quhxmrnsq0u" path="res://scenes/moving_platform.tscn" id="3_g5ssp"]
-[ext_resource type="PackedScene" uid="uid://c3bfdx54pcoxp" path="res://scenes/enemy_slime.tscn" id="4_ahsqd"]
+[ext_resource type="Script" uid="uid://dpeyrqelmayp2" path="res://scripts/rooms/room_3.gd" id="2_g5ssp"]
+[ext_resource type="PackedScene" uid="uid://4quhxmrnsq0u" path="res://scenes/environment/moving_platform.tscn" id="3_g5ssp"]
+[ext_resource type="PackedScene" uid="uid://c3bfdx54pcoxp" path="res://scenes/enemies/slime/enemy_slime.tscn" id="4_ahsqd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ahsqd"]
 size = Vector2(48, 16)

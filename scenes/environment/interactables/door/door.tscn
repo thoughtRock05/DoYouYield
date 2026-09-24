@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://dt1x5ywbgsh1m"]
+
+[ext_resource type="Script" uid="uid://b8g2ppciu8j0m" path="res://scripts/interactables/door/door.gd" id="1_p7ba8"]
+[ext_resource type="Texture2D" uid="uid://kyv1nm3ioy0" path="res://assets/images/interactables/door/door_closed.png" id="2_wrwqh"]
+[ext_resource type="AudioStream" uid="uid://bcl7c36li0g8" path="res://assets/audio/sfx/interactables/door/sfx_door.wav" id="3_pkiwb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3jvd4"]
+size = Vector2(32, 58)
+
+[node name="Door" type="Node2D" unique_id=599625686 node_paths=PackedStringArray("sprite_2d", "trigger_area", "sfx_door")]
+z_index = -1
+script = ExtResource("1_p7ba8")
+sprite_2d = NodePath("Sprite2D")
+trigger_area = NodePath("Area2D")
+sfx_door = NodePath("SfxDoor")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1515198630]
+texture = ExtResource("2_wrwqh")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=802225447]
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=771235972]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_3jvd4")
+
+[node name="SfxDoor" type="AudioStreamPlayer" parent="." unique_id=658168793]
+stream = ExtResource("3_pkiwb")
+volume_db = -12.0
+bus = &"SFX"
