@@ -11,12 +11,12 @@ signal spawn_heart(pos: Vector2)
 @export var sfx_slime_death: AudioStreamPlayer
 @export var sfx_slime_bonk: AudioStreamPlayer
 
-const SPEED = 30.0
+const SPEED = 60.0
 var speed = SPEED / self.scale.x
 const KNOCKBACK: Vector2 = Vector2(300,100)
 var target: Player = null
-var max_threshold: float = 900.0
-var target_threshold: float = 150.0
+var max_threshold: float = 1800.0
+var target_threshold: float = 300.0
 var dir: float = -1.0
 var is_alerting: bool = false
 var is_alerted: bool = false

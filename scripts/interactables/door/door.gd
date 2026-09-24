@@ -1,11 +1,11 @@
 extends Node2D
-class_name Lock
+class_name Door
 
 const DOOR_CLOSED = preload("uid://kyv1nm3ioy0")
 const DOOR_OPEN = preload("uid://bk66uajxkaxfj")
 @export var sprite_2d: Sprite2D
 
-signal trigger_lock(room: String, take_heart, taken_item)
+signal trigger_door(room: String, take_heart, taken_item)
 @export var trigger_area: Area2D
 @export var next_room: String
 @export var sfx_door: AudioStreamPlayer
@@ -24,4 +24,8 @@ func _ready() -> void:
 func _on_area_entered(area: Area2D) -> void:
 	if area is PlayerHitBox:
 		sfx_door.play()
-		trigger_lock.emit(next_room)
+		trigger_door.emit(next_room)
+
+func set_active(b: bool) -> void:
+		trigger_area.monitoring = b
+		trigger_area.monitorable = b

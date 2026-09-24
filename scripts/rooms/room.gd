@@ -23,7 +23,7 @@ const HEART_DROP = preload("uid://cvvxfxr3biyta")
 @export var reset_button: Button
 @export var sfx_player_walk_echo: AudioStreamPlayer
 
-@export var lock: Lock
+@export var door: Door
 
 var room: String
 var uid: String
@@ -45,7 +45,7 @@ func _ready() -> void:
 	yield_prompt.visible = false
 	room_options.visible = false
 	speed_run_timer.visible = true
-	lock.trigger_lock.connect(_on_lock_triggered)
+	door.trigger_door.connect(_on_door_triggered)
 	yes_button.pressed.connect(_on_yes_pressed)
 	no_button.pressed.connect(_on_no_pressed)
 	
@@ -62,7 +62,7 @@ func _ready() -> void:
 	
 	heart_bar.set_health(player.health)
 	heart_bar.set_max_health(player.max_health)
-	lock.is_open = false
+	door.is_open = false
 
 	for child in get_children():
 		if child is Slime:
@@ -114,8 +114,8 @@ func open_menu() -> void:
 	player.can_move = not in_options_menu
 	player.in_menu = in_options_menu
 
-func _on_lock_triggered(_room: String) -> void:
-	lock.is_open = true
+func _on_door_triggered(_room: String) -> void:
+	door.is_open = true
 	Music.switch_player(room_num + 8)
 	can_interact = false
 	player.can_move = false
@@ -149,7 +149,7 @@ func _on_yes_pressed() -> void:
 	SceneTransition.load_scene(room)
 
 func _on_no_pressed() -> void:
-	lock.is_open = false
+	door.is_open = false
 	Music.switch_player(room_num)
 	yield_prompt.visible = false
 	get_tree().paused = false

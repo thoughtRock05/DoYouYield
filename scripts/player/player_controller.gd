@@ -45,6 +45,7 @@ var has_dash: bool
 @export var wall_jump_timer: Timer
 @export var attack_timer: Timer
 @export var i_frame_timer: Timer
+@export var wall_slide_timer: Timer
 
 @export_group("SFX")
 @export var sfx_player_dash: AudioStreamPlayer
@@ -100,18 +101,18 @@ func _physics_process(delta: float) -> void:
 		can_dash = true
 		current_dash = DashType.NONE
 	var dir = Input.get_axis("left","right")
-	check_camera(delta)
+	peek_camera(delta)
 	update_facing(dir)
-	update_shield_visuals()
+	update_shield()
 	move_and_slide()
 	state_machine.physics_update(delta)
 
-func check_camera(delta) -> void:
+func peek_camera(delta) -> void:
 	var look_y: float = 0
 	if Input.is_action_pressed("up"):
-		look_y -= 50
+		look_y -= 125
 	elif Input.is_action_pressed("down"):
-		look_y += 50
+		look_y += 125
 	player_camera.position.y = lerp(player_camera.position.y, look_y, 10 * delta)
 
 func add_gravity(delta: float) -> void:
@@ -165,7 +166,7 @@ func face_right() -> void:
 	player_sprite.flip_h = false
 	sword_hit_box.position.x = 37.0
 
-func update_shield_visuals():
+func update_shield():
 	var shielding = (state_machine.current_state.name == "PlayerShield")
 	
 	shield_sprite.visible = shielding or is_dash_attack

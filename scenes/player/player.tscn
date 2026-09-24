@@ -314,7 +314,8 @@ size = Vector2(82, 92)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q2dwa"]
 size = Vector2(84, 94)
 
-[node name="Player" type="CharacterBody2D" unique_id=933572393 node_paths=PackedStringArray("player_sprite", "player_camera", "player_hitbox", "sword_hit_box", "shield_sprite", "shield_collision", "shield_hitbox", "coyote_timer", "buffer_timer", "dash_timer", "wall_jump_timer", "attack_timer", "i_frame_timer", "sfx_player_dash", "sfx_player_death", "sfx_player_hurt", "sfx_player_jump", "sfx_player_walk", "sfx_player_wall_slide", "sfx_heart_pickup", "sfx_sword_swing", "state_machine")]
+[node name="Player" type="CharacterBody2D" unique_id=933572393 node_paths=PackedStringArray("player_sprite", "player_camera", "player_hitbox", "sword_hit_box", "shield_sprite", "shield_collision", "shield_hitbox", "coyote_timer", "buffer_timer", "dash_timer", "wall_jump_timer", "attack_timer", "i_frame_timer", "wall_slide_timer", "sfx_player_dash", "sfx_player_death", "sfx_player_hurt", "sfx_player_jump", "sfx_player_walk", "sfx_player_wall_slide", "sfx_heart_pickup", "sfx_sword_swing", "state_machine")]
+collision_layer = 2
 script = ExtResource("1_6cv16")
 player_sprite = NodePath("PlayerSprite")
 player_camera = NodePath("PlayerCamera")
@@ -329,6 +330,7 @@ dash_timer = NodePath("Timers/DashTimer")
 wall_jump_timer = NodePath("Timers/WallJumpTimer")
 attack_timer = NodePath("Timers/AttackTimer")
 i_frame_timer = NodePath("Timers/IFrameTimer")
+wall_slide_timer = NodePath("Timers/WallSlideTimer")
 sfx_player_dash = NodePath("SFX/SfxPlayerDash")
 sfx_player_death = NodePath("SFX/SfxPlayerDeath")
 sfx_player_hurt = NodePath("SFX/SfxPlayerHurt")
@@ -349,6 +351,7 @@ process_mode = 1
 position = Vector2(21, -11)
 sprite_frames = SubResource("SpriteFrames_q2dwa")
 animation = &"idle"
+frame = 1
 
 [node name="PlayerCamera" type="Camera2D" parent="." unique_id=750898772]
 zoom = Vector2(0.625, 0.625)
@@ -369,7 +372,7 @@ shape = SubResource("RectangleShape2D_3jvd4")
 [node name="SwordHitBox" type="Area2D" parent="." unique_id=999956691]
 visible = false
 position = Vector2(37, -6)
-collision_layer = 2
+collision_layer = 32
 collision_mask = 4
 script = ExtResource("4_28m0y")
 
@@ -379,8 +382,8 @@ shape = SubResource("RectangleShape2D_l2tch")
 [node name="Shield" type="StaticBody2D" parent="." unique_id=1293064894]
 visible = false
 position = Vector2(0, -2)
-collision_layer = 2
-collision_mask = 0
+collision_layer = 32
+collision_mask = 4
 script = ExtResource("5_uniwh")
 
 [node name="ShieldSprite" type="Sprite2D" parent="Shield" unique_id=770510889]
@@ -419,6 +422,10 @@ one_shot = true
 wait_time = 0.35
 
 [node name="IFrameTimer" type="Timer" parent="Timers" unique_id=1978740903]
+one_shot = true
+
+[node name="WallSlideTimer" type="Timer" parent="Timers" unique_id=1989146289]
+wait_time = 0.1
 one_shot = true
 
 [node name="SFX" type="Node" parent="." unique_id=2031687970]

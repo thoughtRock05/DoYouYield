@@ -29,4 +29,5 @@ func physics_update(delta: float) -> void:
 	elif player.is_on_floor():
 		state_machine.change_state("PlayerIdle")
 	elif not player.is_on_wall():
+		await player.wall_slide_timer.timeout
 		state_machine.change_state("PlayerFall")

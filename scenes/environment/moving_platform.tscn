@@ -1,31 +1,52 @@
-[gd_scene format=4 uid="uid://4quhxmrnsq0u"]
+[gd_scene format=3 uid="uid://4quhxmrnsq0u"]
 
 [ext_resource type="Script" uid="uid://dv56kmattkwlt" path="res://scripts/environment/moving_platform.gd" id="1_ms375"]
 [ext_resource type="Texture2D" uid="uid://bp8uegy6ox6u8" path="res://assets/images/environment/tilesets/TILESET.png" id="2_1tdcd"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mb26n"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qdbol"]
+size = Vector2(32, 32)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qdbol"]
 texture = ExtResource("2_1tdcd")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+9:0/0 = 0
+10:0/0 = 0
+11:0/0 = 0
 0:1/0 = 0
 1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
 
-[sub_resource type="TileSet" id="TileSet_3jvd4"]
+[sub_resource type="TileSet" id="TileSet_l2tch"]
 tile_size = Vector2i(32, 32)
-sources/0 = SubResource("TileSetAtlasSource_mb26n")
+sources/1 = SubResource("TileSetAtlasSource_qdbol")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_l2tch"]
-size = Vector2(64, 32)
-
-[node name="MovingPlatform" type="AnimatableBody2D" unique_id=204123403]
+[node name="MovingPlatform" type="Node2D" unique_id=203841445 node_paths=PackedStringArray("animatable_body_2d", "collision_shape_2d", "tile_map_layer")]
 process_mode = 1
 script = ExtResource("1_ms375")
+animatable_body_2d = NodePath("AnimatableBody2D")
+collision_shape_2d = NodePath("AnimatableBody2D/CollisionShape2D")
+tile_map_layer = NodePath("AnimatableBody2D/TileMapLayer")
 
-[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=234184060]
-scale = Vector2(0.5, 0.5)
-tile_map_data = PackedByteArray("AAD/////AAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAD+////AAAAAAAAAAD+/wAAAAAAAAAAAAABAP//AAAAAAAAAAABAAAAAAAAAAAAAAA=")
-tile_set = SubResource("TileSet_3jvd4")
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="." unique_id=1362126317]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=183576832]
-shape = SubResource("RectangleShape2D_l2tch")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D" unique_id=183576832]
+position = Vector2(16, 16)
+shape = SubResource("RectangleShape2D_qdbol")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="AnimatableBody2D" unique_id=2009567663]
+tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0)
+tile_set = SubResource("TileSet_l2tch")

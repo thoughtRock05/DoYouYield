@@ -76,6 +76,7 @@ size = Vector2(28, 24)
 size = Vector2(28, 24)
 
 [node name="HeartDrop" type="RigidBody2D" unique_id=1066314477 node_paths=PackedStringArray("animated_sprite_2d", "audio_stream_player", "heart_box")]
+collision_layer = 16
 script = ExtResource("1_b8qtl")
 animated_sprite_2d = NodePath("AnimatedSprite2D")
 audio_stream_player = NodePath("SfxHeartShimmer")

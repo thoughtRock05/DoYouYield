@@ -1,11 +1,12 @@
-[gd_scene format=4 uid="uid://dtlklnlt0xd73"]
+[gd_scene format=4 uid="uid://bnob7ju0hgse4"]
 
 [ext_resource type="PackedScene" uid="uid://ddtrp88psneyf" path="res://scenes/rooms/room.tscn" id="1_scgta"]
 [ext_resource type="PackedScene" uid="uid://c3bfdx54pcoxp" path="res://scenes/enemies/slime/enemy_slime.tscn" id="2_hnbyo"]
 [ext_resource type="PackedScene" uid="uid://cqfry822lc17w" path="res://scenes/environment/hazards/acid_pit/acid_pit.tscn" id="3_fbq1s"]
 
-[node name="Room1" unique_id=671016034 instance=ExtResource("1_scgta")]
+[node name="Room 1" unique_id=671016034 node_paths=PackedStringArray("door") instance=ExtResource("1_scgta")]
 room_num = 1
+door = NodePath("Door")
 taken_item = "double jump"
 tiles_x = 101
 tiles_y = 48
@@ -22,7 +23,7 @@ tile_map_data = PackedByteArray("AAAAAAsAAQAAAAAAAAABAAsAAQAAAAAAAAACAAsAAQAAAAA
 [node name="Background" parent="." index="4" unique_id=1723316613]
 tile_map_data = PackedByteArray("AABPACEAAAAHAAUAAAA=")
 
-[node name="Lock" parent="." index="5" unique_id=599625686]
+[node name="Door" parent="." index="5" unique_id=599625686]
 position = Vector2(3168, 863)
 next_room = "uid://dppe7s7bpfeof"
 

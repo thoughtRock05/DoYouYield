@@ -67,8 +67,8 @@ size = Vector2(40, 36)
 
 [node name="EnemySlime" type="CharacterBody2D" unique_id=1893676253 node_paths=PackedStringArray("sprite", "alert", "hitbox", "sfx_slime_damage", "sfx_slime_aggro", "sfx_slime_death", "sfx_slime_bonk")]
 process_mode = 1
-collision_layer = 2
-collision_mask = 3
+collision_layer = 4
+collision_mask = 35
 script = ExtResource("1_khk2i")
 sprite = NodePath("AnimatedSprite2D")
 alert = NodePath("Alert")
@@ -94,7 +94,7 @@ texture = ExtResource("3_1trss")
 
 [node name="EnemyHitBox" type="Area2D" parent="." unique_id=168891118]
 collision_layer = 4
-collision_mask = 2
+collision_mask = 32
 script = ExtResource("4_8is0w")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitBox" unique_id=1602929685]

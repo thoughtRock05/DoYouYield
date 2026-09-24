@@ -445,7 +445,7 @@ cache/0/50/0/glyphs/56/size = Vector2(30, 40)
 cache/0/50/0/glyphs/56/uv_rect = Rect2(96, 1, 30, 40)
 cache/0/50/0/glyphs/56/texture_idx = 0
 
-[node name="Room" type="Node2D" unique_id=671016034 node_paths=PackedStringArray("player", "heart_bar", "yield_prompt", "yes_button", "no_button", "room_options", "back_button", "speed_run_timer", "main_menu_button", "reset_button", "sfx_player_walk_echo", "lock")]
+[node name="Room" type="Node2D" unique_id=671016034 node_paths=PackedStringArray("player", "heart_bar", "yield_prompt", "yes_button", "no_button", "room_options", "back_button", "speed_run_timer", "main_menu_button", "reset_button", "sfx_player_walk_echo", "door")]
 script = ExtResource("1_1fuux")
 player = NodePath("Player")
 heart_bar = NodePath("CanvasLayer/HeartBar")
@@ -459,7 +459,7 @@ main_menu = &"uid://5pufmg2xnm6j"
 main_menu_button = NodePath("CanvasLayer/RoomOptions/Main Menu")
 reset_button = NodePath("CanvasLayer/RoomOptions/Reset")
 sfx_player_walk_echo = NodePath("SfxPlayerWalkEcho")
-lock = NodePath("Door")
+door = NodePath("Door")
 
 [node name="Parallax" parent="." unique_id=991567529 instance=ExtResource("2_c7djm")]
 

@@ -9,7 +9,7 @@ tiles_x = 48
 tiles_y = 27
 
 [node name="Parallax" parent="." index="0" unique_id=991567529]
-scale = Vector2(2.485, 2.485)
+position = Vector2(-23, -15)
 
 [node name="Player" parent="." index="1" unique_id=933572393]
 position = Vector2(36, 838)
@@ -22,7 +22,7 @@ tile_map_data = PackedByteArray("AAADABoAAAAAAAAAAAADABgAAAAAAAAAAAADABYAAAAAAAA
 
 [node name="Door" parent="." index="5" unique_id=599625686]
 position = Vector2(1499, 834)
-next_room = "uid://dtlklnlt0xd73"
+next_room = "uid://bnob7ju0hgse4"
 
 [node name="EnemySlime" parent="." index="6" unique_id=1893676253 instance=ExtResource("8_epks6")]
 position = Vector2(1384, 832)
