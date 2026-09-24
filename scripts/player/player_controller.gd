@@ -239,6 +239,12 @@ func set_camera_boundaries(x: int, y: int) -> void:
 	player_camera.limit_bottom = (y + 1) * tile_size
 	player_camera.limit_left = tile_size * -1
 	player_camera.limit_right = (x + 1) * tile_size
+	
+	player_camera.LEVEL_MAX_WIDTH = (x + 2) * tile_size
+	player_camera.LEVEL_MAX_HEIGHT = (y + 2) * tile_size
+	
+	player_camera._adjust_camera_zoom()
+	
 	player_camera.reset_smoothing()
 
 func _on_dash_timer_timeout() -> void:

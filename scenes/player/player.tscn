@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://uamxcy3vvgfm" path="res://scripts/player/player_controller.gd" id="1_6cv16"]
 [ext_resource type="Texture2D" uid="uid://bxqj6o2pt2nn7" path="res://assets/images/player/knight+sprites--actual FINAL2!.png" id="2_j4nxn"]
+[ext_resource type="Script" uid="uid://obinpft3phee" path="res://scripts/player/player_camera.gd" id="3_28m0y"]
 [ext_resource type="Script" uid="uid://c4fkmk60pxjgo" path="res://scripts/player/player_hitbox.gd" id="3_j4nxn"]
 [ext_resource type="Script" uid="uid://bmxixknxbxqtc" path="res://scripts/player/sword_hit_box.gd" id="4_28m0y"]
 [ext_resource type="Script" uid="uid://dwydjsijwnoq7" path="res://scripts/player/shield_container.gd" id="5_uniwh"]
@@ -359,6 +360,7 @@ process_callback = 0
 limit_smoothed = true
 position_smoothing_enabled = true
 position_smoothing_speed = 12.94
+script = ExtResource("3_28m0y")
 
 [node name="PlayerHitbox" type="Area2D" parent="." unique_id=1544907735]
 visible = false
