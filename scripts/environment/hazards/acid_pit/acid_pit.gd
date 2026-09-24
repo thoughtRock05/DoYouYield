@@ -5,6 +5,7 @@ class_name AcidPit
 @export var sfx_acid_bubble_pop: AudioStreamPlayer2D
 @export var collision_shape_2d: CollisionShape2D
 @export var point_light_2d: PointLight2D
+@export var acid_cooldown: Timer
 
 @export_range(1, 100, 1) var x_size: int = 1:
 	set(value):
@@ -56,8 +57,13 @@ func _update_shape_size() -> void:
 		update_configuration_warnings()
 		notify_property_list_changed()
 
-#func _process(_delta: float) -> void:
-	#if not Engine.is_editor_hint():
-		#if randf_range(1, 100) < 30:
-			#if sfx_acid_bubble_pop and not sfx_acid_bubble_pop.playing: 
-				#sfx_acid_bubble_pop.play()
+func _process(_delta: float) -> void:
+	if not Engine.is_editor_hint():
+		if not acid_cooldown.is_stopped():
+			return
+			
+		if randf_range(1, 100) < 30:
+			if sfx_acid_bubble_pop and not sfx_acid_bubble_pop.playing: 
+				sfx_acid_bubble_pop.play()
+		
+		acid_cooldown.start()
