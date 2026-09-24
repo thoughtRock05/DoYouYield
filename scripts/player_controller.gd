@@ -5,14 +5,14 @@ signal reset_room
 signal set_health(health: int)
 @warning_ignore("unused_signal") signal set_max_health(max_health: int)
 
-const SPEED = 250.0
+const SPEED = 325.0
 const WALK_DECEL = 1200.0
-const JUMP_VELOCITY = -315.0
+const JUMP_VELOCITY = -445.0
 const WALL_JUMP_VELOCITY = -380.0
 const WALL_JUMP_PUSH = 150.0
 const WALL_SLIDE_SPEED = 90.0
-const DASH_SPEED = 500.0
-const DASH_DURATION = 0.25
+const DASH_SPEED = 650.0
+const DASH_DURATION = 0.35
 const DASH_DECEL = 2500.0
 const ATTACK_DECEL = 700.0
 const KNOCKBACK_DECEL = 1200.0
@@ -143,21 +143,23 @@ func update_facing(dir: float):
 	if dir != 0:
 		if current_state_name == "jump" and velocity.x != 0:
 			if velocity.x < 0:
-				player_sprite.position.x = -8.0
-				player_sprite.flip_h = true
-				sword_hit_box.position.x = -30.0
+				face_left()
 			elif velocity.x > 0:
-				player_sprite.position.x = 11.0
-				player_sprite.flip_h = false
-				sword_hit_box.position.x = 30.0
+				face_right()
 		elif dir < 0:
-			player_sprite.position.x = -8.0
-			player_sprite.flip_h = true
-			sword_hit_box.position.x = -30.0
+			face_left()
 		elif dir > 0:
-			player_sprite.position.x = 11.0
-			player_sprite.flip_h = false
-			sword_hit_box.position.x = 30.0
+			face_right()
+
+func face_left() -> void:
+	player_sprite.position.x = -21.0
+	player_sprite.flip_h = true
+	sword_hit_box.position.x = -37.0
+
+func face_right() -> void:
+	player_sprite.position.x = 21.0
+	player_sprite.flip_h = false
+	sword_hit_box.position.x = 37.0
 
 func update_shield_visuals():
 	var shielding = (state_machine.current_state.name == "PlayerShield")
@@ -227,7 +229,7 @@ func die() -> void:
 		reset_room.emit()
 
 func set_camera_boundaries(x: int, y: int) -> void:
-	var tile_size: int = 16
+	var tile_size: int = 32
 	player_camera.limit_top = tile_size * -1
 	player_camera.limit_bottom = (y + 1) * tile_size
 	player_camera.limit_left = tile_size * -1

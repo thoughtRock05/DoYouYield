@@ -10,52 +10,52 @@
 [ext_resource type="AudioStream" uid="uid://k4jmx74oullw" path="res://assets/audio/sfx_slime_death.wav" id="7_21qb3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3jvd4"]
-size = Vector2(20, 18)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1trss"]
-atlas = ExtResource("2_khk2i")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_y5ckx"]
-atlas = ExtResource("2_khk2i")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ecc73"]
-atlas = ExtResource("2_khk2i")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_afdiv"]
-atlas = ExtResource("2_khk2i")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mo75l"]
-atlas = ExtResource("2_khk2i")
-region = Rect2(128, 0, 32, 32)
+size = Vector2(40, 36)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_21qb3"]
 atlas = ExtResource("2_khk2i")
-region = Rect2(160, 0, 32, 32)
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u343j"]
+atlas = ExtResource("2_khk2i")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s5yrl"]
+atlas = ExtResource("2_khk2i")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xl3ot"]
+atlas = ExtResource("2_khk2i")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1krin"]
+atlas = ExtResource("2_khk2i")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fa152"]
+atlas = ExtResource("2_khk2i")
+region = Rect2(320, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3jvd4"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1trss")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_y5ckx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ecc73")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_afdiv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mo75l")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_21qb3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u343j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s5yrl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xl3ot")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1krin")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fa152")
 }],
 "loop": 1,
 "name": &"default",
@@ -63,7 +63,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l2tch"]
-size = Vector2(20, 18)
+size = Vector2(40, 36)
 
 [node name="EnemySlime" type="CharacterBody2D" unique_id=1893676253 node_paths=PackedStringArray("sprite", "alert", "hitbox", "sfx_slime_damage", "sfx_slime_aggro", "sfx_slime_death", "sfx_slime_bonk")]
 process_mode = 1
@@ -83,13 +83,13 @@ position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_3jvd4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=346529562]
-position = Vector2(0, -6)
+position = Vector2(0, -13)
 sprite_frames = SubResource("SpriteFrames_3jvd4")
 frame_progress = 0.98137534
 
 [node name="Alert" type="Sprite2D" parent="." unique_id=1732907874]
 z_index = 3
-position = Vector2(0, -17)
+position = Vector2(0, -27)
 texture = ExtResource("3_1trss")
 
 [node name="EnemyHitBox" type="Area2D" parent="." unique_id=168891118]

@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://csnx16rhwb5kr"]
+
+[ext_resource type="Texture2D" uid="uid://dcnx8r8o84403" path="res://assets/cave4.png" id="4_vhro0"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4jrw4"]
+load_path = "res://.godot/imported/cave1.png-d367637465296f554d8ec7697d09cdef.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_apqbr"]
+load_path = "res://.godot/imported/cave2.png-d0bf584b41b69582e0db3189c26da809.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vu5xb"]
+load_path = "res://.godot/imported/cave3.png-e181f0e5109535deda3e273cc118fb18.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vlveh"]
+load_path = "res://.godot/imported/cave5.png-9fd293059b2986258d699eef5aaf7b10.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8rxox"]
+load_path = "res://.godot/imported/cave6.png-7a4739659b0edcb126bd3ef2918c1d02.ctex"
+
+[node name="Parallax" type="Node2D" unique_id=991567529]
+z_index = -3
+
+[node name="ParallaxLayer0" type="Parallax2D" parent="." unique_id=1236795857]
+scroll_scale = Vector2(0, 0)
+repeat_size = Vector2(640, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer0" unique_id=535253742]
+texture = SubResource("CompressedTexture2D_4jrw4")
+centered = false
+
+[node name="ParallaxLayer2" type="Parallax2D" parent="." unique_id=728722111]
+scroll_scale = Vector2(0.1, 0.1)
+repeat_size = Vector2(640, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer2" unique_id=3426595]
+texture = SubResource("CompressedTexture2D_apqbr")
+centered = false
+
+[node name="ParallaxLayer3" type="Parallax2D" parent="." unique_id=2093327791]
+scroll_scale = Vector2(0.3, 0.3)
+repeat_size = Vector2(640, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer3" unique_id=1559193388]
+texture = SubResource("CompressedTexture2D_vu5xb")
+centered = false
+
+[node name="ParallaxLayer4" type="Parallax2D" parent="." unique_id=1140365449]
+scroll_scale = Vector2(0.5, 0.5)
+repeat_size = Vector2(640, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer4" unique_id=1536582885]
+texture = ExtResource("4_vhro0")
+centered = false
+
+[node name="ParallaxLayer5" type="Parallax2D" parent="." unique_id=118618959]
+scroll_scale = Vector2(0.7, 0.7)
+repeat_size = Vector2(640, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer5" unique_id=250422449]
+texture = SubResource("CompressedTexture2D_vlveh")
+centered = false
+
+[node name="ParallaxLayer6" type="Parallax2D" parent="." unique_id=975948577]
+scroll_scale = Vector2(0.9, 0.9)
+repeat_size = Vector2(640, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer6" unique_id=2060782993]
+texture = SubResource("CompressedTexture2D_8rxox")
+centered = false
+
+[node name="ParallaxLayer7" type="Parallax2D" parent="." unique_id=1111327874]
+scroll_scale = Vector2(0.9, 0.9)
+repeat_size = Vector2(640, 0)
+repeat_times = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer7" unique_id=1109891764]
+centered = false

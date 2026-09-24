@@ -1,58 +1,31 @@
 [gd_scene format=4 uid="uid://bjwbmwcpnr8vf"]
 
 [ext_resource type="PackedScene" uid="uid://ddtrp88psneyf" path="res://scenes/rooms/room.tscn" id="1_qm1r8"]
-[ext_resource type="Texture2D" uid="uid://c5n7e2gg00frh" path="res://assets/dragon1.png" id="2_xdi0x"]
-[ext_resource type="Texture2D" uid="uid://hs5lv437bv7a" path="res://assets/dragon2.png" id="3_epks6"]
-[ext_resource type="Texture2D" uid="uid://bf0clp6oh6dh4" path="res://assets/dragon3.png" id="4_b00dr"]
-[ext_resource type="Texture2D" uid="uid://bysmgw21841ql" path="res://assets/dragon4.png" id="5_kf5e4"]
-[ext_resource type="Texture2D" uid="uid://cwyfwoww8n4s" path="res://assets/dragon5.png" id="6_yg2jv"]
-[ext_resource type="Texture2D" uid="uid://cyosr3m66pkqq" path="res://assets/dragonfinal.png" id="7_xdi0x"]
 [ext_resource type="PackedScene" uid="uid://c3bfdx54pcoxp" path="res://scenes/enemy_slime.tscn" id="8_epks6"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_epks6"]
 
 [node name="Room0" unique_id=671016034 instance=ExtResource("1_qm1r8")]
 room_num = 0
 tiles_x = 48
 tiles_y = 27
 
-[node name="Node2D" parent="." index="0" unique_id=1696102987]
-scale = Vector2(0.655, 0.655)
-
-[node name="Sprite2D" parent="Node2D/ParallaxLayer1" parent_id_path=PackedInt32Array(852846276) index="0" unique_id=1943610877]
-texture = ExtResource("2_xdi0x")
-
-[node name="Sprite2D" parent="Node2D/ParallaxLayer2" parent_id_path=PackedInt32Array(298795171) index="0" unique_id=1085061654]
-texture = ExtResource("3_epks6")
-
-[node name="Sprite2D" parent="Node2D/ParallaxLayer3" parent_id_path=PackedInt32Array(885096743) index="0" unique_id=1339255661]
-texture = ExtResource("4_b00dr")
-
-[node name="Sprite2D" parent="Node2D/ParallaxLayer4" parent_id_path=PackedInt32Array(262871249) index="0" unique_id=2087034164]
-texture = ExtResource("5_kf5e4")
-
-[node name="Sprite2D" parent="Node2D/ParallaxLayer5" parent_id_path=PackedInt32Array(105208814) index="0" unique_id=112949159]
-texture = ExtResource("6_yg2jv")
-
-[node name="Sprite2D" parent="Node2D/ParallaxLayer6" parent_id_path=PackedInt32Array(2014147915) index="0" unique_id=280523691]
-texture = SubResource("CompressedTexture2D_epks6")
-
-[node name="ParallaxLayer7" type="Parallax2D" parent="Node2D" index="6" unique_id=1540800122]
-scroll_scale = Vector2(0.8, 0.8)
-
-[node name="Sprite2D" type="Sprite2D" parent="Node2D/ParallaxLayer7" index="0" unique_id=280265247]
-texture = ExtResource("7_xdi0x")
-centered = false
+[node name="Parallax" parent="." index="0" unique_id=991567529]
+scale = Vector2(2.485, 2.485)
 
 [node name="Player" parent="." index="1" unique_id=933572393]
-position = Vector2(25, 411)
+position = Vector2(36, 838)
 
 [node name="Middle Ground" parent="." index="2" unique_id=1312469661]
 tile_map_data = PackedByteArray("AAD/////AQAAAAAAAAD//wAAAQAEAAAAAAD//wEAAQAEAAAAAAD//wIAAQAEAAAAAAD//wMAAQAEAAAAAAD//wQAAQAEAAAAAAD//wUAAQAEAAAAAAD//wYAAQAEAAAAAAD//wcAAQAEAAAAAAD//wgAAQAEAAAAAAD//wkAAQAEAAAAAAD//woAAQAEAAAAAAD//wsAAQAEAAAAAAD//wwAAQAEAAAAAAD//w0AAQAEAAAAAAD//w4AAQAEAAAAAAD//w8AAQAEAAAAAAD//xAAAQAEAAAAAAD//xEAAQAEAAAAAAD//xIAAQAEAAAAAAD//xMAAQAEAAAAAAD//xQAAQAEAAAAAAD//xUAAQAEAAAAAAD//xYAAQAEAAAAAAAoAP//AQAGAAAAAAAnAP//AQAGAAAAAAAmAP//AQAGAAAAAAAlAP//AQAGAAAAAAAkAP//AQAGAAAAAAAjAP//AQAGAAAAAAAiAP//AQAGAAAAAAAhAP//AQAGAAAAAAAgAP//AQAGAAAAAAAfAP//AQAGAAAAAAAeAP//AQAGAAAAAAAdAP//AQAGAAAAAAAcAP//AQAGAAAAAAAbAP//AQAGAAAAAAAaAP//AQAGAAAAAAAZAP//AQAGAAAAAAAYAP//AQAGAAAAAAAXAP//AQAGAAAAAAAWAP//AQAGAAAAAAAVAP//AQAGAAAAAAAUAP//AQAGAAAAAAATAP//AQAGAAAAAAASAP//AQAGAAAAAAARAP//AQAGAAAAAAAQAP//AQAGAAAAAAAPAP//AQAGAAAAAAAOAP//AQAGAAAAAAANAP//AQAGAAAAAAAMAP//AQAGAAAAAAALAP//AQAGAAAAAAAKAP//AQAGAAAAAAAJAP//AQAGAAAAAAAIAP//AQAGAAAAAAAHAP//AQAGAAAAAAAGAP//AQAGAAAAAAAFAP//AQAGAAAAAAAEAP//AQAGAAAAAAADAP//AQAGAAAAAAACAP//AQAGAAAAAAABAP//AQAGAAAAAAAAAP//AQAGAAAAAAApAP//AQAGAAAAAAAqAP//AQAGAAAAAAArAP//AQAGAAAAAAAsAP//AQAGAAAAAAAtAP//AQAGAAAAAAAuAP//AQAGAAAAAAAvAP//AQAGAAAAAAAwAAAAAQAIAAAAAAAwAAEAAQAIAAAAAAAwAAIAAQAIAAAAAAAwAAMAAQAIAAAAAAAwAAQAAQAIAAAAAAAwAAUAAQAIAAAAAAAwAAYAAQAIAAAAAAAwAAcAAQAIAAAAAAAwAAgAAQAIAAAAAAAwAAkAAQAIAAAAAAAwAAoAAQAIAAAAAAAwAAsAAQAIAAAAAAAwAAwAAQAIAAAAAAAwAA0AAQAIAAAAAAAwAA4AAQAIAAAAAAAwAA8AAQAIAAAAAAAwABAAAQAIAAAAAAAwABEAAQAIAAAAAAAwABIAAQAIAAAAAAAwABMAAQAIAAAAAAAwABQAAQAIAAAAAAAwABUAAQAIAAAAAAAwABYAAQAIAAAAAAAwAP//AQAAAAAAAAD//xsAAQAAAAAAAAAAABsAAQABAAAAAAABABsAAQABAAAAAAACABsAAQABAAAAAAADABsAAQABAAAAAAAEABsAAQABAAAAAAAFABsAAQABAAAAAAAGABsAAQABAAAAAAAHABsAAQABAAAAAAAIABsAAQABAAAAAAAJABsAAQABAAAAAAAKABsAAQABAAAAAAALABsAAQABAAAAAAAMABsAAQABAAAAAAANABsAAQABAAAAAAAOABsAAQABAAAAAAAPABsAAQABAAAAAAAQABsAAQABAAAAAAARABsAAQABAAAAAAASABsAAQABAAAAAAATABsAAQABAAAAAAAUABsAAQABAAAAAAAVABsAAQABAAAAAAAWABsAAQABAAAAAAAXABsAAQABAAAAAAAYABsAAQABAAAAAAAZABsAAQABAAAAAAAaABsAAQABAAAAAAAbABsAAQABAAAAAAAcABsAAQABAAAAAAAdABsAAQABAAAAAAAeABsAAQABAAAAAAAfABsAAQABAAAAAAAgABsAAQABAAAAAAAhABsAAQABAAAAAAAiABsAAQABAAAAAAAjABsAAQABAAAAAAAkABsAAQABAAAAAAAlABsAAQABAAAAAAAmABsAAQABAAAAAAAnABsAAQABAAAAAAAoABsAAQABAAAAAAApABsAAQABAAAAAAAqABsAAQABAAAAAAArABsAAQABAAAAAAAsABsAAQABAAAAAAAtABsAAQABAAAAAAAuABsAAQABAAAAAAAvABsAAQABAAAAAAAwABsAAQAAAAAAAAD//xcAAQAEAAAAAAD//xgAAQAEAAAAAAD//xkAAQAEAAAAAAD//xoAAQAEAAAAAAAwABcAAQAIAAAAAAAwABgAAQAIAAAAAAAwABkAAQAIAAAAAAAwABoAAQAIAAAAAAA=")
 
+[node name="Background" parent="." index="4" unique_id=1723316613]
+tile_map_data = PackedByteArray("AAADABoAAAAAAAAAAAADABgAAAAAAAAAAAADABYAAAAAAAAAAAA=")
+
 [node name="Lock" parent="." index="5" unique_id=599625686]
-position = Vector2(753, 415)
+position = Vector2(1499, 834)
 next_room = "uid://dtlklnlt0xd73"
+
+[node name="EnemySlime" parent="." index="6" unique_id=1893676253 instance=ExtResource("8_epks6")]
+position = Vector2(1384, 832)
 
 [node name="RoomOptions" parent="CanvasLayer" parent_id_path=PackedInt32Array(1494660866) index="1" unique_id=650667937]
 process_mode = 2
@@ -64,6 +37,3 @@ visible = true
 z_index = 1
 text = "In order to leave, you must give what you need most.
 Are you ready?"
-
-[node name="EnemySlime" parent="." index="8" unique_id=1893676253 instance=ExtResource("8_epks6")]
-position = Vector2(506, 359.00003)

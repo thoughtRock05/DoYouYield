@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://bcl7c36li0g8" path="res://assets/audio/sfx_door.wav" id="3_40mgl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3jvd4"]
-size = Vector2(16, 29)
+size = Vector2(32, 58)
 
 [node name="Lock" type="Node2D" unique_id=599625686 node_paths=PackedStringArray("sprite_2d", "trigger_area", "sfx_door")]
 z_index = -1

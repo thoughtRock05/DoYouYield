@@ -5,51 +5,41 @@
 [ext_resource type="Script" uid="uid://b6qka5kmnr4t4" path="res://scripts/heart_box.gd" id="2_napxk"]
 [ext_resource type="AudioStream" uid="uid://sqvu2eyxwcta" path="res://assets/audio/sfx_heart_shimmer_bitcrush_loopable.mp3" id="4_n1cnx"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_napxk"]
-atlas = ExtResource("1_a4x2y")
-region = Rect2(0, 0, 13, 11)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vpq05"]
-atlas = ExtResource("1_a4x2y")
-region = Rect2(13, 0, 13, 11)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_n1cnx"]
 atlas = ExtResource("1_a4x2y")
-region = Rect2(26, 0, 13, 11)
+region = Rect2(0, 0, 26, 22)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pthqn"]
 atlas = ExtResource("1_a4x2y")
-region = Rect2(39, 0, 13, 11)
+region = Rect2(26, 0, 26, 22)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4ydvc"]
 atlas = ExtResource("1_a4x2y")
-region = Rect2(52, 0, 13, 11)
+region = Rect2(52, 0, 26, 22)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w410m"]
 atlas = ExtResource("1_a4x2y")
-region = Rect2(65, 0, 13, 11)
+region = Rect2(78, 0, 26, 22)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bu5eg"]
 atlas = ExtResource("1_a4x2y")
-region = Rect2(78, 0, 13, 11)
+region = Rect2(104, 0, 26, 22)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_868y2"]
 atlas = ExtResource("1_a4x2y")
-region = Rect2(91, 0, 13, 11)
+region = Rect2(130, 0, 26, 22)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nct8a"]
 atlas = ExtResource("1_a4x2y")
-region = Rect2(104, 0, 13, 11)
+region = Rect2(182, 0, 26, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_egiii"]
+atlas = ExtResource("1_a4x2y")
+region = Rect2(156, 0, 26, 22)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3jvd4"]
 animations = [{
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_napxk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vpq05")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_n1cnx")
 }, {
@@ -70,6 +60,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_nct8a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_egiii")
 }],
 "loop": 1,
 "name": &"default",
@@ -77,10 +70,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3jvd4"]
-size = Vector2(14, 12)
+size = Vector2(28, 24)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a4x2y"]
-size = Vector2(14, 12)
+size = Vector2(28, 24)
 
 [node name="HeartDrop" type="RigidBody2D" unique_id=1066314477 node_paths=PackedStringArray("animated_sprite_2d", "audio_stream_player", "heart_box")]
 script = ExtResource("1_vpq05")
