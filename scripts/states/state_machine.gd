@@ -6,10 +6,10 @@ class_name StateMachine
 var current_state: State
 var states: Dictionary = {}
 
-func init(player: Player) -> void:
+func init(actor: CharacterBody2D) -> void:
 	for child in get_children():
 		if child is State:
-			child.player = player
+			child.actor = actor
 			child.state_machine = self
 			states[child.name] = child
 	

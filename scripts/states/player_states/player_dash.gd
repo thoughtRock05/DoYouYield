@@ -4,63 +4,63 @@ class_name PlayerDash
 func enter_state(_msg := {}) -> void:
 	var input_x: float = Input.get_axis("left", "right")
 	if input_x != 0:
-		player.dash_dir = Vector2(input_x, 0).normalized()
+		actor.dash_dir = Vector2(input_x, 0).normalized()
 	else:
-		var dash_x = -1 if player.player_sprite.flip_h else 1
-		player.dash_dir = Vector2(dash_x, 0)
+		var dash_x = -1 if actor.player_sprite.flip_h else 1
+		actor.dash_dir = Vector2(dash_x, 0)
 	
-	if player.is_on_floor():
-		player.current_dash = player.DashType.GROUND
+	if actor.is_on_floor():
+		actor.current_dash = actor.DashType.GROUND
 	else:
-		player.current_dash = player.DashType.AIR
+		actor.current_dash = actor.DashType.AIR
 	
-	player.player_sprite.play("dash")
-	player.can_dash = false
-	player.velocity = player.dash_dir * player.DASH_SPEED
-	player.velocity.y = 0
+	actor.player_sprite.play("dash")
+	actor.can_dash = false
+	actor.velocity = actor.dash_dir * actor.DASH_SPEED
+	actor.velocity.y = 0
 	
-	if not player.sfx_player_dash.is_playing():
-		player.sfx_player_dash.play()
-	player.dash_timer.start(player.DASH_DURATION)
+	if not actor.sfx_player_dash.is_playing():
+		actor.sfx_player_dash.play()
+	actor.dash_timer.start(actor.DASH_DURATION)
 
 func physics_update(delta: float) -> void:
 	var dir = Input.get_axis("left", "right")
 	
-	if Input.is_action_just_pressed("shield") and player.has_shield:
-		player.dash_timer.stop()
-		if player.current_dash == player.DashType.GROUND:
-			player.can_dash = true
-			player.current_dash = player.DashType.AIR
+	if Input.is_action_just_pressed("shield") and actor.has_shield:
+		actor.dash_timer.stop()
+		if actor.current_dash == actor.DashType.GROUND:
+			actor.can_dash = true
+			actor.current_dash = actor.DashType.AIR
 	
-	if Input.is_action_just_pressed("attack") and player.has_sword:
-		player.dash_timer.stop()
-		if player.current_dash == player.DashType.GROUND:
-				player.can_dash = true
-				player.current_dash = player.DashType.AIR
-		player.velocity = player.dash_dir * player.DASH_SPEED * 0.85
+	if Input.is_action_just_pressed("attack") and actor.has_sword:
+		actor.dash_timer.stop()
+		if actor.current_dash == actor.DashType.GROUND:
+				actor.can_dash = true
+				actor.current_dash = actor.DashType.AIR
+		actor.velocity = actor.dash_dir * actor.DASH_SPEED * 0.85
 		state_machine.change_state("PlayerAttack")
 		return
 	
-	if not player.dash_timer.is_stopped():
-		player.velocity = player.dash_dir * player.DASH_SPEED
-		player.velocity.y = 0
+	if not actor.dash_timer.is_stopped():
+		actor.velocity = actor.dash_dir * actor.DASH_SPEED
+		actor.velocity.y = 0
 	else:
-		player.add_gravity(delta)
-		var target = dir * player.SPEED
-		player.velocity.x = move_toward(player.velocity.x, target, player.DASH_DECEL * delta)
+		actor.add_gravity(delta)
+		var target = dir * actor.SPEED
+		actor.velocity.x = move_toward(actor.velocity.x, target, actor.DASH_DECEL * delta)
 		
-		if abs(player.velocity.x) > player.SPEED:
+		if abs(actor.velocity.x) > actor.SPEED:
 			if dir != 0:
-				player.velocity.x = move_toward(player.velocity.x, dir * player.SPEED, player.DASH_DECEL * delta)
+				actor.velocity.x = move_toward(actor.velocity.x, dir * actor.SPEED, actor.DASH_DECEL * delta)
 			else:
-				player.velocity.x = move_toward(player.velocity.x, 0, player.DASH_DECEL * delta)
+				actor.velocity.x = move_toward(actor.velocity.x, 0, actor.DASH_DECEL * delta)
 		
-		if player.is_on_floor():
+		if actor.is_on_floor():
 			if dir == 0.0:
 				state_machine.change_state("PlayerIdle")
 			else:
 				state_machine.change_state("PlayerWalk")
-		elif player.is_on_wall():
+		elif actor.is_on_wall():
 			state_machine.change_state("PlayerFall")
 		else:
 			state_machine.change_state("PlayerFall")

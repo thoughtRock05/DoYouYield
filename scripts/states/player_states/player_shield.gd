@@ -2,11 +2,11 @@ extends State
 class_name PlayerShield
 
 func enter_state(_msg := {}) -> void:
-	player.player_sprite.play("idle")
+	actor.player_sprite.play("idle")
 
 func physics_update(delta: float) -> void:
-	player.velocity.x = move_toward(player.velocity.x, 0, player.ATTACK_DECEL * delta)
-	player.add_gravity(delta)
+	actor.velocity.x = move_toward(actor.velocity.x, 0, actor.ATTACK_DECEL * delta)
+	actor.add_gravity(delta)
 	
-	if not Input.is_action_pressed("shield") or not player.has_shield or player.in_menu:
+	if not Input.is_action_pressed("shield") or not actor.has_shield or actor.in_menu:
 		state_machine.change_state("PlayerIdle")

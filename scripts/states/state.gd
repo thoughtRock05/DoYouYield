@@ -1,7 +1,7 @@
 extends Node
 class_name State
 
-var player: Player
+var actor: CharacterBody2D
 var state_machine: StateMachine
 
 func enter_state(_msg: Dictionary = {}) -> void:

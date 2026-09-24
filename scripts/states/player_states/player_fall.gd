@@ -2,35 +2,35 @@ extends State
 class_name PlayerFall
 
 func enter_state(_msg := {}) -> void:
-	player.player_sprite.play("fall")
+	actor.player_sprite.play("fall")
 	
 
 func physics_update(delta: float) -> void:
 	var dir = Input.get_axis("left", "right")
-	player.add_gravity(delta)
+	actor.add_gravity(delta)
 	
-	if abs(player.velocity.x) > player.SPEED:
+	if abs(actor.velocity.x) > actor.SPEED:
 		if dir == 0:
-			player.velocity.x = move_toward(player.velocity.x, 0, player.DASH_DECEL * delta)
+			actor.velocity.x = move_toward(actor.velocity.x, 0, actor.DASH_DECEL * delta)
 		else:
-			player.velocity.x = move_toward(player.velocity.x, dir * player.SPEED, player.DASH_DECEL * delta)
+			actor.velocity.x = move_toward(actor.velocity.x, dir * actor.SPEED, actor.DASH_DECEL * delta)
 	else:
 		if dir != 0:
-			player.velocity.x = move_toward(player.velocity.x, dir * player.SPEED, player.SPEED * 8.0 * delta)
+			actor.velocity.x = move_toward(actor.velocity.x, dir * actor.SPEED, actor.SPEED * 8.0 * delta)
 		else:
-			player.velocity.x = move_toward(player.velocity.x, 0, player.WALK_DECEL * delta)
+			actor.velocity.x = move_toward(actor.velocity.x, 0, actor.WALK_DECEL * delta)
 	
-	if Input.is_action_just_pressed("dash") and player.has_dash and player.can_dash:
+	if Input.is_action_just_pressed("dash") and actor.has_dash and actor.can_dash:
 		state_machine.change_state("PlayerDash")
-	elif Input.is_action_just_pressed("attack") and player.has_sword:
+	elif Input.is_action_just_pressed("attack") and actor.has_sword:
 		state_machine.change_state("PlayerAttack")
-	elif Input.is_action_just_pressed("jump") and (not player.coyote_timer.is_stopped() or player.jump_count < 1 + int(player.has_double_jump)):
-		player.jump()
-		player.coyote_timer.stop()
-	elif player.has_wall_jump and not player.is_on_floor() and player.is_on_wall() and player.velocity.y > 0:
+	elif Input.is_action_just_pressed("jump") and (not actor.coyote_timer.is_stopped() or actor.jump_count < 1 + int(actor.has_double_jump)):
+		actor.jump()
+		actor.coyote_timer.stop()
+	elif actor.has_wall_jump and not actor.is_on_floor() and actor.is_on_wall() and actor.velocity.y > 0:
 		state_machine.change_state("PlayerWallSlide")
-	elif player.is_on_floor():
-		player.jump_count = 0
+	elif actor.is_on_floor():
+		actor.jump_count = 0
 		if dir == 0.0:
 			state_machine.change_state("PlayerIdle")
 		else:
