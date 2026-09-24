@@ -1,0 +1,132 @@
+[gd_scene format=3 uid="uid://7x73wjqk55v0"]
+
+[ext_resource type="Script" uid="uid://caldpoplm5awl" path="res://scripts/enemies/enemy.gd" id="1_n7575"]
+[ext_resource type="Script" uid="uid://db48diif8wxj6" path="res://scripts/enemies/enemy_hit_box.gd" id="4_ywad4"]
+[ext_resource type="Script" uid="uid://bumqkv3wqlaum" path="res://scripts/states/state_machine.gd" id="7_qch6t"]
+[ext_resource type="Script" uid="uid://3m26u65frdaj" path="res://scripts/states/enemy_states/enemy_idle.gd" id="8_y5th1"]
+[ext_resource type="Script" uid="uid://cnvm8o7rploco" path="res://scripts/states/enemy_states/enemy_alert.gd" id="9_tihwb"]
+[ext_resource type="Script" uid="uid://cnftq2cujlc2c" path="res://scripts/states/enemy_states/enemy_walk.gd" id="10_k4gvh"]
+[ext_resource type="Script" uid="uid://ccrlvsj4ve37b" path="res://scripts/states/enemy_states/enemy_dead.gd" id="10_p7w77"]
+[ext_resource type="Script" uid="uid://jqxlqc7uwniq" path="res://scripts/states/enemy_states/enemy_fall.gd" id="11_twn6s"]
+[ext_resource type="Script" uid="uid://bxyftgu5uhpuo" path="res://scripts/states/enemy_states/enemy_stunned.gd" id="12_sb86v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3jvd4"]
+size = Vector2(32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_63ov3"]
+animations = [{
+"frames": [],
+"loop": 1,
+"name": &"alert",
+"speed": 7.0
+}, {
+"frames": [],
+"loop": 0,
+"name": &"die",
+"speed": 7.0
+}, {
+"frames": [],
+"loop": 0,
+"name": &"fall",
+"speed": 7.0
+}, {
+"frames": [],
+"loop": 0,
+"name": &"hit",
+"speed": 7.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"idle",
+"speed": 7.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"walk",
+"speed": 7.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l2tch"]
+size = Vector2(32, 32)
+
+[node name="Enemy" type="CharacterBody2D" unique_id=1893676253 node_paths=PackedStringArray("sprite", "hitbox", "sfx_damage", "sfx_aggro", "sfx_death", "sfx_bonk", "state_machine", "stun_timer")]
+process_mode = 1
+collision_layer = 4
+collision_mask = 35
+script = ExtResource("1_n7575")
+sprite = NodePath("AnimatedSprite2D")
+hitbox = NodePath("EnemyHitBox")
+sfx_damage = NodePath("SFX/SfxDamage")
+sfx_aggro = NodePath("SFX/SfxAggro")
+sfx_death = NodePath("SFX/SfxDeath")
+sfx_bonk = NodePath("SFX/SfxBonk")
+state_machine = NodePath("StateMachine")
+stun_timer = NodePath("Timers/StunTimer")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2091795132]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_3jvd4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=346529562]
+position = Vector2(0, -13)
+sprite_frames = SubResource("SpriteFrames_63ov3")
+animation = &"walk"
+
+[node name="EnemyHitBox" type="Area2D" parent="." unique_id=168891118]
+collision_layer = 4
+collision_mask = 32
+script = ExtResource("4_ywad4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitBox" unique_id=1602929685]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_l2tch")
+
+[node name="SFX" type="Node" parent="." unique_id=8015678]
+
+[node name="SfxDamage" type="AudioStreamPlayer" parent="SFX" unique_id=1798419569]
+bus = &"SFX"
+
+[node name="SfxAggro" type="AudioStreamPlayer" parent="SFX" unique_id=1975817597]
+pitch_scale = 0.5
+bus = &"SFX"
+
+[node name="SfxDeath" type="AudioStreamPlayer" parent="SFX" unique_id=1296416060]
+bus = &"SFX"
+
+[node name="SfxBonk" type="AudioStreamPlayer" parent="SFX" unique_id=1466576762]
+bus = &"SFX"
+
+[node name="StateMachine" type="Node" parent="." unique_id=841704220 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("7_qch6t")
+initial_state = NodePath("EnemyIdle")
+metadata/_custom_type_script = "uid://bumqkv3wqlaum"
+
+[node name="EnemyIdle" type="Node" parent="StateMachine" unique_id=1808747478]
+script = ExtResource("8_y5th1")
+metadata/_custom_type_script = "uid://bwg1nh5hx6dde"
+
+[node name="EnemyAlert" type="Node" parent="StateMachine" unique_id=1298179502]
+script = ExtResource("9_tihwb")
+metadata/_custom_type_script = "uid://bwg1nh5hx6dde"
+
+[node name="EnemyWalk" type="Node" parent="StateMachine" unique_id=1230430635]
+script = ExtResource("10_k4gvh")
+metadata/_custom_type_script = "uid://bwg1nh5hx6dde"
+
+[node name="EnemyFall" type="Node" parent="StateMachine" unique_id=794072711]
+script = ExtResource("11_twn6s")
+metadata/_custom_type_script = "uid://bwg1nh5hx6dde"
+
+[node name="EnemyStunned" type="Node" parent="StateMachine" unique_id=986176947]
+script = ExtResource("12_sb86v")
+metadata/_custom_type_script = "uid://bwg1nh5hx6dde"
+
+[node name="EnemyDead" type="Node" parent="StateMachine" unique_id=654779608]
+script = ExtResource("10_p7w77")
+metadata/_custom_type_script = "uid://bwg1nh5hx6dde"
+
+[node name="Timers" type="Node" parent="." unique_id=469637303]
+
+[node name="StunTimer" type="Timer" parent="Timers" unique_id=1581369281]
+wait_time = 0.45
+one_shot = true

@@ -1,7 +1,0 @@
-[gd_scene format=3 uid="uid://dtsnjb3etfst4"]
-
-[ext_resource type="Script" uid="uid://g1y0lojvnoq6" path="res://scripts/interactables/heart/heart_bar.gd" id="1_khxvn"]
-
-[node name="HeartBar" type="Node2D" unique_id=932334193]
-z_index = 2
-script = ExtResource("1_khxvn")

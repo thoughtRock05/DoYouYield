@@ -65,8 +65,8 @@ func _ready() -> void:
 	door.is_open = false
 
 	for child in get_children():
-		if child is Slime:
-			child.spawn_heart.connect(_on_spawn_heart)
+		if child is Enemy:
+			child.spawn_on_death.connect(_on_spawn_item)
 
 	for child in get_children(true):
 		if child is Slime:
@@ -178,13 +178,13 @@ func _on_reset_pressed() -> void:
 	get_tree().paused = false
 	SceneTransition.load_scene(uid)
 
-func _on_spawn_heart(pos: Vector2) -> void:
-	call_deferred("spawn_heart", pos)
+func _on_spawn_item(pos: Vector2, item: PackedScene, chance: int) -> void:
+	call_deferred("spawn_item", pos, item, chance)
 
-func spawn_heart(pos: Vector2) -> void:
-	if randi_range(0,100) < 65:
-		var heart = HEART_DROP.instantiate() as RigidBody2D
-		add_child(heart)
-		heart.position = pos
-		var force = Vector2(randf_range(150,250), randf_range(150,250))
-		heart.apply_force(force)
+func spawn_item(pos: Vector2, _item: PackedScene, chance: int) -> void:
+	if _item and randi_range(0,100) < chance:
+		var item = _item.instantiate() as RigidBody2D
+		add_child(item)
+		item.global_position = pos
+		var force = Vector2(randf_range(-100,100), randf_range(-50,-100))
+		item.apply_impulse(force)
