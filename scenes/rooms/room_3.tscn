@@ -3,7 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://ddtrp88psneyf" path="res://scenes/rooms/room.tscn" id="1_etvqs"]
 [ext_resource type="Script" uid="uid://dpeyrqelmayp2" path="res://scripts/rooms/room_3.gd" id="2_g5ssp"]
 [ext_resource type="PackedScene" uid="uid://4quhxmrnsq0u" path="res://scenes/environment/moving_platform.tscn" id="3_g5ssp"]
-[ext_resource type="PackedScene" uid="uid://dbs0hoyal2od3" path="res://scenes/rooms/room_4.tscn" id="3_hfp1j"]
 [ext_resource type="PackedScene" uid="uid://dnncw2ivdbxfd" path="res://scenes/enemies/slime/slime_enemy.tscn" id="4_ahsqd"]
 
 [node name="Room 3" unique_id=671016034 node_paths=PackedStringArray("moving_platform_3") instance=ExtResource("1_etvqs")]
@@ -29,7 +28,7 @@ tile_map_data = PackedByteArray("AAAAAAsAAQAAAAAAAAABAAsAAQAAAAAAAAACAAsAAQAAAAA
 
 [node name="Door" parent="." index="5" unique_id=599625686]
 position = Vector2(1219, 671)
-next_room = ExtResource("3_hfp1j")
+next_room = "uid://dbs0hoyal2od3"
 
 [node name="YieldLabel" parent="CanvasLayer/YieldPrompt" parent_id_path=PackedInt32Array(1938132347) index="1" unique_id=309691000]
 text = "Yield what you need most:

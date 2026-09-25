@@ -10,7 +10,7 @@ func _ready() -> void:
 func enter_state(msg: Dictionary = {}) -> void:
 	super.enter_state(msg)
 	get_tree().paused = false
-	SpeedRunTimerGlobal.is_paused = false #CAUTION player may not move idk
+	SpeedRunTimerGlobal.is_paused = false
 	if room_num > -1:
 		music_controller.switch_player(room_num)
 

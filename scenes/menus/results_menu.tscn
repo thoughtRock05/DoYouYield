@@ -12,15 +12,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=324449066]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.19872731, 0.5198898, 0.61263645, 1)
-
 [node name="Main Menu" type="Button" parent="." unique_id=1322906703]
 layout_mode = 0
 offset_left = 274.0

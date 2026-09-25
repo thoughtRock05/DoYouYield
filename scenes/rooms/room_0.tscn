@@ -2,7 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://ddtrp88psneyf" path="res://scenes/rooms/room.tscn" id="1_qm1r8"]
 [ext_resource type="PackedScene" uid="uid://dnncw2ivdbxfd" path="res://scenes/enemies/slime/slime_enemy.tscn" id="2_p0ccy"]
-[ext_resource type="PackedScene" uid="uid://bnob7ju0hgse4" path="res://scenes/rooms/room_1.tscn" id="2_tf3nb"]
 
 [node name="Room0" unique_id=671016034 instance=ExtResource("1_qm1r8")]
 room_num = 0
@@ -23,7 +22,7 @@ tile_map_data = PackedByteArray("AAADABoAAAAAAAAAAAADABgAAAAAAAAAAAADABYAAAAAAAA
 
 [node name="Door" parent="." index="5" unique_id=599625686]
 position = Vector2(1499, 834)
-next_room = ExtResource("2_tf3nb")
+next_room = "uid://bnob7ju0hgse4"
 
 [node name="SlimeEnemy" parent="." index="6" unique_id=1893676253 instance=ExtResource("2_p0ccy")]
 position = Vector2(1373, 831)

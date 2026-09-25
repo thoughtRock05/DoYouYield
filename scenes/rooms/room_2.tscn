@@ -1,7 +1,6 @@
 [gd_scene format=4 uid="uid://dppe7s7bpfeof"]
 
 [ext_resource type="PackedScene" uid="uid://ddtrp88psneyf" path="res://scenes/rooms/room.tscn" id="1_6a8el"]
-[ext_resource type="PackedScene" uid="uid://brel50h76h54i" path="res://scenes/rooms/room_3.tscn" id="2_nu3hr"]
 [ext_resource type="PackedScene" uid="uid://cqfry822lc17w" path="res://scenes/environment/hazards/acid_pit/acid_pit.tscn" id="3_ar6ir"]
 [ext_resource type="PackedScene" uid="uid://cvvxfxr3biyta" path="res://scenes/environment/interactables/heart/heart_drop.tscn" id="4_0g03g"]
 [ext_resource type="PackedScene" uid="uid://dnncw2ivdbxfd" path="res://scenes/enemies/slime/slime_enemy.tscn" id="5_0hwry"]
@@ -28,7 +27,7 @@ tile_map_data = PackedByteArray("AAAIAAoAAAAAAAAAAAAJAAoAAAAAAAAAAAAJAAkAAAAAAAA
 
 [node name="Door" parent="." index="5" unique_id=599625686]
 position = Vector2(1979, 705)
-next_room = ExtResource("2_nu3hr")
+next_room = "uid://brel50h76h54i"
 
 [node name="YieldLabel" parent="CanvasLayer/YieldPrompt" parent_id_path=PackedInt32Array(1938132347) index="1" unique_id=309691000]
 text = "Yield what you need most:

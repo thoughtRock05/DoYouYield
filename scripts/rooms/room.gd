@@ -65,13 +65,13 @@ func _process(_delta: float) -> void:
 		SceneTransition.load_scene(uid)
 		can_interact = true
 
-func _on_door_triggered(next_room: PackedScene) -> void:
+func _on_door_triggered(next_room: String) -> void:
 	door.is_open = true
 	Music.switch_player(room_num + 8)
 	can_interact = false
 	player.in_menu = true
 	yield_prompt.visible = true
-	room = ResourceUID.id_to_text(ResourceLoader.get_resource_uid(next_room.resource_path))
+	room = next_room
 	get_tree().paused = true
 	yes_button.grab_focus()
 

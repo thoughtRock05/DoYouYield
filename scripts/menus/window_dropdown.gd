@@ -1,4 +1,6 @@
 extends OptionButton
+class_name WindowDropdown
+
 const FONT = preload("uid://di30hy6qprkyp")
 
 func _ready() -> void:

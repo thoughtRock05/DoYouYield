@@ -1,7 +1,7 @@
 extends MenuState
 class_name MenuInventory
 
-var menu : Control = _menu as Control
+@onready var menu : Control = _menu as Control
 
 func enter_state(_msg: Dictionary = {}) -> void:
 	menu.visible = true

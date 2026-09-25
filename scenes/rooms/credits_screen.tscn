@@ -7,10 +7,10 @@ script = ExtResource("1_woluj")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1097955562]
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=2131418786]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=239123303]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 1)
+color = Color(0.19872731, 0.5198898, 0.61263645, 1)

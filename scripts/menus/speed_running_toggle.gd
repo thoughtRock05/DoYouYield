@@ -1,4 +1,5 @@
 extends CheckButton
+class_name SpeedRunToggle
 
 func _ready() -> void:
 	self.toggled.connect(_on_toggle)

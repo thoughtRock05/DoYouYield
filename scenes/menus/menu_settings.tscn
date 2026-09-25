@@ -3,6 +3,7 @@
 [ext_resource type="FontFile" uid="uid://di30hy6qprkyp" path="res://assets/fonts/OldEnglishGothicPixelRegular.ttf" id="1_o2v8x"]
 [ext_resource type="PackedScene" uid="uid://vbc2v1eva61l" path="res://scenes/menus/menu_items/volume_slider.tscn" id="2_ysrrw"]
 [ext_resource type="PackedScene" uid="uid://df6eqqjn0g74m" path="res://scenes/menus/menu_items/window_dropdown.tscn" id="3_hbfmm"]
+[ext_resource type="PackedScene" uid="uid://d18xq73iqq6ia" path="res://scenes/menus/menu_items/resolution_dropdown.tscn" id="4_p33wh"]
 [ext_resource type="PackedScene" uid="uid://cttg2bby718yy" path="res://scenes/menus/menu_items/speed_running_toggle.tscn" id="4_v20nw"]
 
 [node name="Control" type="Control" unique_id=1222955128]
@@ -84,63 +85,48 @@ horizontal_alignment = 1
 layout_mode = 2
 bus_name = "SFX"
 
-[node name="Label" type="Label" parent="." unique_id=2051840865]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -54.0
-offset_top = 32.0
-offset_right = 52.0
-offset_bottom = 55.0
-grow_horizontal = 2
+[node name="GridContainer" type="GridContainer" parent="." unique_id=1884005891]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 50.0
+offset_right = 594.0
+offset_bottom = 102.0
+columns = 3
+
+[node name="Window Mode" type="Label" parent="GridContainer" unique_id=2051840865]
+layout_mode = 2
+size_flags_horizontal = 6
 theme_override_fonts/font = ExtResource("1_o2v8x")
 text = "Window Mode"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="WindowDropdown" parent="." unique_id=1634256139 instance=ExtResource("3_hbfmm")]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -79.0
-offset_top = -115.0
-offset_right = 79.0
-offset_bottom = -84.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Resolution Mode" type="Label" parent="GridContainer" unique_id=1241794626]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_fonts/font = ExtResource("1_o2v8x")
+text = "Resolution Mode"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Label2" type="Label" parent="." unique_id=459603214]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 154.0
-offset_top = 86.5
-offset_right = 260.0
-offset_bottom = 109.5
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Speedrun Timer" type="Label" parent="GridContainer" unique_id=459603214]
+layout_mode = 2
+size_flags_horizontal = 6
 theme_override_fonts/font = ExtResource("1_o2v8x")
 text = "Speedrun Timer"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SpeedRunningToggle" parent="." unique_id=1071498158 instance=ExtResource("4_v20nw")]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 185.0
-offset_top = 113.0
-offset_right = 229.0
-offset_bottom = 137.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="WindowDropdown" parent="GridContainer" unique_id=1634256139 instance=ExtResource("3_hbfmm")]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="ResolutionDropdown" parent="GridContainer" unique_id=323057761 instance=ExtResource("4_p33wh")]
+layout_mode = 2
+size_flags_horizontal = 4
+focus_neighbor_right = NodePath("../SpeedRunToggle")
+
+[node name="SpeedRunToggle" parent="GridContainer" unique_id=1071498158 instance=ExtResource("4_v20nw")]
+layout_mode = 2
+size_flags_horizontal = 6
+focus_neighbor_left = NodePath("../ResolutionDropdown")

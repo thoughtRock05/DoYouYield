@@ -1,7 +1,6 @@
 [gd_scene format=4 uid="uid://cfibgssoakpns"]
 
 [ext_resource type="PackedScene" uid="uid://ddtrp88psneyf" path="res://scenes/rooms/room.tscn" id="1_qliwx"]
-[ext_resource type="PackedScene" uid="uid://biavbis2yub62" path="res://scenes/rooms/credits_screen.tscn" id="2_7u5fy"]
 [ext_resource type="PackedScene" uid="uid://cqfry822lc17w" path="res://scenes/environment/hazards/acid_pit/acid_pit.tscn" id="3_7u5fy"]
 [ext_resource type="PackedScene" uid="uid://dnncw2ivdbxfd" path="res://scenes/enemies/slime/slime_enemy.tscn" id="3_wf3jn"]
 
@@ -24,7 +23,7 @@ tile_map_data = PackedByteArray("AABPACEAAAAHAAUAAAA=")
 
 [node name="Door" parent="." index="5" unique_id=599625686]
 position = Vector2(3168, 863)
-next_room = ExtResource("2_7u5fy")
+next_room = "uid://biavbis2yub62"
 
 [node name="YieldLabel" parent="CanvasLayer/YieldPrompt" parent_id_path=PackedInt32Array(1938132347) index="1" unique_id=309691000]
 text = "You have given away what aided you.

@@ -1,7 +1,7 @@
 extends MenuState
 class_name MenuResults
 
-var menu : Control = _menu as Control
+@onready var menu : Control = _menu as Control
 
 @export var main_menu: Button
 @export var quit: Button
@@ -22,8 +22,7 @@ func enter_state(msg: Dictionary = {}) -> void:
 func _on_main_menu() -> void:
 	SaveLoad.reset_save()
 	SpeedRunTimerGlobal._reset()
-	state_machine.change_state("MenuMain")
-	SceneTransition.load_scene("uid://5pufmg2xnm6j")
+	state_machine.change_state("MenuMain", {"previous_state": "MenuResults"})
 
 func _on_quit() -> void:
 	get_tree().quit()
