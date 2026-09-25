@@ -25,6 +25,7 @@ SaveLoad="*uid://b00ukj88bfewh"
 SceneTransition="*uid://dojws7lqo57q7"
 Music="*uid://d1bthb8t336pb"
 SpeedRunTimerGlobal="*uid://cypqbbtdmvhcn"
+SignalBus="*uid://b1kmugykau8cr"
 
 [display]
 

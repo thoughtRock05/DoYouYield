@@ -3,7 +3,7 @@ class_name MenuMain
 
 var menu : Control = _menu as Control
 
-@export var initial_scene: StringName = &"uid://bjwbmwcpnr8vf"
+@export var initial_scene: PackedScene
 @export var play: Button
 @export var options: Button
 @export var quit: Button
@@ -20,7 +20,7 @@ func enter_state(msg: Dictionary = {}) -> void:
 
 func _on_play() -> void:
 	state_machine.change_state("MenuNone")
-	SceneTransition.load_scene(initial_scene)
+	SceneTransition.load_scene(ResourceUID.id_to_text(ResourceLoader.get_resource_uid(initial_scene.resource_path)))
 
 func _on_options() -> void:
 	state_machine.change_state("MenuSettings", {"previous_state": "MenuMain"})

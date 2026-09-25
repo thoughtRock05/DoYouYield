@@ -14,3 +14,6 @@ func _ready() -> void:
 	if initial_state:
 		initial_state.enter_state()
 		current_state = initial_state
+
+func _process(delta: float) -> void:
+	update(delta)

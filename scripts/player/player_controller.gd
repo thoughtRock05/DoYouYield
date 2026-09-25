@@ -5,21 +5,21 @@ signal reset_room
 signal set_health(health: int)
 @warning_ignore("unused_signal") signal set_max_health(max_health: int)
 
-
-const SPEED = 375.0
-const WALK_DECEL = 1200.0
-const JUMP_VELOCITY = -445.0
-const WALL_JUMP_VELOCITY = -380.0
-const WALL_JUMP_PUSH = 450.0
-const WALL_SLIDE_SPEED = 90.0
-const DASH_SPEED = 650.0
-const DASH_DURATION = 0.35
-const DASH_DECEL = 2500.0
-const ATTACK_DECEL = 700.0
-const KNOCKBACK_DECEL = 1200.0
-const I_FRAMES_DURATION = 0.5
-const DASH_ATTACK_SPEED = 275.0
-const WALL_DETATCH = 100.0
+@export_group("Player Tuning")
+@export var SPEED = 375.0
+@export var WALK_DECEL = 1200.0
+@export var JUMP_VELOCITY = -445.0
+@export var WALL_JUMP_VELOCITY = -380.0
+@export var WALL_JUMP_PUSH = 450.0
+@export var WALL_SLIDE_SPEED = 90.0
+@export var DASH_SPEED = 650.0
+@export var DASH_DURATION = 0.35
+@export var DASH_DECEL = 2500.0
+@export var ATTACK_DECEL = 700.0
+@export var KNOCKBACK_DECEL = 1200.0
+@export var I_FRAMES_DURATION = 0.5
+@export var DASH_ATTACK_SPEED = 275.0
+@export var WALL_DETATCH = 100.0
 enum DashType {NONE, GROUND, AIR}
 var in_menu: bool = false
 
@@ -60,7 +60,6 @@ var has_dash: bool
 @export_group("State Machine")
 @export var state_machine: StateMachine
 
-var can_move = true
 var jump_count = 0
 var health: int
 var max_health: int
@@ -95,8 +94,6 @@ func _ready() -> void:
 	state_machine.init(self)
 
 func _physics_process(delta: float) -> void:
-	if not can_move:
-		return
 	if is_on_floor() and dash_timer.is_stopped() and current_dash != DashType.GROUND:
 		can_dash = true
 		current_dash = DashType.NONE
@@ -104,8 +101,9 @@ func _physics_process(delta: float) -> void:
 	peek_camera(delta)
 	update_facing(dir)
 	update_shield()
+	state_machine.physics_update(delta)
 	move_and_slide()
-	state_machine._physics_process(delta)
+
 
 func peek_camera(delta) -> void:
 	var look_y: float = 0

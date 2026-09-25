@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://dppe7s7bpfeof"]
 
 [ext_resource type="PackedScene" uid="uid://ddtrp88psneyf" path="res://scenes/rooms/room.tscn" id="1_6a8el"]
+[ext_resource type="PackedScene" uid="uid://brel50h76h54i" path="res://scenes/rooms/room_3.tscn" id="2_nu3hr"]
 [ext_resource type="PackedScene" uid="uid://cqfry822lc17w" path="res://scenes/environment/hazards/acid_pit/acid_pit.tscn" id="3_ar6ir"]
 [ext_resource type="PackedScene" uid="uid://cvvxfxr3biyta" path="res://scenes/environment/interactables/heart/heart_drop.tscn" id="4_0g03g"]
 [ext_resource type="PackedScene" uid="uid://dnncw2ivdbxfd" path="res://scenes/enemies/slime/slime_enemy.tscn" id="5_0hwry"]
@@ -27,32 +28,32 @@ tile_map_data = PackedByteArray("AAAIAAoAAAAAAAAAAAAJAAoAAAAAAAAAAAAJAAkAAAAAAAA
 
 [node name="Door" parent="." index="5" unique_id=599625686]
 position = Vector2(1979, 705)
-next_room = "uid://brel50h76h54i"
+next_room = ExtResource("2_nu3hr")
 
-[node name="YieldLabel" parent="YieldPrompt" parent_id_path=PackedInt32Array(1938132347) index="1" unique_id=309691000]
+[node name="YieldLabel" parent="CanvasLayer/YieldPrompt" parent_id_path=PackedInt32Array(1938132347) index="1" unique_id=309691000]
 text = "Yield what you need most:
 Wall Jump"
 
-[node name="AcidPit" parent="." index="9" unique_id=1028025895 instance=ExtResource("3_ar6ir")]
+[node name="AcidPit" parent="." index="8" unique_id=1028025895 instance=ExtResource("3_ar6ir")]
 position = Vector2(1376, 800)
 x_size = 7
 y_size = 22
 
-[node name="AcidPit2" parent="." index="10" unique_id=176602615 instance=ExtResource("3_ar6ir")]
+[node name="AcidPit2" parent="." index="9" unique_id=176602615 instance=ExtResource("3_ar6ir")]
 position = Vector2(1696, 960)
 x_size = 7
 y_size = 17
 
-[node name="HeartDrop" parent="." index="11" unique_id=1066314477 instance=ExtResource("4_0g03g")]
+[node name="HeartDrop" parent="." index="10" unique_id=1066314477 instance=ExtResource("4_0g03g")]
 position = Vector2(294, 493)
 
-[node name="MovingPlatform" parent="." index="12" unique_id=203841445 instance=ExtResource("6_nu3hr")]
+[node name="MovingPlatform" parent="." index="11" unique_id=203841445 instance=ExtResource("6_nu3hr")]
 position = Vector2(896, 1088)
 x_size = 6
 rel_y = -11.0
 duration = 1.5
 
-[node name="Fwed" parent="." index="13" unique_id=1893676253 instance=ExtResource("5_0hwry")]
+[node name="Fwed" parent="." index="12" unique_id=1893676253 instance=ExtResource("5_0hwry")]
 position = Vector2(2387, 1330)
 scale = Vector2(7, 7)
 

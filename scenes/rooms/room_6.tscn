@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://cfibgssoakpns"]
 
 [ext_resource type="PackedScene" uid="uid://ddtrp88psneyf" path="res://scenes/rooms/room.tscn" id="1_qliwx"]
+[ext_resource type="PackedScene" uid="uid://biavbis2yub62" path="res://scenes/rooms/credits_screen.tscn" id="2_7u5fy"]
 [ext_resource type="PackedScene" uid="uid://cqfry822lc17w" path="res://scenes/environment/hazards/acid_pit/acid_pit.tscn" id="3_7u5fy"]
 [ext_resource type="PackedScene" uid="uid://dnncw2ivdbxfd" path="res://scenes/enemies/slime/slime_enemy.tscn" id="3_wf3jn"]
 
@@ -23,31 +24,28 @@ tile_map_data = PackedByteArray("AABPACEAAAAHAAUAAAA=")
 
 [node name="Door" parent="." index="5" unique_id=599625686]
 position = Vector2(3168, 863)
-next_room = "uid://io46bfufwpds"
+next_room = ExtResource("2_7u5fy")
 
-[node name="YieldPrompt" parent="." index="7" unique_id=1938132347]
-visible = true
-
-[node name="YieldLabel" parent="YieldPrompt" index="1" unique_id=309691000]
+[node name="YieldLabel" parent="CanvasLayer/YieldPrompt" parent_id_path=PackedInt32Array(1938132347) index="1" unique_id=309691000]
 text = "You have given away what aided you.
 You have been redeemed.
 You may now exit the Undonegeon."
 
-[node name="AcidPit" parent="." index="9" unique_id=2011704841 instance=ExtResource("3_7u5fy")]
+[node name="AcidPit" parent="." index="8" unique_id=2011704841 instance=ExtResource("3_7u5fy")]
 position = Vector2(608, 1376)
 x_size = 7
 y_size = 4
 
-[node name="AcidPit2" parent="." index="10" unique_id=688975629 instance=ExtResource("3_7u5fy")]
+[node name="AcidPit2" parent="." index="9" unique_id=688975629 instance=ExtResource("3_7u5fy")]
 position = Vector2(928, 1376)
 x_size = 7
 y_size = 4
 
-[node name="SlimeEnemy" parent="." index="11" unique_id=1893676253 instance=ExtResource("3_wf3jn")]
+[node name="SlimeEnemy" parent="." index="10" unique_id=1893676253 instance=ExtResource("3_wf3jn")]
 position = Vector2(1316, 1276)
 
-[node name="SlimeEnemy2" parent="." index="12" unique_id=1704476033 instance=ExtResource("3_wf3jn")]
+[node name="SlimeEnemy2" parent="." index="11" unique_id=1704476033 instance=ExtResource("3_wf3jn")]
 position = Vector2(1569, 1277)
 
-[node name="SlimeEnemy3" parent="." index="13" unique_id=1423152186 instance=ExtResource("3_wf3jn")]
+[node name="SlimeEnemy3" parent="." index="12" unique_id=1423152186 instance=ExtResource("3_wf3jn")]
 position = Vector2(2463, 1057)

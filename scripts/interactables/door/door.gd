@@ -7,7 +7,7 @@ const DOOR_OPEN = preload("uid://bk66uajxkaxfj")
 
 signal trigger_door(room: String, take_heart, taken_item)
 @export var trigger_area: Area2D
-@export var next_room: String
+@export var next_room: PackedScene
 @export var sfx_door: AudioStreamPlayer
 
 var is_open: bool = false:

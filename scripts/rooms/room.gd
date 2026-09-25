@@ -46,7 +46,8 @@ func _ready() -> void:
 	heart_bar.set_health(player.health)
 	heart_bar.set_max_health(player.max_health)
 	door.is_open = false
-
+	SignalBus.set_room_num.emit(room_num)
+	
 	for child in get_children():
 		if child is Enemy:
 			child.spawn_on_death.connect(_on_spawn_item)
@@ -64,13 +65,13 @@ func _process(_delta: float) -> void:
 		SceneTransition.load_scene(uid)
 		can_interact = true
 
-func _on_door_triggered(_room: String) -> void:
+func _on_door_triggered(next_room: PackedScene) -> void:
 	door.is_open = true
 	Music.switch_player(room_num + 8)
 	can_interact = false
 	player.in_menu = true
 	yield_prompt.visible = true
-	room = _room
+	room = ResourceUID.id_to_text(ResourceLoader.get_resource_uid(next_room.resource_path))
 	get_tree().paused = true
 	yes_button.grab_focus()
 

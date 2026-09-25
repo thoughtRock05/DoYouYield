@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://cl33laotrrrb6" path="res://scripts/states/menu_states/menu_none.gd" id="3_yq6so"]
 [ext_resource type="AudioStream" uid="uid://d0t4uaeywxm2f" path="res://assets/audio/music/ost_room_0_1_loopable.mp3" id="4_jkv2x"]
 [ext_resource type="Script" uid="uid://4hg1uru4w5en" path="res://scripts/menus/music_controller.gd" id="4_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://bjwbmwcpnr8vf" path="res://scenes/rooms/room_0.tscn" id="5_2f3dj"]
 [ext_resource type="AudioStream" uid="uid://b328muyii27sv" path="res://assets/audio/music/ost_room_2_loopable.mp3" id="5_jbj1t"]
 [ext_resource type="Script" uid="uid://by17rwv1craqu" path="res://scripts/states/menu_states/menu_settings.gd" id="6_2wyq8"]
 [ext_resource type="AudioStream" uid="uid://7wp1imdyxk3u" path="res://assets/audio/music/ost_room_3_loopable.mp3" id="6_muem4"]
@@ -28,9 +29,10 @@
 [ext_resource type="PackedScene" uid="uid://5pufmg2xnm6j" path="res://scenes/rooms/title_screen.tscn" id="14_tel4y"]
 [ext_resource type="AudioStream" uid="uid://bu6evrr3peoht" path="res://assets/audio/music/ost_room_5_isolate_loopable.mp3" id="15_2wyq8"]
 
-[node name="Main" type="Node2D" unique_id=1053634781 node_paths=PackedStringArray("music_controller")]
+[node name="Main" type="Node2D" unique_id=1053634781 node_paths=PackedStringArray("music_controller", "menu_state_machine")]
 script = ExtResource("1_sugp2")
 music_controller = NodePath("MusicController")
+menu_state_machine = NodePath("UI/MenuStateMachine")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1628545526]
 layer = 100
@@ -41,8 +43,9 @@ script = ExtResource("2_yq6so")
 initial_state = NodePath("MenuMain")
 metadata/_custom_type_script = "uid://dpx75xkeekt8g"
 
-[node name="MenuNone" type="Node" parent="UI/MenuStateMachine" unique_id=1256985043 node_paths=PackedStringArray("_menu")]
+[node name="MenuNone" type="Node" parent="UI/MenuStateMachine" unique_id=1256985043 node_paths=PackedStringArray("music_controller", "_menu")]
 script = ExtResource("3_yq6so")
+music_controller = NodePath("../../../MusicController")
 _menu = NodePath("Empty")
 metadata/_custom_type_script = "uid://qvty4l078043"
 
@@ -55,6 +58,7 @@ mouse_filter = 2
 
 [node name="MenuMain" type="Node" parent="UI/MenuStateMachine" unique_id=2113453542 node_paths=PackedStringArray("play", "options", "quit", "_menu")]
 script = ExtResource("3_vxglm")
+initial_scene = ExtResource("5_2f3dj")
 play = NodePath("MainMenu/Play")
 options = NodePath("MainMenu/Options")
 quit = NodePath("MainMenu/Quit")
@@ -105,7 +109,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Main Menu" parent="SceneContainer" unique_id=1904224642 instance=ExtResource("14_tel4y")]
+[node name="Title Screen" parent="SceneContainer" unique_id=1904224642 instance=ExtResource("14_tel4y")]
 
 [node name="MusicController" type="Node" parent="." unique_id=1919563507 node_paths=PackedStringArray("player_0", "player_1", "player_2", "player_3", "player_4", "player_5", "player_6", "menu_music", "ost_room_0_isolated", "ost_room_1_isolated", "ost_room_2_isolated", "ost_room_3_isolated", "ost_room_4_isolated", "ost_room_5_isolated")]
 process_mode = 3

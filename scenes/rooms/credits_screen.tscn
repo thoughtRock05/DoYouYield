@@ -1,6 +1,9 @@
-[gd_scene format=3 uid="uid://5pufmg2xnm6j"]
+[gd_scene format=3 uid="uid://biavbis2yub62"]
 
-[node name="Main Menu" type="Node2D" unique_id=1904224642]
+[ext_resource type="Script" uid="uid://41e2ycff2it4" path="res://scripts/rooms/credits_screen.gd" id="1_woluj"]
+
+[node name="Credits" type="Node2D" unique_id=1904224642]
+script = ExtResource("1_woluj")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1097955562]
 
