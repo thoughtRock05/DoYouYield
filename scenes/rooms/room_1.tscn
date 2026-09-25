@@ -26,6 +26,10 @@ tile_map_data = PackedByteArray("AABPACEAAAAHAAUAAAA=")
 position = Vector2(3168, 863)
 next_room = "uid://dppe7s7bpfeof"
 
+[node name="YieldLabel" parent="CanvasLayer/YieldPrompt" parent_id_path=PackedInt32Array(1938132347) index="1" unique_id=309691000]
+text = "Yield what you need most:
+Double Jump"
+
 [node name="AcidPit" parent="." index="8" unique_id=2011704841 instance=ExtResource("3_fbq1s")]
 position = Vector2(608, 1376)
 x_size = 7

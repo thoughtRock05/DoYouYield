@@ -28,3 +28,7 @@ next_room = "uid://bnob7ju0hgse4"
 position = Vector2(1373, 831)
 max_threshold = 450.0
 target_threshold = 200.0
+
+[node name="YieldLabel" parent="CanvasLayer/YieldPrompt" parent_id_path=PackedInt32Array(1938132347) index="1" unique_id=309691000]
+text = "In order to leave, you must give what you need most.
+Are you ready?"
