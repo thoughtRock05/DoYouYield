@@ -10,6 +10,7 @@ const HEART_DROP = preload("uid://cvvxfxr3biyta")
 @export var yield_prompt: Control
 @export var yes_button: Button
 @export var no_button: Button
+@export var speed_run_timer: Label
 
 @export var sfx_player_walk_echo: AudioStreamPlayer
 @export var door: Door
@@ -59,7 +60,8 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if not can_interact:
 		return
-	
+	speed_run_timer.visible = SpeedRunTimerGlobal.is_speedrunning
+	speed_run_timer.text = "%.2f" % SpeedRunTimerGlobal.time 
 	if Input.is_action_just_pressed("reset"):
 		can_interact = false
 		SceneTransition.load_scene(uid)

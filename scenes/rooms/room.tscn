@@ -146,13 +146,14 @@ texture_region_size = Vector2i(32, 32)
 tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_vk2vc")
 
-[node name="Room" type="Node2D" unique_id=671016034 node_paths=PackedStringArray("player", "heart_bar", "yield_prompt", "yes_button", "no_button", "sfx_player_walk_echo", "door")]
+[node name="Room" type="Node2D" unique_id=671016034 node_paths=PackedStringArray("player", "heart_bar", "yield_prompt", "yes_button", "no_button", "speed_run_timer", "sfx_player_walk_echo", "door")]
 script = ExtResource("1_1fuux")
 player = NodePath("Player")
 heart_bar = NodePath("CanvasLayer/HeartBar")
 yield_prompt = NodePath("CanvasLayer/YieldPrompt")
 yes_button = NodePath("CanvasLayer/YieldPrompt/Yes")
 no_button = NodePath("CanvasLayer/YieldPrompt/No")
+speed_run_timer = NodePath("CanvasLayer/SpeedRunTimer")
 sfx_player_walk_echo = NodePath("SfxPlayerWalkEcho")
 door = NodePath("Door")
 main_menu = &"uid://5pufmg2xnm6j"
@@ -249,3 +250,20 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("14_p5707")
 text = "No"
+
+[node name="SpeedRunTimer" type="Label" parent="CanvasLayer" unique_id=943452061]
+z_index = 7
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -73.0
+offset_top = -23.0
+offset_right = -6.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("14_p5707")
+text = "00.00"
+horizontal_alignment = 2
+vertical_alignment = 1
