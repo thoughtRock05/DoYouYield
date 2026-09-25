@@ -69,7 +69,7 @@ func _ready() -> void:
 			child.spawn_on_death.connect(_on_spawn_item)
 
 	for child in get_children(true):
-		if child is Slime:
+		if child is Enemy:
 			child.set_target(player)
 
 func _process(_delta: float) -> void:

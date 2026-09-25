@@ -1,19 +1,14 @@
 extends State
 class_name EnemyAlert
 
+var actor: Enemy = _actor as Enemy
+
 func enter_state(_msg := {}) -> void:
-	if actor.sfx_aggro and not actor.is_alerted:
+	if actor.sfx_aggro:
 		actor.sfx_aggro.play()
-	
-	actor.is_alerting = true
-	actor.is_alerted = true
 	
 	if actor.sprite.sprite_frames.has_animation("alert"):
 		actor.sprite.play("alert")
-
-	actor.get_tree().create_timer(0.5).timeout.connect(func():
-		actor.is_alerting = false
-	)
 
 func physics_update(delta: float) -> void:
 	if not actor.is_on_floor():
@@ -28,9 +23,8 @@ func physics_update(delta: float) -> void:
 		return
 
 	if actor.target:
-		var distance = (actor.target.position - actor.position).length()
+		var distance = actor.global_position.distance_to(actor.target.global_position)
 		if distance > actor.max_threshold:
-			actor.target = null
 			state_machine.change_state("EnemyIdle")
 			return
 		
@@ -39,8 +33,8 @@ func physics_update(delta: float) -> void:
 			actor.velocity.x = actor.dir * actor.SPEED
 		else:
 			actor.velocity.x = 0.0
-
+		
 		if actor.velocity.x != 0:
 			actor.sprite.flip_h = actor.velocity.x > 0
-
+		
 	actor.move_and_slide()

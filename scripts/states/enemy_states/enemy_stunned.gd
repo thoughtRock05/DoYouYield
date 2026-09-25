@@ -1,6 +1,8 @@
 extends State
 class_name EnemyStunned
 
+var actor: Enemy = _actor as Enemy
+
 func enter_state(_msg := {}) -> void:
 	if actor.sprite.sprite_frames.has_animation("hit"):
 		actor.sprite.play("hit")

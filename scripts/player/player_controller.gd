@@ -119,14 +119,6 @@ func add_gravity(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-func jump():
-	velocity.y = JUMP_VELOCITY
-	jump_count += 1
-	player_sprite.play("jump")
-	sfx_player_jump.play()
-	buffer_timer.stop()
-	state_machine.change_state("PlayerJump")
-
 func _on_frame_changed() -> void:
 	if player_sprite.animation == "dash":
 		var last_frame: int = player_sprite.sprite_frames.get_frame_count("dash") - 1

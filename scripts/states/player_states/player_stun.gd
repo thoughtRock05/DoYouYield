@@ -1,6 +1,8 @@
 extends State
 class_name PlayerStun
 
+var actor: Player = _actor as Player
+
 func enter_state(_msg := {}) -> void:
 	actor.player_sprite.play("hurt")
 

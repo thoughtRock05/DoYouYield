@@ -1,6 +1,8 @@
 extends State
 class_name EnemyIdle
 
+var actor: Enemy = _actor as Enemy
+
 func enter_state(_msg := {}) -> void:
 	actor.velocity.x = 0.0
 	if actor.sprite.sprite_frames.has_animation("idle"):
@@ -19,8 +21,8 @@ func physics_update(delta: float) -> void:
 		return
 
 	if actor.target:
-		var distance = (actor.target.position - actor.position).length()
-		if distance <= actor.target_threshold and distance <= actor.max_threshold:
+		var distance = actor.global_position.distance_to(actor.target.global_position)
+		if distance <= actor.target_threshold:
 			state_machine.change_state("EnemyAlert")
 			return
 

@@ -1,3 +1,4 @@
+@tool
 extends CharacterBody2D
 class_name Enemy
 
@@ -19,26 +20,39 @@ class_name Enemy
 	set(value):
 		SPEED = value / self.scale.x
 @export var KNOCKBACK: Vector2 = Vector2(300, 100)
-@export var target: Player = null
-@export var max_threshold: float = 1800.0
-@export var target_threshold: float = 300.0
+@export var max_threshold: float = 200.0:
+	set(value):
+		max_threshold = value
+		queue_redraw()
+@export var target_threshold: float = 100.0:
+	set(value):
+		target_threshold = value
+		queue_redraw()
 @export var dir: float = -1.0
-@export var is_alerting: bool = false
-@export var is_alerted: bool = false
 @export var health: int = 3
 @export var is_stunned: bool = false
 @export var knock: float = 0.0
 @export var drop_chance: int = 101
+
+var target: Player = null
+
 func _ready() -> void:
-	if state_machine:
-		state_machine.init(self)
+	if not Engine.is_editor_hint():
+		if state_machine:
+			state_machine.init(self)
 
 func set_target(t: Player) -> void:
 	target = t
 
 func _physics_process(delta: float) -> void:
-	if state_machine:
-		state_machine.physics_update(delta)
+	if not Engine.is_editor_hint():
+		if state_machine:
+			state_machine.physics_update(delta)
+
+func _draw() -> void:
+	if Engine.is_editor_hint():
+		draw_arc(Vector2.ZERO, max_threshold, 0, TAU, 64, Color(0.0, 0.62, 0.729, 1.0))
+		draw_arc(Vector2.ZERO, target_threshold, 0, TAU, 64, Color(0.0, 0.62, 0.729, 1.0))
 
 func hit(area: Area2D) -> void:
 	if is_stunned:

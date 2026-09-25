@@ -1,7 +1,13 @@
 extends State
 class_name PlayerJump
 
+var actor: Player = _actor as Player
+
 func enter_state(_msg := {}) -> void:
+	actor.velocity.y = actor.JUMP_VELOCITY
+	actor.jump_count += 1
+	actor.sfx_player_jump.play()
+	actor.buffer_timer.stop()
 	actor.player_sprite.play("jump")
 
 func physics_update(delta: float) -> void:
@@ -23,8 +29,8 @@ func physics_update(delta: float) -> void:
 		state_machine.change_state("PlayerDash")
 	elif Input.is_action_just_pressed("attack") and actor.has_sword:
 		state_machine.change_state("PlayerAttack")
-	elif Input.is_action_just_pressed("jump") and actor.jump_count < 1 + int(actor.has_double_jump):
-		actor.jump()
+	elif Input.is_action_just_pressed("jump") and actor.jump_count < (1 + int(actor.has_double_jump)):
+		state_machine.change_state("PlayerJump")
 	elif actor.has_wall_jump and not actor.is_on_floor() and actor.is_on_wall() and actor.velocity.y > 0:
 		state_machine.change_state("PlayerWallSlide")
 	elif actor.velocity.y >= 0:

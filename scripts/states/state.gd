@@ -1,7 +1,7 @@
 extends Node
 class_name State
 
-var actor: CharacterBody2D
+@warning_ignore("unused_private_class_variable") var _actor: CharacterBody2D
 var state_machine: StateMachine
 
 func enter_state(_msg: Dictionary = {}) -> void:

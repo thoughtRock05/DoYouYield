@@ -52,7 +52,7 @@ size = Vector2(32, 32)
 [node name="Enemy" type="CharacterBody2D" unique_id=1893676253 node_paths=PackedStringArray("sprite", "hitbox", "sfx_damage", "sfx_aggro", "sfx_death", "sfx_bonk", "state_machine", "stun_timer")]
 process_mode = 1
 collision_layer = 4
-collision_mask = 35
+collision_mask = 33
 script = ExtResource("1_n7575")
 sprite = NodePath("AnimatedSprite2D")
 hitbox = NodePath("EnemyHitBox")

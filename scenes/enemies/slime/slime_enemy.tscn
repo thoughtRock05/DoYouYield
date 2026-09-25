@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://vvhyjebcv41n" path="res://assets/audio/sfx/enemies/slime/sfx_slime_aggro.wav" id="5_u6w2r"]
 [ext_resource type="AudioStream" uid="uid://k4jmx74oullw" path="res://assets/audio/sfx/enemies/slime/sfx_slime_death.wav" id="6_ndsu7"]
 [ext_resource type="AudioStream" uid="uid://c48s5xbilwj41" path="res://assets/audio/sfx/enemies/slime/sfx_slime_bonk.wav" id="7_63ov3"]
+[ext_resource type="Script" uid="uid://ceololx7ukhwk" path="res://scripts/states/enemy_states/slime/slime_alert.gd" id="8_u6w2r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eirrc"]
 size = Vector2(40, 36)
@@ -168,6 +169,8 @@ size = Vector2(40, 36)
 
 [node name="SlimeEnemy" unique_id=1893676253 instance=ExtResource("1_0orhp")]
 script = ExtResource("2_fcqnt")
+max_threshold = 300.0
+target_threshold = 250.0
 
 [node name="CollisionShape2D" parent="." index="0" unique_id=2091795132]
 shape = SubResource("RectangleShape2D_eirrc")
@@ -190,3 +193,6 @@ stream = ExtResource("6_ndsu7")
 
 [node name="SfxBonk" parent="SFX" parent_id_path=PackedInt32Array(8015678) index="3" unique_id=1466576762]
 stream = ExtResource("7_63ov3")
+
+[node name="EnemyAlert" parent="StateMachine" parent_id_path=PackedInt32Array(841704220) index="1" unique_id=1298179502]
+script = ExtResource("8_u6w2r")
