@@ -30,6 +30,7 @@ offset_bottom = 230.0
 
 [node name="Resume" type="Button" parent="VBoxContainer" unique_id=1924393934]
 layout_mode = 2
+focus_neighbor_top = NodePath("../Main Menu")
 theme_override_fonts/font = ExtResource("2_3xsyx")
 text = "Resume"
 
@@ -46,6 +47,7 @@ text = "Settings"
 
 [node name="Main Menu" type="Button" parent="VBoxContainer" unique_id=1717244487]
 layout_mode = 2
+focus_neighbor_bottom = NodePath("../Resume")
 theme_override_fonts/font = ExtResource("2_3xsyx")
 text = "Main Menu"
 metadata/_edit_use_anchors_ = true

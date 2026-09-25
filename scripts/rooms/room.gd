@@ -71,7 +71,6 @@ func _on_door_triggered(next_room: String) -> void:
 	door.is_open = true
 	Music.switch_player(room_num + 8)
 	can_interact = false
-	player.in_menu = true
 	yield_prompt.visible = true
 	room = next_room
 	get_tree().paused = true
@@ -107,7 +106,6 @@ func _on_no_pressed() -> void:
 	get_tree().paused = false
 	
 	can_interact = true
-	player.in_menu = false
 
 func _on_reset_pressed() -> void:
 	can_interact = false

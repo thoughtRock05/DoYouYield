@@ -12,8 +12,8 @@ var LEVEL_MAX_HEIGHT: float = 360.0
 func _ready() -> void:
 	get_tree().get_root().size_changed.connect(_adjust_camera_zoom)
 	await get_tree().process_frame
-	reset_smoothing()
 	_adjust_camera_zoom()
+	reset_smoothing()
 
 func _adjust_camera_zoom() -> void:
 	var window_size: Vector2 = Vector2(get_viewport().get_visible_rect().size)

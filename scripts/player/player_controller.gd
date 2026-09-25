@@ -21,7 +21,6 @@ signal set_health(health: int)
 @export var DASH_ATTACK_SPEED = 275.0
 @export var WALL_DETATCH = 100.0
 enum DashType {NONE, GROUND, AIR}
-var in_menu: bool = false
 
 var has_double_jump: bool
 var has_wall_jump: bool
@@ -250,8 +249,6 @@ func _on_sword_hit_box_area_entered(area: Area2D) -> void:
 		area.get_parent().hit(sword_hit_box)
 
 func check_inputs() -> bool:
-	if in_menu:
-		return false
 	if Input.is_action_just_pressed("shield") and has_shield:
 		state_machine.change_state("PlayerShield")
 		return true

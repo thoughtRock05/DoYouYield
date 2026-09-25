@@ -33,6 +33,7 @@ offset_bottom = 264.0
 
 [node name="Play" type="Button" parent="VBoxContainer" unique_id=1420075557]
 layout_mode = 2
+focus_neighbor_top = NodePath("../Quit")
 theme_override_fonts/font = ExtResource("2_2o76q")
 text = "Start Game"
 
@@ -43,5 +44,6 @@ text = "Options"
 
 [node name="Quit" type="Button" parent="VBoxContainer" unique_id=1924992892]
 layout_mode = 2
+focus_neighbor_bottom = NodePath("../Play")
 theme_override_fonts/font = ExtResource("2_2o76q")
 text = "Quit"
