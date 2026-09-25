@@ -24,32 +24,32 @@ tile_map_data = PackedByteArray("AAAGABsAAAAAAAIAAAAGABwAAAAAAAIAAAAGAB0AAAAAAAI
 position = Vector2(2598, 387)
 next_room = "uid://cfibgssoakpns"
 
-[node name="MovingPlatform" parent="." index="6" unique_id=204123403 instance=ExtResource("2_585it")]
+[node name="YieldLabel" parent="YieldPrompt" parent_id_path=PackedInt32Array(1938132347) index="1" unique_id=309691000]
+text = "Yield what you need most:
+Dash & Heart"
+
+[node name="MovingPlatform" parent="." index="9" unique_id=204123403 instance=ExtResource("2_585it")]
 position = Vector2(2208, 992)
 x_size = 9
 rel_y = -16.0
 duration = 4.5
 
-[node name="AcidPit" parent="." index="7" unique_id=2011704841 instance=ExtResource("3_qf5d3")]
+[node name="AcidPit" parent="." index="10" unique_id=2011704841 instance=ExtResource("3_qf5d3")]
 position = Vector2(288, 864)
 x_size = 7
 y_size = 7
 
-[node name="AcidPit2" parent="." index="8" unique_id=1438418414 instance=ExtResource("3_qf5d3")]
+[node name="AcidPit2" parent="." index="11" unique_id=1438418414 instance=ExtResource("3_qf5d3")]
 position = Vector2(608, 928)
 x_size = 6
 y_size = 5
 
-[node name="AcidPit3" parent="." index="9" unique_id=1774601404 instance=ExtResource("3_qf5d3")]
+[node name="AcidPit3" parent="." index="12" unique_id=1774601404 instance=ExtResource("3_qf5d3")]
 position = Vector2(1216, 960)
 x_size = 27
 y_size = 4
 
-[node name="AcidPit4" parent="." index="10" unique_id=656043810 instance=ExtResource("3_qf5d3")]
+[node name="AcidPit4" parent="." index="13" unique_id=656043810 instance=ExtResource("3_qf5d3")]
 position = Vector2(1888, 768)
 x_size = 8
 y_size = 10
-
-[node name="YieldLabel" parent="CanvasLayer/YieldPrompt" parent_id_path=PackedInt32Array(1938132347) index="1" unique_id=309691000]
-text = "Yield what you need most:
-Dash & Heart"

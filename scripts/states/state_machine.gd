@@ -27,10 +27,10 @@ func change_state(target_state: String, msg: Dictionary = {}) -> void:
 	current_state = states[target_state]
 	current_state.enter_state(msg)
 
-func update(delta: float) -> void:
+func _process(delta: float) -> void:
 	if current_state:
 		current_state.update(delta)
 
-func physics_update(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if current_state:
 		current_state.physics_update(delta)

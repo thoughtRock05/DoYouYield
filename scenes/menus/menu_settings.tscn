@@ -1,0 +1,146 @@
+[gd_scene format=3 uid="uid://jtk5b1ot5lra"]
+
+[ext_resource type="FontFile" uid="uid://di30hy6qprkyp" path="res://assets/fonts/OldEnglishGothicPixelRegular.ttf" id="1_o2v8x"]
+[ext_resource type="PackedScene" uid="uid://vbc2v1eva61l" path="res://scenes/menus/menu_items/volume_slider.tscn" id="2_ysrrw"]
+[ext_resource type="PackedScene" uid="uid://df6eqqjn0g74m" path="res://scenes/menus/menu_items/window_dropdown.tscn" id="3_hbfmm"]
+[ext_resource type="PackedScene" uid="uid://cttg2bby718yy" path="res://scenes/menus/menu_items/speed_running_toggle.tscn" id="4_v20nw"]
+
+[node name="Control" type="Control" unique_id=1222955128]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=356613037]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.069345295, 0.13807091, 0.27187663, 1)
+
+[node name="Back" type="Button" parent="." unique_id=1894296576]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.0
+offset_top = 82.0
+offset_right = 23.0
+offset_bottom = 113.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_o2v8x")
+text = "Back"
+
+[node name="VolumeContainer" type="VBoxContainer" parent="." unique_id=1074984652]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -104.00049
+offset_top = -70.99997
+offset_right = 104.00049
+offset_bottom = 70.99997
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="MasterLabel" type="Label" parent="VolumeContainer" unique_id=1174190018]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_o2v8x")
+text = "Master"
+horizontal_alignment = 1
+
+[node name="Master" parent="VolumeContainer" unique_id=1436275487 instance=ExtResource("2_ysrrw")]
+layout_mode = 2
+bus_name = "Master"
+
+[node name="MusicLabel" type="Label" parent="VolumeContainer" unique_id=945097335]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_o2v8x")
+text = "Music"
+horizontal_alignment = 1
+
+[node name="Music" parent="VolumeContainer" unique_id=187994583 instance=ExtResource("2_ysrrw")]
+layout_mode = 2
+bus_name = "Music"
+
+[node name="SFXLabel" type="Label" parent="VolumeContainer" unique_id=1041395372]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_o2v8x")
+text = "SFX"
+horizontal_alignment = 1
+
+[node name="SFX" parent="VolumeContainer" unique_id=1427838747 instance=ExtResource("2_ysrrw")]
+layout_mode = 2
+bus_name = "SFX"
+
+[node name="Label" type="Label" parent="." unique_id=2051840865]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -54.0
+offset_top = 32.0
+offset_right = 52.0
+offset_bottom = 55.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("1_o2v8x")
+text = "Window Mode"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WindowDropdown" parent="." unique_id=1634256139 instance=ExtResource("3_hbfmm")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -79.0
+offset_top = -115.0
+offset_right = 79.0
+offset_bottom = -84.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label2" type="Label" parent="." unique_id=459603214]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 154.0
+offset_top = 86.5
+offset_right = 260.0
+offset_bottom = 109.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_o2v8x")
+text = "Speedrun Timer"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpeedRunningToggle" parent="." unique_id=1071498158 instance=ExtResource("4_v20nw")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 185.0
+offset_top = 113.0
+offset_right = 229.0
+offset_bottom = 137.0
+grow_horizontal = 2
+grow_vertical = 2

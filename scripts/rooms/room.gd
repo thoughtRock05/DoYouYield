@@ -4,26 +4,16 @@ class_name Room
 const HEART_DROP = preload("uid://cvvxfxr3biyta")
 
 @export var player: Player
-
 @export var room_num: int = -1
-
 @export var heart_bar: Node2D
 
 @export var yield_prompt: Control
 @export var yes_button: Button
 @export var no_button: Button
 
-@export var room_options: Control
-@export var back_button: Button
-@export var speed_run_timer: Control
-
-@export var main_menu: StringName = &""
-@export var main_menu_button: Button
-
-@export var reset_button: Button
 @export var sfx_player_walk_echo: AudioStreamPlayer
-
 @export var door: Door
+@export var main_menu: StringName = &""
 
 var room: String
 var uid: String
@@ -35,25 +25,18 @@ var uid: String
 @export var tiles_y: int = 0
 
 var can_interact: bool = true
-var in_options_menu: bool = false
 
 func _ready() -> void:
 	Music.switch_player(room_num)
 	SpeedRunTimerGlobal.is_paused = false
 	process_mode = Node.PROCESS_MODE_ALWAYS
-	player.can_move = true
 	yield_prompt.visible = false
-	room_options.visible = false
-	speed_run_timer.visible = true
+	
 	door.trigger_door.connect(_on_door_triggered)
 	yes_button.pressed.connect(_on_yes_pressed)
 	no_button.pressed.connect(_on_no_pressed)
 	
 	player.set_camera_boundaries(tiles_x, tiles_y)
-	
-	back_button.pressed.connect(_on_back_pressed)
-	main_menu_button.pressed.connect(_on_main_menu_pressed)
-	reset_button.pressed.connect(_on_reset_pressed)
 	player.reset_room.connect(_on_reset_pressed)
 	uid = ResourceUID.id_to_text(ResourceLoader.get_resource_uid(scene_file_path))
 	
@@ -77,48 +60,14 @@ func _process(_delta: float) -> void:
 		return
 	
 	if Input.is_action_just_pressed("reset"):
-		if not in_options_menu:
-			can_interact = false
-			SceneTransition.load_scene(uid)
-			can_interact = true
-	
-	if Input.is_action_just_pressed("escape"):
-		if can_interact == false:
-			return
-		open_menu()
-		
-	if Input.is_action_just_pressed("back"):
-		if in_options_menu == false:
-			return
-		if can_interact == false:
-			return
-		open_menu()
-
-func open_menu() -> void:
-	in_options_menu = not in_options_menu
-	heart_bar.visible = not in_options_menu
-	SpeedRunTimerGlobal.is_paused = in_options_menu
-	
-	
-	get_tree().paused = in_options_menu
-	room_options.visible = in_options_menu
-	speed_run_timer.visible = not in_options_menu
-	
-	if in_options_menu:
-		back_button.grab_focus()
-		Music.switch_player(7)
-	else:
-		Music.switch_player(room_num)
-	
-	await get_tree().create_timer(0.25).timeout
-	player.can_move = not in_options_menu
-	player.in_menu = in_options_menu
+		can_interact = false
+		SceneTransition.load_scene(uid)
+		can_interact = true
 
 func _on_door_triggered(_room: String) -> void:
 	door.is_open = true
 	Music.switch_player(room_num + 8)
 	can_interact = false
-	player.can_move = false
 	player.in_menu = true
 	yield_prompt.visible = true
 	room = _room
@@ -155,26 +104,10 @@ func _on_no_pressed() -> void:
 	get_tree().paused = false
 	
 	can_interact = true
-	
-	player.can_move = true
 	player.in_menu = false
-
-func _on_back_pressed() -> void:
-	open_menu()
-
-func _on_main_menu_pressed() -> void:
-	can_interact = false
-	player.can_move = false
-	get_tree().paused = false
-	SaveLoad.reset_save()
-	SpeedRunTimerGlobal._reset()
-	SceneTransition.load_scene(main_menu)
 
 func _on_reset_pressed() -> void:
 	can_interact = false
-	player.can_move = false
-	room_options.visible = false
-	speed_run_timer.visible = true
 	get_tree().paused = false
 	SceneTransition.load_scene(uid)
 
@@ -182,9 +115,9 @@ func _on_spawn_item(pos: Vector2, item: PackedScene, chance: int) -> void:
 	call_deferred("spawn_item", pos, item, chance)
 
 func spawn_item(pos: Vector2, _item: PackedScene, chance: int) -> void:
-	if _item and randi_range(0,100) < chance:
+	if _item and randi_range(0, 100) < chance:
 		var item = _item.instantiate() as RigidBody2D
 		add_child(item)
 		item.global_position = pos
-		var force = Vector2(randf_range(-100,100), randf_range(-50,-100))
+		var force = Vector2(randf_range(-100, 100), randf_range(-50, -100))
 		item.apply_impulse(force)

@@ -29,30 +29,30 @@ tile_map_data = PackedByteArray("AAAIAAoAAAAAAAAAAAAJAAoAAAAAAAAAAAAJAAkAAAAAAAA
 position = Vector2(1979, 705)
 next_room = "uid://brel50h76h54i"
 
-[node name="AcidPit" parent="." index="6" unique_id=1028025895 instance=ExtResource("3_ar6ir")]
+[node name="YieldLabel" parent="YieldPrompt" parent_id_path=PackedInt32Array(1938132347) index="1" unique_id=309691000]
+text = "Yield what you need most:
+Wall Jump"
+
+[node name="AcidPit" parent="." index="9" unique_id=1028025895 instance=ExtResource("3_ar6ir")]
 position = Vector2(1376, 800)
 x_size = 7
 y_size = 22
 
-[node name="AcidPit2" parent="." index="7" unique_id=176602615 instance=ExtResource("3_ar6ir")]
+[node name="AcidPit2" parent="." index="10" unique_id=176602615 instance=ExtResource("3_ar6ir")]
 position = Vector2(1696, 960)
 x_size = 7
 y_size = 17
 
-[node name="HeartDrop" parent="." index="8" unique_id=1066314477 instance=ExtResource("4_0g03g")]
+[node name="HeartDrop" parent="." index="11" unique_id=1066314477 instance=ExtResource("4_0g03g")]
 position = Vector2(294, 493)
 
-[node name="MovingPlatform" parent="." index="9" unique_id=203841445 instance=ExtResource("6_nu3hr")]
+[node name="MovingPlatform" parent="." index="12" unique_id=203841445 instance=ExtResource("6_nu3hr")]
 position = Vector2(896, 1088)
 x_size = 6
 rel_y = -11.0
 duration = 1.5
 
-[node name="YieldLabel" parent="CanvasLayer/YieldPrompt" parent_id_path=PackedInt32Array(1938132347) index="1" unique_id=309691000]
-text = "Yield what you need most:
-Wall Jump"
-
-[node name="Fwed" parent="." index="12" unique_id=1893676253 instance=ExtResource("5_0hwry")]
+[node name="Fwed" parent="." index="13" unique_id=1893676253 instance=ExtResource("5_0hwry")]
 position = Vector2(2387, 1330)
 scale = Vector2(7, 7)
 

@@ -47,7 +47,7 @@ func set_target(t: Player) -> void:
 func _physics_process(delta: float) -> void:
 	if not Engine.is_editor_hint():
 		if state_machine:
-			state_machine.physics_update(delta)
+			state_machine._physics_process(delta)
 
 func _draw() -> void:
 	if Engine.is_editor_hint():

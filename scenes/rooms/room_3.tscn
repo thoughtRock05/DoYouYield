@@ -30,26 +30,26 @@ tile_map_data = PackedByteArray("AAAAAAsAAQAAAAAAAAABAAsAAQAAAAAAAAACAAsAAQAAAAA
 position = Vector2(1219, 671)
 next_room = "uid://dbs0hoyal2od3"
 
-[node name="MovingPlatform" parent="." index="6" unique_id=204123403 instance=ExtResource("3_g5ssp")]
+[node name="YieldLabel" parent="YieldPrompt" parent_id_path=PackedInt32Array(1938132347) index="1" unique_id=309691000]
+text = "Yield what you need most:
+Sword & Heart"
+
+[node name="MovingPlatform" parent="." index="9" unique_id=204123403 instance=ExtResource("3_g5ssp")]
 position = Vector2(288, 1280)
 x_size = 5
 rel_y = -7.0
 
-[node name="MovingPlatform2" parent="." index="7" unique_id=1383625235 instance=ExtResource("3_g5ssp")]
+[node name="MovingPlatform2" parent="." index="10" unique_id=1383625235 instance=ExtResource("3_g5ssp")]
 position = Vector2(768, 1280)
 x_size = 5
 rel_y = -7.0
 duration = 1.5
 
-[node name="MovingPlatform3" parent="." index="8" unique_id=743616043 instance=ExtResource("3_g5ssp")]
+[node name="MovingPlatform3" parent="." index="11" unique_id=743616043 instance=ExtResource("3_g5ssp")]
 position = Vector2(960, 704)
 x_size = 3
 rel_y = 15.0
 duration = 3.5
 
-[node name="SlimeEnemy" parent="." index="9" unique_id=1893676253 instance=ExtResource("4_ahsqd")]
+[node name="SlimeEnemy" parent="." index="12" unique_id=1893676253 instance=ExtResource("4_ahsqd")]
 position = Vector2(662, 1319)
-
-[node name="YieldLabel" parent="CanvasLayer/YieldPrompt" parent_id_path=PackedInt32Array(1938132347) index="1" unique_id=309691000]
-text = "Yield what you need most:
-Sword & Heart"

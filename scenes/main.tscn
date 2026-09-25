@@ -1,24 +1,103 @@
 [gd_scene format=3 uid="uid://btjeod2oxeori"]
 
-[ext_resource type="PackedScene" uid="uid://5pufmg2xnm6j" path="res://scenes/menus/main_menu.tscn" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://ctt6xhrny1bpc" path="res://scenes/menus/main_menu.tscn" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://b6kxwh3bt4xd5" path="res://scripts/main.gd" id="1_sugp2"]
+[ext_resource type="Script" uid="uid://dpx75xkeekt8g" path="res://scripts/states/menu_state_machine.gd" id="2_yq6so"]
+[ext_resource type="Script" uid="uid://bsmeexty6qtgg" path="res://scripts/states/menu_states/menu_main.gd" id="3_vxglm"]
+[ext_resource type="Script" uid="uid://cl33laotrrrb6" path="res://scripts/states/menu_states/menu_none.gd" id="3_yq6so"]
 [ext_resource type="AudioStream" uid="uid://d0t4uaeywxm2f" path="res://assets/audio/music/ost_room_0_1_loopable.mp3" id="4_jkv2x"]
 [ext_resource type="Script" uid="uid://4hg1uru4w5en" path="res://scripts/menus/music_controller.gd" id="4_jyhfs"]
 [ext_resource type="AudioStream" uid="uid://b328muyii27sv" path="res://assets/audio/music/ost_room_2_loopable.mp3" id="5_jbj1t"]
+[ext_resource type="Script" uid="uid://by17rwv1craqu" path="res://scripts/states/menu_states/menu_settings.gd" id="6_2wyq8"]
 [ext_resource type="AudioStream" uid="uid://7wp1imdyxk3u" path="res://assets/audio/music/ost_room_3_loopable.mp3" id="6_muem4"]
 [ext_resource type="AudioStream" uid="uid://dla1o7ty54bdo" path="res://assets/audio/music/ost_room_4_loopable.mp3" id="7_dp3eg"]
+[ext_resource type="PackedScene" uid="uid://jtk5b1ot5lra" path="res://scenes/menus/menu_settings.tscn" id="7_vxglm"]
 [ext_resource type="AudioStream" uid="uid://dswm8qfki1546" path="res://assets/audio/music/ost_room_5_loopable.mp3" id="8_0ld40"]
+[ext_resource type="PackedScene" uid="uid://b2hto470bb7u7" path="res://scenes/menus/options_menu.tscn" id="9_2f3dj"]
 [ext_resource type="AudioStream" uid="uid://bdanugkj3ju2w" path="res://assets/audio/music/ost_room_6_loopable.mp3" id="9_gqmmt"]
+[ext_resource type="Script" uid="uid://bn1ydu64dbu0s" path="res://scripts/states/menu_states/menu_inventory.gd" id="10_vxglm"]
 [ext_resource type="AudioStream" uid="uid://b23ua15cfk52c" path="res://assets/audio/music/ost_menu_loopable.mp3" id="10_yc10j"]
+[ext_resource type="Script" uid="uid://cdv5mxm627fb8" path="res://scripts/states/menu_states/menu_results.gd" id="11_2f3dj"]
 [ext_resource type="AudioStream" uid="uid://d2pmlew6ud8s" path="res://assets/audio/music/ost_room_0_1_isolate_loopable.mp3" id="11_jscy8"]
+[ext_resource type="Script" uid="uid://dgj4hlx8rrqjv" path="res://scripts/states/menu_states/menu_pause.gd" id="11_tel4y"]
+[ext_resource type="PackedScene" uid="uid://bel741wnt8ylx" path="res://scenes/menus/inventory_menu.tscn" id="11_yq6so"]
 [ext_resource type="AudioStream" uid="uid://b1x8egd8iuhye" path="res://assets/audio/music/ost_room_2_isolate_loopable.mp3" id="12_pm3ni"]
+[ext_resource type="PackedScene" uid="uid://cuqcp2ihpfte7" path="res://scenes/menus/results_menu.tscn" id="13_fv21b"]
 [ext_resource type="AudioStream" uid="uid://7xraeam7rdef" path="res://assets/audio/music/ost_room_3_isolate_loopable.mp3" id="13_y6deb"]
 [ext_resource type="AudioStream" uid="uid://bua8inql6cjsh" path="res://assets/audio/music/ost_room_4_isolate_loopable.mp3" id="14_og1vs"]
+[ext_resource type="PackedScene" uid="uid://5pufmg2xnm6j" path="res://scenes/rooms/title_screen.tscn" id="14_tel4y"]
 [ext_resource type="AudioStream" uid="uid://bu6evrr3peoht" path="res://assets/audio/music/ost_room_5_isolate_loopable.mp3" id="15_2wyq8"]
 
 [node name="Main" type="Node2D" unique_id=1053634781 node_paths=PackedStringArray("music_controller")]
 script = ExtResource("1_sugp2")
 music_controller = NodePath("MusicController")
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1628545526]
+layer = 100
+
+[node name="MenuStateMachine" type="Node" parent="UI" unique_id=297108393 node_paths=PackedStringArray("initial_state")]
+process_mode = 3
+script = ExtResource("2_yq6so")
+initial_state = NodePath("MenuMain")
+metadata/_custom_type_script = "uid://dpx75xkeekt8g"
+
+[node name="MenuNone" type="Node" parent="UI/MenuStateMachine" unique_id=1256985043 node_paths=PackedStringArray("_menu")]
+script = ExtResource("3_yq6so")
+_menu = NodePath("Empty")
+metadata/_custom_type_script = "uid://qvty4l078043"
+
+[node name="Empty" type="Control" parent="UI/MenuStateMachine/MenuNone" unique_id=366991636]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="MenuMain" type="Node" parent="UI/MenuStateMachine" unique_id=2113453542 node_paths=PackedStringArray("play", "options", "quit", "_menu")]
+script = ExtResource("3_vxglm")
+play = NodePath("MainMenu/Play")
+options = NodePath("MainMenu/Options")
+quit = NodePath("MainMenu/Quit")
+_menu = NodePath("MainMenu")
+metadata/_custom_type_script = "uid://qvty4l078043"
+
+[node name="MainMenu" parent="UI/MenuStateMachine/MenuMain" unique_id=1391288350 instance=ExtResource("1_o5qli")]
+
+[node name="MenuSettings" type="Node" parent="UI/MenuStateMachine" unique_id=219119021 node_paths=PackedStringArray("back", "_menu")]
+script = ExtResource("6_2wyq8")
+back = NodePath("MenuSettings/Back")
+_menu = NodePath("MenuSettings")
+metadata/_custom_type_script = "uid://qvty4l078043"
+
+[node name="MenuSettings" parent="UI/MenuStateMachine/MenuSettings" unique_id=1222955128 instance=ExtResource("7_vxglm")]
+
+[node name="MenuPause" type="Node" parent="UI/MenuStateMachine" unique_id=1681279473 node_paths=PackedStringArray("resume", "options", "main_menu", "reset", "_menu")]
+script = ExtResource("11_tel4y")
+resume = NodePath("OptionsMenu/Resume")
+options = NodePath("OptionsMenu/Options")
+main_menu = NodePath("OptionsMenu/Main Menu")
+reset = NodePath("OptionsMenu/Reset")
+_menu = NodePath("OptionsMenu")
+metadata/_custom_type_script = "uid://qvty4l078043"
+
+[node name="OptionsMenu" parent="UI/MenuStateMachine/MenuPause" unique_id=1342935419 instance=ExtResource("9_2f3dj")]
+
+[node name="MenuInventory" type="Node" parent="UI/MenuStateMachine" unique_id=1489329556 node_paths=PackedStringArray("_menu")]
+script = ExtResource("10_vxglm")
+_menu = NodePath("InventoryMenu")
+metadata/_custom_type_script = "uid://qvty4l078043"
+
+[node name="InventoryMenu" parent="UI/MenuStateMachine/MenuInventory" unique_id=1286386545 instance=ExtResource("11_yq6so")]
+
+[node name="MenuResults" type="Node" parent="UI/MenuStateMachine" unique_id=823686122 node_paths=PackedStringArray("main_menu", "quit", "time_label", "_menu")]
+script = ExtResource("11_2f3dj")
+main_menu = NodePath("ResultsMenu/Main Menu")
+quit = NodePath("ResultsMenu/Quit")
+time_label = NodePath("ResultsMenu/TimeLabel")
+_menu = NodePath("ResultsMenu")
+metadata/_custom_type_script = "uid://qvty4l078043"
+
+[node name="ResultsMenu" parent="UI/MenuStateMachine/MenuResults" unique_id=1277199520 instance=ExtResource("13_fv21b")]
 
 [node name="SceneContainer" type="Control" parent="." unique_id=1952630618]
 layout_mode = 3
@@ -26,7 +105,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Main Menu" parent="SceneContainer" unique_id=1904224642 instance=ExtResource("1_o5qli")]
+[node name="Main Menu" parent="SceneContainer" unique_id=1904224642 instance=ExtResource("14_tel4y")]
 
 [node name="MusicController" type="Node" parent="." unique_id=1919563507 node_paths=PackedStringArray("player_0", "player_1", "player_2", "player_3", "player_4", "player_5", "player_6", "menu_music", "ost_room_0_isolated", "ost_room_1_isolated", "ost_room_2_isolated", "ost_room_3_isolated", "ost_room_4_isolated", "ost_room_5_isolated")]
 process_mode = 3
@@ -101,3 +180,9 @@ bus = &"Music"
 [node name="OstRoom5Isolated" type="AudioStreamPlayer" parent="MusicController" unique_id=843434199]
 stream = ExtResource("15_2wyq8")
 bus = &"Music"
+
+[editable path="UI/MenuStateMachine/MenuMain/MainMenu"]
+[editable path="UI/MenuStateMachine/MenuSettings/MenuSettings"]
+[editable path="UI/MenuStateMachine/MenuPause/OptionsMenu"]
+[editable path="UI/MenuStateMachine/MenuInventory/InventoryMenu"]
+[editable path="UI/MenuStateMachine/MenuResults/ResultsMenu"]

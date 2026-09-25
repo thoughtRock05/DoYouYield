@@ -105,7 +105,7 @@ func _physics_process(delta: float) -> void:
 	update_facing(dir)
 	update_shield()
 	move_and_slide()
-	state_machine.physics_update(delta)
+	state_machine._physics_process(delta)
 
 func peek_camera(delta) -> void:
 	var look_y: float = 0
