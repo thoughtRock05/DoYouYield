@@ -15,6 +15,8 @@ const HEART_DROP = preload("uid://cvvxfxr3biyta")
 @export var sfx_player_walk_echo: AudioStreamPlayer
 @export var door: Door
 @export var main_menu: StringName = &""
+@export var parallax: ParallaxController
+@export var play_space: Node2D
 
 var room: String
 var uid: String
@@ -39,7 +41,11 @@ func _ready() -> void:
 	
 	player.set_camera_boundaries(tiles_x, tiles_y)
 	player.reset_room.connect(_on_reset_pressed)
+	
+	parallax.set_tiles(tiles_x, tiles_y)
+	
 	uid = ResourceUID.id_to_text(ResourceLoader.get_resource_uid(scene_file_path))
+	
 	
 	player.set_health.connect(heart_bar.set_health)
 	player.set_max_health.connect(heart_bar.set_max_health)
@@ -49,11 +55,11 @@ func _ready() -> void:
 	door.is_open = false
 	SignalBus.set_room_num.emit(room_num)
 	
-	for child in get_children():
+	for child in play_space.get_children(true):
 		if child is Enemy:
 			child.spawn_on_death.connect(_on_spawn_item)
 
-	for child in get_children(true):
+	for child in play_space.get_children(true):
 		if child is Enemy:
 			child.set_target(player)
 

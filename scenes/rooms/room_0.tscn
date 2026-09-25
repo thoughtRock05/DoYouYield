@@ -2,33 +2,107 @@
 
 [ext_resource type="PackedScene" uid="uid://ddtrp88psneyf" path="res://scenes/rooms/room.tscn" id="1_qm1r8"]
 [ext_resource type="PackedScene" uid="uid://dnncw2ivdbxfd" path="res://scenes/enemies/slime/slime_enemy.tscn" id="2_p0ccy"]
+[ext_resource type="PackedScene" uid="uid://cexed761tgl76" path="res://scenes/environment/room_parallax.tscn" id="2_tf3nb"]
+[ext_resource type="Texture2D" uid="uid://b4pek6hbu51i6" path="res://assets/images/parallax/cave/cave1.png" id="3_iaxgg"]
+[ext_resource type="Texture2D" uid="uid://by1uc7qji45sp" path="res://assets/images/parallax/cave/cave2.png" id="4_b00dr"]
+[ext_resource type="Texture2D" uid="uid://c1mq4eh4l6r5j" path="res://assets/images/parallax/cave/cave3.png" id="5_kf5e4"]
+[ext_resource type="Texture2D" uid="uid://dcnx8r8o84403" path="res://assets/images/parallax/cave/cave4.png" id="6_yg2jv"]
+[ext_resource type="Texture2D" uid="uid://0xsvuqhht0l3" path="res://assets/images/parallax/cave/cave5.png" id="7_plyvp"]
+[ext_resource type="Texture2D" uid="uid://g4ki6os2asut" path="res://assets/images/parallax/cave/cave6.png" id="8_dimrd"]
 
 [node name="Room0" unique_id=671016034 instance=ExtResource("1_qm1r8")]
 room_num = 0
 tiles_x = 48
 tiles_y = 27
 
-[node name="Parallax" parent="." index="0" unique_id=991567529]
-position = Vector2(-23, -15)
+[node name="RoomParallax1" parent="BackgroundParallax" parent_id_path=PackedInt32Array(991567529) index="0" unique_id=1473973590 instance=ExtResource("2_tf3nb")]
+scroll_scale = Vector2(0, 0)
+room_tiles_x = 48
+room_tiles_y = 27
 
-[node name="Player" parent="." index="1" unique_id=933572393]
-position = Vector2(36, 838)
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundParallax/RoomParallax1/Environment" parent_id_path=PackedInt32Array(1473973590, 554242017) index="0" unique_id=1192415944]
+texture = ExtResource("3_iaxgg")
+centered = false
 
-[node name="Middle Ground" parent="." index="2" unique_id=1312469661]
+[node name="RoomParallax2" parent="BackgroundParallax" parent_id_path=PackedInt32Array(991567529) index="1" unique_id=1175658938 instance=ExtResource("2_tf3nb")]
+scroll_scale = Vector2(0.1, 0.1)
+room_tiles_x = 48
+room_tiles_y = 27
+
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundParallax/RoomParallax2/Environment" parent_id_path=PackedInt32Array(1175658938, 554242017) index="0" unique_id=412106810]
+position = Vector2(-4, -4.0000005)
+scale = Vector2(1.1515623, 1.1611111)
+texture = ExtResource("4_b00dr")
+centered = false
+
+[node name="RoomParallax3" parent="BackgroundParallax" parent_id_path=PackedInt32Array(991567529) index="2" unique_id=1545593301 instance=ExtResource("2_tf3nb")]
+scroll_scale = Vector2(0.3, 0.3)
+room_tiles_x = 48
+room_tiles_y = 27
+
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundParallax/RoomParallax3/Environment" parent_id_path=PackedInt32Array(1545593301, 554242017) index="0" unique_id=1599770301]
+position = Vector2(-9.000002, -8.999996)
+scale = Vector2(1.4484373, 1.4722222)
+texture = ExtResource("5_kf5e4")
+centered = false
+
+[node name="RoomParallax4" parent="BackgroundParallax" parent_id_path=PackedInt32Array(991567529) index="3" unique_id=74311201 instance=ExtResource("2_tf3nb")]
+scroll_scale = Vector2(0.5, 0.5)
+room_tiles_x = 48
+room_tiles_y = 27
+
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundParallax/RoomParallax4/Environment" parent_id_path=PackedInt32Array(74311201, 554242017) index="0" unique_id=994019150]
+position = Vector2(-16, -16.000002)
+scale = Vector2(1.7500001, 1.7888888)
+texture = ExtResource("6_yg2jv")
+centered = false
+
+[node name="RoomParallax5" parent="BackgroundParallax" parent_id_path=PackedInt32Array(991567529) index="4" unique_id=662464673 instance=ExtResource("2_tf3nb")]
+scroll_scale = Vector2(0.7, 0.7)
+room_tiles_x = 48
+room_tiles_y = 27
+
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundParallax/RoomParallax5/Environment" parent_id_path=PackedInt32Array(662464673, 554242017) index="0" unique_id=1424973921]
+position = Vector2(-23.000002, -22.999996)
+scale = Vector2(2.0515625, 2.1055555)
+texture = ExtResource("7_plyvp")
+centered = false
+
+[node name="Player" parent="PlaySpace" parent_id_path=PackedInt32Array(1925690963) index="0" unique_id=933572393]
+position = Vector2(36, 820)
+
+[node name="Middle Ground" parent="PlaySpace" parent_id_path=PackedInt32Array(1925690963) index="1" unique_id=1312469661]
 tile_map_data = PackedByteArray("AAD/////AQAAAAAAAAD//wAAAQAEAAAAAAD//wEAAQAEAAAAAAD//wIAAQAEAAAAAAD//wMAAQAEAAAAAAD//wQAAQAEAAAAAAD//wUAAQAEAAAAAAD//wYAAQAEAAAAAAD//wcAAQAEAAAAAAD//wgAAQAEAAAAAAD//wkAAQAEAAAAAAD//woAAQAEAAAAAAD//wsAAQAEAAAAAAD//wwAAQAEAAAAAAD//w0AAQAEAAAAAAD//w4AAQAEAAAAAAD//w8AAQAEAAAAAAD//xAAAQAEAAAAAAD//xEAAQAEAAAAAAD//xIAAQAEAAAAAAD//xMAAQAEAAAAAAD//xQAAQAEAAAAAAD//xUAAQAEAAAAAAD//xYAAQAEAAAAAAAoAP//AQAGAAAAAAAnAP//AQAGAAAAAAAmAP//AQAGAAAAAAAlAP//AQAGAAAAAAAkAP//AQAGAAAAAAAjAP//AQAGAAAAAAAiAP//AQAGAAAAAAAhAP//AQAGAAAAAAAgAP//AQAGAAAAAAAfAP//AQAGAAAAAAAeAP//AQAGAAAAAAAdAP//AQAGAAAAAAAcAP//AQAGAAAAAAAbAP//AQAGAAAAAAAaAP//AQAGAAAAAAAZAP//AQAGAAAAAAAYAP//AQAGAAAAAAAXAP//AQAGAAAAAAAWAP//AQAGAAAAAAAVAP//AQAGAAAAAAAUAP//AQAGAAAAAAATAP//AQAGAAAAAAASAP//AQAGAAAAAAARAP//AQAGAAAAAAAQAP//AQAGAAAAAAAPAP//AQAGAAAAAAAOAP//AQAGAAAAAAANAP//AQAGAAAAAAAMAP//AQAGAAAAAAALAP//AQAGAAAAAAAKAP//AQAGAAAAAAAJAP//AQAGAAAAAAAIAP//AQAGAAAAAAAHAP//AQAGAAAAAAAGAP//AQAGAAAAAAAFAP//AQAGAAAAAAAEAP//AQAGAAAAAAADAP//AQAGAAAAAAACAP//AQAGAAAAAAABAP//AQAGAAAAAAAAAP//AQAGAAAAAAApAP//AQAGAAAAAAAqAP//AQAGAAAAAAArAP//AQAGAAAAAAAsAP//AQAGAAAAAAAtAP//AQAGAAAAAAAuAP//AQAGAAAAAAAvAP//AQAGAAAAAAAwAAAAAQAIAAAAAAAwAAEAAQAIAAAAAAAwAAIAAQAIAAAAAAAwAAMAAQAIAAAAAAAwAAQAAQAIAAAAAAAwAAUAAQAIAAAAAAAwAAYAAQAIAAAAAAAwAAcAAQAIAAAAAAAwAAgAAQAIAAAAAAAwAAkAAQAIAAAAAAAwAAoAAQAIAAAAAAAwAAsAAQAIAAAAAAAwAAwAAQAIAAAAAAAwAA0AAQAIAAAAAAAwAA4AAQAIAAAAAAAwAA8AAQAIAAAAAAAwABAAAQAIAAAAAAAwABEAAQAIAAAAAAAwABIAAQAIAAAAAAAwABMAAQAIAAAAAAAwABQAAQAIAAAAAAAwABUAAQAIAAAAAAAwABYAAQAIAAAAAAAwAP//AQAAAAAAAAD//xsAAQAAAAAAAAAAABsAAQABAAAAAAABABsAAQABAAAAAAACABsAAQABAAAAAAADABsAAQABAAAAAAAEABsAAQABAAAAAAAFABsAAQABAAAAAAAGABsAAQABAAAAAAAHABsAAQABAAAAAAAIABsAAQABAAAAAAAJABsAAQABAAAAAAAKABsAAQABAAAAAAALABsAAQABAAAAAAAMABsAAQABAAAAAAANABsAAQABAAAAAAAOABsAAQABAAAAAAAPABsAAQABAAAAAAAQABsAAQABAAAAAAARABsAAQABAAAAAAASABsAAQABAAAAAAATABsAAQABAAAAAAAUABsAAQABAAAAAAAVABsAAQABAAAAAAAWABsAAQABAAAAAAAXABsAAQABAAAAAAAYABsAAQABAAAAAAAZABsAAQABAAAAAAAaABsAAQABAAAAAAAbABsAAQABAAAAAAAcABsAAQABAAAAAAAdABsAAQABAAAAAAAeABsAAQABAAAAAAAfABsAAQABAAAAAAAgABsAAQABAAAAAAAhABsAAQABAAAAAAAiABsAAQABAAAAAAAjABsAAQABAAAAAAAkABsAAQABAAAAAAAlABsAAQABAAAAAAAmABsAAQABAAAAAAAnABsAAQABAAAAAAAoABsAAQABAAAAAAApABsAAQABAAAAAAAqABsAAQABAAAAAAArABsAAQABAAAAAAAsABsAAQABAAAAAAAtABsAAQABAAAAAAAuABsAAQABAAAAAAAvABsAAQABAAAAAAAwABsAAQAAAAAAAAD//xcAAQAEAAAAAAD//xgAAQAEAAAAAAD//xkAAQAEAAAAAAD//xoAAQAEAAAAAAAwABcAAQAIAAAAAAAwABgAAQAIAAAAAAAwABkAAQAIAAAAAAAwABoAAQAIAAAAAAA=")
 
-[node name="Background" parent="." index="4" unique_id=1723316613]
+[node name="Background" parent="PlaySpace" parent_id_path=PackedInt32Array(1925690963) index="3" unique_id=1723316613]
 tile_map_data = PackedByteArray("AAADABoAAAAAAAAAAAADABgAAAAAAAAAAAADABYAAAAAAAAAAAA=")
 
-[node name="Door" parent="." index="5" unique_id=599625686]
+[node name="Door" parent="PlaySpace" parent_id_path=PackedInt32Array(1925690963) index="4" unique_id=599625686]
 position = Vector2(1499, 834)
 next_room = "uid://bnob7ju0hgse4"
 
-[node name="SlimeEnemy" parent="." index="6" unique_id=1893676253 instance=ExtResource("2_p0ccy")]
+[node name="SlimeEnemy" parent="PlaySpace" parent_id_path=PackedInt32Array(1925690963) index="5" unique_id=1893676253 instance=ExtResource("2_p0ccy")]
 position = Vector2(1373, 831)
 max_threshold = 450.0
 target_threshold = 200.0
 
-[node name="YieldLabel" parent="CanvasLayer/YieldPrompt" parent_id_path=PackedInt32Array(1938132347) index="1" unique_id=309691000]
+[node name="RoomParallax" parent="ForegroundParallax" parent_id_path=PackedInt32Array(978395490) index="0" unique_id=1488500725 instance=ExtResource("2_tf3nb")]
+room_tiles_x = 48
+room_tiles_y = 27
+
+[node name="Sprite2D" type="Sprite2D" parent="ForegroundParallax/RoomParallax/Environment" parent_id_path=PackedInt32Array(1488500725, 554242017) index="0" unique_id=1035329787]
+position = Vector2(-31, -32)
+scale = Vector2(2.4984376, 2.580556)
+texture = ExtResource("8_dimrd")
+centered = false
+
+[node name="YieldLabel" parent="UI/YieldPrompt" parent_id_path=PackedInt32Array(1938132347) index="1" unique_id=309691000]
 text = "In order to leave, you must give what you need most.
 Are you ready?"
+
+[editable path="BackgroundParallax/RoomParallax1"]
+[editable path="BackgroundParallax/RoomParallax2"]
+[editable path="BackgroundParallax/RoomParallax3"]
+[editable path="BackgroundParallax/RoomParallax4"]
+[editable path="BackgroundParallax/RoomParallax5"]
+[editable path="ForegroundParallax/RoomParallax"]

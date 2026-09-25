@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://csnx16rhwb5kr"]
+
+[ext_resource type="Script" uid="uid://46siy4pd0mbq" path="res://scripts/environment/parallax_controller.gd" id="1_85tbo"]
+
+[node name="Parallax" type="Node2D" unique_id=991567529]
+z_index = -3
+script = ExtResource("1_85tbo")

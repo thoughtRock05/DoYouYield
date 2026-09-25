@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c8r4i4r62e5j8" path="res://scripts/rooms/room.gd" id="1_1fuux"]
 [ext_resource type="PackedScene" uid="uid://dop8vfrtc40vm" path="res://scenes/player/player.tscn" id="2_3nht7"]
-[ext_resource type="PackedScene" uid="uid://csnx16rhwb5kr" path="res://scenes/environment/Parallax.tscn" id="2_c7djm"]
+[ext_resource type="PackedScene" uid="uid://csnx16rhwb5kr" path="res://scenes/environment/parallax_controller.tscn" id="2_c7djm"]
 [ext_resource type="PackedScene" uid="uid://dtsnjb3etfst4" path="res://scenes/menus/heart_bar.tscn" id="2_w2a3g"]
 [ext_resource type="Texture2D" uid="uid://bp8uegy6ox6u8" path="res://assets/images/environment/tilesets/TILESET.png" id="3_a1uh7"]
 [ext_resource type="PackedScene" uid="uid://dt1x5ywbgsh1m" path="res://scenes/environment/interactables/door/door.tscn" id="4_rd4w8"]
@@ -146,47 +146,50 @@ texture_region_size = Vector2i(32, 32)
 tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_vk2vc")
 
-[node name="Room" type="Node2D" unique_id=671016034 node_paths=PackedStringArray("player", "heart_bar", "yield_prompt", "yes_button", "no_button", "speed_run_timer", "sfx_player_walk_echo", "door")]
+[node name="Room" type="Node2D" unique_id=671016034 node_paths=PackedStringArray("player", "heart_bar", "yield_prompt", "yes_button", "no_button", "speed_run_timer", "sfx_player_walk_echo", "door", "parallax", "play_space")]
 script = ExtResource("1_1fuux")
-player = NodePath("Player")
-heart_bar = NodePath("CanvasLayer/HeartBar")
-yield_prompt = NodePath("CanvasLayer/YieldPrompt")
-yes_button = NodePath("CanvasLayer/YieldPrompt/Yes")
-no_button = NodePath("CanvasLayer/YieldPrompt/No")
-speed_run_timer = NodePath("CanvasLayer/SpeedRunTimer")
+player = NodePath("PlaySpace/Player")
+heart_bar = NodePath("UI/HeartBar")
+yield_prompt = NodePath("UI/YieldPrompt")
+yes_button = NodePath("UI/YieldPrompt/Yes")
+no_button = NodePath("UI/YieldPrompt/No")
+speed_run_timer = NodePath("UI/SpeedRunTimer")
 sfx_player_walk_echo = NodePath("SfxPlayerWalkEcho")
-door = NodePath("Door")
+door = NodePath("PlaySpace/Door")
 main_menu = &"uid://5pufmg2xnm6j"
+parallax = NodePath("BackgroundParallax")
+play_space = NodePath("PlaySpace")
 
-[node name="Parallax" parent="." unique_id=991567529 instance=ExtResource("2_c7djm")]
+[node name="BackgroundParallax" parent="." unique_id=991567529 instance=ExtResource("2_c7djm")]
+z_index = -10
 
-[node name="Player" parent="." unique_id=933572393 instance=ExtResource("2_3nht7")]
+[node name="PlaySpace" type="Node2D" parent="." unique_id=1925690963]
 
-[node name="Middle Ground" type="TileMapLayer" parent="." unique_id=1312469661]
+[node name="Player" parent="PlaySpace" unique_id=933572393 instance=ExtResource("2_3nht7")]
+
+[node name="Middle Ground" type="TileMapLayer" parent="PlaySpace" unique_id=1312469661]
 tile_set = SubResource("TileSet_qliwx")
 
-[node name="Foreground" type="TileMapLayer" parent="." unique_id=308859021]
+[node name="Foreground" type="TileMapLayer" parent="PlaySpace" unique_id=308859021]
 z_index = 1
 tile_set = SubResource("TileSet_a1uh7")
 collision_enabled = false
 
-[node name="Background" type="TileMapLayer" parent="." unique_id=1723316613]
+[node name="Background" type="TileMapLayer" parent="PlaySpace" unique_id=1723316613]
 z_index = -1
 tile_set = SubResource("TileSet_hm6s1")
 collision_enabled = false
 
-[node name="Door" parent="." unique_id=599625686 instance=ExtResource("4_rd4w8")]
+[node name="Door" parent="PlaySpace" unique_id=599625686 instance=ExtResource("4_rd4w8")]
 
-[node name="SfxPlayerWalkEcho" type="AudioStreamPlayer" parent="." unique_id=1220384792]
-stream = ExtResource("18_1m0bn")
-volume_db = 1.5
-bus = &"SFX"
+[node name="ForegroundParallax" parent="." unique_id=978395490 instance=ExtResource("2_c7djm")]
+z_index = 10
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=286265922]
+[node name="UI" type="CanvasLayer" parent="." unique_id=286265922]
 
-[node name="HeartBar" parent="CanvasLayer" unique_id=932334193 instance=ExtResource("2_w2a3g")]
+[node name="HeartBar" parent="UI" unique_id=932334193 instance=ExtResource("2_w2a3g")]
 
-[node name="SpeedRunTimer" type="Label" parent="CanvasLayer" unique_id=943452061]
+[node name="SpeedRunTimer" type="Label" parent="UI" unique_id=943452061]
 z_index = 7
 anchors_preset = 3
 anchor_left = 1.0
@@ -203,7 +206,7 @@ text = "00.00"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="YieldPrompt" type="Control" parent="CanvasLayer" unique_id=1938132347]
+[node name="YieldPrompt" type="Control" parent="UI" unique_id=1938132347]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -211,7 +214,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/YieldPrompt" unique_id=175837966]
+[node name="ColorRect" type="ColorRect" parent="UI/YieldPrompt" unique_id=175837966]
 layout_mode = 0
 offset_left = 152.0
 offset_top = 74.0
@@ -219,7 +222,7 @@ offset_right = 489.0
 offset_bottom = 135.0
 color = Color(0.03, 0.03, 0.03, 0.42352942)
 
-[node name="YieldLabel" type="Label" parent="CanvasLayer/YieldPrompt" unique_id=309691000]
+[node name="YieldLabel" type="Label" parent="UI/YieldPrompt" unique_id=309691000]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -234,7 +237,7 @@ text = "Do You Yield?"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Yes" type="Button" parent="CanvasLayer/YieldPrompt" unique_id=1638312946]
+[node name="Yes" type="Button" parent="UI/YieldPrompt" unique_id=1638312946]
 process_mode = 2
 layout_mode = 1
 anchors_preset = 8
@@ -251,7 +254,7 @@ grow_vertical = 2
 theme_override_fonts/font = ExtResource("14_p5707")
 text = "Yes"
 
-[node name="No" type="Button" parent="CanvasLayer/YieldPrompt" unique_id=1938723962]
+[node name="No" type="Button" parent="UI/YieldPrompt" unique_id=1938723962]
 process_mode = 2
 layout_mode = 1
 anchors_preset = 8
@@ -267,3 +270,8 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("14_p5707")
 text = "No"
+
+[node name="SfxPlayerWalkEcho" type="AudioStreamPlayer" parent="." unique_id=1220384792]
+stream = ExtResource("18_1m0bn")
+volume_db = 1.5
+bus = &"SFX"
