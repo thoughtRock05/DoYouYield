@@ -8,7 +8,7 @@ var was_on_floor: bool = true
 
 func enter_state(_msg := {}) -> void:
 	actor.player_sprite.play("walk")
-	step_distance_accumulator = 0.0 # Reset on enter
+	step_distance_accumulator = 0.0
 
 func physics_update(delta: float) -> void:
 	var dir = Input.get_axis("left", "right")

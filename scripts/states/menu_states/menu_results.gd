@@ -10,6 +10,7 @@ class_name MenuResults
 func enter_state(msg: Dictionary = {}) -> void:
 	super.enter_state(msg)
 	get_tree().paused = true
+	time_label.visible = SpeedRunTimerGlobal.is_speedrunning
 	SpeedRunTimerGlobal.is_paused = true
 	
 	time_label.text = "%.2f" % SpeedRunTimerGlobal.time

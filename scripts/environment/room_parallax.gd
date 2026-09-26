@@ -57,7 +57,8 @@ func _draw() -> void:
 		var exact_rect = Rect2(start_x, start_y, required_width, required_height)
 		var padded_rect = Rect2(padded_start_x, padded_start_y, padded_width, padded_height)
 		
-		draw_rect(padded_rect, Color(0.789, 0.394, 0.227, 1.0), false, 2.0, true)
+		if scroll_scale != Vector2(1,1):
+			draw_rect(padded_rect, Color(0.789, 0.394, 0.227, 1.0), false, 2.0, true)
 		
 		draw_rect(exact_rect, Color(0.278, 0.549, 0.749, 1.0), false, 2.0, true)
 		

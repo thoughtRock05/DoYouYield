@@ -3,9 +3,24 @@ class_name PlayerJump
 
 var actor: Player = _actor as Player
 
-func enter_state(_msg := {}) -> void:
-	actor.velocity.y = actor.JUMP_VELOCITY
-	actor.jump_count += 1
+func enter_state(msg := {}) -> void:
+	var dir = Input.get_axis("left", "right")
+	
+	if msg.has("wall_normal"):
+		var wall_normal = msg.wall_normal
+		actor.velocity.y = actor.WALL_JUMP_VELOCITY
+		
+		if dir != 0 and sign(dir) == sign(wall_normal.x):
+			actor.velocity.x = sign(dir) * actor.WALL_JUMP_PUSH
+		else:
+			actor.velocity.x = wall_normal.x * actor.WALL_JUMP_PUSH
+			
+		actor.jump_count = 1
+		actor.wall_jump_timer.start()
+	else:
+		actor.velocity.y = actor.JUMP_VELOCITY
+		actor.jump_count += 1
+		
 	actor.sfx_player_jump.play()
 	actor.buffer_timer.stop()
 	actor.player_sprite.play("jump")

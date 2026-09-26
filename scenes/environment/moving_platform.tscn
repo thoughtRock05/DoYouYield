@@ -40,6 +40,9 @@ script = ExtResource("1_ms375")
 animatable_body_2d = NodePath("AnimatableBody2D")
 collision_shape_2d = NodePath("AnimatableBody2D/CollisionShape2D")
 tile_map_layer = NodePath("AnimatableBody2D/TileMapLayer")
+left_edge_tile = null
+right_edge_tile = null
+middle_edge_tile = null
 
 [node name="AnimatableBody2D" type="AnimatableBody2D" parent="." unique_id=1362126317]
 
@@ -48,5 +51,5 @@ position = Vector2(16, 16)
 shape = SubResource("RectangleShape2D_qdbol")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="AnimatableBody2D" unique_id=2009567663]
-tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0)
+tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 1, 0, 2, 0, 0, 0, 0, 0)
 tile_set = SubResource("TileSet_l2tch")

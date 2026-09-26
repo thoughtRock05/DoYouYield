@@ -16,6 +16,9 @@ class_name MovingPlatform
 @export var bottom_left_tile: Vector2i = Vector2i(7, 0)
 @export var bottom_right_tile: Vector2i = Vector2i(5, 0)
 @export var bottom_tile: Vector2i = Vector2i(6, 0)
+@export var left_edge_tile: Vector2i = Vector2i(9, 0)
+@export var right_edge_tile: Vector2i = Vector2i(11, 0)
+@export var middle_edge_tile: Vector2i = Vector2i(10, 0)
 
 @export_category("Size & Position")
 @export_range(1, 100, 1) var x_size: int = 1:
@@ -100,25 +103,33 @@ func update_visuals() -> void:
 			var coords = Vector2i(x, y)
 			var chosen_tile = center_tile
 			
-			if y == 0:
+			if y_size == 1:
 				if x == 0:
-					chosen_tile = top_left_tile
+					chosen_tile = left_edge_tile
 				elif x == x_size - 1:
-					chosen_tile = top_right_tile
+					chosen_tile = right_edge_tile
 				else:
-					chosen_tile = top_tile
-			elif y == y_size - 1:
-				if x == 0:
-					chosen_tile = bottom_left_tile
+					chosen_tile = middle_edge_tile
+			else:
+				if y == 0:
+					if x == 0:
+						chosen_tile = top_left_tile
+					elif x == x_size - 1:
+						chosen_tile = top_right_tile
+					else:
+						chosen_tile = top_tile
+				elif y == y_size - 1:
+					if x == 0:
+						chosen_tile = bottom_left_tile
+					elif x == x_size - 1:
+						chosen_tile = bottom_right_tile
+					else:
+						chosen_tile = bottom_tile
+				elif x == 0:
+					chosen_tile = left_tile
 				elif x == x_size - 1:
-					chosen_tile = bottom_right_tile
-				else:
-					chosen_tile = bottom_tile
-			elif x == 0:
-				chosen_tile = left_tile
-			elif x == x_size - 1:
-				chosen_tile = right_tile
-			
+					chosen_tile = right_tile
+				
 			tile_map_layer.set_cell(coords, source_id, chosen_tile)
 
 func update_shape_size() -> void:
