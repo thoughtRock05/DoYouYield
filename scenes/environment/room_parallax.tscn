@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://cuqgpylohn363" path="res://scripts/environment/room_parallax.gd" id="1_cg4xk"]
 
 [node name="RoomParallax" type="Parallax2D" unique_id=1473973590 node_paths=PackedStringArray("environment")]
-z_index = -200
 script = ExtResource("1_cg4xk")
 environment = NodePath("Environment")
 

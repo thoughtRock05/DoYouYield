@@ -98,6 +98,9 @@ position = Vector2(1373, 831)
 max_threshold = 450.0
 target_threshold = 200.0
 
+[node name="ForegroundParallax" parent="." index="2" unique_id=978395490]
+z_index = 3
+
 [node name="YieldLabel" parent="UI/YieldPrompt" parent_id_path=PackedInt32Array(1938132347) index="1" unique_id=309691000]
 text = "In order to leave, you must give what you need most.
 Are you ready?"

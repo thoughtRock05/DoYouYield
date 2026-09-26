@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bo30ovjpi0k8h" path="res://assets/images/interactables/heart/full_heart.png" id="3_mpbci"]
 
 [node name="ResultsMenu" type="Control" unique_id=1277199520]
+z_index = 20
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

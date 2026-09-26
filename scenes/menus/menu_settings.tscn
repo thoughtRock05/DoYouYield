@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cttg2bby718yy" path="res://scenes/menus/menu_items/speed_running_toggle.tscn" id="4_v20nw"]
 
 [node name="Control" type="Control" unique_id=1222955128]
+z_index = 20
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

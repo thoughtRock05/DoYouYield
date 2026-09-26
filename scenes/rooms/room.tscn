@@ -190,7 +190,7 @@ z_index = 10
 [node name="HeartBar" parent="UI" unique_id=932334193 instance=ExtResource("2_w2a3g")]
 
 [node name="SpeedRunTimer" type="Label" parent="UI" unique_id=943452061]
-z_index = 7
+z_index = 2
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -207,6 +207,7 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="YieldPrompt" type="Control" parent="UI" unique_id=1938132347]
+z_index = 2
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
