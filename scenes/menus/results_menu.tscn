@@ -19,6 +19,7 @@ offset_left = 274.0
 offset_top = 182.9325
 offset_right = 370.0
 offset_bottom = 213.9325
+focus_neighbor_top = NodePath("../Quit")
 theme_override_fonts/font = ExtResource("2_uxv0o")
 text = "Main Menu"
 
@@ -28,6 +29,7 @@ offset_left = 303.0
 offset_top = 232.9325
 offset_right = 345.0
 offset_bottom = 263.9325
+focus_neighbor_bottom = NodePath("../Main Menu")
 theme_override_fonts/font = ExtResource("2_uxv0o")
 text = "Quit"
 
