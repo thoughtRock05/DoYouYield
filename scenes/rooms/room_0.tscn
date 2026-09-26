@@ -21,6 +21,8 @@ room_tiles_x = 48
 room_tiles_y = 27
 
 [node name="Sprite2D" type="Sprite2D" parent="BackgroundParallax/RoomParallax1/Environment" parent_id_path=PackedInt32Array(1473973590, 554242017) index="0" unique_id=1192415944]
+position = Vector2(-124.00001, -124.00001)
+scale = Vector2(1.39375, 1.7)
 texture = ExtResource("3_iaxgg")
 centered = false
 
@@ -30,8 +32,8 @@ room_tiles_x = 48
 room_tiles_y = 27
 
 [node name="Sprite2D" type="Sprite2D" parent="BackgroundParallax/RoomParallax2/Environment" parent_id_path=PackedInt32Array(1175658938, 554242017) index="0" unique_id=412106810]
-position = Vector2(-4, -4.0000005)
-scale = Vector2(1.1515623, 1.1611111)
+position = Vector2(-132.00006, -132.0001)
+scale = Vector2(1.5515624, 1.8722229)
 texture = ExtResource("4_b00dr")
 centered = false
 
@@ -41,8 +43,8 @@ room_tiles_x = 48
 room_tiles_y = 27
 
 [node name="Sprite2D" type="Sprite2D" parent="BackgroundParallax/RoomParallax3/Environment" parent_id_path=PackedInt32Array(1545593301, 554242017) index="0" unique_id=1599770301]
-position = Vector2(-9.000002, -8.999996)
-scale = Vector2(1.4484373, 1.4722222)
+position = Vector2(-137.00026, -137.00008)
+scale = Vector2(1.8484381, 2.1833336)
 texture = ExtResource("5_kf5e4")
 centered = false
 
@@ -52,8 +54,8 @@ room_tiles_x = 48
 room_tiles_y = 27
 
 [node name="Sprite2D" type="Sprite2D" parent="BackgroundParallax/RoomParallax4/Environment" parent_id_path=PackedInt32Array(74311201, 554242017) index="0" unique_id=994019150]
-position = Vector2(-16, -16.000002)
-scale = Vector2(1.7500001, 1.7888888)
+position = Vector2(-143.99994, -144)
+scale = Vector2(2.1499999, 2.5)
 texture = ExtResource("6_yg2jv")
 centered = false
 
@@ -63,9 +65,19 @@ room_tiles_x = 48
 room_tiles_y = 27
 
 [node name="Sprite2D" type="Sprite2D" parent="BackgroundParallax/RoomParallax5/Environment" parent_id_path=PackedInt32Array(662464673, 554242017) index="0" unique_id=1424973921]
-position = Vector2(-23.000002, -22.999996)
-scale = Vector2(2.0515625, 2.1055555)
+position = Vector2(-150.99995, -152.00014)
+scale = Vector2(2.4515624, 2.8222225)
 texture = ExtResource("7_plyvp")
+centered = false
+
+[node name="RoomParallax" parent="BackgroundParallax" parent_id_path=PackedInt32Array(991567529) index="5" unique_id=1488500725 instance=ExtResource("2_tf3nb")]
+room_tiles_x = 48
+room_tiles_y = 27
+
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundParallax/RoomParallax/Environment" parent_id_path=PackedInt32Array(1488500725, 554242017) index="0" unique_id=1035329787]
+position = Vector2(-158.99994, -159.00005)
+scale = Vector2(2.8984373, 3.2861116)
+texture = ExtResource("8_dimrd")
 centered = false
 
 [node name="Player" parent="PlaySpace" parent_id_path=PackedInt32Array(1925690963) index="0" unique_id=933572393]
@@ -86,16 +98,6 @@ position = Vector2(1373, 831)
 max_threshold = 450.0
 target_threshold = 200.0
 
-[node name="RoomParallax" parent="ForegroundParallax" parent_id_path=PackedInt32Array(978395490) index="0" unique_id=1488500725 instance=ExtResource("2_tf3nb")]
-room_tiles_x = 48
-room_tiles_y = 27
-
-[node name="Sprite2D" type="Sprite2D" parent="ForegroundParallax/RoomParallax/Environment" parent_id_path=PackedInt32Array(1488500725, 554242017) index="0" unique_id=1035329787]
-position = Vector2(-31, -32)
-scale = Vector2(2.4984376, 2.580556)
-texture = ExtResource("8_dimrd")
-centered = false
-
 [node name="YieldLabel" parent="UI/YieldPrompt" parent_id_path=PackedInt32Array(1938132347) index="1" unique_id=309691000]
 text = "In order to leave, you must give what you need most.
 Are you ready?"
@@ -105,4 +107,4 @@ Are you ready?"
 [editable path="BackgroundParallax/RoomParallax3"]
 [editable path="BackgroundParallax/RoomParallax4"]
 [editable path="BackgroundParallax/RoomParallax5"]
-[editable path="ForegroundParallax/RoomParallax"]
+[editable path="BackgroundParallax/RoomParallax"]

@@ -6,7 +6,7 @@ var actor: Player = _actor as Player
 func enter_state(_msg := {}) -> void:
 	actor.sfx_sword_swing.play()
 	actor.player_sprite.play("attack")
-	if abs(actor.velocity.x) > actor.DASH_ATTACK_SPEED or not actor.is_on_floor():
+	if abs(actor.velocity.x) > actor.SPEED or not actor.is_on_floor():
 		actor.is_dash_attack = true
 
 func exit_state() -> void:

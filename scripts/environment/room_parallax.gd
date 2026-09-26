@@ -18,6 +18,11 @@ const VIEWPORT_HEIGHT: float = 360.0
 		room_tiles_y = value
 		queue_redraw()
 
+@export var padding: Vector2 = Vector2(128.0, 128.0):
+	set(value):
+		padding = value
+		queue_redraw()
+
 func _ready() -> void:
 	if environment:
 		environment.visible = true
@@ -41,13 +46,20 @@ func _draw() -> void:
 		
 		var required_width: float = VIEWPORT_WIDTH + (camera_travel_x * scroll_scale.x)
 		var required_height: float = VIEWPORT_HEIGHT + (camera_travel_y * scroll_scale.y)
-		
 		var start_x: float = limit_left * scroll_scale.x
 		var start_y: float = limit_top * scroll_scale.y
 		
-		var rect = Rect2(start_x, start_y, required_width, required_height)
+		var padded_start_x: float = start_x - padding.x
+		var padded_start_y: float = start_y - padding.y
+		var padded_width: float = required_width + (padding.x * 2.0)
+		var padded_height: float = required_height + (padding.y * 2.0)
 		
-		draw_rect(rect, Color(0.278, 0.549, 0.749, 1.0), false, 2.0, true)
+		var exact_rect = Rect2(start_x, start_y, required_width, required_height)
+		var padded_rect = Rect2(padded_start_x, padded_start_y, padded_width, padded_height)
+		
+		draw_rect(padded_rect, Color(0.789, 0.394, 0.227, 1.0), false, 2.0, true)
+		
+		draw_rect(exact_rect, Color(0.278, 0.549, 0.749, 1.0), false, 2.0, true)
 		
 		draw_line(Vector2(start_x + required_width / 2.0, start_y), Vector2(start_x + required_width / 2.0, start_y + required_height), Color(0.278, 0.549, 0.749, 0.3), 1.0)
 		draw_line(Vector2(start_x, start_y + required_height / 2.0), Vector2(start_x + required_width, start_y + required_height / 2.0), Color(0.278, 0.549, 0.749, 0.3), 1.0)

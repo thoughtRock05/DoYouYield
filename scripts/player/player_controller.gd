@@ -175,7 +175,7 @@ func hit(area: Area2D):
 		return
 	
 	var current_state_name = state_machine.current_state.name
-	if is_invincible or current_state_name == "PlayerShield" or current_state_name == "PlayerDead" or (current_state_name == "PlayerAttack" and abs(velocity.x) > DASH_ATTACK_SPEED):
+	if is_invincible or current_state_name == "PlayerShield" or current_state_name == "PlayerDead" or (current_state_name == "PlayerAttack" and abs(velocity.x) > SPEED):
 		return
 	if not sfx_player_hurt.is_playing():
 		sfx_player_hurt.play()
